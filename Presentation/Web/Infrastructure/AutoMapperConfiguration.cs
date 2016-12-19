@@ -23,6 +23,9 @@ namespace Web.Infrastructure
                 //cfg.CreateMap<User, UserEditPasswordModel>();
                 cfg.CreateMap<UserModel, Core.Domain.Common.Users>();
                 cfg.CreateMap<Core.Domain.Common.Users, UserModel>();
+                cfg.CreateMap<GoodsDataModel, GoodsData>();
+                cfg.CreateMap<GoodsData, GoodsDataModel>();
+                
 
 
             });

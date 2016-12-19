@@ -1,17 +1,16 @@
-﻿@model Web.Models.UserListModel
+﻿@model Web.Models.GoodsDataListModel
 
 
 @{
-    ViewBag.Title ="List";
+    ViewBag.Title = "List";
 }
 
 <div class="box box-solid">
     <div class="box-header">
-        @using (Html.BeginForm("Index", "User", FormMethod.Post, new { Id = "UserForm" }))
+        @using (Html.BeginForm("Index", "GoodsData", FormMethod.Post, new { Id = "GoodsDataForm" }))
         {
             @Html.AntiForgeryToken()
             <div class="row">
-
                 <div class="col-md-3 col-sm-4 col-xs-12 ">
                     <div class="form-group">
                         @Html.LabelFor(m => m.Name)
@@ -39,10 +38,14 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Name</th>
-                    <th>Password</th>
+                    <th>商品名称</th>
+                    <th>基本单位</th>
+                    <th>品牌</th>
+                    <th>商品类别</th>
+                    <th>库存</th>
+                    <th>仓库</th>
+                    <th>详情</th>
                     <th>编辑</th>
-
                 </tr>
             </thead>
         </table>
@@ -66,18 +69,30 @@
                 },
                 columns: [
 					{ data: "id" },
-                    { data: "name" },
-                    { data: "password" },
+                    { data: "GoodsName" },
+                    { data: "Unit" },
+                    { data: "Brand" },
+
+                    { data: "GoodType" },
+                    { data: "Inventory" },
+                    { data: "Warehouse" },
                     {
                         orderable: false,
                         responsivePriority: 100
                     }],
                 columnDefs: [
                     {
-                        targets: [3],
+                        targets: [7],
                         orderable: false,
                         render: function (data, type, full) {
-                            return '<a href="/User/Edit?id=' + encodeURIComponent(full["id"]) + '" class="btn btn-xs btn-default "><span class="fa fa-pencil"></span> 修改</a>';
+                            return '<a href="/GoodsData/Edit?id=' + encodeURIComponent(full["id"]) + '" class="btn btn-xs btn-default "><span class="fa fa-pencil"></span> 修改</a>';
+                        }
+                    },
+                    {
+                        targets: [8],
+                        orderable: false,
+                        render: function (data, type, full) {
+                            return '<a href="/GoodsData/Edit?id=' + encodeURIComponent(full["id"]) + '" class="btn btn-xs btn-default "><span class="fa fa-pencil"></span> 修改</a>';
                         }
                     }
                 ],

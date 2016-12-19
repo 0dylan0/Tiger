@@ -70,6 +70,7 @@
     <Compile Include="DbHelper.cs" />
     <Compile Include="Infrastructure\DbStartupTask.cs" />
     <Compile Include="Logging\ConsoleSqlLogger.cs" />
+    <Compile Include="Mapping\GoodsDataMap.cs" />
     <Compile Include="Mapping\Localization\LanguageMap.cs" />
     <Compile Include="Mapping\Localization\LocaleStringResourceMap.cs" />
     <Compile Include="Mapping\UserMap.cs" />

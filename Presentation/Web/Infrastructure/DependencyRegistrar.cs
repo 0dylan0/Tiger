@@ -22,6 +22,7 @@ namespace Web.Infrastructure
             builder.RegisterType<HotelService>().InstancePerLifetimeScope();
             builder.RegisterType<UserHotelRangeService>().InstancePerLifetimeScope();
             builder.RegisterType<LicenseService>().InstancePerLifetimeScope();
+            builder.RegisterType<GoodsDataService>().InstancePerLifetimeScope(); 
 
         }
 

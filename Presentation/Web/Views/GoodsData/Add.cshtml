@@ -1,0 +1,178 @@
+﻿@model Web.Models.GoodsDataModel
+@{
+    ViewBag.Title = "Add";
+}
+
+@using (Html.BeginForm("Add", "GoodsData", FormMethod.Post, new { id = "Add", data_val = true }))
+{
+    @Html.AntiForgeryToken()
+    <div class="box box-solid">
+        <div class="box-body">
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.GoodsName, new { @class = "control-label aaa" })@RequiredTag()
+                        @Html.TextBoxFor(m => m.GoodsName, new { @class = "form-control " })
+                        @Html.ValidationMessageFor(m => m.GoodsName)
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Unit, new { @class = "control-label aaa" })@RequiredTag()
+                        @Html.TextBoxFor(m => m.Unit, new { @class = "form-control " })
+                        @Html.ValidationMessageFor(m => m.Unit)
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Brand, new { @class = "control-label aaa" })@RequiredTag()
+                        @Html.TextBoxFor(m => m.Brand, new { @class = "form-control " })
+                        @Html.ValidationMessageFor(m => m.Brand)
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.GoodType, new { @class = "control-label aaa" })@RequiredTag()
+                        @Html.TextBoxFor(m => m.GoodType, new { @class = "form-control " })
+                        @Html.ValidationMessageFor(m => m.GoodType)
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.DefaultPurchasePrice, new { @class = "control-label aaa" })@RequiredTag()
+                        @Html.TextBoxFor(m => m.DefaultPurchasePrice, new { @class = "form-control " })
+                        @Html.ValidationMessageFor(m => m.DefaultPurchasePrice)
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ActualPurchasePrice, new { @class = "control-label aaa" })@RequiredTag()
+                        @Html.TextBoxFor(m => m.ActualPurchasePrice, new { @class = "form-control " })
+                        @Html.ValidationMessageFor(m => m.ActualPurchasePrice)
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Inventory, new { @class = "control-label aaa" })@RequiredTag()
+                        @Html.TextBoxFor(m => m.Inventory, new { @class = "form-control " })
+                        @Html.ValidationMessageFor(m => m.Inventory)
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Price1, new { @class = "control-label aaa" })@RequiredTag()
+                        @Html.TextBoxFor(m => m.Price1, new { @class = "form-control " })
+                        @Html.ValidationMessageFor(m => m.Price1)
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Price2, new { @class = "control-label aaa" })@RequiredTag()
+                        @Html.TextBoxFor(m => m.Price2, new { @class = "form-control " })
+                        @Html.ValidationMessageFor(m => m.Price2)
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Price3, new { @class = "control-label aaa" })@RequiredTag()
+                        @Html.TextBoxFor(m => m.Price3, new { @class = "form-control " })
+                        @Html.ValidationMessageFor(m => m.Price3)
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Price4, new { @class = "control-label aaa" })@RequiredTag()
+                        @Html.TextBoxFor(m => m.Price4, new { @class = "form-control " })
+                        @Html.ValidationMessageFor(m => m.Price4)
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Warehouse, new { @class = "control-label aaa" })@RequiredTag()
+                        @Html.TextBoxFor(m => m.Warehouse, new { @class = "form-control " })
+                        @Html.ValidationMessageFor(m => m.Warehouse)
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Cost, new { @class = "control-label aaa" })@RequiredTag()
+                        @Html.TextBoxFor(m => m.Cost, new { @class = "form-control " })
+                        @Html.ValidationMessageFor(m => m.Cost)
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.SingleProfit, new { @class = "control-label aaa" })@RequiredTag()
+                        @Html.TextBoxFor(m => m.SingleProfit, new { @class = "form-control " })
+                        @Html.ValidationMessageFor(m => m.SingleProfit)
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Cost, new { @class = "control-label aaa" })@RequiredTag()
+                            @Html.TextBoxFor(m => m.Cost, new { @class = "form-control " })
+                            @Html.ValidationMessageFor(m => m.Cost)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="box-footer">
+            <button id="submitChange" type="submit" class="btn btn-primary"><i class="fa fa-save"></i> 保存</button>
+            <a href="@Url.Action("Index")" class="btn btn-default"><i class="fa fa-undo"></i> 返回</a>
+        </div>
+    </div>
+}
+@helper RequiredTag()
+{
+    @Html.Partial("_RequiredTagPartial")
+}
+
+
+
+@section scripts{
+
+
+    <script type="text/javascript">
+
+
+        $(function () {
+
+        });
+    </script>
+}
+
+
+
+
+
