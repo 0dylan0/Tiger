@@ -12,7 +12,7 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.GoodsName, new { @class = "control-label aaa" })@RequiredTag()
+                        @Html.LabelFor(m => m.GoodsName, new { @class = "control-label" })@RequiredTag()
                         @Html.TextBoxFor(m => m.GoodsName, new { @class = "form-control " })
                         @Html.ValidationMessageFor(m => m.GoodsName)
                     </div>
