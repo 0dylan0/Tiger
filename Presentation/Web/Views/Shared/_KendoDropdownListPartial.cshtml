@@ -1,0 +1,15 @@
+﻿<script src="~/Scripts/kendo/2016.2.714/kendo.dropdownlist.min.js"></script>
+<script>
+    $(function () {
+        var ignoredSelector = [".color-selector", ".ignore-auto-init", "[multiple='multiple']"];
+        var filter = ":not(";
+        for (var i = 0; i < ignoredSelector.length; i++) {
+            filter += ignoredSelector[i] + ",";
+        }
+        filter = filter.substring(0, filter.length - 1) + ")";
+        $("div.content-wrapper select").filter(filter).kendoDropDownList({
+            filter: "contains"
+        });
+    });
+    $.validator.setDefaults({ ignore: [] });
+</script>

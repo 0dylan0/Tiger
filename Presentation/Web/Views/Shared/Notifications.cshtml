@@ -1,0 +1,43 @@
+﻿@using Web.Framework.UI
+
+@{
+    //success messages
+    var successMessages = new List<string>();
+    if (TempData[$"kunlun.notifications.{NotifyType.Success}"] != null)
+    {
+        successMessages.AddRange(TempData[$"kunlun.notifications.{NotifyType.Success}"] as IList<string>);
+    }
+    if (ViewData[$"kunlun.notifications.{NotifyType.Success}"] != null)
+    {
+        successMessages.AddRange(ViewData[$"kunlun.notifications.{NotifyType.Success}"] as IList<string>);
+    }
+
+    //error messages
+    var errorMessages = new List<string>();
+    if (TempData[$"kunlun.notifications.{NotifyType.Error}"] != null)
+    {
+        errorMessages.AddRange(TempData[$"kunlun.notifications.{NotifyType.Error}"] as IList<string>);
+    }
+    if (ViewData[$"kunlun.notifications.{NotifyType.Error}"] != null)
+    {
+        errorMessages.AddRange(ViewData[$"kunlun.notifications.{NotifyType.Error}"] as IList<string>);
+    }
+}
+@foreach (var message in successMessages)
+{
+    <div class="kl-alert-padding"></div>
+    <div class="alert alert-success alert-dismissible fade in notification-word-break" role="alert">
+        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        @message
+    </div>
+}
+@foreach (var message in errorMessages)
+{
+    <div class="kl-alert-padding"></div>
+    <div class="alert alert-error alert-dismissible fade in notification-word-break" role="alert">
+        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        @message
+    </div>
+}

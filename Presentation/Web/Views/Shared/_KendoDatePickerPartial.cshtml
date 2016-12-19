@@ -1,0 +1,20 @@
+﻿<script src="~/Scripts/kendo/2016.2.714/kendo.datepicker.min.js"></script>
+<script>
+    function initKendoDatePicker(selector) {
+        $(selector || ".kl-date-picker").each(function (index, element) {
+            var jqElement = $(element);
+            jqElement.kendoDatePicker({
+                format: "yyyy-MM-dd",
+                min: new Date(1950, 0, 1)
+            });
+
+            jqElement.click(function () {
+                jqElement.data("kendoDatePicker").open();
+            });
+        });
+    }
+
+    $(function () {
+        initKendoDatePicker();
+    });
+</script>

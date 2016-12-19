@@ -1,0 +1,16 @@
+﻿<script>
+    $.validator.addMethod("aaaDate", function (value, element, param) {
+
+        var reg = /^[\u4e00-\u9fa5]$/;
+        return reg.test(userName.value) != true
+
+    }, "用户应为全英文");
+
+    $(function () {
+        $("#Name").rules("add", {
+            aaaDate: true
+        });
+    });
+
+
+</script>

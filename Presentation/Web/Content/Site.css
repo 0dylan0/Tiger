@@ -1,0 +1,768 @@
+﻿/* 全局字体设置 */
+body aside.main-sidebar, body div.content-wrapper {
+    font-family: "Segoe UI", "Microsoft YaHei UI", "Microsoft YaHei";
+}
+
+/* 抵消 bootstrap 的 col 带来的左右 padding */
+.kl-offset-col-padding {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+/* H1 - H6 font */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+    font-family: "Segoe UI", "Microsoft YaHei UI", "Microsoft YaHei";
+}
+
+/* 禁用 resize 属性，阻止 FireFox 等浏览器中 textarea 被修改大小 */
+.disable-resize {
+    resize: none;
+}
+
+/* progress style */
+#kl-loaded-progress.progress {
+    height: 5px;
+    width: 100%;
+    border-radius: 0;
+    position: fixed;
+    top: 0;
+    margin-bottom: 0;
+    z-index: 1033;
+}
+
+.kl-table-background-color {
+    background-color: #EFEFEF;
+}
+
+.kl-table-middle {
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+
+.kl-table-head-text-center thead th {
+    padding-right: 5px !important;
+    text-align: center !important;
+}
+
+    .kl-table-head-text-center thead th.text-left {
+        text-align: left !important;
+    }
+
+.kl-table-th-max-width tbody th {
+    max-width: 12em;
+    overflow: hidden;
+}
+
+.kl-th-text-center th {
+    padding-right: 5px !important;
+    text-align: center !important;
+}
+
+.kl-table-th-center th {
+    text-align: center;
+}
+
+.kl-th-max-width {
+    max-width: 12em;
+    overflow: hidden;
+}
+
+.kl-table-td-nowrap td {
+    white-space: nowrap;
+}
+
+.kl-td-nowrap {
+    white-space: nowrap;
+}
+
+.kl-table-td-text-right td {
+    text-align: right !important;
+}
+
+    .kl-table-td-text-right td input[type=text] {
+        text-align: right !important;
+    }
+
+.kl-td-text-right {
+    text-align: right !important;
+}
+
+    .kl-td-text-right input[type=text] {
+        text-align: right !important;
+    }
+
+.kl-hover-pointer {
+    cursor: pointer;
+}
+
+/* styles for validation helpers */
+.field-validation-error {
+    color: #b94a48;
+    display: inline-block;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #b94a48;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #b94a48;
+    display: inline-block;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+/* margin */
+.kl-margin-top {
+    margin-top: 12px;
+}
+
+.kl-margin-right {
+    margin-right: 1em;
+}
+
+.kl-margin-right-p5 {
+    margin-right: 0.5em;
+}
+
+.kl-margin-right-2 {
+    margin-right: 2em;
+}
+
+.kl-margin-left {
+    margin-left: 1em;
+}
+
+.kl-margin-left-p5 {
+    margin-left: 0.5em;
+}
+
+.kl-no-margin-bottom {
+    margin-bottom: 0 !important;
+}
+
+.kl-margin-bottom {
+    margin-bottom: 12px;
+}
+
+.kl-no-margin-top {
+    margin-top: 0 !important;
+}
+
+.kl-no-margin-right {
+    margin-right: 0 !important;
+}
+
+.kl-no-margin-left {
+    margin-left: 0 !important;
+}
+
+/* padding */
+.kl-no-padding-top {
+    padding-top: 0 !important;
+}
+
+.kl-no-padding-right {
+    padding-right: 0 !important;
+}
+
+.kl-no-padding-bottom {
+    padding-bottom: 0 !important;
+}
+
+.kl-no-padding-left {
+    padding-left: 0 !important;
+}
+
+/* 隐藏 tab 元素底边的边框 */
+.kl-hide-nav-tabs-custom-board {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+
+.skin-green-light .sidebar-menu > li > a {
+    font-weight: 400 !important;
+}
+
+.skin-green-light .treeview-menu > li.active > a {
+    font-weight: 400 !important;
+}
+
+/* 100% 宽 */
+.full-width {
+    width: 100% !important;
+}
+
+/* Alertify Dialog */
+.ajs-header, .ajs-body {
+    font-family: 'Microsoft YaHei' !important;
+}
+
+/* 加宽按钮 */
+.kl-btn-wide {
+    padding-left: 0.8em;
+    padding-right: 0.8em;
+}
+
+    .kl-btn-wide > i {
+        margin-right: 0.4em;
+    }
+
+.paybtn {
+    height: 100px;
+    width: 200px;
+}
+
+/* kl定义的按钮样式 */
+.kl-btn-red {
+    border-color: rgb(233,138,126) !important;
+    color: #f56954 !important;
+    background-color: transparent;
+}
+
+    .kl-btn-red:hover {
+        color: #FFF !important;
+        background-color: rgb(233,138,126) !important;
+    }
+
+.kl-btn-blue {
+    border-color: rgb(127,180,210) !important;
+    color: #3c8dbc !important;
+    background-color: transparent;
+}
+
+    .kl-btn-blue:hover {
+        color: #FFF !important;
+        background-color: rgb(127,180,210) !important;
+    }
+
+.kl-btn-green:hover {
+    color: #FFF !important;
+    background-color: rgb(25, 184, 67) !important;
+}
+
+.kl-btn-black {
+    border-color: rgb(130,130,130) !important;
+    color: #111 !important;
+    background-color: transparent;
+}
+
+    .kl-btn-black:hover {
+        color: #FFF !important;
+        background: rgb(130,130,130) !important;
+    }
+
+/* kl定义的按钮实心样式 */
+.kl-btn-green-s {
+    border-color: rgb(24, 175, 64) !important;
+    color: #FFF !important;
+    background-color: rgb(25, 184, 67) !important;
+}
+
+    .kl-btn-green-s:hover {
+        color: #FFF !important;
+        background-color: rgb(23, 166, 61) !important;
+    }
+
+.kl-btn-width {
+    padding-left: 1.6em;
+    padding-right: 1.6em;
+}
+
+/* 覆盖 AdminLTE 的 .box-header 中的按钮样式 */
+.box-solid.box > .box-header .kl-btn-red:hover {
+    background: rgb(233,138,126) !important;
+}
+
+.box-solid.box > .box-header .kl-btn-blue:hover {
+    background: rgb(127,180,210) !important;
+}
+
+.box-solid.box > .box-header .kl-btn-green:hover {
+    background: rgb(25, 184, 67) !important;
+}
+
+.box-solid.box > .box-header .kl-btn-black:hover {
+    background: rgb(130,130,130) !important;
+}
+
+/* AdminLTE box */
+.box.kl-with-none-shadow {
+    box-shadow: none !important;
+}
+
+/* AdminLTE stacked 用于 button 伪造出的 link */
+.nav-stacked > li > button.btn-link {
+    border-radius: 0;
+    border-top: 0;
+    border-left: 3px solid transparent;
+    color: #444;
+    font-size: 14px;
+}
+
+.nav-pills > li > button.btn-link {
+    border-radius: 0;
+    border-top: 3px solid transparent;
+    color: #444;
+}
+
+.nav > li > button.btn-link {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    width: 100%;
+    text-align: left;
+    text-decoration: none;
+}
+
+    .nav > li > button.btn-link:hover {
+        background-color: #EEE;
+    }
+
+.nav-stacked > li.active > button.btn-link, .nav-stacked > li.active > button.btn-link:hover {
+    background-color: #f4f4f4;
+    border-top: 0;
+    border-left-color: #3c8dbc;
+    color: #444;
+    font-weight: bold;
+}
+
+.nav-pills > li > button.btn-link > .fa, .nav-pills > li > button.btn-link > .glyphicon, .nav-pills > li > button.btn-link > .ion {
+    margin-right: 5px;
+}
+
+/* table */
+.table > thead > tr > th {
+    font-weight: 900;
+    font-size: 12px;
+}
+
+/* form */
+/*
+label {
+    font-weight: 400;
+}
+*/
+/* info-box */
+.kl-info-box {
+    text-align: center;
+}
+
+    .kl-info-box .info-box-text {
+        font-size: 14px;
+    }
+
+    .kl-info-box .info-box-number {
+        font-size: 30px;
+        font-weight: lighter;
+        font-family: "Segoe UI Light", "STXIHEI", "Microsoft YaHei", sans-serif;
+        -ms-word-break: break-all;
+        word-break: break-all;
+    }
+
+.kl-membership-deleted {
+    opacity: 0.6;
+}
+
+/* Kendo UI 扩展 */
+/* readonly 的下拉菜单表现出 disabled 的灰色背景和不可选样式 */
+.k-dropdown[aria-readonly="true"] .k-state-default.k-dropdown-wrap {
+    background-color: inherit;
+    cursor: not-allowed;
+    opacity: 0.7;
+    box-shadow: none !important;
+    border-color: #CCC;
+}
+
+.kl-reservation-options.isStuck {
+    width: calc(16.66% - 15px - 15px - 10px);
+    min-width: 8.6em;
+    margin-top: 20px;
+    -moz-box-shadow: 0 0 18px #CCC;
+    -webkit-box-shadow: 0 0 18px #CCC;
+    box-shadow: 0 0 18px #CCC;
+    z-index: 999;
+}
+
+.placeholder {
+    visibility: hidden;
+}
+
+.kl-input-num {
+    height: 30px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+}
+
+    .kl-input-num .k-input {
+        margin-bottom: 1px;
+    }
+
+span[name="hotelSelection"] {
+    cursor: pointer;
+}
+
+    span[name="hotelSelection"].active {
+        border: 1px solid red !important;
+    }
+
+th[name="roomType"], td[name="roomRate"] {
+    color: blue;
+    cursor: pointer;
+}
+
+.roomInfo {
+    border-bottom: 2px solid rgb(177, 255, 255);
+    margin-bottom: 10px !important;
+}
+
+    .roomInfo thead {
+        background-color: rgb(177, 255, 255);
+    }
+
+    .roomInfo td, .roomInfo th {
+        max-width: 120px !important;
+    }
+
+.table-tooltip-condensed > tbody > tr > td {
+    padding: 2px;
+}
+
+span[name="hotel"] {
+    color: blue;
+    cursor: pointer;
+}
+
+.modal-title > .sub {
+    padding-left: 8px;
+}
+
+.rateDetailDaily table thead {
+    background-color: #6a6aed;
+    color: white;
+}
+
+.weekDay {
+    color: red;
+}
+
+.rateDetailDaily table tbody tr.active td {
+    background-color: #16ffb1;
+}
+
+.kl-not-found {
+    color: red;
+}
+
+.kl-box-no-margin {
+    margin-bottom: 0;
+}
+
+.kl-section-header {
+    border-bottom: solid 3px #dfdfdf;
+    padding-bottom: 1px;
+    margin-bottom: 10px;
+}
+/*
+.box.box-solid > .box-header .btn-primary:hover {
+    background-color: #367fa9 !important;
+}
+    */
+
+.table-margin-top {
+    margin-top: 20px;
+}
+
+.content-wrapper .alert {
+    margin: 0 15px 0;
+}
+
+.kl-box-search .box-header input {
+    border-radius: 3px;
+}
+
+.kl-box-search > .box-header {
+    padding-top: 8px;
+    padding-bottom: 0;
+}
+
+.box.box-solid > .box-header .btn.btn-default {
+    background: #f4f4f4;
+}
+/*end*/
+.tag-required {
+    color: red;
+}
+
+.kl-alert-padding {
+    padding-top: 8px;
+}
+
+.checkboxleft {
+    margin-left: -15px;
+}
+
+.column-head {
+    text-align: left !important;
+}
+
+/* 表格描述溢出截断样式 */
+.RemarkCut {
+    white-space: nowrap;
+    overflow: hidden;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    max-width: 200px;
+}
+
+.text-ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+}
+
+.selectedTable tbody tr th {
+    background-color: lightgray;
+}
+
+.selectedTable tbody tr td:hover {
+    background-color: #DFF0D8;
+    color: #FFF;
+}
+
+.kl-word-break-all {
+    -ms-word-break: break-all;
+    word-break: break-all;
+    -ms-word-wrap: break-word;
+    word-wrap: break-word;
+}
+
+.kl-can-select:hover {
+    background-color: #f7f7f7;
+    cursor: pointer;
+}
+
+.kl-selected {
+    background-color: #3c8dbc !important;
+    color: #ffffff;
+}
+
+    .kl-selected a {
+        color: #FFF !important;
+    }
+
+/* 触发选择器的文本框所用的样式 */
+.kl-selector-invoker {
+    background-color: #FFF !important;
+    cursor: pointer;
+}
+
+.channelInventory:hover {
+    background-color: #E6F1E1;
+    cursor: pointer;
+}
+
+table.dataTable {
+    width: 100% !important;
+}
+
+    table.dataTable tbody tr.selected {
+        background-color: #B0BED9;
+    }
+
+.selectLabel {
+    cursor: pointer;
+    text-decoration: underline;
+    margin-bottom: 5px;
+    display: inline-block;
+    color: #357ebd;
+    font-family: "Segoe UI", "Microsoft YaHei UI", "Microsoft YaHei";
+}
+
+.num-availRooms, .num-soldRooms, .inventorySwitch {
+    display: inline-block;
+    width: 30px;
+    text-align: center;
+}
+
+.inventorySwitch {
+    width: 20px;
+}
+
+.td-nowrap {
+    white-space: nowrap;
+}
+
+.tooltip-restriction-table td:first-child {
+    padding-right: 4px;
+}
+
+.rate-restriction-tr > td:not(:first-child) {
+    cursor: pointer;
+}
+
+.rate-restriction-tr > td.active {
+    background-color: lightgrey !important;
+}
+
+
+.sidebar-menu .treeview-menu > li > a {
+    font-size: 12px;
+}
+
+.sidebar-menu .treeview > a > span {
+    font-size: 12px;
+}
+
+.sidebar-menu li > a > span {
+    font-size: 12px;
+}
+
+/*    alt-admin在bootstrap字体是12的情况下，mini左边菜单的间距需要调整*/
+.sidebar-mini.sidebar-collapse .sidebar-menu > li:hover > .treeview-menu {
+    top: 40px;
+}
+
+.sidebar-menu .fa {
+    font-size: 16px;
+}
+
+/* 分页信息*/
+div.dataTables_info {
+    color: darkgray;
+}
+
+div.dataTables_length {
+    color: darkgray;
+}
+
+.pagination > li > a:hover,
+.pagination > li > span:hover,
+.pagination > li > a:focus,
+.pagination > li > span:focus {
+    color: #333333;
+}
+/* end*/
+/* 提示信息*/
+.alert-success {
+    background-color: #dff0d8 !important;
+    border-color: #d6e9c6 !important;
+    color: #3c763d !important;
+}
+
+.alert-info {
+    background-color: #d9edf7 !important;
+    border-color: #bce8f1 !important;
+    color: #31708f !important;
+}
+
+.alert-warning {
+    background-color: #fcf8e3 !important;
+    border-color: #faebcc !important;
+    color: #8a6d3b !important;
+}
+
+.alert-danger {
+    background-color: #f2dede !important;
+    border-color: #ebccd1 !important;
+    color: #a94442 !important;
+}
+/* end*/
+/* kendo UI 的控件去掉圆角*/
+.k-block, .k-button, .k-textbox, .k-drag-clue, .k-touch-scrollbar, .k-window, .k-window-titleless .k-window-content, .k-window-action, .k-inline-block, .k-grid .k-filter-options, .k-grouping-header .k-group-indicator, .k-autocomplete, .k-multiselect, .k-combobox, .k-dropdown, .k-dropdown-wrap, .k-datepicker, .k-timepicker, .k-colorpicker, .k-datetimepicker, .k-notification, .k-numerictextbox, .k-picker-wrap, .k-numeric-wrap, .k-colorpicker, .k-list-container, .k-calendar-container, .k-calendar td, .k-calendar .k-link, .k-treeview .k-in, .k-editor-inline, .k-tooltip, .k-tile, .k-slider-track, .k-slider-selection, .k-upload, .k-split-button {
+    border-radius: 0;
+}
+/*end*/
+/*adminLTE的背景色*/
+.content-wrapper,
+.right-side {
+    background-color: #eeeeee;
+}
+/*end*/
+.td-word-break {
+    -ms-word-break: break-all;
+    word-break: break-all;
+    -ms-word-wrap: break-word;
+    word-wrap: break-word;
+}
+
+.notification-word-break {
+    -ms-word-break: break-all;
+    word-break: break-all;
+    -ms-word-wrap: break-word;
+    word-wrap: break-word;
+}
+
+.kl-label-error, .kl-label-success, .kl-label-warning {
+    width: 60px;
+    display: inline-block;
+}
+
+/* Kunlun Selector Begin */
+.dataTable thead tr th {
+    white-space: nowrap;
+}
+
+
+.kl-modal-selector #searchResult {
+    max-height: 330px;
+}
+
+    .kl-modal-selector #searchResult table {
+        width: 100%;
+        table-layout: fixed;
+    }
+
+    .kl-modal-selector #searchResult tbody td {
+        white-space: nowrap;
+        -ms-text-overflow: ellipsis;
+        -o-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .kl-modal-selector #searchResult tbody th {
+        background-color: lightgray;
+    }
+
+        .kl-modal-selector #searchResult tbody th label {
+            font-weight: bold;
+        }
+
+/* Kunlun Selector End */
+
+/* 市场预测分析背景颜色样式*/
+.marketbggrey {
+    background-color: #F3F3F3;
+}
+
+.marketbglightgrey {
+    background-color: #FDF9FD;
+}

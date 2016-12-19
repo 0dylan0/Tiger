@@ -1,0 +1,8 @@
+﻿<td class="#= item ? 'kl-can-select' : '' # #= item && $.klSelector.isSelected(new kunlun.data.Selector.Item(item.code, null, item.categoryCode)) ? 'kl-selected' : '' # "
+    data-category-code="#= item ? item.categoryCode : '' #"
+    data-category-name="#= item ? item.categoryName : '' #"
+    data-code="#= item ? item.code : '' #"
+    data-name="#= item ? item.name : '' #"
+    title="#= text #">
+    #= $.htmlEncode(text) #
+</td>

@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <title>@ViewBag.Title - Kunlun RMS</title>
+
+
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/kendo/2016.2.714/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/admin-lte/AdminLTE.css" rel="stylesheet" />
+    <link href="~/Content/admin-lte/skins/skin-green.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="~/Content/alertifyjs/alertify.css" rel="stylesheet" />
+
+    <link href="~/Content/alertifyjs/themes/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/awesome-bootstrap-checkbox.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+</head>
+<body class="hold-transition login-page">
+    <script src="~/Scripts/kunlun.sidebar.js" type="text/javascript"></script>
+    <div class="progress" id="kl-loaded-progress">
+        <div class="progress-bar progress-bar-striped progress-bar-info active" role="progressbar" style="width: 10%;"></div>
+    </div>
+    <div class="wrapper">
+
+
+        <script type="text/javascript">
+            var progressBar = document.querySelectorAll("#kl-loaded-progress.progress > .progress-bar").item(0),
+                progressBarNumber = 30,
+                progressBarTask = setInterval(function () {
+                    if (progressBarNumber >= 85) {
+                        clearInterval(progressBarTask);
+                    }
+
+                    progressBar.style.width = progressBarNumber + "%";
+                    progressBarNumber += 0.6;
+                }, 100);
+        </script>
+
+        <section class="content">
+            @RenderBody()
+        </section>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/kendoui")
+
+    <script src="~/Scripts/kendo/2016.2.714/cultures/kendo.culture.zh-Hans.min.js"></script>
+    <script src="~/Scripts/admin-lte/app.js"></script>
+    <script src="~/Scripts/alertify.js"></script>
+    <script src="~/Scripts/kunlun.util.js"></script>
+    <script src="~/Scripts/kunlun.data.js"></script>
+    <script src="~/Scripts/kunlun.extension.alertify.js"></script>
+
+    @RenderSection("scripts", required: false)
+    <script type="text/javascript">
+        clearInterval(progressBarTask);
+        progressBar.style.width = "100%";
+        setTimeout(function () { $(progressBar).parents(".progress").fadeOut(); }, 350);
+    </script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+﻿@model Web.Models.LoginModel
+@using Services.Localization;
+@using Core.Infrastructure;
+@{
+    ViewBag.Title = "RMS.Login.Login";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+@using (Html.BeginForm("Login", "User", FormMethod.Post, new { @autocomplete = "off", id = "loginForm" }))
+{
+    @Html.HiddenFor(m => m.ReturnUrl)
+    <div class="login-box">
+        <div class="login-logo">
+            <b>Kunlun</b>tiget<h5> Login.tiger </h5>
+        </div>
+
+        <!-- /.login-logo -->
+        <div class="login-box-body">
+            <p class="login-box-msg">Login.Msg</p>
+
+            <div class="form-group has-feedback">
+                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder = "UserName", autofocus = "autofocus" })
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                @Html.ValidationMessageFor(m => m.UserName)
+                @Html.ValidationMessage("UserName_NotExist")
+            </div>
+            <div class="form-group has-feedback">
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password" })
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                @Html.ValidationMessageFor(m => m.Password)
+                @Html.ValidationMessage("Password_Wrong")
+            </div>
+
+            <div class="row">
+                <div class="col-xs-8">
+                    <div class="checkbox">
+                        @Html.CheckBoxFor(m => m.RememberMe)
+                        @Html.LabelFor(m => m.RememberMe)
+                    </div>
+                </div>
+                <!-- /.col -->
+                <div class="col-xs-4">
+                    <button class="btn btn-primary btn-block" type="submit" id="login">登陆</button>
+                </div>
+                <!-- /.col -->
+            </div>
+        </div>
+        <!-- /.login-box-body -->
+        <br />
+    </div>
+}
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+
+    </script>
+}

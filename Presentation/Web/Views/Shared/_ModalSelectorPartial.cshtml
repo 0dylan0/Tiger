@@ -1,0 +1,144 @@
+﻿<script id="modalSelectorPartialTemplate" type="text/x-kendo-template">
+    <form class="row kl-modal-selector" id="KunlunModalSelector">
+        <div class="col-md-4 col-sm-6 col-xs-12" id="CategoryCodeContainer">
+            <div class="form-group">
+                <label for="CategoryCode">@T("Category")</label>
+                <select id="CategoryCode" name="CategoryCode" class="full-width">
+                    <option value="1">12</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-12" id="QueryStrContainer">
+            <div class="form-group">
+                <label for="QueryStr">@T("SearchKeyLabel")</label>
+                <input type="text" id="QueryStr" name="QueryStr" class="form-control" />
+            </div>
+        </div>
+        <div id="kunlunSearchContainer" class="col-md-1 col-sm-1 col-xs-1">
+            @HiddenLabel()
+            <button type="submit" class="btn btn-default" id="kunlunSearch"><i class="fa fa-search"></i> @T("Search")</button>
+        </div>
+        <div class="table-responsive col-xs-12" id="searchResult">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td class="text-center kl-modal-selector-default-info">@T("SearchAndChoose")</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="kl-margin-top kl-offset-col-padding col-xs-12">
+            <div class="col-xs-6">
+                <div class="checkbox checkbox-inline" id="selectAllContainer">
+                    <input type="checkbox" id="selectAll" />
+                    <label for="selectAll">@T("SelectAll")</label>
+                </div>
+            </div>
+            <div class="col-xs-6 text-right">
+                <button type="button" id="kunlunOk" class="btn btn-default"> @T("OK")</button>
+            </div>
+        </div>
+    </form>
+</script>
+
+<script id="modalSelectorPartialRowWithCategoryTemplate" type="text/x-kendo-template">
+    <tbody>
+        # var generateCategoryName = function(categoryCode, categoryName) { #
+        # var content = ""; #
+        # if(categoryName !== null && categoryName !== "") { #
+        # content += categoryName; #
+        # } #
+
+        # if(categoryCode !== null && categoryCode !== "") { #
+        # content += " [" + categoryCode + "]"; #
+        # } #
+
+        # return $.htmlEncode(content); #
+        # }; #
+        # var rowCells = $.klSelector.getOptions().rowCells; #
+
+        # if(data.__length__ == 0) { #
+        <tr>
+            <td class="text-center" colspan="#= rowCells #">
+                @T("DataTables.zeroRecords")
+            </td>
+        </tr>
+        # } else { #
+        # for(var group in data) { #
+        # var key = data[group].key; #
+        # var value = data[group].value; #
+        # var categoryCode = key.categoryCode; #
+        # var categoryId = "selectorCategory_" + categoryCode; #
+        # var categoryTitle = generateCategoryName(key.categoryCode, key.categoryName); #
+
+        <tr>
+            <th class="" colspan="#= rowCells #">
+                # if($.klSelector.isMultiSelect() && value.length > 0) { #
+                <div class="checkbox checkbox-inline">
+                    <input type="checkbox"
+                           class="kl-modal-selector-category"
+                           id="#= categoryId #"
+                           value="#= key.categoryCode #"
+                           data-code="#= key.categoryCode #" />
+
+                    <label class="text-bold" for="#= categoryId #">
+                        #= categoryTitle #
+                    </label>
+                </div>
+                # } else { #
+                #= categoryTitle #
+                # } #
+            </th>
+        </tr>
+
+        # if(value.length == 0) { #
+        <tr>
+            <td class="text-center" colspan="#= rowCells #">
+                @T("DataTables.zeroRecords")
+            </td>
+        </tr>
+        # } else { #
+        # for(var i = 0; i < value.length; i++) { #
+        # var row = value[i]; #
+        <tr>
+            # for(var j = 0; j < row.length; j++) { #
+            # var item = row[j], text = ""; #
+            # if(item) { #
+            # text = "{0} [{1}]".formate(item.name, item.code); #
+            # } #
+            @Html.Partial("_ModalSelectorCellTemplatePartial")
+            # } #
+        </tr>
+        # } #
+        # } #
+        # } #
+        # } #
+    </tbody>
+</script>
+
+<script id="modalSelectorPartialRowTemplate" type="text/x-kendo-template">
+    <tbody>
+        # var rowCells = $.klSelector.getOptions().rowCells; #
+        # if(data.length == 0) { #
+        <tr>
+            <td class="text-center" colspan="#= rowCells #">
+                @T("DataTables.zeroRecords")
+            </td>
+        </tr>
+        # } else { #
+        # for(var i = 0; i < data.length; i++) { #
+        # var row = data[i]; #
+        <tr>
+            # for(var j = 0; j < row.length; j++) { #
+            # var item = row[j], text = ""; #
+            # if(item) { #
+            # text = "{0} [{1}]".formate(item.name, item.code); #
+            # } #
+
+            @Html.Partial("_ModalSelectorCellTemplatePartial")
+            # } #
+        </tr>
+        # } #
+        # } #
+    </tbody>
+</script>

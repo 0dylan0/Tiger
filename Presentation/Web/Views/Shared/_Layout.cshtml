@@ -1,0 +1,484 @@
+﻿@using Core.Domain;
+@using Core.Domain.Common;
+@using Core.Domain.Localization;
+@using Core.Infrastructure;
+@using Services.Localization;
+@using Services.Common;
+@using Services.Security;
+@using Web.Framework.Configuration;
+@{
+    string controller = ViewContext.RouteData.Values["controller"].ToString(),
+        action = ViewContext.RouteData.Values["action"].ToString();
+    User currentUser = WorkContext.CurrentUser;
+    //Hotel currentHotel = WorkContext.CurrentHotel;
+    //Language currentLanguage = WorkContext.CurrentLanguage;
+    //var userHotelRange = EngineContext.Current.Resolve<UserHotelRangeService>().GetByUserCode(currentUser.Code);
+    //var hotelSelectList = userHotelRange.ToList().Select(r => new SelectListItem { Text = $"[{r.Hotel.Code}]{r.Hotel.Name}", Value = r.Hotel.Code, Selected = currentHotel.Code == r.Hotel.Code }).ToList();
+    //var languageList = EngineContext.Current.Resolve<LanguageService>().GetAllLanguages().OrderBy(l => l.Seq).Select(sl => new { sl.Code, sl.Name }).ToList();
+    //var licenseService = EngineContext.Current.Resolve<LicenseService>();
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <title>@ViewBag.Action @ViewBag.Title - Kunlun tiger</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/kendo/2016.2.714/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/echarts")
+    <link href="~/Content/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="~/Content/DataTables/css/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/awesome-bootstrap-checkbox.css" rel="stylesheet" />
+    <link href="~/Content/admin-lte/skins/skin-kl.css" rel="stylesheet" />
+    @Styles.Render("~/Content/kl-style")
+    <link href="~/favicon.ico" rel="shortcut icon">
+</head>
+<body class="sidebar-mini skin-kl">
+    <script src="~/Scripts/kunlun.sidebar.js" type="text/javascript"></script>
+    <div class="progress" id="kl-loaded-progress">
+        <div class="progress-bar progress-bar-striped progress-bar-info active" role="progressbar" style="width: 10%;"></div>
+    </div>
+    <div class="wrapper">
+        <header class="main-header">
+            <a href="~/Home" class="logo">
+                <span class="logo-mini">tiger</span>
+                <span class="logo-lg">Kunlun tiger</span>
+            </a>
+            <nav class="navbar navbar-static-top" role="navigation">
+                <a href="#" title="Toggle navigation" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+                @*<div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        @if (true)
+                        {
+                            var rmsExpireDate = licenseService.GetModuleExpireDate(currentHotel.Code, null);
+                            var isRMSWillSoonFallDue = rmsExpireDate.HasValue && ((DateTime.Now - rmsExpireDate.Value).Days > -31);
+
+                            if (isRMSWillSoonFallDue)
+                            {
+                                <li class="dropdown notifications-menu">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                        <i class="fa fa-bell-o"></i>
+                                        <span class="label label-warning">@(isRMSWillSoonFallDue ? 1 : 0)</span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+
+                                        @if (isRMSWillSoonFallDue)
+                                        {
+                                            <li class="header">
+                                                <i class="fa fa-warning text-yellow"></i> @string.Format(T("RMSLicenseWillSoonFallDue").ToString(), rmsExpireDate.Value.ToKLDateString())
+                                            </li>
+                                        }
+
+
+                                    </ul>
+                                </li>
+                            }
+                        }
+                        <li class="dropdown user user-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-user"></i>
+                                <span class="hidden-xs">@currentUser.Code - @currentUser.Name</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        <a href="~/User/EditPassword" class="btn btn-default btn-flat">@T("EditPassword")</a>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a href="~/User/Logout" class="btn btn-default btn-flat">@T("Logout")</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        @if (currentHotel.Code != null)
+                        {
+                            <li id="changeHotel" class="dropdown notifications-menu">
+                                <a id="hotelName" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                                    <i class="fa fa-building"></i>
+                                    <span class="hidden-xs">@currentHotel.Code - @currentHotel.Name</span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <div class="slimScrollDiv">
+                                            @Html.DropDownList("selectHotelAtNav", hotelSelectList, new { @class = "form-control full-width ignore-auto-init" })
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
+                        <li class="dropdown notifications-menu" id="rmsChangeModuleArea">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="@T("ChangeModule.Title")">
+                                <i class="fa fa-exchange"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                @if (LoginAddressConfiguration.GetAllAddress().Count() == 0)
+                                {
+                                    <li class="header text-red">@T("ChangeModule.Unconfigured")</li>
+                                }
+                                else
+                                {
+                                    <li class="header">@T("ChangeModule.Description")</li>
+                                    <li>
+                                        <ul class="menu">
+                                            @ChangeModule(LoginAddressConfiguration.ECRSLoginAddress, "CRM/LPS/CSM")
+                                            @ChangeModule(LoginAddressConfiguration.CROLoginAddress, "Kunlun CRO")
+                                            @ChangeModule(LoginAddressConfiguration.SOCLoginAddress, "Kunlun SOC")
+                                        </ul>
+                                    </li>
+                                }
+                            </ul>
+                        </li>
+
+                    </ul>
+                </div>*@
+            </nav>
+        </header>
+
+        <aside class="main-sidebar">
+            <section class="sidebar">
+                <ul class="sidebar-menu">
+                    <li class="treeview">
+                        <!-- 预算管理-->
+                        <a href="#">
+                            <i class="fa fa-calculator"></i><span> 用户管理</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            @NavMenuItem(T("用户"), Url.Action("Index", "User")) 
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-pie-chart"></i><span> 添加货物</span> 
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            @*@NavMenuItem(T("22"), Url.Action("Index", "MarketStat")) <!-- 按市场统计 -->*@
+                        </ul>
+                    </li>
+                    
+                </ul>
+            </section>
+        </aside>
+        <script type="text/javascript">
+            var progressBar = document.querySelectorAll("#kl-loaded-progress.progress > .progress-bar").item(0),
+                progressBarNumber = 15,
+                progressBarTask = null,
+                setProgressBarProgressing = function () {
+                    document.querySelector("#kl-loaded-progress").style = null;
+                    progressBar.style.width = "15%";
+
+                    return setInterval(function () {
+                        if (progressBarNumber >= 85) {
+                            clearInterval(progressBarTask);
+                        }
+
+                        progressBar.style.width = progressBarNumber + "%";
+                        progressBarNumber += 0.6;
+                    }, 100);
+                },
+                setProgressBarFinish = function () {
+                    clearInterval(progressBarTask);
+                    progressBar.style.width = "100%";
+                    setTimeout(function () { $(progressBar).parents(".progress").fadeOut(); }, 350);
+                };
+
+            progressBarTask = setProgressBarProgressing();
+        </script>
+
+        <div class="content-wrapper">
+            @Html.Partial("Notifications")
+            <section class="content-header">
+                <h1>
+                    @ViewBag.Action @ViewBag.Title @(ViewBag.PageSubhead != null ? "- " + ViewBag.PageSubhead : "")
+                </h1>
+
+                @*<ol class="breadcrumb">
+                        <li><a href="@Url.Action(ViewBag.ControllerIndex, controller)"><i class="fa fa-map-marker"></i> @ViewBag.Controller</a></li>
+                        <li class="active"> @ViewBag.Action</li>
+                    </ol>*@
+            </section>
+
+            <section class="content">
+                @RenderBody()
+            </section>
+        </div>
+
+        <footer class="main-footer">
+            <div class="pull-right hidden-xs">
+                Kunlun tiger
+            </div>
+            @*<span style="margin-right:100px" class="pull-right">
+                @for (int i = 0; i < languageList.Count; i++)
+                {
+                    if (WorkContext.CurrentLanguage.Code == languageList[i].Code)
+                    {
+                        <span>@languageList[i].Name</span>
+                    }
+                    else
+                    {
+                        <a data-code="@languageList[i].Code" href="#" data-trigger="changeLanguage">@languageList[i].Name</a>
+                    }
+                    if (i != languageList.Count - 1)
+                    {
+                        <span>|</span>
+                    }
+                }
+            </span>*@
+            Copyright &copy; @DateTime.Now.Year Shiji Kunlun Software Co.,Ltd. All rights reserved.
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/kendoui")
+    <script src="~/Scripts/admin-lte/app.js"></script>
+    <script src="~/Scripts/alertify.js"></script>
+    <script src="~/Scripts/jquery.pjax.js"></script>
+    @Scripts.Render("~/bundles/datatables")
+    @Scripts.Render("~/bundles/kunlun-extensions")
+    @Html.Partial("ModalPartial")
+    @Html.Partial("alertify")
+
+    <script>
+        // 在左侧栏上标出当前位置
+        $(".sidebar-menu a[href!='#']").each(function (index, element) {
+            if ($(element).parent(".isOnlyActive").length != 0) {
+                if ((new RegExp("\/@controller\/@(action )", "i")).test($(element).prop("href"))) {
+                    $(element).parents(".sidebar-menu li").addClass("active");
+                }
+            }
+            else {
+                if ((new RegExp("\/@controller\/@(action == "Index" ? "?" : string.Empty)", "i")).test($(element).prop("href"))) {
+                    $(element).parents(".sidebar-menu li").addClass("active");
+                }
+            }
+        });
+
+        // 级联下拉菜单全局设置,统一
+        $.cascadeDropdownListSetup = {
+            displayText: function (value, text) {
+                return value + " - " + text;
+            }
+        };
+
+        // Ajax 全局设置
+        $.ajaxSetup({
+            cache: false,
+            timeout: 30000,
+            error: function (xhr, status, errorThrown) {
+                if (status === 'abort') {
+                    return;
+                }
+                alertify.klErrorAlert("Ajax {0}: {1} {2}".formate(status, xhr.status ? xhr.status : "", errorThrown));
+            }
+        });
+
+        // Kendo 全局设置
+        @*var currentLanguage = "@WorkContext.CurrentLanguage.Code";
+        if (currentLanguage == "C") {
+            kendo.culture("zh-Hans");
+        }*@
+
+        $.extend(kunlun, {
+            language: {
+                selector: {
+                    optionLabel: "All"
+                }
+            }
+        });
+
+
+        // Datatables 相关配置
+        // 分页全局设置
+        $.extend(true, $.fn.dataTable.defaults, {
+            searching: false,
+            processing: true,
+            serverSide: true,
+            responsive: true,
+            lengthChange: false,
+            fnDrawCallback: function () {
+                $(".dataTables_wrapper select[multiple!='multiple']").kendoDropDownList();
+                // 重新计算响应式宽度，避免部分列超出指定区域
+                this.api().responsive.recalc();
+            },
+            language: {
+                lengthMenu: "DataTables.lengthMenu",
+                infoEmpty: "DataTables.infoEmpty",
+                zeroRecords: "DataTables.zeroRecords",
+                sEmptyTable: "DataTables.zeroRecords",
+                info: "DataTables.info",
+                paginate: {
+                    first: "首页",
+                    previous: "上一页",
+                    next: "下一页",
+                    last: "末页"
+                },
+                processing: "DataTables.processing"
+            }
+        });
+
+        $(function () {
+
+            // 记住sidebar的状态
+            var saveSidebarCollapseState = function (e) {
+                localStorage.sidebarCollapse = e.type == "collapsed";
+            };
+
+            $("body").on({
+                "expanded.pushMenu": saveSidebarCollapseState,
+                "collapsed.pushMenu": saveSidebarCollapseState
+            });
+
+
+            // Notification
+            $('.kl-alert').on('closed.bs.alert', function () {
+                $(".kl-alert-padding").remove();
+            });
+
+            // 修改当前酒店
+            $("#selectHotelAtNav").kendoDropDownList({
+                filter: "contains",
+                change: function () {
+                    $.ajax({
+                        url: '@Url.Content("~/Hotel/ChangeHotel")',
+                        type: 'GET',
+                        data: addAntiForgeryToken({ code: $("#selectHotelAtNav").val() }),
+                        success: function (data) {
+                            if (data && data.status == "success") {
+                                location.href = '@Url.Content("~/Home/Index")';
+                            }
+                        }
+                    });
+                },
+                close: function () {
+                    $("#hotelName").attr("data-toggle", "dropdown");
+                    $("#hotelName").parent().attr("class", "dropdown notifications-menu")
+                },
+                open: function () {
+                    var that = this;
+                    setTimeout(function () { that.filterInput.focus(); }, 300);
+                }
+            });
+
+            $("#changeHotel").click(function (e) {
+                setTimeout(function () {
+                    var a = $("#hotelName").parent().attr("class");
+                    if (a == "dropdown notifications-menu open") {
+                        $("#selectHotelAtNav").data("kendoDropDownList").open();
+                        $("#hotelName").attr("data-toggle", "");
+                    }
+                }, 100);
+            });
+
+            // 修改当前语言
+            $("[data-trigger='changeLanguage']").click(function (e) {
+                e.preventDefault();
+                $.ajax({
+                    url: '@Url.Action("ChangeLanguage", "Common")',
+                    type: 'POST',
+                    data: addAntiForgeryToken({
+                        code: $(this).attr("data-code")
+                    }),
+                    success: function (data) {
+                        if (data && data.status == "success") {
+                            location.reload();
+                        }
+                    }
+                })
+            });
+
+            @*$("#rmsChangeModuleArea .rms-change-module-item").click(function () {
+                var info = $(this),
+                    loginTo = info.data("loginTo"),
+                    loginAddress = info.data("loginAddress"),
+                    username = "@currentUser.Code",
+                    password = decodeURIComponent("@HttpUtility.UrlEncode(currentUser.Password)"),
+                    hotelCode = "@currentHotel.Code",
+                    data;
+
+                if (loginTo == "ECRS") {
+                    data = {
+                        name: username,
+                        password: password,
+                        hotels: hotelCode,
+                        sys: "CSM/CSM",
+                        language: "@currentLanguage.Code",
+                        dowhat: "SSO"
+                    };
+                }
+                else {
+                    data = {
+                        username: username,
+                        password: password,
+                        hotelCode: hotelCode,
+                        isFromOtherSystem: true
+                    }
+                }
+
+                var loginForm = document.createElement("form");
+                loginForm.action = loginAddress;
+                loginForm.method = "POST";
+                loginForm.id = "ssoLoginForm";
+                loginForm.target = "_blank";
+                for (var p in data) {
+                    var hidden = $.createHidden(p, data[p]);
+                    loginForm.appendChild(hidden);
+                }
+
+                $("body").append(loginForm);
+                $("#ssoLoginForm").submit();
+                $("#ssoLoginForm").remove();
+            });*@
+        });
+    </script>
+
+    @RenderSection("scripts", required: false)
+
+    <script type="text/javascript">
+        setProgressBarFinish();
+    </script>
+</body>
+</html>
+
+@helper NavMenuItem(IHtmlString innerText, string url, IEnumerable<string> classNames = null, string iconClassNames = null)
+{
+const string ICON_CLASS_NAME = "fa fa-circle-o";
+
+if (classNames == null)
+{
+    classNames = new List<string>();
+}
+
+if (iconClassNames == null)
+{
+    iconClassNames = ICON_CLASS_NAME;
+}
+
+    <li class="@String.Join(" ", classNames)">
+        <a class="text-ellipsis" title="@innerText" href="@url"><i class="@iconClassNames"></i> @innerText</a>
+    </li>
+}
+
+
+@helper ChangeModule(string loginAddress, string description)
+{
+if (loginAddress != null)
+{
+        <li>
+            <a href="#" data-login-address="@loginAddress" data-login-to="@description" class="rms-change-module-item">
+                <i class="fa fa-angle-right"></i> @description
+            </a>
+        </li>
+}
+}

@@ -1,0 +1,7 @@
+﻿<script type="text/javascript">
+    function onKendoNumericTextBoxChangeToNull() {
+        if (this.value() == null) {
+            this.value(this.min() || 0);
+        }
+    }
+</script>

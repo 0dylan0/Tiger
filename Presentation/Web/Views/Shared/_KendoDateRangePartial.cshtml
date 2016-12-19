@@ -1,0 +1,103 @@
+﻿<style>
+    .kl-date-range-wrap input[type=text] {
+        cursor: pointer;
+    }
+
+    .date-range-container {
+        box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+        border: 1px solid rgba(0,0,0,0.2);
+        padding: 0.3333em;
+        font-size: 12px !important;
+    }
+
+    .date-range-calendar-control button {
+        padding: 0;
+        border-color: rgba(0,0,0,0.2);
+    }
+
+    .date-range-container .last-control,
+    .date-range-container .next-control {
+        width: 1.8333em;
+    }
+
+    .date-range-container .last-control {
+        margin-right: 0.3333em;
+    }
+
+    .date-range-container .next-control {
+        margin-left: 0.3333em;
+    }
+
+        .date-range-container .last-control button,
+        .date-range-container .next-control button {
+            width: 1.8333em;
+        }
+
+            .date-range-container .last-control button.last-year,
+            .date-range-container .next-control button.next-year {
+                height: 1.99996em;
+                margin-bottom: 0.3333em;
+            }
+
+            .date-range-container .last-control button.last-month,
+            .date-range-container .next-control button.next-month {
+                height: 14.3em;
+            }
+
+
+
+    div.date-range-container div.calendar-area div.k-header > a.k-nav-fast {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+        div.date-range-container div.calendar-area div.k-header > a.k-nav-fast:hover {
+            text-decoration: none;
+            background-color: #ebebeb;
+            color: #333333;
+        }
+
+    div.date-range-container .date-range-calendar-container {
+        width: 668px;
+        margin-bottom: 0.3333em;
+        padding-bottom: 0.3333em;
+        border-bottom: 1px solid rgba(0,0,0,0.2);
+    }
+</style>
+
+<script id="DemoTemplate" type="text/x-kendo-template">
+    <div class="date-range-container" style="background-color: #FFF; ">
+        <div class="row kl-no-margin-left kl-no-margin-right date-range-calendar-container hidden-xs">
+            <div class="pull-left last-control date-range-calendar-control" style="">
+                <button class="k-button last-year" type="button"><span class="fa fa-angle-double-left"></span></button>
+                <button class="k-button last-month" type="button"><span class="fa fa-angle-left"></span></button>
+            </div>
+            <div class="calendar-area pull-left">
+                <div class="calendar-1 kl-date-range-calendar" data-index="1"></div>
+                <div class="calendar-2 kl-date-range-calendar" data-index="2"></div>
+                <div class="calendar-3 kl-date-range-calendar" data-index="3"></div>
+            </div>
+            <div class="pull-left next-control date-range-calendar-control" style="">
+                <button class="k-button next-year" type="button"><span class="fa fa-angle-double-right"></span></button>
+                <button class="k-button next-month" type="button"><span class="fa fa-angle-right"></span></button>
+            </div>
+        </div>
+
+        <div class="row kl-no-margin-left kl-no-margin-right date-range-control-container">
+            <div class="pull-left">
+                <label class="kl-margin-right-p5 culture-pad-left visible-xs-block visible-sm-inline visible-md-inline visible-lg-inline">123</label>
+                <input type="text" class="calendar-begin form-control kl-margin-right-p5 input-sm" />
+
+                <label class="kl-margin-right-p5 culture-pad-middle visible-xs-block visible-sm-inline visible-md-inline visible-lg-inline"></label>
+                <input type="text" class="calendar-end form-control kl-margin-right-p5 input-sm" />
+
+                <label class="culture-pad-right visible-xs-block visible-sm-inline visible-md-inline visible-lg-inline"></label>
+            </div>
+            <div class="pull-right">
+                <button type="button" class="btn btn-sm btn-primary date-range-ok">@T("OK")</button>
+                <button type="button" class="btn btn-sm btn-default date-range-cancel">@T("Cancel")</button>
+            </div>
+        </div>
+    </div>
+</script>
