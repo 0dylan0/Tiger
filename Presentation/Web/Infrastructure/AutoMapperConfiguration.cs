@@ -19,17 +19,14 @@ namespace Web.Infrastructure
         {
             _mapperConfiguration = new MapperConfiguration(cfg =>
             {
-                //cfg.CreateMap<Hotel, HotelModel>();
-                //cfg.CreateMap<User, UserEditPasswordModel>();
                 cfg.CreateMap<UserModel, Core.Domain.Common.Users>();
                 cfg.CreateMap<Core.Domain.Common.Users, UserModel>();
                 cfg.CreateMap<GoodsDataModel, GoodsData>();
                 cfg.CreateMap<GoodsData, GoodsDataModel>();
                 cfg.CreateMap<ClientDataModel, ClientData>();
                 cfg.CreateMap<ClientData, ClientDataModel>();
-
-
-
+                cfg.CreateMap<SupplierDataModel, SupplierData>();
+                cfg.CreateMap<SupplierData, SupplierDataModel>();              
             });
 
             _mapper = _mapperConfiguration.CreateMapper();

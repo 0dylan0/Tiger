@@ -13,18 +13,18 @@ using Web.Models;
 
 namespace Web.Controllers
 {
-    public class ClientDataController : BaseController
+    public class SupplierDataController : BaseController
     {
 
         private readonly IWorkContext _webWorkContext;
-        private readonly ClientDataService _clientDataService;
+        private readonly SupplierDataService _supplierDataService;
         private readonly LocalizationService _localizationService;
-        public ClientDataController(IWorkContext webWorkContext,
-            ClientDataService clientDataService,
+        public SupplierDataController(IWorkContext webWorkContext,
+            SupplierDataService supplierDataService,
             LocalizationService localizationService)
         {
             _webWorkContext = webWorkContext;
-            _clientDataService = clientDataService;
+            _supplierDataService = supplierDataService;
             _localizationService = localizationService;
         }
 
@@ -32,22 +32,22 @@ namespace Web.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            ClientDataListModel model = new ClientDataListModel();
+            SupplierDataListModel model = new SupplierDataListModel();
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult Index(PageInfo pageInfo, ClientDataListModel model)
+        public ActionResult Index(PageInfo pageInfo, SupplierDataListModel model)
         {
-            IPagedList<ClientData> UserList = _clientDataService.GetList(model.Name, pageInfo.PageIndex, pageInfo.PageSize, pageInfo.sortExpression);
-            model.ClientData = UserList.MapTo<IList<ClientData>, IList<ClientDataModel>>();
+            IPagedList<SupplierData> UserList = _supplierDataService.GetList(model.Name, pageInfo.PageIndex, pageInfo.PageSize, pageInfo.sortExpression);
+            model.SupplierData = UserList.MapTo<IList<SupplierData>, IList<SupplierDataModel>>();
 
-            var results = new DataTable<ClientDataModel>()
+            var results = new DataTable<SupplierDataModel>()
             {
                 Draw = pageInfo.Draw + 1,
                 RecordsTotal = UserList.TotalCount,
                 RecordsFiltered = UserList.TotalCount,
-                Data = model.ClientData
+                Data = model.SupplierData
             };
 
             return Json(new PlainJsonResponse(results));
@@ -56,16 +56,16 @@ namespace Web.Controllers
         [HttpGet]
         public ActionResult Add()
         {
-            ClientDataModel model = new ClientDataModel();
+            SupplierDataModel model = new SupplierDataModel();
             return View(model);
         }
         [HttpPost]
-        public ActionResult Add(ClientDataModel model)
+        public ActionResult Add(SupplierDataModel model)
         {
             if (ModelState.IsValid)
             {
-                ClientData Goods = model.MapTo<ClientDataModel, ClientData>();
-                _clientDataService.Insert(Goods);
+                SupplierData Goods = model.MapTo<SupplierDataModel, SupplierData>();
+                _supplierDataService.Insert(Goods);
                 return RedirectToAction("Index");
             }
             return View(model);
@@ -73,24 +73,23 @@ namespace Web.Controllers
 
         public ActionResult Edit(int id)
         {
-            var user = _clientDataService.GetUserById(id);
-            var res = user.MapTo<ClientData, ClientDataModel>();
+            var user = _supplierDataService.GetUserById(id);
+            var res = user.MapTo<SupplierData, SupplierDataModel>();
             return View(res);
 
         }
         [HttpPost]
-        public ActionResult Edit(ClientDataModel model)
+        public ActionResult Edit(SupplierDataModel model)
         {
             if (ModelState.IsValid)
             {
-                ClientData goodsData = model.MapTo<ClientDataModel, ClientData>();
-                _clientDataService.Update(goodsData);
-                SuccessNotification($"{_localizationService.GetResource("UpdateSuccess") + model.ClientName}");
+                SupplierData goodsData = model.MapTo<SupplierDataModel, SupplierData>();
+                _supplierDataService.Update(goodsData);
+                SuccessNotification($"{_localizationService.GetResource("UpdateSuccess") + model.SupplierName}");
                 return RedirectToAction("Index");
 
             }
             return View(model);
         }
-
     }
 }

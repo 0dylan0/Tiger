@@ -23,7 +23,8 @@ namespace Web.Infrastructure
             builder.RegisterType<UserHotelRangeService>().InstancePerLifetimeScope();
             builder.RegisterType<LicenseService>().InstancePerLifetimeScope();
             builder.RegisterType<GoodsDataService>().InstancePerLifetimeScope();
-            builder.RegisterType<ClientDataService>().InstancePerLifetimeScope(); 
+            builder.RegisterType<ClientDataService>().InstancePerLifetimeScope();
+            builder.RegisterType<SupplierDataService>().InstancePerLifetimeScope(); 
 
         }
 

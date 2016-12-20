@@ -2660,6 +2660,7 @@
     <Compile Include="Controllers\ClientDataController.cs" />
     <Compile Include="Controllers\GoodsDataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SupplierDataController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Extensions\MappingExtensions.cs" />
     <Compile Include="Global.asax.cs">
@@ -2673,6 +2674,8 @@
     <Compile Include="Models\GoodsDataListModel.cs" />
     <Compile Include="Models\GoodsDataModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\SupplierDataListModel.cs" />
+    <Compile Include="Models\SupplierDataModel.cs" />
     <Compile Include="Models\UserListModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -2722,6 +2725,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\SupplierData\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Libraries\Core\Core.csproj">
