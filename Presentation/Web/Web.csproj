@@ -2096,6 +2096,7 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="tiger.ico" />
     <Content Include="Web.config" />
     <Content Include="Scripts\jquery.form.min.js.map" />
     <Content Include="Scripts\kendo\2016.2.714\messages\kendo.messages.zh-TW.min.js.map" />
@@ -2716,6 +2717,9 @@
     <Content Include="Views\ClientData\Index.cshtml" />
     <Content Include="Views\ClientData\Add.cshtml" />
     <Content Include="Views\ClientData\Edit.cshtml" />
+    <Content Include="Views\SupplierData\Index.cshtml" />
+    <Content Include="Views\SupplierData\Add.cshtml" />
+    <Content Include="Views\SupplierData\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2725,7 +2729,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\SupplierData\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Libraries\Core\Core.csproj">
