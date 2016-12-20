@@ -1,4 +1,4 @@
-﻿@model Web.Models.GoodsDataListModel
+﻿@model Web.Models.ClientDataListModel
 
 
 @{
@@ -7,7 +7,7 @@
 
 <div class="box box-solid">
     <div class="box-header">
-        @using (Html.BeginForm("Index", "GoodsData", FormMethod.Post, new { Id = "GoodsDataForm" }))
+        @using (Html.BeginForm("Index", "ClientData", FormMethod.Post, new { Id = "ClientDataForm" }))
         {
             @Html.AntiForgeryToken()
             <div class="row">
@@ -38,12 +38,13 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>商品名称</th>
-                    <th>基本单位</th>
-                    <th>品牌</th>
-                    <th>商品类别</th>
-                    <th>库存</th>
-                    <th>仓库</th>
+                    <th>客户名称</th>
+                    <th>公司名称</th>
+                    <th>客户类型</th>
+                    <th>区域</th>
+                    <th>手机</th>
+                    <th>欠款</th>
+                    <th>收款日期</th>
                     <th>详情</th>
                     <th>编辑</th>
                 </tr>
@@ -69,30 +70,31 @@
                 },
                 columns: [
 					{ data: "id" },
-                    { data: "goodsName" },
-                    { data: "unit" },
-                    { data: "brand" },
+                    { data: "clientName" },
+                    { data: "companyName" },
+                    { data: "clientType" },
 
-                    { data: "goodType" },
-                    { data: "inventory" },
-                    { data: "warehouse" },
+                    { data: "area" },
+                    { data: "phone" },
+                    { data: "arrears" },
+                    { data: "receiptDate"},
                     {
                         orderable: false,
                         responsivePriority: 100
                     }],
                 columnDefs: [
                     {
-                        targets: [7],
-                        orderable: false,
-                        render: function (data, type, full) {
-                            return '<a href="/GoodsData/Edit?id=' + encodeURIComponent(full["id"]) + '" class="btn btn-xs btn-default "><span class="fa fa-pencil"></span> 详情</a>';
-                        }
-                    },
-                    {
                         targets: [8],
                         orderable: false,
                         render: function (data, type, full) {
-                            return '<a href="/GoodsData/Edit?id=' + encodeURIComponent(full["id"]) + '" class="btn btn-xs btn-default "><span class="fa fa-pencil"></span> 修改</a>';
+                            return '<a href="/ClientData/Edit?id=' + encodeURIComponent(full["id"]) + '" class="btn btn-xs btn-default "><span class="fa fa-pencil"></span> 详情</a>';
+                        }
+                    },
+                    {
+                        targets: [9],
+                        orderable: false,
+                        render: function (data, type, full) {
+                            return '<a href="/ClientData/Edit?id=' + encodeURIComponent(full["id"]) + '" class="btn btn-xs btn-default "><span class="fa fa-pencil"></span> 修改</a>';
                         }
                     }
                 ],

@@ -3,7 +3,6 @@ using Core.Domain.Common;
 using Core.Page;
 using Services.Common;
 using Services.Localization;
-using Services.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,40 +16,41 @@ using Web.Models;
 
 namespace Web.Controllers
 {
-    public class GoodsDataController : BaseController
+    public class ClientDataController : BaseController
     {
+
         private readonly IWorkContext _webWorkContext;
-        private readonly GoodsDataService _goodsDataService;
+        private readonly ClientDataService _clientDataService;
         private readonly LocalizationService _localizationService;
-        public GoodsDataController(IWorkContext webWorkContext,
-            GoodsDataService goodsDataService,
+        public ClientDataController(IWorkContext webWorkContext,
+            ClientDataService clientDataService,
             LocalizationService localizationService)
         {
             _webWorkContext = webWorkContext;
-            _goodsDataService = goodsDataService;
+            _clientDataService = clientDataService;
             _localizationService = localizationService;
         }
 
-        // GET: GoodsData
+
         [HttpGet]
         public ActionResult Index()
         {
-            GoodsDataListModel model = new GoodsDataListModel();
+            ClientDataListModel model = new ClientDataListModel();
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult Index(PageInfo pageInfo, GoodsDataListModel model)
+        public ActionResult Index(PageInfo pageInfo, ClientDataListModel model)
         {
-            IPagedList<GoodsData> UserList = _goodsDataService.GetList(model.Name, pageInfo.PageIndex, pageInfo.PageSize, pageInfo.sortExpression);
-            model.GoodsData = UserList.MapTo<IList<GoodsData>, IList<GoodsDataModel>>();
+            IPagedList<ClientData> UserList = _clientDataService.GetList(model.Name, pageInfo.PageIndex, pageInfo.PageSize, pageInfo.sortExpression);
+            model.ClientData = UserList.MapTo<IList<ClientData>, IList<ClientDataModel>>();
 
-            var results = new DataTable<GoodsDataModel>()
+            var results = new DataTable<ClientDataModel>()
             {
                 Draw = pageInfo.Draw + 1,
                 RecordsTotal = UserList.TotalCount,
                 RecordsFiltered = UserList.TotalCount,
-                Data = model.GoodsData
+                Data = model.ClientData
             };
 
             return Json(new PlainJsonResponse(results));
@@ -59,18 +59,18 @@ namespace Web.Controllers
         [HttpGet]
         public ActionResult Add()
         {
-            GoodsDataModel model = new GoodsDataModel();
+            ClientDataModel model = new ClientDataModel();
             return View(model);
         }
         [HttpPost]
-        public ActionResult Add(GoodsDataModel model)
+        public ActionResult Add(ClientDataModel model)
         {
 
 
             if (ModelState.IsValid)
             {
-                GoodsData Goods = model.MapTo<GoodsDataModel, GoodsData>();
-                _goodsDataService.Insert(Goods);
+                ClientData Goods = model.MapTo<ClientDataModel, ClientData>();
+                _clientDataService.Insert(Goods);
                 return RedirectToAction("Index");
             }
             return View(model);
@@ -78,19 +78,19 @@ namespace Web.Controllers
 
         public ActionResult Edit(int id)
         {
-            var user = _goodsDataService.GetUserById(id);
-            var res = user.MapTo<GoodsData, GoodsDataModel>();
+            var user = _clientDataService.GetUserById(id);
+            var res = user.MapTo<ClientData, ClientDataModel>();
             return View(res);
 
         }
         [HttpPost]
-        public ActionResult Edit(GoodsDataModel model)
+        public ActionResult Edit(ClientDataModel model)
         {
             if (ModelState.IsValid)
             {
-                GoodsData goodsData = model.MapTo<GoodsDataModel, GoodsData>();
-                _goodsDataService.Update(goodsData);
-                SuccessNotification($"{_localizationService.GetResource("UpdateSuccess") + model.GoodsName}");
+                ClientData goodsData = model.MapTo<ClientDataModel, ClientData>();
+                _clientDataService.Update(goodsData);
+                SuccessNotification($"{_localizationService.GetResource("UpdateSuccess") + model.ClientName}");
                 return RedirectToAction("Index");
 
             }

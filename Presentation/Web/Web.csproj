@@ -2657,6 +2657,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\ClientDataController.cs" />
     <Compile Include="Controllers\GoodsDataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -2667,6 +2668,8 @@
     <Compile Include="Infrastructure\AutoMapperConfiguration.cs" />
     <Compile Include="Infrastructure\AutoMapperStartupTask.cs" />
     <Compile Include="Infrastructure\DependencyRegistrar.cs" />
+    <Compile Include="Models\ClientDataListModel.cs" />
+    <Compile Include="Models\ClientDataModel.cs" />
     <Compile Include="Models\GoodsDataListModel.cs" />
     <Compile Include="Models\GoodsDataModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
@@ -2706,6 +2709,10 @@
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\GoodsData\Index.cshtml" />
     <Content Include="Views\GoodsData\Add.cshtml" />
+    <Content Include="Views\GoodsData\Edit.cshtml" />
+    <Content Include="Views\ClientData\Index.cshtml" />
+    <Content Include="Views\ClientData\Add.cshtml" />
+    <Content Include="Views\ClientData\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

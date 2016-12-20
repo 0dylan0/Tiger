@@ -70,6 +70,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\ClientDataService.cs" />
     <Compile Include="Common\GoodsDataService.cs" />
     <Compile Include="Common\UserHotelRangeService.cs" />
     <Compile Include="Configuration\SettingService.cs" />

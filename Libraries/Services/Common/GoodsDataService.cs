@@ -26,36 +26,98 @@ namespace Services.Common
 
         public void Insert(GoodsData GoodsData)
         {
-           // var sql = $@"insert into Users(
-           //         [Name],
-           //         [Password])
-			        //VALUES (
-           //         @Name,
-           //         @Password)";
+            var sql = $@"insert into GoodsData(
+                    GoodsName,
+                    Unit,
+                    Brand,
+                    GoodType,
+                    DefaultPurchasePrice,
+                    ActualPurchasePrice,
+                    Inventory,
+                    Price1,
+                    Price2,
+                    Price3,
+                    Price4,
+                    Warehouse,
+                    Cost,
+                    Image,
+                    SingleProfit)
+			        VALUES (
+                    @GoodsName,
+                    @Unit,
+                    @Brand,
+                    @GoodType,
+                    @DefaultPurchasePrice,
+                    @ActualPurchasePrice,
+                    @Inventory,
+                    @Price1,
+                    @Price2,
+                    @Price3,
+                    @Price4,
+                    @Warehouse,
+                    @Cost,
+                    @Image,
+                    @SingleProfit)";
 
 
-           // _context.Execute(sql, new
-           // {
-           //     Name = GoodsData.Name,
-           //     Password = GoodsData.Password
-           // });
+            _context.Execute(sql, new
+            {
+                GoodsName = GoodsData.GoodsName,
+                Unit = GoodsData.Unit,
+                Brand=GoodsData.Brand,
+                GoodType=GoodsData.GoodType,
+                DefaultPurchasePrice=GoodsData.DefaultPurchasePrice,
+                ActualPurchasePrice=GoodsData.ActualPurchasePrice,
+                Inventory=GoodsData.Inventory,
+                Price1=GoodsData.Price1,
+                Price2=GoodsData.Price2,
+                Price3= GoodsData.Price3,
+                Price4=GoodsData.Price4,
+                Warehouse=GoodsData.Warehouse,
+                Cost=GoodsData.Cost,
+                Image=GoodsData.Image,
+                SingleProfit=GoodsData.SingleProfit
+            });
         }
 
         public void Update(GoodsData GoodsData)
         {
-           // var sql = $@"insert into Users(
-           //         [Name],
-           //         [Password])
-			        //VALUES (
-           //         @Name,
-           //         @Password)";
 
-
-           // _context.Execute(sql, new
-           // {
-           //     Name = GoodsData.Name,
-           //     Password = GoodsData.Password
-           // });
+            var sql = $@"update GoodsData set
+                    GoodsName =@GoodsName,
+                    Unit=@Unit,
+                    Brand=@Brand,
+                    GoodType=@GoodType,
+                    DefaultPurchasePrice=@DefaultPurchasePrice,
+                    ActualPurchasePrice=@ActualPurchasePrice,
+                    Inventory=@Inventory,
+                    Price1=@Price1,
+                    Price2=@Price2,
+                    Price3=@Price3,
+                    Price4=@Price4,
+                    Warehouse=@Warehouse,
+                    Cost=@Cost,
+                    Image=@Image,
+                    SingleProfit=@SingleProfit
+                    where ID=@ID";          
+            _context.Execute(sql, new
+            {
+                GoodsName = GoodsData.GoodsName,
+                Unit = GoodsData.Unit,
+                Brand = GoodsData.Brand,
+                GoodType = GoodsData.GoodType,
+                DefaultPurchasePrice = GoodsData.DefaultPurchasePrice,
+                ActualPurchasePrice = GoodsData.ActualPurchasePrice,
+                Inventory = GoodsData.Inventory,
+                Price1 = GoodsData.Price1,
+                Price2 = GoodsData.Price2,
+                Price3 = GoodsData.Price3,
+                Price4 = GoodsData.Price4,
+                Warehouse = GoodsData.Warehouse,
+                Cost = GoodsData.Cost,
+                Image = GoodsData.Image,
+                SingleProfit = GoodsData.SingleProfit
+            });
 
         }
 
