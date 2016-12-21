@@ -80,6 +80,17 @@ namespace Services.Users
             return new SqlPagedList<Core.Domain.Common.Users>(sql, Parameter, pageIndex, pageSize, sortExpression);
         }
 
+        public Core.Domain.Common.Users GetByCode(string Name)
+        {
+            return _context.QuerySingle<Core.Domain.Common.Users>(
+                @"select ID,
+                Name,
+                Password
+                from Users
+                where Name = @Name ",
+                new { Name = Name });
+        }
+
 
 
 

@@ -13,8 +13,8 @@ namespace Web
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                LoginPath = new PathString("/Index"),
-                LogoutPath = new PathString("/Index"),
+                LoginPath = new PathString("/Login"),
+                LogoutPath = new PathString("/Logout"),
                 CookieName = CookieNameConfiguration.AuthenticationCookieName
             });
 

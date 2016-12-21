@@ -11,7 +11,7 @@ namespace Core
 {
     public interface IWorkContext
     {
-        User CurrentUser { get; set; }
+        Core.Domain.Common.Users CurrentUser { get; set; }
 
         //Hotel CurrentHotel { get; set; }
 

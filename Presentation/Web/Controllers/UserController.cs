@@ -2,6 +2,7 @@
 using Core.Domain.Common;
 using Core.Page;
 using Services.Localization;
+using Services.Security;
 using Services.Users;
 using System;
 using System.Collections.Generic;
@@ -16,18 +17,25 @@ using Web.Models;
 
 namespace Web.Controllers
 {
-    public class UserController :BaseController
+    public class UserController : Controller
     {
         private readonly IWorkContext _webWorkContext;
         private readonly UserService _userService;
         private readonly LocalizationService _localizationService;
+        private readonly IAuthenticationService _authenticationService;
+        private readonly UserValidateService _userValidateService;
+
         public UserController(IWorkContext webWorkContext,
             UserService userService,
-            LocalizationService localizationService)
+            LocalizationService localizationService,
+            IAuthenticationService authenticationService,
+            UserValidateService userValidateService)
         {
             _webWorkContext = webWorkContext;
             _userService = userService;
             _localizationService = localizationService;
+            _authenticationService = authenticationService;
+            _userValidateService = userValidateService;
         }
         // GET: User
         [HttpGet]
@@ -88,7 +96,7 @@ namespace Web.Controllers
             {
                 Users opponent = model.MapTo<UserModel, Users>();
                 _userService.Update(opponent);
-                SuccessNotification($"{_localizationService.GetResource("UpdateSuccess") + model.Name}");
+                //SuccessNotification($"{_localizationService.GetResource("UpdateSuccess") + model.Name}");
                 return RedirectToAction("Index");
 
             }
@@ -103,14 +111,14 @@ namespace Web.Controllers
             model.ReturnUrl = returnUrl;
             if (_webWorkContext.IsAlreadyLogin())
             {
-                    if (!String.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
-                    {
-                        return Redirect(returnUrl);
-                    }
-                    else
-                    {
-                        return Redirect("~/Home");
-                    }
+                if (!String.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                {
+                    return Redirect(returnUrl);
+                }
+                else
+                {
+                    return Redirect("~/Home");
+                }
             }
             return View(model);
         }
@@ -118,13 +126,40 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult Login(LoginModel loginModel)
         {
+
+
             if (ModelState.IsValid)
-            {           
-                        if (!String.IsNullOrEmpty(loginModel.ReturnUrl) && Url.IsLocalUrl(loginModel.ReturnUrl))
+            {
+                UserLoginResult result = _userValidateService.Validate(loginModel.UserName, loginModel.Password, loginModel.IsFromOtherSystem);
+                switch (result)
+                {
+                    case UserLoginResult.Successful:
+                        Core.Domain.Common.Users user = _userService.GetByCode(loginModel.UserName);
+                        _authenticationService.SignIn(user, loginModel.RememberMe);
+
+                        if (loginModel.IsFromOtherSystem)
                         {
-                            return Redirect("~/Hotel/Index?returnUrl=" + HttpUtility.UrlEncode(loginModel.ReturnUrl));
-                        }
-                        return Redirect("~/Hotel");                
+                            if (!String.IsNullOrEmpty(loginModel.ReturnUrl) && Url.IsLocalUrl(loginModel.ReturnUrl))
+                            {
+                                return Redirect("~/Home/Index?returnUrl=" + HttpUtility.UrlEncode(loginModel.ReturnUrl));
+                            }
+                        }                       
+                        return Redirect("~/Home/Index");
+                    case UserLoginResult.UserNotExist:
+                        ModelState.AddModelError("UserName_NotExist","登录失败");
+                        break;
+                    case UserLoginResult.WrongPassword:
+                        ModelState.AddModelError("Password_Wrong", "密码错误");
+                        break;
+                }
+                //Core.Domain.Common.Users user = _userService.GetByCode(loginModel.UserName);
+                //_authenticationService.SignIn(user, loginModel.RememberMe);
+
+                //if (!String.IsNullOrEmpty(loginModel.ReturnUrl) && Url.IsLocalUrl(loginModel.ReturnUrl))
+                //{
+                //    return Redirect("~/Hotel/Index?returnUrl=" + HttpUtility.UrlEncode(loginModel.ReturnUrl));
+                //}
+                //return Redirect("~/Hotel");
             }
             return View(loginModel);
         }

@@ -9,10 +9,10 @@ namespace Services.Security
 {
     public interface IAuthenticationService
     {
-        void SignIn(User user, bool createPersistentCookie);
+        void SignIn(Core.Domain.Common.Users user, bool createPersistentCookie);
 
         void SignOut();
 
-        User GetAuthenticatedUser();
+        Core.Domain.Common.Users GetAuthenticatedUser();
     }
 }

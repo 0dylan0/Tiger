@@ -1,10 +1,10 @@
-﻿using Services.Users;
+﻿using Core.Domain;
+using Services.Users;
 using System;
 using System.Security.Claims;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Infrastructure;
 using Microsoft.Owin.Security;
-using Core.Domain;
 
 namespace Services.Security
 {
@@ -14,7 +14,7 @@ namespace Services.Security
 
         private readonly UserService _userService;
 
-        private User _cachedUser;
+        private Core.Domain.Common.Users _cachedUser;
 
         private readonly IAuthenticationManager _authenticationManager;
 
@@ -32,10 +32,10 @@ namespace Services.Security
 
         #region Methods
 
-        public void SignIn(User user, bool createPersistentCookie)
+        public void SignIn(Core.Domain.Common.Users user, bool createPersistentCookie)
         {
             var applicationIdentity = new ClaimsIdentity(DefaultAuthenticationTypes.ApplicationCookie);
-            applicationIdentity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Code));
+            applicationIdentity.AddClaim(new Claim(ClaimTypes.NameIdentifier,user.Name ));
             applicationIdentity.AddClaim(new Claim("http://schemas.microsoft.com/accesscontrolservice/2010/07/claims/identityprovider", "ASP.NET Identity"));
 
             // Cookie
@@ -56,7 +56,7 @@ namespace Services.Security
             _authenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
         }
 
-        public User GetAuthenticatedUser()
+        public Core.Domain.Common.Users GetAuthenticatedUser()
         {
             if (_cachedUser != null)
             {
@@ -69,31 +69,31 @@ namespace Services.Security
             }
 
             var formsIdentity = (ClaimsIdentity)_authenticationManager.User.Identity;
-            //User user = GetAuthenticatedUserFromClaims(formsIdentity);
-            //if (user != null)
-            //{
-            //    _cachedUser = user;
-            //}
+            Core.Domain.Common.Users user = GetAuthenticatedUserFromClaims(formsIdentity);
+            if (user != null)
+            {
+                _cachedUser = user;
+            }
 
             return _cachedUser;
         }
 
-        //public virtual User GetAuthenticatedUserFromClaims(ClaimsIdentity identity)
-        //{
-        //    if (identity == null)
-        //    {
-        //        throw new ArgumentNullException(nameof(identity));
-        //    }
+        public virtual Core.Domain.Common.Users GetAuthenticatedUserFromClaims(ClaimsIdentity identity)
+        {
+            if (identity == null)
+            {
+                throw new ArgumentNullException(nameof(identity));
+            }
 
-        //    string code = identity.FindFirstValue(ClaimTypes.NameIdentifier);
+            string code = identity.FindFirstValue(ClaimTypes.NameIdentifier);
 
-        //    if (String.IsNullOrWhiteSpace(code))
-        //    {
-        //        return null;
-        //    }
-        //    var user = _userService.GetByCode(code);
-        //    return user;
-        //}
+            if (String.IsNullOrWhiteSpace(code))
+            {
+                return null;
+            }
+            var user = _userService.GetByCode(code);
+            return user;
+        }
 
         #endregion
     }

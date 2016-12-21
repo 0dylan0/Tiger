@@ -25,22 +25,22 @@ namespace Services.Users
         /// <returns></returns>
         public UserLoginResult Validate(string userCode, string password, bool isEncryptedPassword = false)
         {
-            //User user = _userService.GetByCode(userCode);
-            //if (user == null)
-            //{
-            //    return UserLoginResult.UserNotExist;
-            //}
+            Core.Domain.Common.Users user = _userService.GetByCode(userCode);
+            if (user == null)
+            {
+                return UserLoginResult.UserNotExist;
+            }
 
-            //string encryptedPassword = password;
-            //if (!isEncryptedPassword)
-            //{
-            //    encryptedPassword = EncryptionService.EncryptCRSPassword(password);
-            //}
+            string encryptedPassword = password;
+            if (!isEncryptedPassword)
+            {
+                encryptedPassword = EncryptionService.EncryptCRSPassword(password);
+            }
 
-            //if (user.Password.Equals(encryptedPassword) == false)
-            //{
-            //    return UserLoginResult.WrongPassword;
-            //}
+            if (user.Password.Equals(encryptedPassword) == false)
+            {
+                return UserLoginResult.WrongPassword;
+            }
 
             return UserLoginResult.Successful;
         }

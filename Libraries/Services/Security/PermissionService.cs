@@ -19,7 +19,7 @@ namespace Services.Security
 
         public virtual bool Authorize(string permission)
         {
-            return Authorize(_workContext.CurrentUser.Code, permission);
+            return Authorize(Convert.ToString(_workContext.CurrentUser.ID) , permission);
         }
 
         /// <summary>

@@ -35,8 +35,8 @@ namespace Data
             var type = typeof(T);
             type.GetProperty("InsertDate")?.SetValue(entity, DateTime.Now);
             type.GetProperty("UpdateDate")?.SetValue(entity, DateTime.Now);
-            type.GetProperty("InsertUser")?.SetValue(entity, workContext.CurrentUser?.Code);
-            type.GetProperty("UpdateUser")?.SetValue(entity, workContext.CurrentUser?.Code);
+            type.GetProperty("InsertUser")?.SetValue(entity, workContext.CurrentUser?.ID);
+            type.GetProperty("UpdateUser")?.SetValue(entity, workContext.CurrentUser?.ID);
 
             _context.Insert(entity);
             //var sqlGenerator = EngineContext.Current.Resolve<ISqlGenerator<T>>();
@@ -65,7 +65,7 @@ namespace Data
             IWorkContext workContext = EngineContext.Current.Resolve<IWorkContext>();
             var type = typeof(T);
             type.GetProperty("UpdateDate")?.SetValue(entity, DateTime.Now);
-            type.GetProperty("UpdateUser")?.SetValue(entity, workContext.CurrentUser?.Code);
+            type.GetProperty("UpdateUser")?.SetValue(entity, workContext.CurrentUser?.ID);
 
             //var sqlGenerator = EngineContext.Current.Resolve<ISqlGenerator<T>>();
             //var query = sqlGenerator.GetUpdate();
@@ -91,8 +91,8 @@ namespace Data
                 var type = typeof(T);
                 type.GetProperty("InsertDate")?.SetValue(entity, DateTime.Now);
                 type.GetProperty("UpdateDate")?.SetValue(entity, DateTime.Now);
-                type.GetProperty("InsertUser")?.SetValue(entity, workContext.CurrentUser?.Code);
-                type.GetProperty("UpdateUser")?.SetValue(entity, workContext.CurrentUser?.Code);
+                type.GetProperty("InsertUser")?.SetValue(entity, workContext.CurrentUser?.ID);
+                type.GetProperty("UpdateUser")?.SetValue(entity, workContext.CurrentUser?.ID);
                 Insert(entity);
             }
 
@@ -127,7 +127,7 @@ namespace Data
             {
                 var type = typeof(T);
                 type.GetProperty("UpdateDate")?.SetValue(entity, DateTime.Now);
-                type.GetProperty("UpdateUser")?.SetValue(entity, workContext.CurrentUser?.Code);
+                type.GetProperty("UpdateUser")?.SetValue(entity, workContext.CurrentUser?.ID);
                 Update(entity);
             }
             return 0;

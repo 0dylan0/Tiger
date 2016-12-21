@@ -30,7 +30,7 @@ namespace Web.Framework
 
         private readonly HttpContextBase _httpContext;
 
-        private User _cachedUser;
+        private Core.Domain.Common.Users _cachedUser;
 
         private Hotel _cachedHotel;
 
@@ -76,7 +76,7 @@ namespace Web.Framework
             }
         }
 
-        public User CurrentUser
+        public Core.Domain.Common.Users CurrentUser
         {
             get
             {
@@ -87,7 +87,7 @@ namespace Web.Framework
                 _cachedUser = _authenticationService.GetAuthenticatedUser();
                 if (_cachedUser == null)
                 {
-                    _cachedUser = new User();
+                    _cachedUser = new Core.Domain.Common.Users();
                 }
                 return _cachedUser;
             }
@@ -144,10 +144,10 @@ namespace Web.Framework
         {
             bool isAlreadyLogin = false;
 
-            if (CurrentUser.UserHotelRanges != null && CurrentUser.UserHotelRanges.Count != 0)
-            {
-                isAlreadyLogin = true;
-            }
+            //if (CurrentUser.UserHotelRanges != null && CurrentUser.UserHotelRanges.Count != 0)
+            //{
+            //    isAlreadyLogin = true;
+            //}
 
             return isAlreadyLogin;
         }

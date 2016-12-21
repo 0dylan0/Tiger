@@ -9,7 +9,7 @@
 @{
     string controller = ViewContext.RouteData.Values["controller"].ToString(),
         action = ViewContext.RouteData.Values["action"].ToString();
-    User currentUser = WorkContext.CurrentUser;
+    Core.Domain.Common.Users currentUser = WorkContext.CurrentUser;
     //Hotel currentHotel = WorkContext.CurrentHotel;
     //Language currentLanguage = WorkContext.CurrentLanguage;
     //var userHotelRange = EngineContext.Current.Resolve<UserHotelRangeService>().GetByUserCode(currentUser.Code);
