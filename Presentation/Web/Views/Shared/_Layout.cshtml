@@ -53,9 +53,9 @@
                 <a href="#" title="Toggle navigation" class="sidebar-toggle" data-toggle="offcanvas" role="button">
                     <span class="sr-only">Toggle navigation</span>
                 </a>
-                @*<div class="navbar-custom-menu">
+                <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
-                        @if (true)
+                        @*@if (true)
                         {
                             var rmsExpireDate = licenseService.GetModuleExpireDate(currentHotel.Code, null);
                             var isRMSWillSoonFallDue = rmsExpireDate.HasValue && ((DateTime.Now - rmsExpireDate.Value).Days > -31);
@@ -80,11 +80,11 @@
                                     </ul>
                                 </li>
                             }
-                        }
+                        }*@
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-user"></i>
-                                <span class="hidden-xs">@currentUser.Code - @currentUser.Name</span>
+                                @*<span class="hidden-xs">@currentUser.Code - @currentUser.Name</span>*@
                             </a>
                             <ul class="dropdown-menu">
                                 <li class="user-footer">
@@ -97,7 +97,7 @@
                                 </li>
                             </ul>
                         </li>
-                        @if (currentHotel.Code != null)
+                        @*@if (currentHotel.Code != null)
                         {
                             <li id="changeHotel" class="dropdown notifications-menu">
                                 <a id="hotelName" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
@@ -112,8 +112,8 @@
                                     </li>
                                 </ul>
                             </li>
-                        }
-                        <li class="dropdown notifications-menu" id="rmsChangeModuleArea">
+                        }*@
+                        @*<li class="dropdown notifications-menu" id="rmsChangeModuleArea">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="@T("ChangeModule.Title")">
                                 <i class="fa fa-exchange"></i>
                             </a>
@@ -134,10 +134,10 @@
                                     </li>
                                 }
                             </ul>
-                        </li>
+                        </li>*@
 
                     </ul>
-                </div>*@
+                </div>
             </nav>
         </header>
 
@@ -170,17 +170,9 @@
                         </ul>
                     </li>
 
-                    <li class="treeview">                        
-                        <a href="#">
-                            <i class="fa fa-calculator"></i><span> 采购进货</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            @NavMenuItem(T("采购进货"), Url.Action("Index", "PurchaseData"))
-                        </ul>
-                    </li>
+                    <li class="treeview">@NavMenuItem(T("采购进货"), Url.Action("Index", "PurchaseData"))</li>
+                    <li class="treeview">@NavMenuItem(T("销售出货"), Url.Action("Index", "SalesShipmentsData"))</li>
+                    <li class="treeview">@NavMenuItem(T("商品库存"), Url.Action("Index", "InventoryData"))</li>
                     
                 </ul>
             </section>

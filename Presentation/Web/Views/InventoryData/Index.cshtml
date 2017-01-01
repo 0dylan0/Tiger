@@ -1,13 +1,13 @@
-﻿@model Web.Models.PurchaseDataListModel
+﻿@model Web.Models.InventoryDataListModel
 
 
 @{
-    ViewBag.Title = "采购进货列表";
+    ViewBag.Title = "商品库存列表";
 }
 
 <div class="box box-solid">
     <div class="box-header">
-        @using (Html.BeginForm("Index", "PurchaseData", FormMethod.Post, new { Id = "PurchaseDataForm" }))
+        @using (Html.BeginForm("Index", "InventoryData", FormMethod.Post, new { Id = "InventoryDataForm" }))
         {
             @Html.AntiForgeryToken()
             <div class="row">
@@ -31,7 +31,7 @@
     <div class="box-body">
         <div class="mailbox-controls no-padding">
             <div class="pull-right">
-                <a href="@Url.Action("Add")" class="btn btn-primary"><i class="fa fa-plus"></i> 添加</a>
+                <a href="@Url.Action("Add","PurchaseData")" class="btn btn-primary"><i class="fa fa-plus"></i> 添加</a>
             </div>
         </div>
         <table class="table table-condensed table-striped table-hover dataTable">
@@ -40,14 +40,21 @@
                     <th>ID</th>
                     <th>商品编号</th>
                     <th>商品名称</th>
-                    <th>日期</th>
+
+                    <th>进货日期</th>@*采购进货日期*@
+                    <th>出货日期</th>@*销售出货日期*@
 
                     <th>类别</th>
-                    <th>数量</th>
-                    <th>单价</th>
-                    <th>金额</th>
+                    <th>单位</th>
+                    <th>成本价</th>
 
-                    <th>总量</th>
+                    <th>存库数量</th>                
+                    <th>存库金额</th>
+
+                    <th>仓库编号</th>
+                    <th>仓库名称</th>
+
+                    
                     <th>供应商编号</th>
                     <th>供应商名称</th>
                     <th>供应商地址</th>
@@ -79,35 +86,40 @@
 					{ data: "id" },
                     { data: "goodsID" },
                     { data: "goodsName" },
-                    { data: "date" },
 
-                    { data: "goodsType" },
-                    { data: "quantity" },
-                    { data: "unitPrice" },
-                    { data: "sum" },
+                    { data: "PurchaseDate" },
+                    { data: "ShipmentsDate" },
+                    { data: "GoodsType" },
+                    { data: "Unit" },
+                    { data: "CostPrice" },              
 
-                    { data: "total" },
+                    { data: "InventoryQuantity" },
+                    { data: "InventorySum" },
+
+                    { data: "WarehouseID" },
+                    { data: "WarehouseName" },
+
                     { data: "supplierID" },
                     { data: "supplierName" },
                     { data: "supplierAddress" },
                     {
                         orderable: false,
-                        
+
                     },
                     {
                         orderable: false,
-                        
+
                     }],
                 columnDefs: [
                     {
-                        targets: [12],
+                        targets: [14],
                         orderable: false,
                         render: function (data, type, full) {
                             return '<a href="/ClientData/Edit?id=' + encodeURIComponent(full["id"]) + '" class="btn btn-xs btn-default "><span class="fa fa-pencil"></span> 详情</a>';
                         }
                     },
                     {
-                        targets: [13],
+                        targets: [15],
                         orderable: false,
                         render: function (data, type, full) {
                             return '<a href="/ClientData/Edit?id=' + encodeURIComponent(full["id"]) + '" class="btn btn-xs btn-default "><span class="fa fa-pencil"></span> 修改</a>';
