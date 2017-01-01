@@ -26,7 +26,8 @@ namespace Web.Infrastructure
             builder.RegisterType<ClientDataService>().InstancePerLifetimeScope();
             builder.RegisterType<SupplierDataService>().InstancePerLifetimeScope();
             builder.RegisterType<PurchaseDataService>().InstancePerLifetimeScope();
-
+            builder.RegisterType<SalesShipmentsDataService>().InstancePerLifetimeScope();
+            builder.RegisterType<InventoryDataService>().InstancePerLifetimeScope();
         }
 
 

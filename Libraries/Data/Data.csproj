@@ -72,9 +72,11 @@
     <Compile Include="Logging\ConsoleSqlLogger.cs" />
     <Compile Include="Mapping\ClientDataMap.cs" />
     <Compile Include="Mapping\GoodsDataMap.cs" />
+    <Compile Include="Mapping\InventoryDataMap.cs" />
     <Compile Include="Mapping\Localization\LanguageMap.cs" />
     <Compile Include="Mapping\Localization\LocaleStringResourceMap.cs" />
     <Compile Include="Mapping\PurchaseDataMap.cs" />
+    <Compile Include="Mapping\SalesShipmentsDataMap.cs" />
     <Compile Include="Mapping\SupplierDataMap.cs" />
     <Compile Include="Mapping\UserMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -29,6 +29,13 @@ namespace Web.Infrastructure
                 cfg.CreateMap<SupplierData, SupplierDataModel>();
                 cfg.CreateMap<PurchaseDataModel, PurchaseData>();
                 cfg.CreateMap<PurchaseData, PurchaseDataModel>();
+                cfg.CreateMap<SalesShipmentsDataModel, SalesShipmentsData>();
+                cfg.CreateMap<SalesShipmentsData, SalesShipmentsDataModel>();
+                cfg.CreateMap<InventoryDataModel, InventoryData>();
+                cfg.CreateMap<InventoryData, InventoryDataModel>();
+                
+
+
             });
 
             _mapper = _mapperConfiguration.CreateMapper();

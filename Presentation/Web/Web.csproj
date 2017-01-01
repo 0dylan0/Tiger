@@ -2661,7 +2661,9 @@
     <Compile Include="Controllers\ClientDataController.cs" />
     <Compile Include="Controllers\GoodsDataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InventoryDataController.cs" />
     <Compile Include="Controllers\PurchaseDataController.cs" />
+    <Compile Include="Controllers\SalesShipmentsDataController.cs" />
     <Compile Include="Controllers\SupplierDataController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Extensions\MappingExtensions.cs" />
@@ -2675,9 +2677,13 @@
     <Compile Include="Models\ClientDataModel.cs" />
     <Compile Include="Models\GoodsDataListModel.cs" />
     <Compile Include="Models\GoodsDataModel.cs" />
+    <Compile Include="Models\InventoryDataListModel.cs" />
+    <Compile Include="Models\InventoryDataModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\PurchaseDataListModel.cs" />
     <Compile Include="Models\PurchaseDataModel.cs" />
+    <Compile Include="Models\SalesShipmentsDataListModel.cs" />
+    <Compile Include="Models\SalesShipmentsDataModel.cs" />
     <Compile Include="Models\SupplierDataListModel.cs" />
     <Compile Include="Models\SupplierDataModel.cs" />
     <Compile Include="Models\UserListModel.cs" />
@@ -2726,6 +2732,8 @@
     <Content Include="Views\PurchaseData\Index.cshtml" />
     <Content Include="Views\PurchaseData\Add.cshtml" />
     <Content Include="Views\PurchaseData\Edit.cshtml" />
+    <Content Include="Views\SalesShipmentsData\Index.cshtml" />
+    <Content Include="Views\SalesShipmentsData\Add.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2735,6 +2743,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\InventoryData\" />
     <Folder Include="Views\Purchase\" />
   </ItemGroup>
   <ItemGroup>

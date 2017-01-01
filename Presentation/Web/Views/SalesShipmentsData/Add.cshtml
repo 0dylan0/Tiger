@@ -1,9 +1,9 @@
-﻿@model Web.Models.PurchaseDataModel
+﻿@model Web.Models.SalesShipmentsDataModel
 @{
     ViewBag.Title = "Add";
 }
 
-@using (Html.BeginForm("Add", "PurchaseData", FormMethod.Post, new { id = "Add", data_val = true }))
+@using (Html.BeginForm("Add", "SalesShipmentsData", FormMethod.Post, new { id = "Add", data_val = true }))
 {
     @Html.AntiForgeryToken()
     <div class="box box-solid">
@@ -98,6 +98,25 @@
                     </div>
                 </div>
             </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Cost, new { @class = "control-label aaa" })@RequiredTag()
+                        @Html.TextBoxFor(m => m.Cost, new { @class = "form-control " })
+                        @Html.ValidationMessageFor(m => m.Cost)
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Profit, new { @class = "control-label aaa" })@RequiredTag()
+                        @Html.TextBoxFor(m => m.Profit, new { @class = "form-control " })
+                        @Html.ValidationMessageFor(m => m.Profit)
+                    </div>
+                </div>
+            </div>
+
 
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-4">

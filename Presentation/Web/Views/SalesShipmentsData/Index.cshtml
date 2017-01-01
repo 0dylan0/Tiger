@@ -1,0 +1,136 @@
+﻿@model Web.Models.SalesShipmentsDataListModel
+
+
+@{
+    ViewBag.Title = "List";
+}
+
+<div class="box box-solid">
+    <div class="box-header">
+        @using (Html.BeginForm("Index", "SalesShipmentsData", FormMethod.Post, new { Id = "SalesShipmentsDataForm" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="row">
+                <div class="col-md-3 col-sm-4 col-xs-12 ">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Name)
+                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control full-width", placeholder = "可按中文名查询" })
+                    </div>
+                </div>
+
+                <div class="col-md-1 col-sm-2 col-xs-12">
+                    <div class="form-group">
+                        @HiddenLabel()
+                        <button type="submit" class="btn btn-default" id="SubmitRivalDatumForm"><i class="fa fa-search"></i> 查询</button>
+                    </div>
+                </div>
+            </div>
+
+        }
+    </div>
+    <div class="box-body">
+        <div class="mailbox-controls no-padding">
+            <div class="pull-right">
+                <a href="@Url.Action("Add")" class="btn btn-primary"><i class="fa fa-plus"></i> 添加</a>
+            </div>
+        </div>
+        <table class="table table-condensed table-striped table-hover dataTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>商品编号</th>
+                    <th>商品名称</th>
+                    <th>日期</th>
+
+                    <th>类别</th>
+                    <th>数量</th>
+                    <th>单价</th>
+                    <th>金额</th>
+
+                    <th>成本</th>
+                    <th>利润</th>
+
+                    <th>总量</th>
+                    <th>供应商编号</th>
+                    <th>供应商名称</th>
+                    <th>供应商地址</th>
+
+                    <th>详情</th>
+                    <th>编辑</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+@section scripts{
+    @Html.Partial("_KendoDropdownListPartial")
+    @Html.Partial("_ModalSelectorPartial")
+    <script type="text/javascript">
+
+        $(function () {
+            var grid = $(".dataTable").DataTable({
+                order: [1, "desc"],
+                ajax: {
+                    url: "@Url.Action("Index")",
+                    type: "post",
+                    data: function (d) {
+                        d.textquery = $("#Name").val(),
+                        addAntiForgeryToken(d);
+                    },
+                },
+                columns: [
+					{ data: "id" },
+                    { data: "goodsID" },
+                    { data: "goodsName" },
+                    { data: "date" },
+
+                    { data: "goodsType" },
+                    { data: "quantity" },
+                    { data: "unitPrice" },
+
+                    { data: "cost" },
+                    { data: "Profit" },
+
+                    { data: "sum" },
+                    { data: "total" },
+                    { data: "supplierID" },
+                    { data: "supplierName" },
+                    { data: "supplierAddress" },
+                    {
+                        orderable: false,
+
+                    },
+                    {
+                        orderable: false,
+
+                    }],
+                columnDefs: [
+                    {
+                        targets: [14],
+                        orderable: false,
+                        render: function (data, type, full) {
+                            return '<a href="/ClientData/Edit?id=' + encodeURIComponent(full["id"]) + '" class="btn btn-xs btn-default "><span class="fa fa-pencil"></span> 详情</a>';
+                        }
+                    },
+                    {
+                        targets: [15],
+                        orderable: false,
+                        render: function (data, type, full) {
+                            return '<a href="/ClientData/Edit?id=' + encodeURIComponent(full["id"]) + '" class="btn btn-xs btn-default "><span class="fa fa-pencil"></span> 修改</a>';
+                        }
+                    }
+                ],
+
+                language: {
+                    zeroRecords: "DataTables.zeroRecords"
+                },
+            });
+            $("#SubmitRivalDatumForm").click(function (e) {
+                grid.page("first").draw();
+                return false;
+            });
+
+        });
+    </script>
+}
+
