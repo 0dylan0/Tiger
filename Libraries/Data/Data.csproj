@@ -74,6 +74,7 @@
     <Compile Include="Mapping\GoodsDataMap.cs" />
     <Compile Include="Mapping\Localization\LanguageMap.cs" />
     <Compile Include="Mapping\Localization\LocaleStringResourceMap.cs" />
+    <Compile Include="Mapping\PurchaseDataMap.cs" />
     <Compile Include="Mapping\SupplierDataMap.cs" />
     <Compile Include="Mapping\UserMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

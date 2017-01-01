@@ -144,8 +144,7 @@
         <aside class="main-sidebar">
             <section class="sidebar">
                 <ul class="sidebar-menu">
-                    <li class="treeview">
-                        <!-- 预算管理-->
+                    <li class="treeview">                       
                         <a href="#">
                             <i class="fa fa-calculator"></i><span> 用户管理</span>
                             <span class="pull-right-container">
@@ -168,6 +167,18 @@
                             @NavMenuItem(T("客户信息维护"), Url.Action("Index", "ClientData"))
                             @NavMenuItem(T("供货商信息维护"), Url.Action("Index", "SupplierData"))
                             
+                        </ul>
+                    </li>
+
+                    <li class="treeview">                        
+                        <a href="#">
+                            <i class="fa fa-calculator"></i><span> 采购进货</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            @NavMenuItem(T("采购进货"), Url.Action("Index", "PurchaseData"))
                         </ul>
                     </li>
                     
