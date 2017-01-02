@@ -51,8 +51,8 @@ namespace Services.Common
                     @Contacts,
                     @SupplierType,
                     @Address,
-                    @Area,sePrice,
-                    @Phone,ePrice,
+                    @Area,
+                    @Phone,
                     @Telephone,
                     @Arrears,
                     @RepaymentDate,
@@ -69,6 +69,7 @@ namespace Services.Common
             {
                 SupplierName = SupplierData.SupplierName,
                 CompanyName = SupplierData.CompanyName,
+                Contacts=SupplierData.Contacts,
                 SupplierType = SupplierData.SupplierType,
                 Address = SupplierData.Address,
                 Area = SupplierData.Area,

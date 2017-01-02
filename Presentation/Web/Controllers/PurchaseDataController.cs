@@ -22,13 +22,16 @@ namespace Web.Controllers
         private readonly IWorkContext _webWorkContext;
         private readonly PurchaseDataService _purchaseDataService;
         private readonly LocalizationService _localizationService;
+        private readonly GoodsDataService _goodsDataService;
         public PurchaseDataController(IWorkContext webWorkContext,
             PurchaseDataService purchaseDataService,
-            LocalizationService localizationService)
+            LocalizationService localizationService,
+            GoodsDataService goodsDataService)
         {
             _webWorkContext = webWorkContext;
             _purchaseDataService = purchaseDataService;
             _localizationService = localizationService;
+            _goodsDataService = goodsDataService;
         }
 
         [HttpGet]
@@ -59,6 +62,8 @@ namespace Web.Controllers
         public ActionResult Add()
         {
             PurchaseDataModel model = new PurchaseDataModel();
+            model.Date = DateTime.Now;
+            model.GoodsList = GetSaleList();
             return View(model);
         }
         [HttpPost]
@@ -94,5 +99,14 @@ namespace Web.Controllers
             return View(model);
         }
 
+        public List<SelectListItem> GetSaleList()
+        {           
+            return _goodsDataService.GetGoodsList().Select(o => new SelectListItem
+            {
+                Text = o.Code + "-" + o.Name,
+                Value = o.Code,
+            }).ToList();
+
+        }
     }
 }

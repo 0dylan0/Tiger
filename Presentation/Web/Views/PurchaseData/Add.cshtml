@@ -25,13 +25,23 @@
                         @Html.ValidationMessageFor(m => m.GoodsName)
                     </div>
                 </div>
+
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.GoodsName, new { @class = "control-label" })
+                        @Html.DropDownListFor(m => m.GoodsName, Model.GoodsList, T("未选择").Text.ToString(), new { @class = "form-control full-width " })
+
+                    </div>
+                </div>
+
             </div>
 
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <div class="form-group">
                         @Html.LabelFor(m => m.Date, new { @class = "control-label aaa" })@RequiredTag()
-                        @Html.TextBoxFor(m => m.Date, new { @class = "form-control " })
+                        @Html.KLDateTextBoxFor(m => m.Date, new { @class = "form-control kl-date-picker full-width" })
+                        @*@Html.TextBoxFor(m => m.Date, new { @class = "form-control " })*@
                         @Html.ValidationMessageFor(m => m.Date)
                     </div>
                 </div>
@@ -159,10 +169,19 @@
 
 
 @section scripts{
-
+    @Html.Partial("_KendoDropdownListPartial")
+    @Html.Partial("_KendoDatePickerPartial")
+    @Html.Partial("_ModalSelectorPartial")
 
     <script type="text/javascript">
 
+
+        $(document).ready(function () {
+            $("#Date").kendoDatePicker({
+                format: "yyyy-MM-dd",
+
+            });
+        });
 
         $(function () {
 

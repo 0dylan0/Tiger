@@ -1,4 +1,5 @@
-﻿using Core.Domain.Common;
+﻿using Core.Domain;
+using Core.Domain.Common;
 using Core.Page;
 using Dapper;
 using Data;
@@ -64,19 +65,19 @@ namespace Services.Common
             {
                 GoodsName = GoodsData.GoodsName,
                 Unit = GoodsData.Unit,
-                Brand=GoodsData.Brand,
-                GoodType=GoodsData.GoodType,
-                DefaultPurchasePrice=GoodsData.DefaultPurchasePrice,
-                ActualPurchasePrice=GoodsData.ActualPurchasePrice,
-                Inventory=GoodsData.Inventory,
-                Price1=GoodsData.Price1,
-                Price2=GoodsData.Price2,
-                Price3= GoodsData.Price3,
-                Price4=GoodsData.Price4,
-                Warehouse=GoodsData.Warehouse,
-                Cost=GoodsData.Cost,
-                Image=GoodsData.Image,
-                SingleProfit=GoodsData.SingleProfit
+                Brand = GoodsData.Brand,
+                GoodType = GoodsData.GoodType,
+                DefaultPurchasePrice = GoodsData.DefaultPurchasePrice,
+                ActualPurchasePrice = GoodsData.ActualPurchasePrice,
+                Inventory = GoodsData.Inventory,
+                Price1 = GoodsData.Price1,
+                Price2 = GoodsData.Price2,
+                Price3 = GoodsData.Price3,
+                Price4 = GoodsData.Price4,
+                Warehouse = GoodsData.Warehouse,
+                Cost = GoodsData.Cost,
+                Image = GoodsData.Image,
+                SingleProfit = GoodsData.SingleProfit
             });
         }
 
@@ -99,7 +100,7 @@ namespace Services.Common
                     Cost=@Cost,
                     Image=@Image,
                     SingleProfit=@SingleProfit
-                    where ID=@ID";          
+                    where ID=@ID";
             _context.Execute(sql, new
             {
                 GoodsName = GoodsData.GoodsName,
@@ -137,6 +138,14 @@ namespace Services.Common
             var Parameter = new DynamicParameters();
             //Parameter.Add("textQuery", textQuery);
             return new SqlPagedList<GoodsData>(sql, Parameter, pageIndex, pageSize, sortExpression);
+        }
+
+
+        public List<GetList> GetGoodsList()
+        {
+            string sql = @"select ID as code,GoodsName as name from GoodsData";
+
+            return _context.Query<GetList>(sql).ToList();
         }
     }
 }
