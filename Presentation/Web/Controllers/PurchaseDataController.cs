@@ -102,7 +102,13 @@ namespace Web.Controllers
                     InventorySum = model.Sum,
                     SupplierID = model.SupplierID,
                     SupplierName = model.SupplierName,
-                    SupplierAddress = model.SupplierAddress
+                    SupplierAddress = model.SupplierAddress,
+
+
+                    PurchaseDate = DateTime.Now,
+                    ShipmentsDate = DateTime.Now,
+                    LastInventoryDate = DateTime.Now,
+                    FinalSaleDate = DateTime.Now
                 };
                 _inventoryDataService.Insert(inventoryData);
                 return RedirectToAction("Index");
