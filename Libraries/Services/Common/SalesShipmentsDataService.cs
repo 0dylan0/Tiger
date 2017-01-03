@@ -138,7 +138,7 @@ namespace Services.Common
         }
         public IPagedList<SalesShipmentsData> GetList(string textQuery, int pageIndex = 0, int pageSize = 2147483647, string sortExpression = "")
         {
-            string sql = @"select * from PurchaseData";
+            string sql = @"select * from SalesShipmentsData";
             var Parameter = new DynamicParameters();
             //Parameter.Add("textQuery", textQuery);
             return new SqlPagedList<SalesShipmentsData>(sql, Parameter, pageIndex, pageSize, sortExpression);
