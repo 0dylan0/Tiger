@@ -1,4 +1,5 @@
 ﻿using Core;
+using Core.Domain;
 using Core.Domain.Common;
 using Core.Page;
 using Services.Common;
@@ -24,17 +25,25 @@ namespace Web.Controllers
         private readonly LocalizationService _localizationService;
         private readonly GoodsDataService _goodsDataService;
         private readonly SupplierDataService _supplierDataService;
+        private readonly WarehouseService _warehouseService;
+        private readonly InventoryDataService _inventoryDataService;
+
+
         public PurchaseDataController(IWorkContext webWorkContext,
             PurchaseDataService purchaseDataService,
             LocalizationService localizationService,
             GoodsDataService goodsDataService,
-            SupplierDataService supplierDataService)
+            SupplierDataService supplierDataService,
+            WarehouseService warehouseService,
+            InventoryDataService inventoryDataService)
         {
             _webWorkContext = webWorkContext;
             _purchaseDataService = purchaseDataService;
             _localizationService = localizationService;
             _goodsDataService = goodsDataService;
             _supplierDataService = supplierDataService;
+            _warehouseService = warehouseService;
+            _inventoryDataService = inventoryDataService;
         }
 
         [HttpGet]
@@ -47,14 +56,14 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult Index(PageInfo pageInfo, PurchaseDataListModel model)
         {
-            IPagedList<PurchaseData> UserList = _purchaseDataService.GetList(model.Name, pageInfo.PageIndex, pageInfo.PageSize, pageInfo.sortExpression);
-            model.PurchaseData = UserList.MapTo<IList<PurchaseData>, IList<PurchaseDataModel>>();
+            IPagedList<PurchaseData> PurchaseDataList = _purchaseDataService.GetList(model.Name, pageInfo.PageIndex, pageInfo.PageSize, pageInfo.sortExpression);
+            model.PurchaseData = PurchaseDataList.MapTo<IList<PurchaseData>, IList<PurchaseDataModel>>();
 
             var results = new DataTable<PurchaseDataModel>()
             {
                 Draw = pageInfo.Draw + 1,
-                RecordsTotal = UserList.TotalCount,
-                RecordsFiltered = UserList.TotalCount,
+                RecordsTotal = PurchaseDataList.TotalCount,
+                RecordsFiltered = PurchaseDataList.TotalCount,
                 Data = model.PurchaseData
             };
             return Json(new PlainJsonResponse(results));
@@ -67,6 +76,7 @@ namespace Web.Controllers
             model.Date = DateTime.Now;
             model.GoodsList = GetGoodsList();
             model.SupplierList = GetSupplierList();
+            model.WarehouseList = GetWarehouseList();
             return View(model);
         }
 
@@ -77,6 +87,24 @@ namespace Web.Controllers
             {
                 PurchaseData Purchase = model.MapTo<PurchaseDataModel, PurchaseData>();
                 _purchaseDataService.Insert(Purchase);
+                InventoryData inventoryData = new InventoryData()
+                {
+                    WarehouseID = model.WarehouseID,
+                    WarehouseName = model.WarehouseName,
+                    GoodsID = model.GoodsID,
+                    GoodsName = model.GoodsName,
+                    Unit = model.Unit,
+                    Specification = model.Specification,
+                    GoodsType = model.GoodsType,
+                    Brand = model.Brand,
+                    InventoryQuantity = model.Quantity,
+                    CostPrice = ((string.IsNullOrEmpty(model.Quantity) && model.Quantity != "0") ? (model.Sum / Convert.ToDecimal(model.Quantity)) : 0),
+                    InventorySum = model.Sum,
+                    SupplierID = model.SupplierID,
+                    SupplierName = model.SupplierName,
+                    SupplierAddress = model.SupplierAddress
+                };
+                _inventoryDataService.Insert(inventoryData);
                 return RedirectToAction("Index");
             }
             return View(model);
@@ -107,7 +135,7 @@ namespace Web.Controllers
         {
             return _goodsDataService.GetGoodsList().Select(o => new SelectListItem
             {
-                Text = o.Code + "-" + o.Name,
+                Text = o.Name,
                 Value = o.Code,
             }).ToList();
 
@@ -116,7 +144,16 @@ namespace Web.Controllers
         {
             return _supplierDataService.GetSupplierList().Select(o => new SelectListItem
             {
-                Text = o.Code + "-" + o.Name,
+                Text = o.Name,
+                Value = o.Code,
+            }).ToList();
+        }
+
+        public List<SelectListItem> GetWarehouseList()
+        {
+            return _warehouseService.GetWarehouseList().Select(o => new SelectListItem
+            {
+                Text = o.Name,
                 Value = o.Code,
             }).ToList();
         }

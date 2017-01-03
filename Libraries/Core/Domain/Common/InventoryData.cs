@@ -44,10 +44,10 @@ namespace Core.Domain
         public string InventoryQuantity { get; set; }
 
         //成本
-        public string CostPrice { get; set; }
+        public decimal CostPrice { get; set; }
 
         //库存金额
-        public string InventorySum { get; set; }
+        public decimal InventorySum { get; set; }
 
         //上次盘点日期
         public DateTime LastInventoryDate { get; set; }

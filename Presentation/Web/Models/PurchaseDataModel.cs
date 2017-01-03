@@ -59,5 +59,13 @@ namespace Web.Models
 
         [DisplayName("供应商地址")]
         public string SupplierAddress { get; set; }
+
+        [DisplayName("仓库ID")]
+        public int WarehouseID { get; set; }
+
+        public IEnumerable<SelectListItem> WarehouseList { get; set; }
+
+        [DisplayName("仓库名")]
+        public string WarehouseName { get; set; }
     }
 }

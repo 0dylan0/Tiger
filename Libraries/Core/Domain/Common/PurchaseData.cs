@@ -53,5 +53,9 @@ namespace Core.Domain.Common
 
         //供应商地址
         public string SupplierAddress { get; set; }
+
+        public int WarehouseID { get; set; }
+
+        public string WarehouseName { get; set; }
     }
 }

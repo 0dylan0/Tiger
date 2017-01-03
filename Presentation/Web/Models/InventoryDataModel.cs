@@ -44,10 +44,10 @@ namespace Web.Models
         public string InventoryQuantity { get; set; }
 
         [DisplayName("成本价")]
-        public string CostPrice { get; set; }
+        public decimal CostPrice { get; set; }
 
         [DisplayName("库存金额")]
-        public string InventorySum { get; set; }
+        public decimal InventorySum { get; set; }
 
         [DisplayName("上次盘点日期")]
         public DateTime LastInventoryDate { get; set; }

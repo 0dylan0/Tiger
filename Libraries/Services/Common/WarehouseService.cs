@@ -61,5 +61,12 @@ namespace Services.Common
             var Parameter = new DynamicParameters();
             return new SqlPagedList<Warehouse>(sql, Parameter, pageIndex, pageSize, sortExpression);
         }
+
+        public List<GetList> GetWarehouseList()
+        {
+            string sql = @"select id as code, name from Warehouse";
+
+            return _context.Query<GetList>(sql).ToList();
+        }
     }
 }

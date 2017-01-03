@@ -10,27 +10,19 @@
         <div class="box-body">
 
             <div class="row">
-                <div class="col-xs-12 col-sm-6 col-md-4 hidden">
+                <div class="col-xs-12 col-sm-6 col-md-4 ">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.GoodsID, new { @class = "control-label" })@RequiredTag()
-                        @Html.TextBoxFor(m => m.GoodsID, new { @class = "form-control " })
+                        @Html.LabelFor(m => m.GoodsName, new { @class = "control-label" })@RequiredTag()
+                        @Html.DropDownListFor(m => m.GoodsID, Model.GoodsList, T("未选择").Text.ToString(), new { @class = "form-control full-width " })
+                        
                         @Html.ValidationMessageFor(m => m.GoodsID)
                     </div>
                 </div>
 
                 <div class="col-xs-12 col-sm-6 col-md-4">
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.GoodsName, new { @class = "control-label" })@RequiredTag()
-                        @Html.TextBoxFor(m => m.GoodsName, new { @class = "form-control " })
-                        @Html.ValidationMessageFor(m => m.GoodsName)
-                    </div>
-                </div>
-
-                <div class="col-xs-12 col-sm-6 col-md-4">
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.GoodsName, new { @class = "control-label" })
-                        @Html.DropDownListFor(m => m.GoodsName, Model.GoodsList, T("未选择").Text.ToString(), new { @class = "form-control full-width " })
-
+                    <div class="form-group hidden">
+                                          
+                        @Html.TextBoxFor(m => m.GoodsName, new { @class = "form-control ", @readonly = "readonly" })
                     </div>
                 </div>
 
@@ -154,6 +146,26 @@
                 </div>
 
             </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-4 hidden">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.WarehouseID, new { @class = "control-label" })@RequiredTag()
+                        @Html.TextBoxFor(m => m.WarehouseID, new { @class = "form-control " })
+                        @Html.ValidationMessageFor(m => m.WarehouseID)
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.WarehouseName, new { @class = "control-label" })@RequiredTag()
+                        @Html.DropDownListFor(m => m.WarehouseName, Model.WarehouseList, T("未选择").Text.ToString(), new { @class = "form-control full-width " })
+                        @*@Html.TextBoxFor(m => m.WarehouseName, new { @class = "form-control " })*@
+                        @Html.ValidationMessageFor(m => m.WarehouseName)
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <div class="box-footer">
@@ -183,6 +195,9 @@
 
             });
         });
+        $("#GoodsID").change(function () {
+            $("#GoodsName").val($("#GoodsID").getKendoDropDownList().text());
+        })
 
         $(function () {
 

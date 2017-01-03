@@ -41,7 +41,9 @@ namespace Services.Common
                     Remarks,
                     Supplier_ID,
                     Supplier_Name,
-                    Supplier_Address)
+                    Supplier_Address,
+                    Warehouse_ID,
+                    Warehouse_Name)
 			        VALUES (
                     @GoodsID,
                     @GoodsName,
@@ -57,7 +59,9 @@ namespace Services.Common
                     @Remarks,
                     @SupplierID,
                     @SupplierName,
-                    @SupplierAddress)";
+                    @SupplierAddress,
+                    @WarehouseID,
+                    @WarehouseName)";
             _context.Execute(sql, new
             {
                 GoodsID= PurchaseData.GoodsID,
@@ -73,7 +77,9 @@ namespace Services.Common
                 Remarks= PurchaseData.Remarks,
                 SupplierID = PurchaseData.SupplierID,
                 SupplierName = PurchaseData.SupplierName,
-                SupplierAddress = PurchaseData.SupplierAddress
+                SupplierAddress = PurchaseData.SupplierAddress,
+                WarehouseID=PurchaseData.WarehouseID,
+                WarehouseName=PurchaseData.WarehouseName
             });
         }
 
@@ -97,7 +103,9 @@ namespace Services.Common
                     Supplier_Address=@SupplierAddress,
                     Remarks2=@Remarks2,
                     Remarks3=@Remarks3,
-                    Remarks4=@Remarks4)
+                    Remarks4=@Remarks4,
+                    WarehouseID=@WarehouseID,
+                    WarehouseName=@WarehouseName)
                     where ID=@ID";
             _context.Execute(sql, new
             {
@@ -114,7 +122,9 @@ namespace Services.Common
                 Remarks = PurchaseData.Remarks,
                 SupplierID = PurchaseData.SupplierID,
                 SupplierName = PurchaseData.SupplierName,
-                SupplierAddress = PurchaseData.SupplierAddress
+                SupplierAddress = PurchaseData.SupplierAddress,
+                WarehouseID=PurchaseData.WarehouseID,
+                WarehouseName=PurchaseData.WarehouseName
             });
 
         }
