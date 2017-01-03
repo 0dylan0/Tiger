@@ -6,6 +6,7 @@
 @using (Html.BeginForm("Edit", "PurchaseData", FormMethod.Post, new { id = "Edit", data_val = true }))
 {
     @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.ID)
     <div class="box box-solid">
         <div class="box-body">
 

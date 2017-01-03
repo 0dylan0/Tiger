@@ -106,10 +106,11 @@ namespace Services.Common
                     Remarks3=@Remarks3,
                     Remarks4=@Remarks4,
                     WarehouseID=@WarehouseID,
-                    WarehouseName=@WarehouseName)
+                    WarehouseName=@WarehouseName
                     where ID=@ID";
             _context.Execute(sql, new
             {
+                ID = PurchaseData.ID,
                 GoodsID = PurchaseData.GoodsID,
                 GoodsName = PurchaseData.GoodsName,
                 Unit = PurchaseData.Unit,

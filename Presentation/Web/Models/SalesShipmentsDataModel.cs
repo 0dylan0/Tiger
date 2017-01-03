@@ -60,5 +60,9 @@ namespace Web.Models
 
         [DisplayName("供应商地址")]
         public string SupplierAddress { get; set; }
+
+        public int WarehouseID { get; set; }
+
+        public string WarehouseName { get; set; }
     }
 }

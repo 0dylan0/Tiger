@@ -42,7 +42,9 @@ namespace Services.Common
                     Remarks,
                     Supplier_ID,
                     Supplier_Name,
-                    Supplier_Address)
+                    Supplier_Address,
+                    Warehouse_ID,
+                    Warehouse_Name)
 			        VALUES (
                     @GoodsID,
                     @GoodsName,
@@ -60,7 +62,9 @@ namespace Services.Common
                     @Remarks,
                     @SupplierID,
                     @SupplierName,
-                    @SupplierAddress)";
+                    @SupplierAddress,
+                    WarehouseID,
+                    WarehouseName)";
             _context.Execute(sql, new
             {
                 GoodsID = SalesShipmentsData.GoodsID,
@@ -78,7 +82,9 @@ namespace Services.Common
                 Remarks = SalesShipmentsData.Remarks,
                 SupplierID = SalesShipmentsData.SupplierID,
                 SupplierName = SalesShipmentsData.SupplierName,
-                SupplierAddress = SalesShipmentsData.SupplierAddress
+                SupplierAddress = SalesShipmentsData.SupplierAddress,
+                WarehouseID = SalesShipmentsData.WarehouseID,
+                WarehouseName = SalesShipmentsData.WarehouseName
             });
         }
 

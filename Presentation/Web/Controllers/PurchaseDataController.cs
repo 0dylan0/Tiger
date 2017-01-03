@@ -119,8 +119,11 @@ namespace Web.Controllers
         public ActionResult Edit(int id)
         {
             var purchase = _purchaseDataService.GetById(id);
-            var res = purchase.MapTo<PurchaseData, PurchaseDataModel>();
-            return View(res);
+            var model = purchase.MapTo<PurchaseData, PurchaseDataModel>();
+            model.GoodsList = GetGoodsList();
+            model.SupplierList = GetSupplierList();
+            model.WarehouseList = GetWarehouseList();
+            return View(model);
 
         }
         [HttpPost]
