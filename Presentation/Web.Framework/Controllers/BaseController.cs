@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace Web.Framework.Controllers
 {
-    //[Authorize]   
+    [Authorize]   
     //  [LicenseCheck]
     [IMAntiForgeryAttribute]
     public abstract class BaseController : Controller
