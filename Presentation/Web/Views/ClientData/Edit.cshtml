@@ -85,7 +85,8 @@
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <div class="form-group">
                         @Html.LabelFor(m => m.ReceiptDate, new { @class = "control-label aaa" })@RequiredTag()
-                        @Html.TextBoxFor(m => m.ReceiptDate, new { @class = "form-control " })
+                        @Html.KLDateTextBoxFor(m => m.ReceiptDate, new { @class = "form-control kl-date-picker full-width" })
+                        @*@Html.TextBoxFor(m => m.ReceiptDate, new { @class = "form-control " })*@
                         @Html.ValidationMessageFor(m => m.ReceiptDate)
                     </div>
                 </div>
@@ -188,7 +189,9 @@
 
 
 @section scripts{
-
+    @Html.Partial("_KendoDropdownListPartial")
+    @Html.Partial("_KendoDatePickerPartial")
+    @Html.Partial("_ModalSelectorPartial")
 
     <script type="text/javascript">
 

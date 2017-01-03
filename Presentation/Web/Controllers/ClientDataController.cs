@@ -3,6 +3,7 @@ using Core.Domain.Common;
 using Core.Page;
 using Services.Common;
 using Services.Localization;
+using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using Web.Extensions;
@@ -57,6 +58,7 @@ namespace Web.Controllers
         public ActionResult Add()
         {
             ClientDataModel model = new ClientDataModel();
+            model.ReceiptDate = DateTime.Now;
             return View(model);
         }
         [HttpPost]
@@ -74,7 +76,7 @@ namespace Web.Controllers
         public ActionResult Edit(int id)
         {
             var user = _clientDataService.GetUserById(id);
-            var res = user.MapTo<ClientData, ClientDataModel>();
+            var res = user.MapTo<ClientData, ClientDataModel>();            
             return View(res);
 
         }

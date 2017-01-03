@@ -84,17 +84,24 @@
                     }],
                 columnDefs: [
                     {
+                        targets: [7],
+                        render: function (data, type, full) {
+                            return FormatDate(data, "yyyy-MM-dd");
+                        }
+
+                    },
+                    {
                         targets: [8],
                         orderable: false,
                         render: function (data, type, full) {
-                            return '<a href="/ClientData/Edit?id=' + encodeURIComponent(full["id"]) + '" class="btn btn-xs btn-default "><span class="fa fa-pencil"></span> 详情</a>';
+                            return '<a href="/SupplierData/Edit?id=' + encodeURIComponent(full["id"]) + '" class="btn btn-xs btn-default "><span class="fa fa-pencil"></span> 详情</a>';
                         }
                     },
                     {
                         targets: [9],
                         orderable: false,
                         render: function (data, type, full) {
-                            return '<a href="/ClientData/Edit?id=' + encodeURIComponent(full["id"]) + '" class="btn btn-xs btn-default "><span class="fa fa-pencil"></span> 修改</a>';
+                            return '<a href="/SupplierData/Edit?id=' + encodeURIComponent(full["id"]) + '" class="btn btn-xs btn-default "><span class="fa fa-pencil"></span> 修改</a>';
                         }
                     }
                 ],

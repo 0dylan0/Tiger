@@ -52,6 +52,8 @@ namespace Web.Models
         [DisplayName("供应商编号")]
         public int SupplierID { get; set; }
 
+        public IEnumerable<SelectListItem> SupplierList { get; set; }
+
         [DisplayName("供应商名称")]
         public string SupplierName { get; set; }
 

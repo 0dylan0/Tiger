@@ -23,15 +23,18 @@ namespace Web.Controllers
         private readonly PurchaseDataService _purchaseDataService;
         private readonly LocalizationService _localizationService;
         private readonly GoodsDataService _goodsDataService;
+        private readonly SupplierDataService _supplierDataService;
         public PurchaseDataController(IWorkContext webWorkContext,
             PurchaseDataService purchaseDataService,
             LocalizationService localizationService,
-            GoodsDataService goodsDataService)
+            GoodsDataService goodsDataService,
+            SupplierDataService supplierDataService)
         {
             _webWorkContext = webWorkContext;
             _purchaseDataService = purchaseDataService;
             _localizationService = localizationService;
             _goodsDataService = goodsDataService;
+            _supplierDataService = supplierDataService;
         }
 
         [HttpGet]
@@ -63,7 +66,8 @@ namespace Web.Controllers
         {
             PurchaseDataModel model = new PurchaseDataModel();
             model.Date = DateTime.Now;
-            model.GoodsList = GetSaleList();
+            model.GoodsList = GetGoodsList();
+            model.SupplierList = GetSupplierList();
             return View(model);
         }
         [HttpPost]
@@ -99,14 +103,22 @@ namespace Web.Controllers
             return View(model);
         }
 
-        public List<SelectListItem> GetSaleList()
-        {           
+        public List<SelectListItem> GetGoodsList()
+        {
             return _goodsDataService.GetGoodsList().Select(o => new SelectListItem
             {
                 Text = o.Code + "-" + o.Name,
                 Value = o.Code,
             }).ToList();
 
+        }
+        public List<SelectListItem> GetSupplierList()
+        {
+            return _supplierDataService.GetSupplierList().Select(o => new SelectListItem
+            {
+                Text = o.Code + "-" + o.Name,
+                Value = o.Code,
+            }).ToList();
         }
     }
 }

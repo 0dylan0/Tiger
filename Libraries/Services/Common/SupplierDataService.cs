@@ -150,5 +150,13 @@ namespace Services.Common
             //Parameter.Add("textQuery", textQuery);
             return new SqlPagedList<SupplierData>(sql, Parameter, pageIndex, pageSize, sortExpression);
         }
+
+        //获取供应商数据 填充下拉框
+        public List<GetList> GetSupplierList()
+        {
+            string sql = @"select ID as code,SupplierName as name from SupplierData";
+
+            return _context.Query<GetList>(sql).ToList();
+        }
     }
 }

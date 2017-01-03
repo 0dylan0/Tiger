@@ -3,6 +3,7 @@ using Core.Domain.Common;
 using Core.Page;
 using Services.Common;
 using Services.Localization;
+using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using Web.Extensions;
@@ -57,6 +58,7 @@ namespace Web.Controllers
         public ActionResult Add()
         {
             SupplierDataModel model = new SupplierDataModel();
+            model.RepaymentDate = DateTime.Now;
             return View(model);
         }
         [HttpPost]

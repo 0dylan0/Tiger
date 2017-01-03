@@ -77,12 +77,15 @@
                     { data: "area" },
                     { data: "phone" },
                     { data: "arrears" },
-                    { data: "receiptDate"},
-                    {
-                        orderable: false,
-                        responsivePriority: 100
-                    }],
+                    { data: "receiptDate" }],
                 columnDefs: [
+                    {
+                        targets: [7],
+                        render: function (data, type, full) {
+                            return FormatDate(data, "yyyy-MM-dd");
+                        }
+
+                    },
                     {
                         targets: [8],
                         orderable: false,

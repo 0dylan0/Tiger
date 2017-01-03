@@ -56,31 +56,31 @@
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
                         @*@if (true)
-                        {
-                            var rmsExpireDate = licenseService.GetModuleExpireDate(currentHotel.Code, null);
-                            var isRMSWillSoonFallDue = rmsExpireDate.HasValue && ((DateTime.Now - rmsExpireDate.Value).Days > -31);
-
-                            if (isRMSWillSoonFallDue)
                             {
-                                <li class="dropdown notifications-menu">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                        <i class="fa fa-bell-o"></i>
-                                        <span class="label label-warning">@(isRMSWillSoonFallDue ? 1 : 0)</span>
-                                    </a>
-                                    <ul class="dropdown-menu">
+                                var rmsExpireDate = licenseService.GetModuleExpireDate(currentHotel.Code, null);
+                                var isRMSWillSoonFallDue = rmsExpireDate.HasValue && ((DateTime.Now - rmsExpireDate.Value).Days > -31);
 
-                                        @if (isRMSWillSoonFallDue)
-                                        {
-                                            <li class="header">
-                                                <i class="fa fa-warning text-yellow"></i> @string.Format(T("RMSLicenseWillSoonFallDue").ToString(), rmsExpireDate.Value.ToKLDateString())
-                                            </li>
-                                        }
+                                if (isRMSWillSoonFallDue)
+                                {
+                                    <li class="dropdown notifications-menu">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                            <i class="fa fa-bell-o"></i>
+                                            <span class="label label-warning">@(isRMSWillSoonFallDue ? 1 : 0)</span>
+                                        </a>
+                                        <ul class="dropdown-menu">
+
+                                            @if (isRMSWillSoonFallDue)
+                                            {
+                                                <li class="header">
+                                                    <i class="fa fa-warning text-yellow"></i> @string.Format(T("RMSLicenseWillSoonFallDue").ToString(), rmsExpireDate.Value.ToKLDateString())
+                                                </li>
+                                            }
 
 
-                                    </ul>
-                                </li>
-                            }
-                        }*@
+                                        </ul>
+                                    </li>
+                                }
+                            }*@
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-user"></i>
@@ -98,43 +98,43 @@
                             </ul>
                         </li>
                         @*@if (currentHotel.Code != null)
-                        {
-                            <li id="changeHotel" class="dropdown notifications-menu">
-                                <a id="hotelName" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-                                    <i class="fa fa-building"></i>
-                                    <span class="hidden-xs">@currentHotel.Code - @currentHotel.Name</span>
+                            {
+                                <li id="changeHotel" class="dropdown notifications-menu">
+                                    <a id="hotelName" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                                        <i class="fa fa-building"></i>
+                                        <span class="hidden-xs">@currentHotel.Code - @currentHotel.Name</span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <div class="slimScrollDiv">
+                                                @Html.DropDownList("selectHotelAtNav", hotelSelectList, new { @class = "form-control full-width ignore-auto-init" })
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+                            }*@
+                        @*<li class="dropdown notifications-menu" id="rmsChangeModuleArea">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="@T("ChangeModule.Title")">
+                                    <i class="fa fa-exchange"></i>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li>
-                                        <div class="slimScrollDiv">
-                                            @Html.DropDownList("selectHotelAtNav", hotelSelectList, new { @class = "form-control full-width ignore-auto-init" })
-                                        </div>
-                                    </li>
+                                    @if (LoginAddressConfiguration.GetAllAddress().Count() == 0)
+                                    {
+                                        <li class="header text-red">@T("ChangeModule.Unconfigured")</li>
+                                    }
+                                    else
+                                    {
+                                        <li class="header">@T("ChangeModule.Description")</li>
+                                        <li>
+                                            <ul class="menu">
+                                                @ChangeModule(LoginAddressConfiguration.ECRSLoginAddress, "CRM/LPS/CSM")
+                                                @ChangeModule(LoginAddressConfiguration.CROLoginAddress, "Kunlun CRO")
+                                                @ChangeModule(LoginAddressConfiguration.SOCLoginAddress, "Kunlun SOC")
+                                            </ul>
+                                        </li>
+                                    }
                                 </ul>
-                            </li>
-                        }*@
-                        @*<li class="dropdown notifications-menu" id="rmsChangeModuleArea">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="@T("ChangeModule.Title")">
-                                <i class="fa fa-exchange"></i>
-                            </a>
-                            <ul class="dropdown-menu">
-                                @if (LoginAddressConfiguration.GetAllAddress().Count() == 0)
-                                {
-                                    <li class="header text-red">@T("ChangeModule.Unconfigured")</li>
-                                }
-                                else
-                                {
-                                    <li class="header">@T("ChangeModule.Description")</li>
-                                    <li>
-                                        <ul class="menu">
-                                            @ChangeModule(LoginAddressConfiguration.ECRSLoginAddress, "CRM/LPS/CSM")
-                                            @ChangeModule(LoginAddressConfiguration.CROLoginAddress, "Kunlun CRO")
-                                            @ChangeModule(LoginAddressConfiguration.SOCLoginAddress, "Kunlun SOC")
-                                        </ul>
-                                    </li>
-                                }
-                            </ul>
-                        </li>*@
+                            </li>*@
 
                     </ul>
                 </div>
@@ -144,7 +144,7 @@
         <aside class="main-sidebar">
             <section class="sidebar">
                 <ul class="sidebar-menu">
-                    <li class="treeview">                       
+                    <li class="treeview">
                         <a href="#">
                             <i class="fa fa-calculator"></i><span> 用户管理</span>
                             <span class="pull-right-container">
@@ -152,28 +152,28 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            @NavMenuItem(T("用户"), Url.Action("Index", "User")) 
+                            @NavMenuItem(T("用户"), Url.Action("Index", "User"))
                         </ul>
                     </li>
                     <li class="treeview">
                         <a href="#">
-                            <i class="fa fa-pie-chart"></i><span> 货物管理</span> 
+                            <i class="fa fa-pie-chart"></i><span> 货物管理</span>
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            @NavMenuItem(T("货物信息维护"), Url.Action("Index", "GoodsData")) 
+                            @NavMenuItem(T("货物信息维护"), Url.Action("Index", "GoodsData"))
                             @NavMenuItem(T("客户信息维护"), Url.Action("Index", "ClientData"))
                             @NavMenuItem(T("供货商信息维护"), Url.Action("Index", "SupplierData"))
-                            
+
                         </ul>
                     </li>
 
                     <li class="treeview">@NavMenuItem(T("采购进货"), Url.Action("Index", "PurchaseData"))</li>
                     <li class="treeview">@NavMenuItem(T("销售出货"), Url.Action("Index", "SalesShipmentsData"))</li>
                     <li class="treeview">@NavMenuItem(T("商品库存"), Url.Action("Index", "InventoryData"))</li>
-                    
+
                 </ul>
             </section>
         </aside>
@@ -226,22 +226,22 @@
                 Kunlun tiger
             </div>
             @*<span style="margin-right:100px" class="pull-right">
-                @for (int i = 0; i < languageList.Count; i++)
-                {
-                    if (WorkContext.CurrentLanguage.Code == languageList[i].Code)
+                    @for (int i = 0; i < languageList.Count; i++)
                     {
-                        <span>@languageList[i].Name</span>
+                        if (WorkContext.CurrentLanguage.Code == languageList[i].Code)
+                        {
+                            <span>@languageList[i].Name</span>
+                        }
+                        else
+                        {
+                            <a data-code="@languageList[i].Code" href="#" data-trigger="changeLanguage">@languageList[i].Name</a>
+                        }
+                        if (i != languageList.Count - 1)
+                        {
+                            <span>|</span>
+                        }
                     }
-                    else
-                    {
-                        <a data-code="@languageList[i].Code" href="#" data-trigger="changeLanguage">@languageList[i].Name</a>
-                    }
-                    if (i != languageList.Count - 1)
-                    {
-                        <span>|</span>
-                    }
-                }
-            </span>*@
+                </span>*@
             Copyright &copy; @DateTime.Now.Year Shiji Kunlun Software Co.,Ltd. All rights reserved.
         </footer>
     </div>
@@ -291,10 +291,9 @@
         });
 
         // Kendo 全局设置
-        @*var currentLanguage = "@WorkContext.CurrentLanguage.Code";
-        if (currentLanguage == "C") {
-            kendo.culture("zh-Hans");
-        }*@
+
+        kendo.culture("zh-Hans");
+
 
         $.extend(kunlun, {
             language: {
