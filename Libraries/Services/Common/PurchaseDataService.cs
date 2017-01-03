@@ -66,6 +66,7 @@ namespace Services.Common
             {
                 GoodsID= PurchaseData.GoodsID,
                 GoodsName = PurchaseData.GoodsName,
+                Date=PurchaseData.Date,
                 Unit = PurchaseData.Unit,
                 Specification = PurchaseData.Specification,
                 GoodsType = PurchaseData.GoodsType,
