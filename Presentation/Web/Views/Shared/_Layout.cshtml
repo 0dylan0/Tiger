@@ -157,7 +157,7 @@
                     </li>
                     <li class="treeview">
                         <a href="#">
-                            <i class="fa fa-pie-chart"></i><span> 货物管理</span>
+                            <i class="fa fa-plus"></i><span> 信息维护</span>
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
@@ -170,9 +170,25 @@
                         </ul>
                     </li>
 
-                    <li class="treeview">@NavMenuItem(T("采购进货"), Url.Action("Index", "PurchaseData"))</li>
-                    <li class="treeview">@NavMenuItem(T("销售出货"), Url.Action("Index", "SalesShipmentsData"))</li>
-                    <li class="treeview">@NavMenuItem(T("商品库存"), Url.Action("Index", "InventoryData"))</li>
+                    <li class="treeview">
+                        <a href="~/PurchaseData/Index">
+                            <i class="fa fa-train"></i><span> 采购进货</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="~/SalesShipmentsData/Index">
+                            <i class="fa fa-truck"></i><span> 销售出货</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="~/InventoryData/Index">
+                            <i class="fa fa-archive"></i><span> 商品库存</span>
+                        </a>
+                    </li>
+
+                    @*<li class="treeview">@NavMenuItem(T("采购进货"), Url.Action("Index", "PurchaseData"))</li>*@
+                    @*<li class="treeview">@NavMenuItem(T("销售出货"), Url.Action("Index", "SalesShipmentsData"))</li>
+                    <li class="treeview">@NavMenuItem(T("商品库存"), Url.Action("Index", "InventoryData"))</li>*@
 
                 </ul>
             </section>

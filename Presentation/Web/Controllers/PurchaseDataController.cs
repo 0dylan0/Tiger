@@ -57,7 +57,6 @@ namespace Web.Controllers
                 RecordsFiltered = UserList.TotalCount,
                 Data = model.PurchaseData
             };
-
             return Json(new PlainJsonResponse(results));
         }
 
@@ -70,6 +69,7 @@ namespace Web.Controllers
             model.SupplierList = GetSupplierList();
             return View(model);
         }
+
         [HttpPost]
         public ActionResult Add(PurchaseDataModel model)
         {
