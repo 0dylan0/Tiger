@@ -106,10 +106,11 @@ namespace Services.Common
                     Remarks1=@Remarks1,
                     Remarks2=@Remarks2,
                     Remarks3=@Remarks3,
-                    Remarks4=@Remarks4)
+                    Remarks4=@Remarks4
                     where ID=@ID";
             _context.Execute(sql, new
             {
+                ID = ClientData.ID,
                 ClientName = ClientData.ClientName,
                 CompanyName = ClientData.CompanyName,
                 ClientType = ClientData.ClientType,

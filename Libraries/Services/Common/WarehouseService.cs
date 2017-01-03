@@ -38,7 +38,7 @@ namespace Services.Common
         public void Update(Warehouse Warehouse)
         {
             var sql = $@"update Warehouse set
-                    Goods_Name=@Name)
+                    Name=@Name
                     where ID=@ID";
             _context.Execute(sql, new
             {
