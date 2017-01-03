@@ -24,18 +24,22 @@ namespace Web.Controllers
         private readonly LocalizationService _localizationService;
         private readonly IAuthenticationService _authenticationService;
         private readonly UserValidateService _userValidateService;
+        private readonly HttpContextBase _httpContext;
+        private const string _hotelCookieName = "kunlun.hotel";
 
         public UserController(IWorkContext webWorkContext,
             UserService userService,
             LocalizationService localizationService,
             IAuthenticationService authenticationService,
-            UserValidateService userValidateService)
+            UserValidateService userValidateService,
+            HttpContextBase httpContext)
         {
             _webWorkContext = webWorkContext;
             _userService = userService;
             _localizationService = localizationService;
             _authenticationService = authenticationService;
             _userValidateService = userValidateService;
+            _httpContext = httpContext;
         }
         // GET: User
         [HttpGet]
@@ -162,6 +166,21 @@ namespace Web.Controllers
                 //return Redirect("~/Hotel");
             }
             return View(loginModel);
+        }
+
+        public ActionResult Logout()
+        {
+            _authenticationService.SignOut();
+            //ClearHotelCookie();
+            return Redirect("~/Login");
+        }
+
+        public virtual void ClearHotelCookie()
+        {
+            if (_httpContext != null && _httpContext.Response != null)
+            {
+                _httpContext.Response.Cookies[_hotelCookieName].Expires = DateTime.Now.AddDays(-1);
+            }
         }
 
     }

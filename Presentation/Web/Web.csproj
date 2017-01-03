@@ -2666,6 +2666,7 @@
     <Compile Include="Controllers\SalesShipmentsDataController.cs" />
     <Compile Include="Controllers\SupplierDataController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\WarehouseController.cs" />
     <Compile Include="Extensions\MappingExtensions.cs" />
     <Compile Include="Global.asax.cs">
@@ -2741,6 +2742,9 @@
     <Content Include="Views\Warehouse\Index.cshtml" />
     <Content Include="Views\Warehouse\Add.cshtml" />
     <Content Include="Views\Warehouse\Edit.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Users\Add.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
