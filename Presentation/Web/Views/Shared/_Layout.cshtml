@@ -157,7 +157,7 @@
                     </li>
                     <li class="treeview">
                         <a href="#">
-                            <i class="fa fa-plus"></i><span> 信息维护</span>
+                            <i class="fa fa-leaf"></i><span> 信息维护</span>
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
@@ -169,6 +169,19 @@
 
                         </ul>
                     </li>
+
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-wrench"></i><span> 基本信息维护</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            @NavMenuItem(T("仓库信息维护"), Url.Action("Index", "Warehouse"))
+                        </ul>
+                    </li>
+
 
                     <li class="treeview">
                         <a href="~/PurchaseData/Index">

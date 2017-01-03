@@ -77,6 +77,7 @@
     <Compile Include="Common\SalesShipmentsDataService.cs" />
     <Compile Include="Common\SupplierDataService.cs" />
     <Compile Include="Common\UserHotelRangeService.cs" />
+    <Compile Include="Common\WarehouseService.cs" />
     <Compile Include="Configuration\SettingService.cs" />
     <Compile Include="Localization\LanguageService.cs" />
     <Compile Include="Localization\LocalizationExtensions.cs" />

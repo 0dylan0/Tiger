@@ -125,6 +125,7 @@
     <Compile Include="Domain\Common\UserHotelRange.cs" />
     <Compile Include="Domain\Common\UserHotelView.cs" />
     <Compile Include="Domain\Common\InventoryData.cs" />
+    <Compile Include="Domain\Common\Warehouse.cs" />
     <Compile Include="Domain\Localization\Language.cs" />
     <Compile Include="Domain\Localization\LocaleStringResource.cs" />
     <Compile Include="Domain\Security\License.cs" />

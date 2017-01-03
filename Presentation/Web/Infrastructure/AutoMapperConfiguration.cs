@@ -33,7 +33,8 @@ namespace Web.Infrastructure
                 cfg.CreateMap<SalesShipmentsData, SalesShipmentsDataModel>();
                 cfg.CreateMap<InventoryDataModel, InventoryData>();
                 cfg.CreateMap<InventoryData, InventoryDataModel>();
-                
+                cfg.CreateMap<WarehouseModel, Warehouse>();
+                cfg.CreateMap<Warehouse, WarehouseModel>();
 
 
             });
