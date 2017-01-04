@@ -2682,6 +2682,7 @@
     <Compile Include="Models\ClientDataModel.cs" />
     <Compile Include="Models\GoodsDataListModel.cs" />
     <Compile Include="Models\GoodsDataModel.cs" />
+    <Compile Include="Models\GoodsSpecificationListModel.cs" />
     <Compile Include="Models\GoodsSpecificationModel.cs" />
     <Compile Include="Models\InventoryDataListModel.cs" />
     <Compile Include="Models\InventoryDataModel.cs" />
@@ -2751,6 +2752,9 @@
     <Content Include="Views\Users\Add.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Shared\_SelectInventoryDataPartial.cshtml" />
+    <Content Include="Views\GoodsSpecification\Index.cshtml" />
+    <Content Include="Views\GoodsSpecification\Add.cshtml" />
+    <Content Include="Views\GoodsSpecification\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2761,7 +2765,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Common\" />
-    <Folder Include="Views\GoodsSpecification\" />
     <Folder Include="Views\Purchase\" />
   </ItemGroup>
   <ItemGroup>
