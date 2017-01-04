@@ -24,18 +24,18 @@
 
 
                         @*@Html.LabelFor(m => m.GoodsID, new { @class = "control-label" })@RequiredTag()
-                            @Html.TextBoxFor(m => m.GoodsID, new { @class = "form-control " })
-                            @Html.ValidationMessageFor(m => m.GoodsID)*@
+                        @Html.TextBoxFor(m => m.GoodsID, new { @class = "form-control " })
+                        @Html.ValidationMessageFor(m => m.GoodsID)*@
                     </div>
                 </div>
 
                 @*<div class="col-xs-12 col-sm-6 col-md-4">
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.GoodsName, new { @class = "control-label aaa" })@RequiredTag()
-                            @Html.TextBoxFor(m => m.GoodsName, new { @class = "form-control " })
-                            @Html.ValidationMessageFor(m => m.GoodsName)
-                        </div>
-                    </div>*@
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.GoodsName, new { @class = "control-label aaa" })@RequiredTag()
+                        @Html.TextBoxFor(m => m.GoodsName, new { @class = "form-control " })
+                        @Html.ValidationMessageFor(m => m.GoodsName)
+                    </div>
+                </div>*@
 
             </div>
 
@@ -89,6 +89,7 @@
                     <div class="form-group">
                         @Html.LabelFor(m => m.Quantity, new { @class = "control-label" })@RequiredTag()
                         @Html.TextBoxFor(m => m.Quantity, new { @class = "form-control " })
+                        @Html.HiddenFor(m => m.OldQuantity)
                         @Html.ValidationMessageFor(m => m.Quantity)
                     </div>
                 </div>
@@ -150,31 +151,27 @@
             </div>
 
             <div class="row">
-                <div class="col-xs-12 col-sm-6 col-md-4 hidden">
+
+                <div class="col-xs-12 col-sm-6 col-md-4">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.SupplierID, new { @class = "control-label" })@RequiredTag()
-                        @Html.TextBoxFor(m => m.SupplierID, new { @class = "form-control " })
+                        @Html.LabelFor(m => m.SupplierName, new { @class = "control-label" })@RequiredTag()
+                        @Html.DropDownListFor(m => m.SupplierID, Model.SupplierList, T("未选择").Text.ToString(), new { @class = "form-control full-width " })
+                        @Html.HiddenFor(m => m.SupplierName)
                         @Html.ValidationMessageFor(m => m.SupplierID)
                     </div>
                 </div>
 
+                
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.SupplierName, new { @class = "control-label" })@RequiredTag()
-                        @Html.TextBoxFor(m => m.SupplierName, new { @class = "form-control " })
-                        @Html.ValidationMessageFor(m => m.SupplierName)
+                        @Html.LabelFor(m => m.WarehouseName, new { @class = "control-label" })@RequiredTag()
+                        @Html.DropDownListFor(m => m.WarehouseID, Model.WarehouseList, T("未选择").Text.ToString(), new { @class = "form-control full-width " })
+                        @Html.HiddenFor(m => m.WarehouseName)
+                        @Html.ValidationMessageFor(m => m.WarehouseID)
                     </div>
                 </div>
-
-                <div class="col-xs-12 col-sm-6 col-md-4">
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.SupplierName, new { @class = "control-label" })@RequiredTag()
-                        @Html.TextBoxFor(m => m.SupplierName, new { @class = "form-control " })
-                        @Html.ValidationMessageFor(m => m.SupplierName)
-                    </div>
-                </div>
-
             </div>
+
         </div>
 
         <div class="box-footer">
@@ -217,11 +214,32 @@
             if (data) {
                 $("#GoodsName").val(data.goodsName);
                 $("#GoodsID").val(data.goodsID);
-
+                $("#GoodsType").val(data.goodsType);
+                $("#OldQuantity").val(data.inventoryQuantity);
+                $("#Cost").val(data.costPrice);
+                $("#Brand").val(data.brand);
+                $("#Sum").val(data.inventorySum);
+                $("#Specification").val(data.specification);
+                $("#SupplierID").getKendoDropDownList().value(data.supplierID);
+                $("#SupplierName").val(data.supplierName);
+                $("#Unit").val(data.unit);
+                $("#WarehouseID").getKendoDropDownList().value(data.warehouseID);
+                $("#WarehouseName").val(data.warehouseName);
             }
             else {
                 $("#GoodsName").val("");
                 $("#GoodsID").val("");
+                $("#GoodsType").val("");
+                $("#OldQuantity").val("");
+                $("#Cost").val("");
+                $("#Brand").val("");
+                $("#Sum")("");
+                $("#Specification").val("");
+                $("#SupplierID").getKendoDropDownList().value("");
+                $("#SupplierName").val("");
+                $("#Unit").val("");
+                $("#WarehouseID").getKendoDropDownList().value("");
+                $("#WarehouseName").val("");
             }
         }
 

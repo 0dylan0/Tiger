@@ -110,6 +110,7 @@ namespace Services.Common
                     where ID=@ID";
             _context.Execute(sql, new
             {
+                ID = InventoryData.ID,
                 GoodsID = InventoryData.GoodsID,
                 GoodsName = InventoryData.GoodsName,
                 Unit = InventoryData.Unit,
