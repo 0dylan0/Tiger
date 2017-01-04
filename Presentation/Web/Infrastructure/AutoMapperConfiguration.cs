@@ -35,8 +35,8 @@ namespace Web.Infrastructure
                 cfg.CreateMap<InventoryData, InventoryDataModel>();
                 cfg.CreateMap<WarehouseModel, Warehouse>();
                 cfg.CreateMap<Warehouse, WarehouseModel>();
-
-
+                cfg.CreateMap<GoodsSpecificationModel, GoodsSpecification>();
+                cfg.CreateMap<GoodsSpecification, GoodsSpecificationModel>();
             });
 
             _mapper = _mapperConfiguration.CreateMapper();

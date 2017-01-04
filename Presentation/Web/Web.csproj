@@ -2661,6 +2661,7 @@
     <Compile Include="Controllers\ClientDataController.cs" />
     <Compile Include="Controllers\CommonController.cs" />
     <Compile Include="Controllers\GoodsDataController.cs" />
+    <Compile Include="Controllers\GoodsSpecificationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InventoryDataController.cs" />
     <Compile Include="Controllers\PurchaseDataController.cs" />
@@ -2676,10 +2677,12 @@
     <Compile Include="Infrastructure\AutoMapperConfiguration.cs" />
     <Compile Include="Infrastructure\AutoMapperStartupTask.cs" />
     <Compile Include="Infrastructure\DependencyRegistrar.cs" />
+    <Compile Include="Models\BasicModel.cs" />
     <Compile Include="Models\ClientDataListModel.cs" />
     <Compile Include="Models\ClientDataModel.cs" />
     <Compile Include="Models\GoodsDataListModel.cs" />
     <Compile Include="Models\GoodsDataModel.cs" />
+    <Compile Include="Models\GoodsSpecificationModel.cs" />
     <Compile Include="Models\InventoryDataListModel.cs" />
     <Compile Include="Models\InventoryDataModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
@@ -2758,6 +2761,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Common\" />
+    <Folder Include="Views\GoodsSpecification\" />
     <Folder Include="Views\Purchase\" />
   </ItemGroup>
   <ItemGroup>

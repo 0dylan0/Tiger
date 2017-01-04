@@ -29,7 +29,7 @@ namespace Web.Infrastructure
             builder.RegisterType<SalesShipmentsDataService>().InstancePerLifetimeScope();
             builder.RegisterType<InventoryDataService>().InstancePerLifetimeScope();
             builder.RegisterType<WarehouseService>().InstancePerLifetimeScope();
-            
+            builder.RegisterType<GoodsSpecificationService>().InstancePerLifetimeScope();
         }
 
 

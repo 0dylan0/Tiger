@@ -84,7 +84,7 @@ namespace Services.Users
         {
             string sql = @" select ID,Name,Password from Users where Name = @Name ";
             //return _context.QuerySingle<Core.Domain.Common.Users>(sql, new { Name = Name });
-            return _context.Query<Core.Domain.Common.Users>(sql, new { Name = Name }).FirstOrDefault();
+            return _context.QuerySingleOrDefault<Core.Domain.Common.Users>(sql, new { Name = Name });
         }
 
 
