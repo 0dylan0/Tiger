@@ -1,0 +1,194 @@
+﻿@model Web.Models.SearchInventoryDataModel
+@{
+    Layout = null;
+}
+
+<link href="~/Content/Site.css" rel="stylesheet" />
+<div id="SearchInventoryDataModel" class="row">
+    <div class="col-xs-10 cro-offset-col-padding">
+        <div class="col-xs-4">
+            @Html.LabelFor(m => m.InventoryDataName, new { @class = "control-label" })
+            @Html.TextBoxFor(m => m.InventoryDataName, new { @class = "form-control input-sm" })
+            @Html.TextBoxFor(m => m.ChoiceTypes, new { @class = "hidden" })
+            @Html.TextBoxFor(m => m.IdList, new { @class = "hidden" })
+            @Html.TextBoxFor(m => m.NameList, new { @class = "hidden" })
+        </div>
+    </div>
+    <div class="col-xs-2">
+        <label for="search" class="control-label">&nbsp;</label>
+        <div>
+            <button id="SearchCustAccount" class="btn btn-primary btn-block btn-sm"> 查询</button>
+        </div>
+    </div>
+
+    <div id="SearchAccountResult" class="col-xs-12" style="display: none;">
+        <table class="table table-hover" id="AccountdataTable">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>ID</th>
+                    <th>商品编号</th>
+                    <th>商品名称</th>
+
+                    <th>进货日期</th>@*采购进货日期*@
+                    <th>出货日期</th>@*销售出货日期*@
+
+                    <th>类别</th>
+                    <th>单位</th>
+                    <th>成本价</th>
+
+                    <th>存库数量</th>
+                    <th>存库金额</th>
+
+                    <th>仓库编号</th>
+                    <th>仓库名称</th>
+
+
+                    <th>供应商编号</th>
+                    <th>供应商名称</th>
+                    <th>供应商地址</th>
+
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+<script>
+    var searchResultInPage = $("#SearchAccountResult");
+    function onSearchAccountClick() {
+        getResult.page("first").draw();
+    }
+    var idList = [];
+    var nameList = [];
+    if ($("#IdList").val() != "") {
+        idList = $("#IdList").val().split(",");
+    }
+    if ($("#NameList").val() != "") {
+        nameList = $("#NameList").val().split(",");
+    }
+
+    function IfChoiceTypes() {
+        if ($("#ChoiceTypes").val() != "Radio") {
+            $('#AccountdataTable tbody').on('click', 'tr', function () {
+                $(this).toggleClass('kl-selected');
+                var accountdata = $('#AccountdataTable').DataTable().row($(this)).data();
+                if (idList.indexOf($(this).find("td:last").text(), 0) >= 0) {
+                    idList.splice(idList.indexOf(accountdata.id.toString(), 0), 1)
+                    nameList.splice(nameList.indexOf(accountdata.chName, 0), 1);
+                }
+                else {
+                    idList.push(accountdata.id.toString())
+                    nameList.push(accountdata.chName);
+
+                }
+            });
+        }
+    }
+
+
+    var getResult = $("#AccountdataTable").DataTable({
+
+        ajax: {
+            url: "@Url.Action("Index", "InventoryData")",
+            type: "post",
+            data: function (d) {
+                d.AccountName = $("#SearchInventoryDataModel #InventoryDataName").val();
+                d.CustomerType = $("#SearchInventoryDataModel #CustomerType").val();
+                addAntiForgeryToken(d);
+            },
+            beforeSend: function () {
+                searchResultInPage.hide();
+                $.klModal.displayModalLoadingInfo();
+            }
+        },
+        fnDrawCallback: function () {
+            $.klModal.hideModalLoadingInfo();
+            searchResultInPage.fadeIn(200);
+        },
+        createdRow: function (row, data, index) {
+
+            if (idList.length != 0) {
+                var str = data.id + "";
+                if (idList.indexOf(str, 0) >= 0) {
+
+                    $(row).attr("class", "kl-selected");
+                }
+            }
+
+        },
+        order: [1, "desc"],
+        columns: [
+            { data: "", orderable: false },
+            { data: "id" },
+            { data: "goodsID" },
+            { data: "goodsName" },
+
+            { data: "purchaseDate" },
+            { data: "shipmentsDate" },
+            { data: "goodsType" },
+            { data: "unit" },
+            { data: "costPrice" },
+
+            { data: "inventoryQuantity" },
+            { data: "inventorySum" },
+
+            { data: "warehouseID" },
+            { data: "warehouseName" },
+
+            { data: "supplierID" },
+            { data: "supplierName" },
+            { data: "supplierAddress" }
+        ],
+        columnDefs: [
+             {
+                 targets: [0],
+                 render: function (data, type, row, meta) {
+                     if ($("#ChoiceTypes").val() == "Radio") {
+                         return '<button class="select-cust-account btn btn-sm btn-primary" id="RadioChoose">选择</button>';
+                     }
+                     else {
+                         return '<p class="hidden"> </p>';
+                     }
+                 }
+             },
+             {
+                 targets: [4],
+                 render: function (data, type, full) {
+                     return FormatDate(data, "yyyy-MM-dd");
+                 }
+
+             },
+             {
+                 targets: [5],
+                 render: function (data, type, full) {
+                     return FormatDate(data, "yyyy-MM-dd");
+                 }
+
+             },
+        ],
+        lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]]
+    });
+
+    IfChoiceTypes();
+
+    $("#SearchInventoryDataModel #SearchCustAccount").on("click", onSearchAccountClick);
+    //单选选择传值
+    $("#SearchInventoryDataModel").on("click", "table tbody tr .select-cust-account", onSelectAccount);
+
+    //选择器的点击事件
+    function onSelectAccount() {
+        var selected = $('#AccountdataTable').DataTable().row($(this).parents("tr")).data();
+        setCustomer(selected);
+        $.klModal.closeModal();
+    }
+    function searchAccountIdList() {
+        $.klModal.closeModal();
+        return idList;
+    }
+    function searchAccountNameList() {
+        $.klModal.closeModal();
+        return nameList;
+    }
+
+</script>

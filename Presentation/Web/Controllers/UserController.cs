@@ -41,6 +41,88 @@ namespace Web.Controllers
             _userValidateService = userValidateService;
             _httpContext = httpContext;
         }
+
+        [HttpGet]
+        public ActionResult Login(string returnUrl)
+        {
+            LoginModel model = new LoginModel();
+            model.ReturnUrl = returnUrl;
+            if (_webWorkContext.IsAlreadyLogin())
+            {
+                if (!String.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                {
+                    return Redirect(returnUrl);
+                }
+                else
+                {
+                    return Redirect("~/Home");
+                }
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Login(LoginModel loginModel)
+        {
+
+
+            if (ModelState.IsValid)
+            {
+                UserLoginResult result = _userValidateService.Validate(loginModel.UserName, loginModel.Password, loginModel.IsFromOtherSystem);
+                switch (result)
+                {
+                    case UserLoginResult.Successful:
+                        Core.Domain.Common.Users user = _userService.GetByCode(loginModel.UserName);
+                        _authenticationService.SignIn(user, loginModel.RememberMe);
+
+                        if (loginModel.IsFromOtherSystem)
+                        {
+                            if (!String.IsNullOrEmpty(loginModel.ReturnUrl) && Url.IsLocalUrl(loginModel.ReturnUrl))
+                            {
+                                return Redirect("~/Home/Index?returnUrl=" + HttpUtility.UrlEncode(loginModel.ReturnUrl));
+                            }
+                        }
+                        return Redirect("~/Home/Index");
+                    case UserLoginResult.UserNotExist:
+                        ModelState.AddModelError("UserName_NotExist", "登录失败");
+                        break;
+                    case UserLoginResult.WrongPassword:
+                        ModelState.AddModelError("Password_Wrong", "密码错误");
+                        break;
+                }
+                //Core.Domain.Common.Users user = _userService.GetByCode(loginModel.UserName);
+                //_authenticationService.SignIn(user, loginModel.RememberMe);
+
+                //if (!String.IsNullOrEmpty(loginModel.ReturnUrl) && Url.IsLocalUrl(loginModel.ReturnUrl))
+                //{
+                //    return Redirect("~/Hotel/Index?returnUrl=" + HttpUtility.UrlEncode(loginModel.ReturnUrl));
+                //}
+                //return Redirect("~/Hotel");
+            }
+            return View(loginModel);
+        }
+
+        public ActionResult Logout()
+        {
+            _authenticationService.SignOut();
+            //ClearHotelCookie();
+            return Redirect("~/Login");
+        }
+
+        public virtual void ClearHotelCookie()
+        {
+            if (_httpContext != null && _httpContext.Response != null)
+            {
+                _httpContext.Response.Cookies[_hotelCookieName].Expires = DateTime.Now.AddDays(-1);
+            }
+        }
+
+
+
+
+
+
+
         // GET: User
         [HttpGet]
         public ActionResult Index()
@@ -105,82 +187,6 @@ namespace Web.Controllers
 
             }
             return View(model);
-        }
-
-
-        [HttpGet]
-        public ActionResult Login(string returnUrl)
-        {
-            LoginModel model = new LoginModel();
-            model.ReturnUrl = returnUrl;
-            if (_webWorkContext.IsAlreadyLogin())
-            {
-                if (!String.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
-                {
-                    return Redirect(returnUrl);
-                }
-                else
-                {
-                    return Redirect("~/Home");
-                }
-            }
-            return View(model);
-        }
-
-        [HttpPost]
-        public ActionResult Login(LoginModel loginModel)
-        {
-
-
-            if (ModelState.IsValid)
-            {
-                UserLoginResult result = _userValidateService.Validate(loginModel.UserName, loginModel.Password, loginModel.IsFromOtherSystem);
-                switch (result)
-                {
-                    case UserLoginResult.Successful:
-                        Core.Domain.Common.Users user = _userService.GetByCode(loginModel.UserName);
-                        _authenticationService.SignIn(user, loginModel.RememberMe);
-
-                        if (loginModel.IsFromOtherSystem)
-                        {
-                            if (!String.IsNullOrEmpty(loginModel.ReturnUrl) && Url.IsLocalUrl(loginModel.ReturnUrl))
-                            {
-                                return Redirect("~/Home/Index?returnUrl=" + HttpUtility.UrlEncode(loginModel.ReturnUrl));
-                            }
-                        }                       
-                        return Redirect("~/Home/Index");
-                    case UserLoginResult.UserNotExist:
-                        ModelState.AddModelError("UserName_NotExist","登录失败");
-                        break;
-                    case UserLoginResult.WrongPassword:
-                        ModelState.AddModelError("Password_Wrong", "密码错误");
-                        break;
-                }
-                //Core.Domain.Common.Users user = _userService.GetByCode(loginModel.UserName);
-                //_authenticationService.SignIn(user, loginModel.RememberMe);
-
-                //if (!String.IsNullOrEmpty(loginModel.ReturnUrl) && Url.IsLocalUrl(loginModel.ReturnUrl))
-                //{
-                //    return Redirect("~/Hotel/Index?returnUrl=" + HttpUtility.UrlEncode(loginModel.ReturnUrl));
-                //}
-                //return Redirect("~/Hotel");
-            }
-            return View(loginModel);
-        }
-
-        public ActionResult Logout()
-        {
-            _authenticationService.SignOut();
-            //ClearHotelCookie();
-            return Redirect("~/Login");
-        }
-
-        public virtual void ClearHotelCookie()
-        {
-            if (_httpContext != null && _httpContext.Response != null)
-            {
-                _httpContext.Response.Cookies[_hotelCookieName].Expires = DateTime.Now.AddDays(-1);
-            }
         }
 
     }

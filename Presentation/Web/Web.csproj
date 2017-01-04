@@ -2659,6 +2659,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\ClientDataController.cs" />
+    <Compile Include="Controllers\CommonController.cs" />
     <Compile Include="Controllers\GoodsDataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InventoryDataController.cs" />
@@ -2686,6 +2687,7 @@
     <Compile Include="Models\PurchaseDataModel.cs" />
     <Compile Include="Models\SalesShipmentsDataListModel.cs" />
     <Compile Include="Models\SalesShipmentsDataModel.cs" />
+    <Compile Include="Models\SearchInventoryDataModel.cs" />
     <Compile Include="Models\SupplierDataListModel.cs" />
     <Compile Include="Models\SupplierDataModel.cs" />
     <Compile Include="Models\UserListModel.cs" />
@@ -2745,6 +2747,7 @@
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Users\Add.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Shared\_SelectInventoryDataPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2754,6 +2757,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Common\" />
     <Folder Include="Views\Purchase\" />
   </ItemGroup>
   <ItemGroup>

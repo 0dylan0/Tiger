@@ -55,14 +55,14 @@ namespace Services.Users
 
             _context.Execute(sql, new
             {
-                Name = user.Name ,
+                Name = user.Name,
                 Password = user.Password,
                 ID = user.ID
             });
 
         }
 
-        public Core.Domain.Common.Users GetUserById(int id)      
+        public Core.Domain.Common.Users GetUserById(int id)
         {
             var sql = @"select * from Users  where id = @id";
 
@@ -82,13 +82,9 @@ namespace Services.Users
 
         public Core.Domain.Common.Users GetByCode(string Name)
         {
-            return _context.QuerySingle<Core.Domain.Common.Users>(
-                @"select ID,
-                Name,
-                Password
-                from Users
-                where Name = @Name ",
-                new { Name = Name });
+            string sql = @" select ID,Name,Password from Users where Name = @Name ";
+            //return _context.QuerySingle<Core.Domain.Common.Users>(sql, new { Name = Name });
+            return _context.Query<Core.Domain.Common.Users>(sql, new { Name = Name }).FirstOrDefault();
         }
 
 

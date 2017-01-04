@@ -130,6 +130,7 @@
     <Compile Include="Domain\Localization\LocaleStringResource.cs" />
     <Compile Include="Domain\Security\License.cs" />
     <Compile Include="Domain\Users.cs" />
+    <Compile Include="Enum\ChoiceType.cs" />
     <Compile Include="Enum\NumberDisplayFormat.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\UriExtensions.cs" />

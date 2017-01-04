@@ -59,6 +59,7 @@ namespace Web.Controllers
         public ActionResult Add()
         {
             SalesShipmentsDataModel model = new SalesShipmentsDataModel();
+            model.Date= DateTime.Now;
             return View(model);
         }
         [HttpPost]
