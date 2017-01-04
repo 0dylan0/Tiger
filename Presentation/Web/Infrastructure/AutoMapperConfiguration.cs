@@ -39,6 +39,8 @@ namespace Web.Infrastructure
                 cfg.CreateMap<GoodsSpecification, GoodsSpecificationModel>();
                 cfg.CreateMap<GoodsTypeModel, GoodsType>();
                 cfg.CreateMap<GoodsType, GoodsTypeModel>();
+                cfg.CreateMap<ClientTypeModel, ClientType>();
+                cfg.CreateMap<ClientType, ClientTypeModel>();
             });
 
             _mapper = _mapperConfiguration.CreateMapper();

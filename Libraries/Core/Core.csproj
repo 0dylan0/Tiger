@@ -116,6 +116,7 @@
     <Compile Include="Domain\Common\BaseEntity.cs" />
     <Compile Include="Domain\Common\Basic.cs" />
     <Compile Include="Domain\Common\ClientData.cs" />
+    <Compile Include="Domain\Common\ClientType.cs" />
     <Compile Include="Domain\Common\GetList.cs" />
     <Compile Include="Domain\Common\GoodsData.cs" />
     <Compile Include="Domain\Common\GoodsSpecification.cs" />

@@ -2659,6 +2659,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\ClientDataController.cs" />
+    <Compile Include="Controllers\ClientTypeController.cs" />
     <Compile Include="Controllers\CommonController.cs" />
     <Compile Include="Controllers\GoodsDataController.cs" />
     <Compile Include="Controllers\GoodsSpecificationController.cs" />
@@ -2681,6 +2682,8 @@
     <Compile Include="Models\BasicModel.cs" />
     <Compile Include="Models\ClientDataListModel.cs" />
     <Compile Include="Models\ClientDataModel.cs" />
+    <Compile Include="Models\ClientTypeListModel.cs" />
+    <Compile Include="Models\ClientTypeModel.cs" />
     <Compile Include="Models\GoodsDataListModel.cs" />
     <Compile Include="Models\GoodsDataModel.cs" />
     <Compile Include="Models\GoodsSpecificationListModel.cs" />
@@ -2761,6 +2764,9 @@
     <Content Include="Views\GoodsType\Index.cshtml" />
     <Content Include="Views\GoodsType\Add.cshtml" />
     <Content Include="Views\GoodsType\Edit.cshtml" />
+    <Content Include="Views\ClientType\Index.cshtml" />
+    <Content Include="Views\ClientType\Add.cshtml" />
+    <Content Include="Views\ClientType\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

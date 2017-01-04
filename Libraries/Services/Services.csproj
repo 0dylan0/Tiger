@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\ClientDataService.cs" />
+    <Compile Include="Common\ClientTypeService.cs" />
     <Compile Include="Common\GoodsDataService.cs" />
     <Compile Include="Common\GoodsSpecificationService.cs" />
     <Compile Include="Common\GoodsTypeService.cs" />

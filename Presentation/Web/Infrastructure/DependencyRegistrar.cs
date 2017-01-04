@@ -31,7 +31,10 @@ namespace Web.Infrastructure
             builder.RegisterType<WarehouseService>().InstancePerLifetimeScope();
             builder.RegisterType<GoodsSpecificationService>().InstancePerLifetimeScope();
             builder.RegisterType<GoodsTypeService>().InstancePerLifetimeScope();
+            builder.RegisterType<ClientTypeService>().InstancePerLifetimeScope();
             
+
+
         }
 
 

@@ -1,0 +1,68 @@
+﻿@model Web.Models.ClientTypeModel
+@{
+    ViewBag.Title = "Edit";
+}
+
+@using (Html.BeginForm("Edit", "ClientType", FormMethod.Post, new { id = "Edit", data_val = true }))
+{
+    @Html.AntiForgeryToken()
+    <div class="box box-solid">
+        <div class="box-body">
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-4 hidden">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ID, new { @class = "control-label" })@RequiredTag()
+                        @Html.TextBoxFor(m => m.ID, new { @class = "form-control " })
+                        @Html.ValidationMessageFor(m => m.ID)
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Name, new { @class = "control-label" })@RequiredTag()
+                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control " })
+                        @Html.ValidationMessageFor(m => m.Name)
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+        <div class="box-footer">
+            <button id="submitChange" type="submit" class="btn btn-primary"><i class="fa fa-save"></i> 保存</button>
+            <a href="@Url.Action("Index")" class="btn btn-default"><i class="fa fa-undo"></i> 返回</a>
+        </div>
+    </div>
+}
+@helper RequiredTag()
+{
+    @Html.Partial("_RequiredTagPartial")
+}
+
+
+
+@section scripts{
+    @Html.Partial("_KendoDropdownListPartial")
+    @Html.Partial("_KendoDatePickerPartial")
+    @Html.Partial("_ModalSelectorPartial")
+
+    <script type="text/javascript">
+
+
+        $(function () {
+
+        });
+    </script>
+}
+
+
+
+
+
+
+
+
+
