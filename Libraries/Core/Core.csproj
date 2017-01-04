@@ -119,6 +119,7 @@
     <Compile Include="Domain\Common\GetList.cs" />
     <Compile Include="Domain\Common\GoodsData.cs" />
     <Compile Include="Domain\Common\GoodsSpecification.cs" />
+    <Compile Include="Domain\Common\GoodsType.cs" />
     <Compile Include="Domain\Common\Hotel.cs" />
     <Compile Include="Domain\Common\PurchaseData.cs" />
     <Compile Include="Domain\Common\SalesShipmentsData.cs" />
