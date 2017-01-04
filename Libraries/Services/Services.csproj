@@ -73,6 +73,7 @@
     <Compile Include="Common\ClientDataService.cs" />
     <Compile Include="Common\GoodsDataService.cs" />
     <Compile Include="Common\GoodsSpecificationService.cs" />
+    <Compile Include="Common\GoodsTypeService.cs" />
     <Compile Include="Common\InventoryDataService.cs" />
     <Compile Include="Common\PurchaseDataService.cs" />
     <Compile Include="Common\SalesShipmentsDataService.cs" />

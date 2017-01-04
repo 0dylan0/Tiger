@@ -2662,6 +2662,7 @@
     <Compile Include="Controllers\CommonController.cs" />
     <Compile Include="Controllers\GoodsDataController.cs" />
     <Compile Include="Controllers\GoodsSpecificationController.cs" />
+    <Compile Include="Controllers\GoodsTypeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InventoryDataController.cs" />
     <Compile Include="Controllers\PurchaseDataController.cs" />
@@ -2684,6 +2685,8 @@
     <Compile Include="Models\GoodsDataModel.cs" />
     <Compile Include="Models\GoodsSpecificationListModel.cs" />
     <Compile Include="Models\GoodsSpecificationModel.cs" />
+    <Compile Include="Models\GoodsTypeListModel.cs" />
+    <Compile Include="Models\GoodsTypeModel.cs" />
     <Compile Include="Models\InventoryDataListModel.cs" />
     <Compile Include="Models\InventoryDataModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
@@ -2755,6 +2758,9 @@
     <Content Include="Views\GoodsSpecification\Index.cshtml" />
     <Content Include="Views\GoodsSpecification\Add.cshtml" />
     <Content Include="Views\GoodsSpecification\Edit.cshtml" />
+    <Content Include="Views\GoodsType\Index.cshtml" />
+    <Content Include="Views\GoodsType\Add.cshtml" />
+    <Content Include="Views\GoodsType\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
