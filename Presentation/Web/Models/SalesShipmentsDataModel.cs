@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace Web.Models
 {
@@ -34,6 +35,8 @@ namespace Web.Models
         [DisplayName("数量")]
         public string Quantity { get; set; }
 
+        public string OldQuantity { get; set; }
+
         [DisplayName("单价")]
         public string UnitPrice { get; set; }
 
@@ -44,7 +47,7 @@ namespace Web.Models
         public string Profit { get; set; }
 
         [DisplayName("金额")]
-        public string Sum { get; set; }
+        public decimal Sum { get; set; }
 
         [DisplayName("总量")]
         public string Total { get; set; }
@@ -63,6 +66,11 @@ namespace Web.Models
 
         public int WarehouseID { get; set; }
 
+        [DisplayName("仓库名称")]
         public string WarehouseName { get; set; }
+
+        public IEnumerable<SelectListItem> SupplierList { get; set; }
+
+        public IEnumerable<SelectListItem> WarehouseList { get; set; }
     }
 }

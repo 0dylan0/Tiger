@@ -63,12 +63,13 @@ namespace Services.Common
                     @SupplierID,
                     @SupplierName,
                     @SupplierAddress,
-                    WarehouseID,
-                    WarehouseName)";
+                    @WarehouseID,
+                    @WarehouseName)";
             _context.Execute(sql, new
             {
                 GoodsID = SalesShipmentsData.GoodsID,
                 GoodsName = SalesShipmentsData.GoodsName,
+                Date = SalesShipmentsData.Date,
                 Unit = SalesShipmentsData.Unit,
                 Specification = SalesShipmentsData.Specification,
                 GoodsType = SalesShipmentsData.GoodsType,
@@ -86,7 +87,7 @@ namespace Services.Common
                 WarehouseID = SalesShipmentsData.WarehouseID,
                 WarehouseName = SalesShipmentsData.WarehouseName
             });
-        }
+        } 
 
         public void Update(SalesShipmentsData SalesShipmentsData)
         {

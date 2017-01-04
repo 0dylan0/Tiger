@@ -1,4 +1,5 @@
 ﻿using Core;
+using Core.Domain;
 using Core.Domain.Common;
 using Core.Page;
 using Services.Common;
@@ -21,13 +22,19 @@ namespace Web.Controllers
         private readonly IWorkContext _webWorkContext;
         private readonly SalesShipmentsDataService _salesShipmentsDataService;
         private readonly LocalizationService _localizationService;
+        private readonly SupplierDataService _supplierDataService;
+        private readonly WarehouseService _warehouseService;
         public SalesShipmentsDataController(IWorkContext webWorkContext,
             SalesShipmentsDataService salesShipmentsDataService,
-            LocalizationService localizationService)
+            LocalizationService localizationService,
+            SupplierDataService supplierDataService,
+            WarehouseService warehouseService)
         {
             _webWorkContext = webWorkContext;
             _salesShipmentsDataService = salesShipmentsDataService;
             _localizationService = localizationService;
+            _supplierDataService = supplierDataService;
+            _warehouseService = warehouseService;
         }
 
         // GET: SalesShipmentsData
@@ -60,6 +67,8 @@ namespace Web.Controllers
         {
             SalesShipmentsDataModel model = new SalesShipmentsDataModel();
             model.Date= DateTime.Now;
+            model.SupplierList = GetSupplierList();
+            model.WarehouseList = GetWarehouseList();
             return View(model);
         }
         [HttpPost]
@@ -69,9 +78,53 @@ namespace Web.Controllers
             {
                 SalesShipmentsData SalesShipments = model.MapTo<SalesShipmentsDataModel, SalesShipmentsData>();
                 _salesShipmentsDataService.Insert(SalesShipments);
+                InventoryData inventoryData = new InventoryData()
+                {
+                    WarehouseID = model.WarehouseID,
+                    WarehouseName = model.WarehouseName,
+                    GoodsID = model.GoodsID,
+                    GoodsName = model.GoodsName,
+                    Unit = model.Unit,
+                    Specification = model.Specification,
+                    GoodsType = model.GoodsType,
+                    Brand = model.Brand,
+                    //InventoryQuantity = model.OldQuantity - model.Quantity,
+                    CostPrice = ((string.IsNullOrEmpty(model.Quantity) && model.Quantity != "0") ? (model.Sum / Convert.ToDecimal(model.Quantity)) : 0),
+                    InventorySum = model.Sum,
+                    SupplierID = model.SupplierID,
+                    SupplierName = model.SupplierName,
+                    SupplierAddress = model.SupplierAddress,
+
+
+                    PurchaseDate = DateTime.Now,
+                    ShipmentsDate = DateTime.Now,
+                    LastInventoryDate = DateTime.Now,
+                    FinalSaleDate = DateTime.Now
+                };
                 return RedirectToAction("Index");
             }
+
+            model.SupplierList = GetSupplierList();
+            model.WarehouseList = GetWarehouseList();
             return View(model);
+        }
+
+        public List<SelectListItem> GetSupplierList()
+        {
+            return _supplierDataService.GetSupplierList().Select(o => new SelectListItem
+            {
+                Text = o.Name,
+                Value = o.Code,
+            }).ToList();
+        }
+
+        public List<SelectListItem> GetWarehouseList()
+        {
+            return _warehouseService.GetWarehouseList().Select(o => new SelectListItem
+            {
+                Text = o.Name,
+                Value = o.Code,
+            }).ToList();
         }
     }
 }
