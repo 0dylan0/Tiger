@@ -2669,6 +2669,7 @@
     <Compile Include="Controllers\PurchaseDataController.cs" />
     <Compile Include="Controllers\SalesShipmentsDataController.cs" />
     <Compile Include="Controllers\SupplierDataController.cs" />
+    <Compile Include="Controllers\SupplierTypeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\WarehouseController.cs" />
@@ -2700,6 +2701,8 @@
     <Compile Include="Models\SearchInventoryDataModel.cs" />
     <Compile Include="Models\SupplierDataListModel.cs" />
     <Compile Include="Models\SupplierDataModel.cs" />
+    <Compile Include="Models\SupplierTypeListModel.cs" />
+    <Compile Include="Models\SupplierTypeModel.cs" />
     <Compile Include="Models\UserListModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\WarehouseListModel.cs" />
@@ -2767,6 +2770,9 @@
     <Content Include="Views\ClientType\Index.cshtml" />
     <Content Include="Views\ClientType\Add.cshtml" />
     <Content Include="Views\ClientType\Edit.cshtml" />
+    <Content Include="Views\SupplierType\Index.cshtml" />
+    <Content Include="Views\SupplierType\Add.cshtml" />
+    <Content Include="Views\SupplierType\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

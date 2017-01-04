@@ -1,13 +1,13 @@
-﻿@model Web.Models.ClientTypeListModel
+﻿@model Web.Models.SupplierTypeListModel
 
 
 @{
-    ViewBag.Title = "客户类别列表";
+    ViewBag.Title = "供应商类别列表";
 }
 
 <div class="box box-solid">
     <div class="box-header">
-        @using (Html.BeginForm("Index", "ClientType", FormMethod.Post, new { Id = "ClientTypeForm" }))
+        @using (Html.BeginForm("Index", "SupplierType", FormMethod.Post, new { Id = "SupplierTypeForm" }))
         {
             @Html.AntiForgeryToken()
             <div class="row">
@@ -38,7 +38,7 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>客户类别</th>
+                    <th>供应商类别</th>
                     <th>编辑</th>
                 </tr>
             </thead>
@@ -73,7 +73,7 @@
                         targets: [2],
                         orderable: false,
                         render: function (data, type, full) {
-                            return '<a href="/ClientType/Edit?id=' + encodeURIComponent(full["id"]) + '" class="btn btn-xs btn-default "><span class="fa fa-pencil"></span> 编辑</a>';
+                            return '<a href="/SupplierType/Edit?id=' + encodeURIComponent(full["id"]) + '" class="btn btn-xs btn-default "><span class="fa fa-pencil"></span> 编辑</a>';
                         }
                     }
                 ],
