@@ -33,8 +33,8 @@ namespace Web.Infrastructure
             builder.RegisterType<GoodsTypeService>().InstancePerLifetimeScope();
             builder.RegisterType<ClientTypeService>().InstancePerLifetimeScope();
             builder.RegisterType<SupplierTypeService>().InstancePerLifetimeScope();
-
-
+            builder.RegisterType<GoodsUnitService>().InstancePerLifetimeScope();
+            
         }
 
 
