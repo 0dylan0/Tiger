@@ -28,8 +28,12 @@ namespace Web.Models
         [DisplayName("规格")]
         public string Specification { get; set; }
 
+        public IEnumerable<SelectListItem> SpecificationList { get; set; }
+
         [DisplayName("商品类别")]
         public string GoodsType { get; set; }
+
+        public IEnumerable<SelectListItem> GoodsTypeList { get; set; }
 
         [DisplayName("品牌")]
         public string Brand { get; set; }

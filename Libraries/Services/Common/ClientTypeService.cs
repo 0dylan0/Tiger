@@ -62,7 +62,7 @@ namespace Services.Common
             return new SqlPagedList<ClientType>(sql, Parameter, pageIndex, pageSize, sortExpression);
         }
 
-        public List<GetList> GetWarehouseList()
+        public List<GetList> GetClientTypeList()
         {
             string sql = @"select id as code, name from ClientType";
 

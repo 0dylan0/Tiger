@@ -27,6 +27,8 @@ namespace Web.Controllers
         private readonly SupplierDataService _supplierDataService;
         private readonly WarehouseService _warehouseService;
         private readonly InventoryDataService _inventoryDataService;
+        private readonly GoodsSpecificationService _goodsSpecificationService;
+        private readonly ClientTypeService _clientTypeService;
 
 
         public PurchaseDataController(IWorkContext webWorkContext,
@@ -35,7 +37,9 @@ namespace Web.Controllers
             GoodsDataService goodsDataService,
             SupplierDataService supplierDataService,
             WarehouseService warehouseService,
-            InventoryDataService inventoryDataService)
+            InventoryDataService inventoryDataService,
+            GoodsSpecificationService goodsSpecificationService,
+            ClientTypeService clientTypeService)
         {
             _webWorkContext = webWorkContext;
             _purchaseDataService = purchaseDataService;
@@ -44,6 +48,8 @@ namespace Web.Controllers
             _supplierDataService = supplierDataService;
             _warehouseService = warehouseService;
             _inventoryDataService = inventoryDataService;
+            _goodsSpecificationService = goodsSpecificationService;
+            _clientTypeService = clientTypeService;
         }
 
         [HttpGet]
@@ -77,6 +83,8 @@ namespace Web.Controllers
             model.GoodsList = GetGoodsList();
             model.SupplierList = GetSupplierList();
             model.WarehouseList = GetWarehouseList();
+            model.SpecificationList = GetSpecificationList();
+            model.GoodsTypeList = GetGoodsTypeList();
             return View(model);
         }
 
@@ -123,6 +131,8 @@ namespace Web.Controllers
             model.GoodsList = GetGoodsList();
             model.SupplierList = GetSupplierList();
             model.WarehouseList = GetWarehouseList();
+            model.SpecificationList = GetSpecificationList();
+            model.GoodsTypeList = GetGoodsTypeList();
             return View(model);
 
         }
@@ -166,5 +176,24 @@ namespace Web.Controllers
                 Value = o.Code,
             }).ToList();
         }
+
+        public List<SelectListItem> GetSpecificationList()
+        {
+            return _goodsSpecificationService.GetGoodsSpecificationList().Select(o => new SelectListItem
+            {
+                Text = o.Name,
+                Value = o.Name,
+            }).ToList();
+        }
+
+        public List<SelectListItem> GetGoodsTypeList()
+        {
+            return _clientTypeService.GetClientTypeList().Select(o => new SelectListItem
+            {
+                Text = o.Name,
+                Value = o.Name,
+            }).ToList();
+        }
+
     }
 }
