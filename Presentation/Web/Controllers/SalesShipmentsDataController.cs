@@ -113,6 +113,30 @@ namespace Web.Controllers
             return View(model);
         }
 
+        public ActionResult Edit(int id)
+        {
+            var salesShipments = _salesShipmentsDataService.GetById(id);
+            var model = salesShipments.MapTo<SalesShipmentsData, SalesShipmentsDataModel>();
+           
+            model.SupplierList = GetSupplierList();
+            model.WarehouseList = GetWarehouseList();
+            return View(model);
+
+        }
+        [HttpPost]
+        public ActionResult Edit(SalesShipmentsDataModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                SalesShipmentsData salesShipments = model.MapTo<SalesShipmentsDataModel, SalesShipmentsData>();
+                _salesShipmentsDataService.Update(salesShipments);
+                SuccessNotification($"{_localizationService.GetResource("UpdateSuccess") + model.GoodsName}");
+                return RedirectToAction("Index");
+
+            }
+            return View(model);
+        }
+
         public List<SelectListItem> GetSupplierList()
         {
             return _supplierDataService.GetSupplierList().Select(o => new SelectListItem
