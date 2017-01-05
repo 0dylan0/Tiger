@@ -92,7 +92,7 @@ namespace Web.Controllers
                     GoodsType = model.GoodsType,
                     Brand = model.Brand,
                     //InventoryQuantity = model.OldQuantity - model.Quantity,
-                    CostPrice = ((string.IsNullOrEmpty(model.Quantity) && model.Quantity != "0") ? (model.Sum / Convert.ToDecimal(model.Quantity)) : 0),
+                    CostPrice = (( model.Quantity != 0) ? (model.Sum / Convert.ToDecimal(model.Quantity)) : 0),
                     InventorySum = model.Sum,
                     SupplierID = model.SupplierID,
                     SupplierName = model.SupplierName,
