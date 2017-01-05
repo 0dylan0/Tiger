@@ -31,7 +31,7 @@ namespace Core.Domain.Common
         public string Brand { get; set; }
 
         //数量
-        public string Quantity { get; set; }
+        public int Quantity { get; set; }
 
         //单价
         public decimal UnitPrice { get; set; }

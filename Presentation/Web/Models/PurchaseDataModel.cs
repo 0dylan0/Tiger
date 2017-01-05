@@ -35,7 +35,7 @@ namespace Web.Models
         public string Brand { get; set; }
 
         [DisplayName("数量")]
-        public string Quantity { get; set; }
+        public int Quantity { get; set; }
 
         [DisplayName("单价")]
         public decimal UnitPrice { get; set; }

@@ -41,7 +41,7 @@ namespace Web.Models
         public string Brand { get; set; }
 
         [DisplayName("库存数量")]
-        public string InventoryQuantity { get; set; }
+        public int InventoryQuantity { get; set; }
 
         [DisplayName("成本价")]
         public decimal CostPrice { get; set; }

@@ -41,7 +41,7 @@ namespace Core.Domain
         public string Brand { get; set; }
 
         //库存数量
-        public string InventoryQuantity { get; set; }
+        public int InventoryQuantity { get; set; }
 
         //成本
         public decimal CostPrice { get; set; }
