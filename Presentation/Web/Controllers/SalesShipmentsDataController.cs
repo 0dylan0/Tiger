@@ -24,17 +24,20 @@ namespace Web.Controllers
         private readonly LocalizationService _localizationService;
         private readonly SupplierDataService _supplierDataService;
         private readonly WarehouseService _warehouseService;
+        private readonly InventoryDataService _inventoryDataService;
         public SalesShipmentsDataController(IWorkContext webWorkContext,
             SalesShipmentsDataService salesShipmentsDataService,
             LocalizationService localizationService,
             SupplierDataService supplierDataService,
-            WarehouseService warehouseService)
+            WarehouseService warehouseService,
+            InventoryDataService inventoryDataService)
         {
             _webWorkContext = webWorkContext;
             _salesShipmentsDataService = salesShipmentsDataService;
             _localizationService = localizationService;
             _supplierDataService = supplierDataService;
             _warehouseService = warehouseService;
+            _inventoryDataService = inventoryDataService;
         }
 
         // GET: SalesShipmentsData
@@ -101,6 +104,7 @@ namespace Web.Controllers
                     LastInventoryDate = DateTime.Now,
                     FinalSaleDate = DateTime.Now
                 };
+                _inventoryDataService.Update(inventoryData);
                 return RedirectToAction("Index");
             }
 
