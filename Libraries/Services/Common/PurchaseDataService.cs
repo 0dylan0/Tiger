@@ -102,17 +102,15 @@ namespace Services.Common
                     Supplier_ID=@SupplierID,
                     Supplier_Name=@SupplierName,
                     Supplier_Address=@SupplierAddress,
-                    Remarks2=@Remarks2,
-                    Remarks3=@Remarks3,
-                    Remarks4=@Remarks4,
-                    WarehouseID=@WarehouseID,
-                    WarehouseName=@WarehouseName
+                    Warehouse_ID=@WarehouseID,
+                    Warehouse_Name=@WarehouseName
                     where ID=@ID";
             _context.Execute(sql, new
             {
                 ID = PurchaseData.ID,
                 GoodsID = PurchaseData.GoodsID,
                 GoodsName = PurchaseData.GoodsName,
+                Date = PurchaseData.Date,
                 Unit = PurchaseData.Unit,
                 Specification = PurchaseData.Specification,
                 GoodsType = PurchaseData.GoodsType,
@@ -125,7 +123,7 @@ namespace Services.Common
                 SupplierID = PurchaseData.SupplierID,
                 SupplierName = PurchaseData.SupplierName,
                 SupplierAddress = PurchaseData.SupplierAddress,
-                WarehouseID=PurchaseData.WarehouseID,
+                WarehouseID =PurchaseData.WarehouseID,
                 WarehouseName=PurchaseData.WarehouseName
             });
 
