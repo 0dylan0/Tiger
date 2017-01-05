@@ -49,16 +49,16 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.Specification, new { @class = "control-label aaa" })@RequiredTag()
-                        @Html.TextBoxFor(m => m.Specification, new { @class = "form-control " })
+                        @Html.LabelFor(m => m.Specification, new { @class = "control-label" })@RequiredTag()
+                        @Html.DropDownListFor(m => m.Specification, Model.SpecificationList, T("未选择").Text.ToString(), new { @class = "form-control full-width " })
                         @Html.ValidationMessageFor(m => m.Specification)
                     </div>
                 </div>
 
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.GoodsType, new { @class = "control-label aaa" })@RequiredTag()
-                        @Html.TextBoxFor(m => m.GoodsType, new { @class = "form-control " })
+                        @Html.LabelFor(m => m.GoodsType, new { @class = "control-label" })@RequiredTag()
+                        @Html.DropDownListFor(m => m.GoodsType, Model.GoodsTypeList, T("未选择").Text.ToString(), new { @class = "form-control full-width " })
                         @Html.ValidationMessageFor(m => m.GoodsType)
                     </div>
                 </div>
@@ -119,31 +119,32 @@
             </div>
 
             <div class="row">
-                <div class="col-xs-12 col-sm-6 col-md-4 hidden">
+
+                <div class="col-xs-12 col-sm-6 col-md-4">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.SupplierID, new { @class = "control-label aaa" })@RequiredTag()
-                        @Html.TextBoxFor(m => m.SupplierID, new { @class = "form-control " })
+                        @Html.LabelFor(m => m.SupplierID, new { @class = "control-label" })@RequiredTag()
+                        @Html.DropDownListFor(m => m.SupplierID, Model.SupplierList, T("未选择").Text.ToString(), new { @class = "form-control full-width " })
+                        @*@Html.TextBoxFor(m => m.SupplierID, new { @class = "form-control " })*@
                         @Html.ValidationMessageFor(m => m.SupplierID)
                     </div>
                 </div>
 
-                <div class="col-xs-12 col-sm-6 col-md-4">
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.SupplierName, new { @class = "control-label aaa" })@RequiredTag()
-                        @Html.TextBoxFor(m => m.SupplierName, new { @class = "form-control " })
-                        @Html.ValidationMessageFor(m => m.SupplierName)
-                    </div>
-                </div>
+                @Html.TextBoxFor(m => m.SupplierName, new { @class = "form-control hidden" })
+                @Html.TextBoxFor(m => m.SupplierAddress, new { @class = "form-control hidden" })
+
 
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.SupplierName, new { @class = "control-label aaa" })@RequiredTag()
-                        @Html.TextBoxFor(m => m.SupplierName, new { @class = "form-control " })
-                        @Html.ValidationMessageFor(m => m.SupplierName)
+                        @Html.LabelFor(m => m.WarehouseName, new { @class = "control-label" })@RequiredTag()
+                        @Html.DropDownListFor(m => m.WarehouseID, Model.WarehouseList, T("未选择").Text.ToString(), new { @class = "form-control full-width " })
+                        @*@Html.TextBoxFor(m => m.WarehouseID, new { @class = "form-control " })*@
+                        @Html.ValidationMessageFor(m => m.WarehouseID)
                     </div>
                 </div>
+                @Html.TextBoxFor(m => m.WarehouseName, new { @class = "form-control hidden" })
 
             </div>
+
         </div>
 
         <div class="box-footer">
