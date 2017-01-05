@@ -106,11 +106,11 @@ namespace Services.Common
                     PurchaseDate=@PurchaseDate,
                     ShipmentsDate=@ShipmentsDate,
                     Warehouse_ID=@WarehouseID,
-                    Warehouse_Name=@WarehouseName)
-                    where ID=@ID";
+                    Warehouse_Name=@WarehouseName
+                    WHERE Goods_ID=@GoodsID
+                      AND Goods_Name=@GoodsName";
             _context.Execute(sql, new
             {
-                ID = InventoryData.ID,
                 GoodsID = InventoryData.GoodsID,
                 GoodsName = InventoryData.GoodsName,
                 Unit = InventoryData.Unit,

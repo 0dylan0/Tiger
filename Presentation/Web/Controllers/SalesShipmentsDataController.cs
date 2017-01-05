@@ -91,7 +91,7 @@ namespace Web.Controllers
                     Specification = model.Specification,
                     GoodsType = model.GoodsType,
                     Brand = model.Brand,
-                    //InventoryQuantity = model.OldQuantity - model.Quantity,
+                    InventoryQuantity = model.OldQuantity - model.Quantity,
                     CostPrice = (( model.Quantity != 0) ? (model.Sum / Convert.ToDecimal(model.Quantity)) : 0),
                     InventorySum = model.Sum,
                     SupplierID = model.SupplierID,

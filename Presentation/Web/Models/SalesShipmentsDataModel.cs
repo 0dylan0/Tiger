@@ -35,7 +35,7 @@ namespace Web.Models
         [DisplayName("数量")]
         public int Quantity { get; set; }
 
-        public string OldQuantity { get; set; }
+        public int OldQuantity { get; set; }
 
         [DisplayName("单价")]
         public string UnitPrice { get; set; }
