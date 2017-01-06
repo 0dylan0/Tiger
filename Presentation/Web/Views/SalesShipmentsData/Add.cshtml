@@ -19,24 +19,9 @@
                                 <button id="DeleteSelectInventoryDataGoods" class="btn btn-default btn-flat" type="button" )><i class="fa fa-close"></i></button>
                             </span>
                         </div>
-
-                        @Html.TextBoxFor(m => m.GoodsID, new { @class = "form-control" })
-
-
-                        @*@Html.LabelFor(m => m.GoodsID, new { @class = "control-label" })@RequiredTag()
-                        @Html.TextBoxFor(m => m.GoodsID, new { @class = "form-control " })
-                        @Html.ValidationMessageFor(m => m.GoodsID)*@
+                        @Html.HiddenFor(m => m.GoodsID)
                     </div>
                 </div>
-
-                @*<div class="col-xs-12 col-sm-6 col-md-4">
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.GoodsName, new { @class = "control-label aaa" })@RequiredTag()
-                        @Html.TextBoxFor(m => m.GoodsName, new { @class = "form-control " })
-                        @Html.ValidationMessageFor(m => m.GoodsName)
-                    </div>
-                </div>*@
-
             </div>
 
             <div class="row">
@@ -44,7 +29,6 @@
                     <div class="form-group">
                         @Html.LabelFor(m => m.Date, new { @class = "control-label" })@RequiredTag()
                         @Html.KLDateTextBoxFor(m => m.Date, new { @class = "form-control kl-date-picker full-width" })
-                        @*@Html.TextBoxFor(m => m.Date, new { @class = "form-control " })*@
                         @Html.ValidationMessageFor(m => m.Date)
                     </div>
                 </div>
@@ -62,7 +46,7 @@
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <div class="form-group">
                         @Html.LabelFor(m => m.Specification, new { @class = "control-label" })@RequiredTag()
-                        @Html.TextBoxFor(m => m.Specification, new { @class = "form-control " })
+                        @Html.DropDownListFor(m => m.Specification, Model.SpecificationList, T("未选择").Text.ToString(), new { @class = "form-control full-width " })
                         @Html.ValidationMessageFor(m => m.Specification)
                     </div>
                 </div>
@@ -70,7 +54,7 @@
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <div class="form-group">
                         @Html.LabelFor(m => m.GoodsType, new { @class = "control-label" })@RequiredTag()
-                        @Html.TextBoxFor(m => m.GoodsType, new { @class = "form-control " })
+                        @Html.DropDownListFor(m => m.GoodsType, Model.GoodsTypeList, T("未选择").Text.ToString(), new { @class = "form-control full-width " })
                         @Html.ValidationMessageFor(m => m.GoodsType)
                     </div>
                 </div>
@@ -88,7 +72,7 @@
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <div class="form-group">
                         @Html.LabelFor(m => m.Quantity, new { @class = "control-label" })@RequiredTag()
-                        @Html.TextBoxFor(m => m.Quantity, new { @class = "form-control " })
+                        @Html.TextBoxFor(m => m.Quantity, new { @class = "kl-input-num  full-width" })
                         @Html.HiddenFor(m => m.OldQuantity)
                         @Html.ValidationMessageFor(m => m.Quantity)
                     </div>
@@ -99,7 +83,7 @@
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <div class="form-group">
                         @Html.LabelFor(m => m.UnitPrice, new { @class = "control-label" })@RequiredTag()
-                        @Html.TextBoxFor(m => m.UnitPrice, new { @class = "form-control " })
+                        @Html.TextBoxFor(m => m.UnitPrice, new { @class = "kl-input-num  full-width" })
                         @Html.ValidationMessageFor(m => m.UnitPrice)
                     </div>
                 </div>
@@ -107,7 +91,7 @@
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <div class="form-group">
                         @Html.LabelFor(m => m.Sum, new { @class = "control-label" })@RequiredTag()
-                        @Html.TextBoxFor(m => m.Sum, new { @class = "form-control " })
+                        @Html.TextBoxFor(m => m.Sum, new { @class = "kl-input-num  full-width" })
                         @Html.ValidationMessageFor(m => m.Sum)
                     </div>
                 </div>
@@ -117,7 +101,7 @@
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <div class="form-group">
                         @Html.LabelFor(m => m.Cost, new { @class = "control-label" })@RequiredTag()
-                        @Html.TextBoxFor(m => m.Cost, new { @class = "form-control " })
+                        @Html.TextBoxFor(m => m.Cost, new { @class = "kl-input-num  full-width" })
                         @Html.ValidationMessageFor(m => m.Cost)
                     </div>
                 </div>
@@ -125,7 +109,7 @@
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <div class="form-group">
                         @Html.LabelFor(m => m.Profit, new { @class = "control-label" })@RequiredTag()
-                        @Html.TextBoxFor(m => m.Profit, new { @class = "form-control " })
+                        @Html.TextBoxFor(m => m.Profit, new { @class = "kl-input-num  full-width" })
                         @Html.ValidationMessageFor(m => m.Profit)
                     </div>
                 </div>
@@ -136,7 +120,7 @@
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <div class="form-group">
                         @Html.LabelFor(m => m.Total, new { @class = "control-label" })@RequiredTag()
-                        @Html.TextBoxFor(m => m.Total, new { @class = "form-control " })
+                        @Html.TextBoxFor(m => m.Total, new { @class = "kl-input-num  full-width" })
                         @Html.ValidationMessageFor(m => m.Total)
                     </div>
                 </div>
@@ -161,7 +145,7 @@
                     </div>
                 </div>
 
-                
+
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <div class="form-group">
                         @Html.LabelFor(m => m.WarehouseName, new { @class = "control-label" })@RequiredTag()
@@ -189,61 +173,71 @@
     @Html.Partial("_KendoDropdownListPartial")
     @Html.Partial("_KendoDatePickerPartial")
     @Html.Partial("_ModalSelectorPartial")
+    @Html.Partial("_KendoNumericTextBoxPartial")
+
 
     <script type="text/javascript">
-
-        $("#ShowSelectInventoryDataGoods").on("click", onShowSelectInventoryDataGoodsClick);
-        function onShowSelectInventoryDataGoodsClick() {
-            $.klModal.showModal("库存商品信息选择器", false, true);
-
-            $.ajax({
-                url: "@Url.Action("SelectInventoryDataByRadio", "Common")",
-                method: "POST",
-                data: addAntiForgeryToken({
-                    HotelCode: $("#HotelCode").val()
-                }),
-                beforeSend: $.klModal.displayModalLoadingInfo,
-                success: function (data) {
-                    $.klModal.addDataToModalBody(data);
-                    $.klModal.hideModalLoadingInfoAndDisplayBody();
-                }
-            });
-        }
-
-        function setCustomer(data) {
-            if (data) {
-                $("#GoodsName").val(data.goodsName);
-                $("#GoodsID").val(data.goodsID);
-                $("#GoodsType").val(data.goodsType);
-                $("#OldQuantity").val(data.inventoryQuantity);
-                $("#Cost").val(data.costPrice);
-                $("#Brand").val(data.brand);
-                $("#Sum").val(data.inventorySum);
-                $("#Specification").val(data.specification);
-                $("#SupplierID").getKendoDropDownList().value(data.supplierID);
-                $("#SupplierName").val(data.supplierName);
-                $("#Unit").val(data.unit);
-                $("#WarehouseID").getKendoDropDownList().value(data.warehouseID);
-                $("#WarehouseName").val(data.warehouseName);
-            }
-            else {
-                $("#GoodsName").val("");
-                $("#GoodsID").val("");
-                $("#GoodsType").val("");
-                $("#OldQuantity").val("");
-                $("#Cost").val("");
-                $("#Brand").val("");
-                $("#Sum")("");
-                $("#Specification").val("");
-                $("#SupplierID").getKendoDropDownList().value("");
-                $("#SupplierName").val("");
-                $("#Unit").val("");
-                $("#WarehouseID").getKendoDropDownList().value("");
-                $("#WarehouseName").val("");
-            }
-        }
-
         $(function () {
+            $(".kl-input-num").kendoNumericTextBox({
+                format: "0",
+                decimals: 0,
+                min: 0,
+                max: 5000
+            });
+
+
+            $("#ShowSelectInventoryDataGoods").on("click", onShowSelectInventoryDataGoodsClick);
+            function onShowSelectInventoryDataGoodsClick() {
+                $.klModal.showModal("库存商品信息选择器", false, true);
+
+                $.ajax({
+                    url: "@Url.Action("SelectInventoryDataByRadio", "Common")",
+                    method: "POST",
+                    data: addAntiForgeryToken({
+                        HotelCode: $("#HotelCode").val()
+                    }),
+                    beforeSend: $.klModal.displayModalLoadingInfo,
+                    success: function (data) {
+                        $.klModal.addDataToModalBody(data);
+                        $.klModal.hideModalLoadingInfoAndDisplayBody();
+                    }
+                });
+            }
+
+            function setCustomer(data) {
+                if (data) {
+                    $("#GoodsName").val(data.goodsName);
+                    $("#GoodsID").val(data.goodsID);
+                    $("#GoodsType").val(data.goodsType);
+                    $("#OldQuantity").val(data.inventoryQuantity);
+                    $("#Cost").val(data.costPrice);
+                    $("#Brand").val(data.brand);
+                    $("#Sum").val(data.inventorySum);
+                    $("#Specification").val(data.specification);
+                    $("#SupplierID").getKendoDropDownList().value(data.supplierID);
+                    $("#SupplierName").val(data.supplierName);
+                    $("#Unit").val(data.unit);
+                    $("#WarehouseID").getKendoDropDownList().value(data.warehouseID);
+                    $("#WarehouseName").val(data.warehouseName);
+                }
+                else {
+                    $("#GoodsName").val("");
+                    $("#GoodsID").val("");
+                    $("#GoodsType").val("");
+                    $("#OldQuantity").val("");
+                    $("#Cost").val("");
+                    $("#Brand").val("");
+                    $("#Sum")("");
+                    $("#Specification").val("");
+                    $("#SupplierID").getKendoDropDownList().value("");
+                    $("#SupplierName").val("");
+                    $("#Unit").val("");
+                    $("#WarehouseID").getKendoDropDownList().value("");
+                    $("#WarehouseName").val("");
+                }
+            }
+
+
 
         });
     </script>
