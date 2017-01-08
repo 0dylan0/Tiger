@@ -2780,6 +2780,7 @@
     <Content Include="Views\GoodsUnit\Add.cshtml" />
     <Content Include="Views\GoodsUnit\Edit.cshtml" />
     <Content Include="Views\SalesShipmentsData\Edit.cshtml" />
+    <Content Include="Views\PurchaseData\PurchaseDataPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

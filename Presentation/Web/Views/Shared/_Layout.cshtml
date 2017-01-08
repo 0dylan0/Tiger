@@ -24,7 +24,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <title>@ViewBag.Action @ViewBag.Title - Kunlun tiger</title>
+    <title>@ViewBag.Action @ViewBag.Title - 库存管理系统</title>
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/kendo/2016.2.714/css")
     @Scripts.Render("~/bundles/modernizr")
@@ -46,8 +46,8 @@
     <div class="wrapper">
         <header class="main-header">
             <a href="~/Home" class="logo">
-                <span class="logo-mini">tiger</span>
-                <span class="logo-lg">Kunlun tiger</span>
+                <span class="logo-mini">库存</span>
+                <span class="logo-lg">库存管理系统</span>
             </a>
             <nav class="navbar navbar-static-top" role="navigation">
                 <a href="#" title="Toggle navigation" class="sidebar-toggle" data-toggle="offcanvas" role="button">
@@ -89,10 +89,10 @@
                             <ul class="dropdown-menu">
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a href="~/User/EditPassword" class="btn btn-default btn-flat">@T("EditPassword")</a>
+                                        <a href="~/Users/Index" class="btn btn-default btn-flat">用户列表</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a href="~/User/Logout" class="btn btn-default btn-flat">@T("Logout")</a>
+                                        <a href="~/User/Logout" class="btn btn-default btn-flat">注销</a>
                                     </div>
                                 </li>
                             </ul>
@@ -127,9 +127,7 @@
                                         <li class="header">@T("ChangeModule.Description")</li>
                                         <li>
                                             <ul class="menu">
-                                                @ChangeModule(LoginAddressConfiguration.ECRSLoginAddress, "CRM/LPS/CSM")
-                                                @ChangeModule(LoginAddressConfiguration.CROLoginAddress, "Kunlun CRO")
-                                                @ChangeModule(LoginAddressConfiguration.SOCLoginAddress, "Kunlun SOC")
+
                                             </ul>
                                         </li>
                                     }
@@ -258,7 +256,7 @@
 
         <footer class="main-footer">
             <div class="pull-right hidden-xs">
-                Kunlun tiger
+                库存管理系统
             </div>
             @*<span style="margin-right:100px" class="pull-right">
                     @for (int i = 0; i < languageList.Count; i++)
@@ -277,7 +275,7 @@
                         }
                     }
                 </span>*@
-            Copyright &copy; @DateTime.Now.Year Shiji Kunlun Software Co.,Ltd. All rights reserved.
+            Copyright &copy; @DateTime.Now.Year 库存管理系统 Software Co.,Ltd. All rights reserved.
         </footer>
     </div>
 

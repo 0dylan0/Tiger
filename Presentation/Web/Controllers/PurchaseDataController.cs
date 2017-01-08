@@ -1,6 +1,7 @@
 ﻿using Core;
 using Core.Domain;
 using Core.Domain.Common;
+using Core.Enum;
 using Core.Page;
 using Services.Common;
 using Services.Localization;
@@ -148,6 +149,19 @@ namespace Web.Controllers
 
             }
             return View(model);
+        }
+
+        public ActionResult PurchaseDataDetails(/*int id*/)
+        {
+            var purchase = _purchaseDataService.GetById(2);
+            var model = purchase.MapTo<PurchaseData, PurchaseDataModel>();
+            model.GoodsList = GetGoodsList();
+            model.SupplierList = GetSupplierList();
+            model.WarehouseList = GetWarehouseList();
+            model.SpecificationList = GetSpecificationList();
+            model.GoodsTypeList = GetGoodsTypeList();
+
+            return Json(new JsonResponse<string>(RenderPartialViewToString("PurchaseDataPartial", model)));
         }
 
         public List<SelectListItem> GetGoodsList()

@@ -2,7 +2,7 @@
 @using Services.Localization;
 @using Core.Infrastructure;
 @{
-    ViewBag.Title = "Login.Login";
+    ViewBag.Title = "登录";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
@@ -11,12 +11,12 @@
     @Html.HiddenFor(m => m.ReturnUrl)
     <div class="login-box">
         <div class="login-logo">
-            <b>Kunlun</b>tiget<h5> Login.tiger </h5>
+            <b>库存管理系统</b><h5> 1.0 版本</h5>
         </div>
 
         <!-- /.login-logo -->
         <div class="login-box-body">
-            <p class="login-box-msg">Login.Msg</p>
+            <p class="login-box-msg">登录</p>
 
             <div class="form-group has-feedback">
                 @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder = "UserName", autofocus = "autofocus" })
