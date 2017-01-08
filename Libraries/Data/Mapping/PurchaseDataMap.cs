@@ -39,6 +39,8 @@ namespace Data.Mapping
 
             Map(t => t.InventoryDataID).ToColumn("InventoryData_ID");
             Map(t => t.Active).ToColumn("Active");
+            Map(t => t.Freight).ToColumn("Freight");
+            
         }
         
     }

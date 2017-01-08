@@ -23,7 +23,7 @@ namespace Services.Common
             _context = context;
         }
 
-        public void Insert(InventoryData InventoryData)
+        public int Insert(InventoryData InventoryData)
         {
             var sql = $@"insert into InventoryData(
                     Goods_ID,
@@ -68,8 +68,8 @@ namespace Services.Common
                     @WarehouseName,
                     @Active,
                     @ShipmentsQuantity,           
-                    @RemainingQuantity)";
-            _context.Execute(sql, new
+                    @RemainingQuantity) select @@identity";
+            return _context.QuerySingle<int>(sql, new
             {
                 GoodsID = InventoryData.GoodsID,
                 GoodsName = InventoryData.GoodsName,
@@ -149,14 +149,14 @@ namespace Services.Common
         public InventoryData GetById(int id)
         {
             var sql = @"select * from InventoryData  where id = @id";
-            return _context.QuerySingle<InventoryData>(sql, new
+            return _context.QuerySingleOrDefault<InventoryData>(sql, new
             {
                 id = id
             });
         }
         public IPagedList<InventoryData> GetList(string textQuery, int pageIndex = 0, int pageSize = 2147483647, string sortExpression = "")
         {
-            string sql = @"select * from InventoryData";
+            string sql = @"select * from InventoryData where Active='1'";
             var Parameter = new DynamicParameters();
             //Parameter.Add("textQuery", textQuery);
             return new SqlPagedList<InventoryData>(sql, Parameter, pageIndex, pageSize, sortExpression);

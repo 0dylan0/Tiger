@@ -75,7 +75,7 @@ namespace Web.Controllers
 
         public ActionResult Edit(int id)
         {
-            var user = _supplierDataService.GetUserById(id);
+            var user = _supplierDataService.GetById(id);
             var res = user.MapTo<SupplierData, SupplierDataModel>();
             return View(res);
 

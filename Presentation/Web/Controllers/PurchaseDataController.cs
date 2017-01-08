@@ -95,7 +95,7 @@ namespace Web.Controllers
             if (ModelState.IsValid)
             {
                 PurchaseData Purchase = model.MapTo<PurchaseDataModel, PurchaseData>();
-                _purchaseDataService.Insert(Purchase);
+
                 InventoryData inventoryData = new InventoryData()
                 {
                     WarehouseID = model.WarehouseID,
@@ -107,19 +107,27 @@ namespace Web.Controllers
                     GoodsType = model.GoodsType,
                     Brand = model.Brand,
                     InventoryQuantity = model.Quantity,
-                    CostPrice = (( model.Quantity !=0) ? (model.Sum / Convert.ToDecimal(model.Quantity)) : 0),
+                    CostPrice = ((model.Quantity != 0) ? (model.Sum / Convert.ToDecimal(model.Quantity)) : 0),
                     InventorySum = model.Sum,
                     SupplierID = model.SupplierID,
                     SupplierName = model.SupplierName,
                     SupplierAddress = model.SupplierAddress,
 
-
                     PurchaseDate = DateTime.Now,
                     ShipmentsDate = DateTime.Now,
                     LastInventoryDate = DateTime.Now,
-                    FinalSaleDate = DateTime.Now
+                    FinalSaleDate = DateTime.Now,
+                    Active="1",
+                    ShipmentsQuantity=0,
+                    RemainingQuantity= model.Quantity
                 };
-                _inventoryDataService.Insert(inventoryData);
+                //添加货物库存表返回ID
+                int inventoryDataID = _inventoryDataService.Insert(inventoryData);
+                Purchase.InventoryDataID = inventoryDataID;
+                Purchase.Active = "1";
+
+                _purchaseDataService.Insert(Purchase);
+
                 return RedirectToAction("Index");
             }
             return View(model);
@@ -127,14 +135,20 @@ namespace Web.Controllers
 
         public ActionResult Edit(int id)
         {
+            
             var purchase = _purchaseDataService.GetById(id);
-            var model = purchase.MapTo<PurchaseData, PurchaseDataModel>();
-            model.GoodsList = GetGoodsList();
-            model.SupplierList = GetSupplierList();
-            model.WarehouseList = GetWarehouseList();
-            model.SpecificationList = GetSpecificationList();
-            model.GoodsTypeList = GetGoodsTypeList();
-            return View(model);
+            if (_supplierDataService.GetById(purchase.InventoryDataID)!=null)
+            {
+                var model = purchase.MapTo<PurchaseData, PurchaseDataModel>();
+                model.GoodsList = GetGoodsList();
+                model.SupplierList = GetSupplierList();
+                model.WarehouseList = GetWarehouseList();
+                model.SpecificationList = GetSpecificationList();
+                model.GoodsTypeList = GetGoodsTypeList();
+                return View(model);
+            }
+            ErrorNotification("已经存在销售出货记录"+purchase.GoodsName+"不允许修改");
+            return RedirectToAction("Index");
 
         }
         [HttpPost]
@@ -144,7 +158,7 @@ namespace Web.Controllers
             {
                 PurchaseData goodsData = model.MapTo<PurchaseDataModel, PurchaseData>();
                 _purchaseDataService.Update(goodsData);
-                SuccessNotification($"{_localizationService.GetResource("UpdateSuccess") + model.GoodsName}");
+                SuccessNotification("修改成功"+model.GoodsName);
                 return RedirectToAction("Index");
 
             }

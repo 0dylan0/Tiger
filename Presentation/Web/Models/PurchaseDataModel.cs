@@ -41,10 +41,10 @@ namespace Web.Models
         [DisplayName("数量")]
         public int Quantity { get; set; }
 
-        [DisplayName("单价")]
+        [DisplayName("成本价")]
         public decimal UnitPrice { get; set; }
 
-        [DisplayName("金额")]
+        [DisplayName("总金额")]
         public decimal Sum { get; set; }
 
         [DisplayName("总量")]
@@ -78,5 +78,8 @@ namespace Web.Models
         [DisplayName("有效性")]
         //有效为1，无效为0
         public string Active { get; set; }
+
+        [DisplayName("运费")]
+        public decimal Freight { get; set; }
     }
 }

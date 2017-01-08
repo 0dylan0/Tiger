@@ -44,8 +44,9 @@ namespace Services.Common
                     Supplier_Address,
                     Warehouse_ID,
                     Warehouse_Name,
-                    InventoryDataID,
-                    Active)
+                    InventoryData_ID,
+                    Active,
+                    Freight)
 			        VALUES (
                     @GoodsID,
                     @GoodsName,
@@ -64,8 +65,9 @@ namespace Services.Common
                     @SupplierAddress,
                     @WarehouseID,
                     @WarehouseName,
-                    @InventoryDataID
-                    @Active)";
+                    @InventoryDataID,
+                    @Active,
+                    @Freight)";
             _context.Execute(sql, new
             {
                 GoodsID= PurchaseData.GoodsID,
@@ -85,8 +87,9 @@ namespace Services.Common
                 SupplierAddress = PurchaseData.SupplierAddress,
                 WarehouseID=PurchaseData.WarehouseID,
                 WarehouseName=PurchaseData.WarehouseName,
-                InventoryDataID=PurchaseData.InventoryDataID,
-                Active=PurchaseData.Active
+                InventoryDataID = PurchaseData.InventoryDataID,
+                Active=PurchaseData.Active,
+                Freight=PurchaseData.Freight
             });
         }
 
@@ -111,7 +114,8 @@ namespace Services.Common
                     Warehouse_ID=@WarehouseID,
                     Warehouse_Name=@WarehouseName,
                     InventoryData_ID=@InventoryDataID,
-                    Active=@Active
+                    Active=@Active,
+                    Freight=@Freight 
                     where ID=@ID";
             _context.Execute(sql, new
             {
@@ -134,7 +138,8 @@ namespace Services.Common
                 WarehouseID =PurchaseData.WarehouseID,
                 WarehouseName=PurchaseData.WarehouseName,
                 InventoryDataID = PurchaseData.InventoryDataID,
-                Active = PurchaseData.Active
+                Active = PurchaseData.Active,
+                Freight = PurchaseData.Freight
             });
 
         }
@@ -149,7 +154,7 @@ namespace Services.Common
         }
         public IPagedList<PurchaseData> GetList(string textQuery, int pageIndex = 0, int pageSize = 2147483647, string sortExpression = "")
         {
-            string sql = @"select * from PurchaseData";
+            string sql = @"select * from PurchaseData where Active='1' ";
             var Parameter = new DynamicParameters();
             //Parameter.Add("textQuery", textQuery);
             return new SqlPagedList<PurchaseData>(sql, Parameter, pageIndex, pageSize, sortExpression);

@@ -18,13 +18,21 @@
                         @Html.ValidationMessageFor(m => m.GoodsID)
                     </div>
                 </div>
+                 @Html.TextBoxFor(m => m.GoodsName, new { @class = "form-control hidden", @readonly = "readonly" })
+
 
                 <div class="col-xs-12 col-sm-6 col-md-4">
-                    <div class="form-group hidden">
-
-                        @Html.TextBoxFor(m => m.GoodsName, new { @class = "form-control ", @readonly = "readonly" })
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.SupplierName, new { @class = "control-label" })@RequiredTag()
+                        @Html.DropDownListFor(m => m.SupplierID, Model.SupplierList, T("未选择").Text.ToString(), new { @class = "form-control full-width " })
+                        @*@Html.TextBoxFor(m => m.SupplierID, new { @class = "form-control " })*@
+                        @Html.ValidationMessageFor(m => m.SupplierID)
                     </div>
                 </div>
+
+                @Html.TextBoxFor(m => m.SupplierName, new { @class = "form-control hidden" })
+                @Html.TextBoxFor(m => m.SupplierAddress, new { @class = "form-control hidden" })
+
 
             </div>
 
@@ -68,12 +76,20 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.Brand, new { @class = "control-label" })@RequiredTag()
-                        @Html.TextBoxFor(m => m.Brand, new { @class = "form-control " })
-                        @Html.ValidationMessageFor(m => m.Brand)
+                        @Html.LabelFor(m => m.WarehouseName, new { @class = "control-label" })@RequiredTag()
+                        @Html.DropDownListFor(m => m.WarehouseID, Model.WarehouseList, T("未选择").Text.ToString(), new { @class = "form-control full-width " })
+                        @*@Html.TextBoxFor(m => m.WarehouseID, new { @class = "form-control " })*@
+                        @Html.ValidationMessageFor(m => m.WarehouseID)
                     </div>
                 </div>
+                @Html.TextBoxFor(m => m.WarehouseName, new { @class = "form-control hidden" })
 
+
+                
+            </div>
+            
+            <div class="row">
+                
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <div class="form-group">
                         @Html.LabelFor(m => m.Quantity, new { @class = "control-label" })@RequiredTag()
@@ -81,9 +97,7 @@
                         @Html.ValidationMessageFor(m => m.Quantity)
                     </div>
                 </div>
-            </div>
 
-            <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <div class="form-group">
                         @Html.LabelFor(m => m.UnitPrice, new { @class = "control-label" })@RequiredTag()
@@ -91,6 +105,19 @@
                         @Html.ValidationMessageFor(m => m.UnitPrice)
                     </div>
                 </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Freight, new { @class = "control-label" })@RequiredTag()
+                        @Html.TextBoxFor(m => m.Freight, new { @class = "kl-input-num  full-width" })
+                        @Html.ValidationMessageFor(m => m.Freight)
+                    </div>
+                </div>
+
 
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <div class="form-group">
@@ -104,7 +131,7 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.Total, new { @class = "control-label" })@RequiredTag()
+                        @Html.LabelFor(m => m.Total, new { @class = "control-label" })
                         @Html.TextBoxFor(m => m.Total, new { @class = "form-control " })
                         @Html.ValidationMessageFor(m => m.Total)
                     </div>
@@ -112,38 +139,24 @@
 
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.Remarks, new { @class = "control-label" })@RequiredTag()
-                        @Html.TextBoxFor(m => m.Remarks, new { @class = "form-control " })
-                        @Html.ValidationMessageFor(m => m.Remarks)
+                        @Html.LabelFor(m => m.Brand, new { @class = "control-label" })
+                        @Html.TextBoxFor(m => m.Brand, new { @class = "form-control " })
+                        @Html.ValidationMessageFor(m => m.Brand)
                     </div>
                 </div>
+
+
             </div>
 
             <div class="row">
 
-                <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="col-xs-12 col-sm-12 col-md-8">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.SupplierName, new { @class = "control-label" })@RequiredTag()
-                        @Html.DropDownListFor(m => m.SupplierID, Model.SupplierList, T("未选择").Text.ToString(), new { @class = "form-control full-width " })
-                        @*@Html.TextBoxFor(m => m.SupplierID, new { @class = "form-control " })*@
-                        @Html.ValidationMessageFor(m => m.SupplierID)
+                        @Html.LabelFor(m => m.Remarks, new { @class = "control-label" })
+                        @Html.TextAreaFor(m => m.Remarks, new { @class = "form-control " })
+                        @Html.ValidationMessageFor(m => m.Remarks)
                     </div>
                 </div>
-
-                @Html.TextBoxFor(m => m.SupplierName, new { @class = "form-control hidden" })
-                @Html.TextBoxFor(m => m.SupplierAddress, new { @class = "form-control hidden" })
-
-
-                <div class="col-xs-12 col-sm-6 col-md-4">
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.WarehouseName, new { @class = "control-label" })@RequiredTag()
-                        @Html.DropDownListFor(m => m.WarehouseID, Model.WarehouseList, T("未选择").Text.ToString(), new { @class = "form-control full-width " })
-                        @*@Html.TextBoxFor(m => m.WarehouseID, new { @class = "form-control " })*@
-                        @Html.ValidationMessageFor(m => m.WarehouseID)
-                    </div>
-                </div>
-                @Html.TextBoxFor(m => m.WarehouseName, new { @class = "form-control hidden" })
-
             </div>
 
         </div>
@@ -198,6 +211,11 @@
             min: 0
         });
         $("#Sum").kendoNumericTextBox({
+            format: "c",
+            decimals: 2,
+            min: 0
+        });
+        $("#Freight").kendoNumericTextBox({
             format: "c",
             decimals: 2,
             min: 0

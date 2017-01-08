@@ -138,10 +138,10 @@ namespace Services.Common
 
         }
 
-        public SupplierData GetUserById(int id)
+        public SupplierData GetById(int id)
         {
             var sql = @"select * from SupplierData  where id = @id";
-            return _context.QuerySingle<SupplierData>(sql, new
+            return _context.QuerySingleOrDefault<SupplierData>(sql, new
             {
                 id = id
             });

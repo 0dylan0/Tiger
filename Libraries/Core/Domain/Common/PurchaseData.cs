@@ -63,5 +63,8 @@ namespace Core.Domain.Common
 
         //有效性
         public string Active { get; set; }
+
+        //运费
+        public decimal Freight { get; set; }
     }
 }
