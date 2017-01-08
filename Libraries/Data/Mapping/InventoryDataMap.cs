@@ -37,6 +37,10 @@ namespace Data.Mapping
             Map(t => t.SupplierID).ToColumn("Supplier_ID");
             Map(t => t.SupplierName).ToColumn("Supplier_Name");
             Map(t => t.SupplierAddress).ToColumn("Supplier_Address");
+
+            Map(t => t.Active).ToColumn("Active");
+            Map(t => t.ShipmentsQuantity).ToColumn("ShipmentsQuantity");
+            Map(t => t.RemainingQuantity).ToColumn("RemainingQuantity");
         }
     }
 }

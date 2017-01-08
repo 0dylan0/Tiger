@@ -71,5 +71,12 @@ namespace Web.Models
 
         [DisplayName("仓库名")]
         public string WarehouseName { get; set; }
+
+        //库存ID
+        public int InventoryDataID { get; set; }
+
+        [DisplayName("有效性")]
+        //有效为1，无效为0
+        public string Active { get; set; }
     }
 }

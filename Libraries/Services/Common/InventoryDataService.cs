@@ -43,7 +43,10 @@ namespace Services.Common
                     PurchaseDate,
                     ShipmentsDate,
                     Warehouse_ID,
-                    Warehouse_Name)
+                    Warehouse_Name,
+                    Active,
+                    ShipmentsQuantity,
+                    RemainingQuantity)
 			        VALUES (
                     @GoodsID,
                     @GoodsName,
@@ -62,7 +65,10 @@ namespace Services.Common
                     @PurchaseDate,
                     @ShipmentsDate,
                     @WarehouseID,
-                    @WarehouseName)";
+                    @WarehouseName,
+                    @Active,
+                    @ShipmentsQuantity,           
+                    @RemainingQuantity)";
             _context.Execute(sql, new
             {
                 GoodsID = InventoryData.GoodsID,
@@ -82,7 +88,10 @@ namespace Services.Common
                 PurchaseDate = InventoryData.PurchaseDate,
                 ShipmentsDate = InventoryData.ShipmentsDate,
                 WarehouseID = InventoryData.WarehouseID,
-                WarehouseName = InventoryData.WarehouseName
+                WarehouseName = InventoryData.WarehouseName,
+                Active=InventoryData.Active,
+                ShipmentsQuantity=InventoryData.ShipmentsQuantity,
+                RemainingQuantity=InventoryData.RemainingQuantity
             });
         }
 
@@ -106,9 +115,11 @@ namespace Services.Common
                     PurchaseDate=@PurchaseDate,
                     ShipmentsDate=@ShipmentsDate,
                     Warehouse_ID=@WarehouseID,
-                    Warehouse_Name=@WarehouseName
-                    WHERE Goods_ID=@GoodsID
-                      AND Goods_Name=@GoodsName";
+                    Warehouse_Name=@WarehouseName,
+                    Active=@Active,
+                    ShipmentsQuantity=@ShipmentsQuantity,
+                    RemainingQuantity=@RemainingQuantity 
+                    WHERE Goods_ID=@GoodsID";
             _context.Execute(sql, new
             {
                 GoodsID = InventoryData.GoodsID,
@@ -128,7 +139,10 @@ namespace Services.Common
                 PurchaseDate = InventoryData.PurchaseDate,
                 ShipmentsDate = InventoryData.ShipmentsDate,
                 WarehouseID = InventoryData.WarehouseID,
-                WarehouseName = InventoryData.WarehouseName
+                WarehouseName = InventoryData.WarehouseName,
+                Active = InventoryData.Active,
+                ShipmentsQuantity = InventoryData.ShipmentsQuantity,
+                RemainingQuantity = InventoryData.RemainingQuantity
             });
         }
 

@@ -63,5 +63,15 @@ namespace Web.Models
 
         [DisplayName("供应商地址")]
         public string SupplierAddress { get; set; }
+
+        [DisplayName("有效性")]
+        //有效为1.无效为0
+        public string Active { get; set; }
+
+        [DisplayName("出货数量")]
+        public int ShipmentsQuantity { get; set; }
+
+        [DisplayName("剩余数量")]
+        public int RemainingQuantity { get; set; }
     }
 }

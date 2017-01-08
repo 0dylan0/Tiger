@@ -43,7 +43,9 @@ namespace Services.Common
                     Supplier_Name,
                     Supplier_Address,
                     Warehouse_ID,
-                    Warehouse_Name)
+                    Warehouse_Name,
+                    InventoryDataID,
+                    Active)
 			        VALUES (
                     @GoodsID,
                     @GoodsName,
@@ -61,7 +63,9 @@ namespace Services.Common
                     @SupplierName,
                     @SupplierAddress,
                     @WarehouseID,
-                    @WarehouseName)";
+                    @WarehouseName,
+                    @InventoryDataID
+                    @Active)";
             _context.Execute(sql, new
             {
                 GoodsID= PurchaseData.GoodsID,
@@ -80,7 +84,9 @@ namespace Services.Common
                 SupplierName = PurchaseData.SupplierName,
                 SupplierAddress = PurchaseData.SupplierAddress,
                 WarehouseID=PurchaseData.WarehouseID,
-                WarehouseName=PurchaseData.WarehouseName
+                WarehouseName=PurchaseData.WarehouseName,
+                InventoryDataID=PurchaseData.InventoryDataID,
+                Active=PurchaseData.Active
             });
         }
 
@@ -103,7 +109,9 @@ namespace Services.Common
                     Supplier_Name=@SupplierName,
                     Supplier_Address=@SupplierAddress,
                     Warehouse_ID=@WarehouseID,
-                    Warehouse_Name=@WarehouseName
+                    Warehouse_Name=@WarehouseName,
+                    InventoryData_ID=@InventoryDataID,
+                    Active=@Active
                     where ID=@ID";
             _context.Execute(sql, new
             {
@@ -124,7 +132,9 @@ namespace Services.Common
                 SupplierName = PurchaseData.SupplierName,
                 SupplierAddress = PurchaseData.SupplierAddress,
                 WarehouseID =PurchaseData.WarehouseID,
-                WarehouseName=PurchaseData.WarehouseName
+                WarehouseName=PurchaseData.WarehouseName,
+                InventoryDataID = PurchaseData.InventoryDataID,
+                Active = PurchaseData.Active
             });
 
         }

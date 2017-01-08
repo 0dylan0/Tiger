@@ -57,5 +57,11 @@ namespace Core.Domain.Common
         public int WarehouseID { get; set; }
 
         public string WarehouseName { get; set; }
+
+        //库存ID
+        public int InventoryDataID { get; set; }
+
+        //有效性
+        public string Active { get; set; }
     }
 }

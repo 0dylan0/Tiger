@@ -63,5 +63,16 @@ namespace Core.Domain
 
         //供应商地址
         public string SupplierAddress { get; set; }
+
+        //有效性
+        public string Active { get; set; }
+
+        //出货数量
+        public int ShipmentsQuantity { get; set; }
+
+        //剩余数量
+        public int RemainingQuantity { get; set; }
+
+
     }
 }
