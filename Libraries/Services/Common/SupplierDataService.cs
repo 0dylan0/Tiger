@@ -146,6 +146,7 @@ namespace Services.Common
                 id = id
             });
         }
+        
         public IPagedList<SupplierData> GetList(string textQuery, int pageIndex = 0, int pageSize = 2147483647, string sortExpression = "")
         {
             string sql = @"select * from SupplierData";
