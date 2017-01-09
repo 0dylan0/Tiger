@@ -32,9 +32,6 @@ namespace Data.Mapping
 
             Map(t => t.Total).ToColumn("Total");
             Map(t => t.Remarks).ToColumn("Remarks");
-            Map(t => t.SupplierID).ToColumn("Supplier_ID");
-            Map(t => t.SupplierName).ToColumn("Supplier_Name");
-            Map(t => t.SupplierAddress).ToColumn("Supplier_Address");
             Map(t => t.WarehouseID).ToColumn("Warehouse_ID");
             Map(t => t.WarehouseName).ToColumn("Warehouse_Name");
         }
