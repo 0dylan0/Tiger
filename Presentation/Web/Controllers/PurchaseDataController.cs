@@ -30,6 +30,7 @@ namespace Web.Controllers
         private readonly InventoryDataService _inventoryDataService;
         private readonly GoodsSpecificationService _goodsSpecificationService;
         private readonly ClientTypeService _clientTypeService;
+        private readonly SalesShipmentsDataService _salesShipmentsDataService;
 
 
         public PurchaseDataController(IWorkContext webWorkContext,
@@ -40,7 +41,8 @@ namespace Web.Controllers
             WarehouseService warehouseService,
             InventoryDataService inventoryDataService,
             GoodsSpecificationService goodsSpecificationService,
-            ClientTypeService clientTypeService)
+            ClientTypeService clientTypeService,
+            SalesShipmentsDataService salesShipmentsDataService)
         {
             _webWorkContext = webWorkContext;
             _purchaseDataService = purchaseDataService;
@@ -51,6 +53,7 @@ namespace Web.Controllers
             _inventoryDataService = inventoryDataService;
             _goodsSpecificationService = goodsSpecificationService;
             _clientTypeService = clientTypeService;
+            _salesShipmentsDataService = salesShipmentsDataService;
         }
 
         [HttpGet]
@@ -137,7 +140,7 @@ namespace Web.Controllers
         {
             
             var purchase = _purchaseDataService.GetById(id);
-            if (_supplierDataService.GetById(purchase.InventoryDataID)!=null)
+            if (_salesShipmentsDataService.GetByInventoryDataID(purchase.InventoryDataID)==null)
             {
                 var model = purchase.MapTo<PurchaseData, PurchaseDataModel>();
                 model.GoodsList = GetGoodsList();

@@ -143,6 +143,16 @@ namespace Services.Common
                 id = id
             });
         }
+
+        public SupplierData GetByInventoryDataID(int InventoryDataID)
+        {
+            var sql = @"select * from SalesShipmentsData  where InventoryData_ID = @InventoryDataID";
+            return _context.QuerySingleOrDefault<SupplierData>(sql, new
+            {
+                InventoryDataID = InventoryDataID
+            });
+        }
+
         public IPagedList<SalesShipmentsData> GetList(string textQuery, int pageIndex = 0, int pageSize = 2147483647, string sortExpression = "")
         {
             string sql = @"select * from SalesShipmentsData";
