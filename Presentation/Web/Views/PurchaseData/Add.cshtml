@@ -189,6 +189,21 @@
 
             });
         });
+        
+        $("#Quantity").change(function () {
+            Sum();
+        })
+        $("#UnitPrice").change(function () {
+            Sum();
+        })
+        $("#Freight").change(function () {
+            Sum();
+        });
+
+        function Sum()
+        {
+            $("#Sum").getKendoNumericTextBox().value((parseInt($("#Quantity").val()) * parseInt($("#UnitPrice").val())) + parseInt($("#Freight").val()));
+        }
         $("#GoodsID").change(function () {
             $("#GoodsName").val($("#GoodsID").getKendoDropDownList().text());
         })
@@ -205,6 +220,7 @@
             min: 0,
             max: 50000          
         });
+
         $("#UnitPrice").kendoNumericTextBox({
             format: "c",
             decimals: 2,
@@ -215,6 +231,7 @@
             decimals: 2,
             min: 0
         });
+
         $("#Freight").kendoNumericTextBox({
             format: "c",
             decimals: 2,
