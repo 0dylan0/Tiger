@@ -39,7 +39,7 @@ namespace Web.Models
 
         public int OldQuantity { get; set; }
 
-        [DisplayName("单价")]
+        [DisplayName("实际单价")]
         public string UnitPrice { get; set; }
 
         [DisplayName("成本")]
@@ -48,7 +48,7 @@ namespace Web.Models
         [DisplayName("利润")]
         public string Profit { get; set; }
 
-        [DisplayName("金额")]
+        [DisplayName("总金额")]
         public decimal Sum { get; set; }
 
         [DisplayName("总量")]
@@ -57,22 +57,29 @@ namespace Web.Models
         [DisplayName("备注")]
         public string Remarks { get; set; }
 
-        [DisplayName("供应商ID")]
-        public int SupplierID { get; set; }
-
-        [DisplayName("供应商名称")]
-        public string SupplierName { get; set; }
-
-        [DisplayName("供应商地址")]
-        public string SupplierAddress { get; set; }
-
         public int WarehouseID { get; set; }
 
         [DisplayName("仓库名称")]
         public string WarehouseName { get; set; }
 
-        public IEnumerable<SelectListItem> SupplierList { get; set; }
+        public IEnumerable<SelectListItem> ClientDataList { get; set; }
 
         public IEnumerable<SelectListItem> WarehouseList { get; set; }
+
+        //库存ID
+        public int InventoryDataID { get; set; }
+
+        [DisplayName("有效性")]
+        //有效为1，无效为0
+        public string Active { get; set; }
+
+        [DisplayName("运费")]
+        public decimal Freight { get; set; }
+
+        //客户ID
+        public int ClientDataID { get; set; }
+
+        [DisplayName("客户")]
+        public string ClientDataName { get; set; }
     }
 }

@@ -148,5 +148,12 @@ namespace Services.Common
             //Parameter.Add("textQuery", textQuery);
             return new SqlPagedList<ClientData>(sql, Parameter, pageIndex, pageSize, sortExpression);
         }
+
+        public List<GetList> GetClientDataList()
+        {
+            string sql = @"select id as code, clientName as name from ClientData";
+
+            return _context.Query<GetList>(sql).ToList();
+        }
     }
 }

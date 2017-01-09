@@ -40,11 +40,13 @@ namespace Services.Common
                     Sum,
                     Total,
                     Remarks,
-                    Supplier_ID,
-                    Supplier_Name,
-                    Supplier_Address,
                     Warehouse_ID,
-                    Warehouse_Name)
+                    Warehouse_Name，
+                    InventoryData_ID,
+                    Active,
+                    Freight,
+                    ClientData_ID,
+                    ClientData_Name)
 			        VALUES (
                     @GoodsID,
                     @GoodsName,
@@ -60,11 +62,13 @@ namespace Services.Common
                     @Sum,
                     @Total,
                     @Remarks,
-                    @SupplierID,
-                    @SupplierName,
-                    @SupplierAddress,
                     @WarehouseID,
-                    @WarehouseName)";
+                    @WarehouseName,
+                    @InventoryDataID,
+                    @Active,
+                    @Freight,
+                    @ClientDataID,
+                    @ClientDataName)";
             _context.Execute(sql, new
             {
                 GoodsID = SalesShipmentsData.GoodsID,
@@ -81,11 +85,13 @@ namespace Services.Common
                 Sum = SalesShipmentsData.Sum,
                 Total = SalesShipmentsData.Total,
                 Remarks = SalesShipmentsData.Remarks,
-                SupplierID = SalesShipmentsData.SupplierID,
-                SupplierName = SalesShipmentsData.SupplierName,
-                SupplierAddress = SalesShipmentsData.SupplierAddress,
                 WarehouseID = SalesShipmentsData.WarehouseID,
-                WarehouseName = SalesShipmentsData.WarehouseName
+                WarehouseName = SalesShipmentsData.WarehouseName,
+                InventoryDataID = SalesShipmentsData.InventoryDataID,
+                Active = SalesShipmentsData.Active,
+                Freight = SalesShipmentsData.Freight,
+                ClientDataID = SalesShipmentsData.ClientDataID,
+                ClientDataName = SalesShipmentsData.ClientDataName
             });
         } 
 
@@ -106,12 +112,8 @@ namespace Services.Common
                     Sum=@Sum,
                     Total=@Total,
                     Remarks=@Remarks,
-                    Supplier_ID=@SupplierID,
-                    Supplier_Name=@SupplierName,
-                    Supplier_Address=@SupplierAddress,
-                    Remarks2=@Remarks2,
-                    Remarks3=@Remarks3,
-                    Remarks4=@Remarks4)
+                    ClientData_ID=@ClientDataID,
+                    ClientData_Name=@ClientDataName)
                     where ID=@ID";
             _context.Execute(sql, new
             {
@@ -128,9 +130,8 @@ namespace Services.Common
                 Sum = SalesShipmentsData.Sum,
                 Total = SalesShipmentsData.Total,
                 Remarks = SalesShipmentsData.Remarks,
-                SupplierID = SalesShipmentsData.SupplierID,
-                SupplierName = SalesShipmentsData.SupplierName,
-                SupplierAddress = SalesShipmentsData.SupplierAddress
+                ClientDataID = SalesShipmentsData.ClientDataID,
+                ClientDataName = SalesShipmentsData.ClientDataName
             });
 
         }

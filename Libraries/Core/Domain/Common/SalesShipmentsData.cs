@@ -52,17 +52,22 @@ namespace Core.Domain.Common
         //备注
         public string Remarks { get; set; }
 
-        //供应商ID
-        public int SupplierID { get; set; }
-
-        //供应商名称
-        public string SupplierName { get; set; }
-
-        //供应商地址
-        public string SupplierAddress { get; set; }
-
         public int WarehouseID { get; set; }
 
         public string WarehouseName { get; set; }
+
+        //库存ID
+        public int InventoryDataID { get; set; }
+
+        //有效性
+        public string Active { get; set; }
+
+        //运费
+        public decimal Freight { get; set; }
+
+        //客户ID
+        public int ClientDataID { get; set; }
+
+        public string ClientDataName { get; set; }
     }
 }

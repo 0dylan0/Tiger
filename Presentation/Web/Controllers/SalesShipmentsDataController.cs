@@ -27,6 +27,7 @@ namespace Web.Controllers
         private readonly InventoryDataService _inventoryDataService;
         private readonly GoodsSpecificationService _goodsSpecificationService;
         private readonly ClientTypeService _clientTypeService;
+        private readonly ClientDataService _clientDataService;
 
         public SalesShipmentsDataController(IWorkContext webWorkContext,
             SalesShipmentsDataService salesShipmentsDataService,
@@ -35,7 +36,8 @@ namespace Web.Controllers
             WarehouseService warehouseService,
             InventoryDataService inventoryDataService,
             GoodsSpecificationService goodsSpecificationService,
-            ClientTypeService clientTypeService)
+            ClientTypeService clientTypeService,
+            ClientDataService clientDataService)
         {
             _webWorkContext = webWorkContext;
             _salesShipmentsDataService = salesShipmentsDataService;
@@ -45,6 +47,7 @@ namespace Web.Controllers
             _inventoryDataService = inventoryDataService;
             _goodsSpecificationService = goodsSpecificationService;
             _clientTypeService = clientTypeService;
+            _clientDataService = clientDataService;
         }
 
         // GET: SalesShipmentsData
@@ -77,7 +80,7 @@ namespace Web.Controllers
         {
             SalesShipmentsDataModel model = new SalesShipmentsDataModel();
             model.Date= DateTime.Now;
-            model.SupplierList = GetSupplierList();
+            model.ClientDataList = GetClientDataList();
             model.WarehouseList = GetWarehouseList();
             model.SpecificationList = GetSpecificationList();
             model.GoodsTypeList = GetGoodsTypeList();
@@ -103,10 +106,6 @@ namespace Web.Controllers
                     InventoryQuantity = model.OldQuantity - model.Quantity,
                     CostPrice = (( model.Quantity != 0) ? (model.Sum / Convert.ToDecimal(model.Quantity)) : 0),
                     InventorySum = model.Sum,
-                    SupplierID = model.SupplierID,
-                    SupplierName = model.SupplierName,
-                    SupplierAddress = model.SupplierAddress,
-
 
                     PurchaseDate = DateTime.Now,
                     ShipmentsDate = DateTime.Now,
@@ -117,7 +116,7 @@ namespace Web.Controllers
                 return RedirectToAction("Index");
             }
 
-            model.SupplierList = GetSupplierList();
+            model.ClientDataList = GetClientDataList();
             model.WarehouseList = GetWarehouseList();
             model.SpecificationList = GetSpecificationList();
             model.GoodsTypeList = GetGoodsTypeList();
@@ -129,7 +128,7 @@ namespace Web.Controllers
             var salesShipments = _salesShipmentsDataService.GetById(id);
             var model = salesShipments.MapTo<SalesShipmentsData, SalesShipmentsDataModel>();
            
-            model.SupplierList = GetSupplierList();
+            model.ClientDataList = GetClientDataList();
             model.WarehouseList = GetWarehouseList();
             return View(model);
 
@@ -148,9 +147,9 @@ namespace Web.Controllers
             return View(model);
         }
 
-        public List<SelectListItem> GetSupplierList()
+        public List<SelectListItem> GetClientDataList()
         {
-            return _supplierDataService.GetSupplierList().Select(o => new SelectListItem
+            return _clientDataService.GetClientDataList().Select(o => new SelectListItem
             {
                 Text = o.Name,
                 Value = o.Code,
