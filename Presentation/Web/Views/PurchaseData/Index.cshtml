@@ -14,7 +14,7 @@
                 <div class="col-md-3 col-sm-4 col-xs-12 ">
                     <div class="form-group">
                         @Html.LabelFor(m => m.Name)
-                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control full-width", placeholder = "可按中文名查询" })
+                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control full-width", placeholder = "可按商品名查询" })
                     </div>
                 </div>
 
@@ -38,7 +38,7 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>商品编号</th>
+                    <th class="hidden">商品编号</th>
                     <th>商品名称</th>
                     <th>日期</th>
 
@@ -48,11 +48,11 @@
                     <th>金额</th>
 
                     <th>总量</th>
-                    <th>供应商编号</th>
+                    <th class="hidden">供应商编号</th>
                     <th>供应商名称</th>
                     <th>供应商地址</th>
 
-                    <th>仓库ID</th>
+                    <th class="hidden">仓库ID</th>
                     <th>仓库名</th>
 
                     <th>详情</th>
@@ -70,7 +70,7 @@
             alert("123");
         };
         function onShowSelectInventoryDataGoodsClick() {
-            $.klModal.showModal("进货详细信息", true, true);
+            $.klModal.showModal("采购进货信息详情", false, true);
             $.ajax({
                 url: "@Url.Action("PurchaseDataDetails", "PurchaseData")",
                 method: "POST",
@@ -97,13 +97,13 @@
                     url: "@Url.Action("Index")",
                     type: "post",
                     data: function (d) {
-                        d.textquery = $("#Name").val(),
+                        d.Name = $("#Name").val(),
                         addAntiForgeryToken(d);
                     },
                 },
                 columns: [
                     { data: "id" },
-                    { data: "goodsID" },
+                    { data: "goodsID", className: "hidden" },
                     { data: "goodsName" },
                     { data: "date" },
 
@@ -113,10 +113,10 @@
                     { data: "sum" },
 
                     { data: "total" },
-                    { data: "supplierID" },
+                    { data: "supplierID", className: "hidden" },
                     { data: "supplierName" },
                     { data: "supplierAddress" },
-                    { data: "warehouseID" },
+                    { data: "warehouseID", className: "hidden" },
                     { data: "warehouseName" },
                     {
                         orderable: false,
@@ -138,7 +138,7 @@
                         targets: [14],
                         orderable: false,
                         render: function (data, type, full) {
-                            return '<a  class="btn btn-xs btn-default" onclick="onShowSelectInventoryDataGoodsClick()"><span class="fa fa-pencil"></span> 详情</a>';
+                            return '<a  class="btn btn-xs btn-default" onclick="onShowSelectInventoryDataGoodsClick()"><span class="fa fa-search"></span> 详情</a>';
                         }
                     },
                     {

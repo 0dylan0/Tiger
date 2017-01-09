@@ -159,8 +159,36 @@ namespace Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                PurchaseData goodsData = model.MapTo<PurchaseDataModel, PurchaseData>();
-                _purchaseDataService.Update(goodsData);
+                PurchaseData purchase = model.MapTo<PurchaseDataModel, PurchaseData>();
+                InventoryData inventoryData = new InventoryData()
+                {
+                    WarehouseID = model.WarehouseID,
+                    WarehouseName = model.WarehouseName,
+                    GoodsID = model.GoodsID,
+                    GoodsName = model.GoodsName,
+                    Unit = model.Unit,
+                    Specification = model.Specification,
+                    GoodsType = model.GoodsType,
+                    Brand = model.Brand,
+                    InventoryQuantity = model.Quantity,
+                    CostPrice = ((model.Quantity != 0) ? (model.Sum / Convert.ToDecimal(model.Quantity)) : 0),
+                    InventorySum = model.Sum,
+                    SupplierID = model.SupplierID,
+                    SupplierName = model.SupplierName,
+                    SupplierAddress = model.SupplierAddress,
+
+                    PurchaseDate = DateTime.Now,
+                    ShipmentsDate = DateTime.Now,
+                    LastInventoryDate = DateTime.Now,
+                    FinalSaleDate = DateTime.Now,
+                    Active = "1",
+                    ShipmentsQuantity = 0,
+                    RemainingQuantity = model.Quantity
+                };
+                //修改货物库存表返回ID
+                _inventoryDataService.Update(inventoryData);
+                purchase.Active = "1";
+                _purchaseDataService.Update(purchase);
                 SuccessNotification("修改成功"+model.GoodsName);
                 return RedirectToAction("Index");
 

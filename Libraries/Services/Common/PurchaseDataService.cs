@@ -156,7 +156,13 @@ namespace Services.Common
         {
             string sql = @"select * from PurchaseData where Active='1' ";
             var Parameter = new DynamicParameters();
-            //Parameter.Add("textQuery", textQuery);
+            if(!string.IsNullOrEmpty(textQuery))
+            {
+                sql += " and Goods_Name like @textQuery";
+                textQuery = textQuery.Contains("%") ? textQuery : $"%{textQuery}%";
+                Parameter.Add("textQuery", textQuery);
+            }
+
             return new SqlPagedList<PurchaseData>(sql, Parameter, pageIndex, pageSize, sortExpression);
         }
 
