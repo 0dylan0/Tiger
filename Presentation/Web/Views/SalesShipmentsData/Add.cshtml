@@ -182,6 +182,38 @@
 
 
     <script type="text/javascript">
+        function setCustomer(data) {
+            debugger;
+            if (data) {
+                $("#GoodsName").val(data.goodsName);
+                $("#GoodsID").val(data.goodsID);
+                $("#GoodsType").val(data.goodsType);
+                $("#OldQuantity").val(data.inventoryQuantity);
+                $("#Cost").val(data.costPrice);
+                $("#Brand").val(data.brand);
+                $("#Sum").val(data.inventorySum);
+                $("#Specification").val(data.specification);
+               
+                $("#Unit").val(data.unit);
+                $("#WarehouseID").getKendoDropDownList().value(data.warehouseID);
+                $("#WarehouseName").val(data.warehouseName);
+            }
+            else {
+                $("#GoodsName").val("");
+                $("#GoodsID").val("");
+                $("#GoodsType").val("");
+                $("#OldQuantity").val("");
+                $("#Cost").val("");
+                $("#Brand").val("");
+                $("#Sum")("");
+                $("#Specification").val("");
+                
+                $("#Unit").val("");
+                $("#WarehouseID").getKendoDropDownList().value("");
+                $("#WarehouseName").val("");
+            }
+        }
+
         $(function () {
             $("#Quantity").kendoNumericTextBox({
                 decimals: 0,
@@ -237,40 +269,7 @@
                     }
                 });
             }
-
-            function setCustomer(data) {
-                if (data) {
-                    $("#GoodsName").val(data.goodsName);
-                    $("#GoodsID").val(data.goodsID);
-                    $("#GoodsType").val(data.goodsType);
-                    $("#OldQuantity").val(data.inventoryQuantity);
-                    $("#Cost").val(data.costPrice);
-                    $("#Brand").val(data.brand);
-                    $("#Sum").val(data.inventorySum);
-                    $("#Specification").val(data.specification);
-                    $("#SupplierID").getKendoDropDownList().value(data.supplierID);
-                    $("#Unit").val(data.unit);
-                    $("#WarehouseID").getKendoDropDownList().value(data.warehouseID);
-                    $("#WarehouseName").val(data.warehouseName);
-                }
-                else {
-                    $("#GoodsName").val("");
-                    $("#GoodsID").val("");
-                    $("#GoodsType").val("");
-                    $("#OldQuantity").val("");
-                    $("#Cost").val("");
-                    $("#Brand").val("");
-                    $("#Sum")("");
-                    $("#Specification").val("");
-                    $("#SupplierID").getKendoDropDownList().value("");
-                    $("#Unit").val("");
-                    $("#WarehouseID").getKendoDropDownList().value("");
-                    $("#WarehouseName").val("");
-                }
-            }
-
-
-
+           
         });
     </script>
 }

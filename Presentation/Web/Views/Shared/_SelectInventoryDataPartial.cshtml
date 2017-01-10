@@ -27,24 +27,24 @@
                 <tr>
                     <th></th>
                     <th>ID</th>
-                    <th>商品编号</th>
+                    <th class="hidden">商品编号</th>
                     <th>商品名称</th>
 
                     <th>进货日期</th>@*采购进货日期*@
                     <th>出货日期</th>@*销售出货日期*@
 
                     <th>类别</th>
-                    <th>单位</th>
+                    <th class="hidden">单位</th>
                     <th>成本价</th>
 
                     <th>存库数量</th>
                     <th>存库金额</th>
 
-                    <th>仓库编号</th>
+                    <th class="hidden">仓库编号</th>
                     <th>仓库名称</th>
 
 
-                    <th>供应商编号</th>
+                    <th class="hidden">供应商编号</th>
                     <th>供应商名称</th>
                     <th>供应商地址</th>
 
@@ -121,22 +121,22 @@
         columns: [
             { data: "", orderable: false },
             { data: "id" },
-            { data: "goodsID" },
+            { data: "goodsID", className: "hidden" },
             { data: "goodsName" },
 
             { data: "purchaseDate" },
             { data: "shipmentsDate" },
             { data: "goodsType" },
-            { data: "unit" },
+            { data: "unit", className: "hidden" },
             { data: "costPrice" },
 
             { data: "inventoryQuantity" },
             { data: "inventorySum" },
 
-            { data: "warehouseID" },
+            { data: "warehouseID", className: "hidden" },
             { data: "warehouseName" },
 
-            { data: "supplierID" },
+            { data: "supplierID", className: "hidden" },
             { data: "supplierName" },
             { data: "supplierAddress" }
         ],
