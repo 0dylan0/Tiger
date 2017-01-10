@@ -31,6 +31,7 @@ namespace Web.Controllers
         private readonly GoodsSpecificationService _goodsSpecificationService;
         private readonly ClientTypeService _clientTypeService;
         private readonly SalesShipmentsDataService _salesShipmentsDataService;
+        private readonly GoodsTypeService _goodsTypeService;
 
 
         public PurchaseDataController(IWorkContext webWorkContext,
@@ -42,7 +43,8 @@ namespace Web.Controllers
             InventoryDataService inventoryDataService,
             GoodsSpecificationService goodsSpecificationService,
             ClientTypeService clientTypeService,
-            SalesShipmentsDataService salesShipmentsDataService)
+            SalesShipmentsDataService salesShipmentsDataService,
+            GoodsTypeService goodsTypeService)
         {
             _webWorkContext = webWorkContext;
             _purchaseDataService = purchaseDataService;
@@ -54,6 +56,7 @@ namespace Web.Controllers
             _goodsSpecificationService = goodsSpecificationService;
             _clientTypeService = clientTypeService;
             _salesShipmentsDataService = salesShipmentsDataService;
+            _goodsTypeService = goodsTypeService;
         }
 
         [HttpGet]
@@ -196,9 +199,9 @@ namespace Web.Controllers
             return View(model);
         }
 
-        public ActionResult PurchaseDataDetails(/*int id*/)
+        public ActionResult PurchaseDataDetails(int id)
         {
-            var purchase = _purchaseDataService.GetById(2);
+            var purchase = _purchaseDataService.GetById(id);
             var model = purchase.MapTo<PurchaseData, PurchaseDataModel>();
             model.GoodsList = GetGoodsList();
             model.SupplierList = GetSupplierList();
@@ -247,7 +250,7 @@ namespace Web.Controllers
 
         public List<SelectListItem> GetGoodsTypeList()
         {
-            return _clientTypeService.GetClientTypeList().Select(o => new SelectListItem
+            return _goodsTypeService.GetGoodsTypeList().Select(o => new SelectListItem
             {
                 Text = o.Name,
                 Value = o.Name,

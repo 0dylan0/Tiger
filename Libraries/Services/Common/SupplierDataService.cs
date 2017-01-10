@@ -149,9 +149,14 @@ namespace Services.Common
         
         public IPagedList<SupplierData> GetList(string textQuery, int pageIndex = 0, int pageSize = 2147483647, string sortExpression = "")
         {
-            string sql = @"select * from SupplierData";
+            string sql = @"select * from SupplierData ";
             var Parameter = new DynamicParameters();
-            //Parameter.Add("textQuery", textQuery);
+            if (!string.IsNullOrEmpty(textQuery))
+            {
+                sql += "where SupplierName like @textQuery";
+                textQuery = textQuery.Contains("%") ? textQuery : $"%{textQuery}%";
+                Parameter.Add("textQuery", textQuery);
+            }
             return new SqlPagedList<SupplierData>(sql, Parameter, pageIndex, pageSize, sortExpression);
         }
 

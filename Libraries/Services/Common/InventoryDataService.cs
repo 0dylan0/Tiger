@@ -156,9 +156,14 @@ namespace Services.Common
         }
         public IPagedList<InventoryData> GetList(string textQuery, int pageIndex = 0, int pageSize = 2147483647, string sortExpression = "")
         {
-            string sql = @"select * from InventoryData where Active='1'";
+            string sql = @"select * from InventoryData where Active='1' ";
             var Parameter = new DynamicParameters();
-            //Parameter.Add("textQuery", textQuery);
+            if (!string.IsNullOrEmpty(textQuery))
+            {
+                sql += " and Goods_Name like @textQuery";
+                textQuery = textQuery.Contains("%") ? textQuery : $"%{textQuery}%";
+                Parameter.Add("textQuery", textQuery);
+            }
             return new SqlPagedList<InventoryData>(sql, Parameter, pageIndex, pageSize, sortExpression);
         }
     }

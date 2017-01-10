@@ -14,7 +14,7 @@
                 <div class="col-md-3 col-sm-4 col-xs-12 ">
                     <div class="form-group">
                         @Html.LabelFor(m => m.Name)
-                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control full-width", placeholder = "可按中文名查询" })
+                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control full-width", placeholder = "可按客户类别名查询" })
                     </div>
                 </div>
 
@@ -57,7 +57,7 @@
                     url: "@Url.Action("Index")",
                     type: "post",
                     data: function (d) {
-                        d.textquery = $("#Name").val(),
+                        d.Name = $("#Name").val(),
                         addAntiForgeryToken(d);
                     },
                 },

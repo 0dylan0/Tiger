@@ -14,7 +14,7 @@
                 <div class="col-md-3 col-sm-4 col-xs-12 ">
                     <div class="form-group">
                         @Html.LabelFor(m => m.Name)
-                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control full-width", placeholder = "可按中文名查询" })
+                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control full-width", placeholder = "可按商品名查询" })
                     </div>
                 </div>
 
@@ -37,25 +37,25 @@
         <table class="table table-condensed table-striped table-hover dataTable">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>商品编号</th>
+                    <th>编号</th>
+                    <th class="hidden">商品编号</th>
                     <th>商品名称</th>
 
                     <th>进货日期</th>@*采购进货日期*@
                     <th>出货日期</th>@*销售出货日期*@
 
-                    <th>类别</th>
-                    <th>单位</th>
-                    <th>成本价</th>
+                    <th>商品类别</th>
+                    <th class="hidden">单位</th>
+                    <th class="hidden">成本价</th>
 
                     <th>存库数量</th>                
-                    <th>存库金额</th>
+                    <th class="hidden">存库金额</th>
 
-                    <th>仓库编号</th>
+                    <th class="hidden">仓库编号</th>
                     <th>仓库名称</th>
 
                     
-                    <th>供应商编号</th>
+                    <th class="hidden">供应商编号</th>
                     <th>供应商名称</th>
                     <th>供应商地址</th>
 
@@ -78,28 +78,28 @@
                     url: "@Url.Action("Index")",
                     type: "post",
                     data: function (d) {
-                        d.textquery = $("#Name").val(),
+                        d.Name = $("#Name").val(),
                         addAntiForgeryToken(d);
                     },
                 },
                 columns: [
 					{ data: "id" },
-                    { data: "goodsID" },
+                    { data: "goodsID", className: "hidden" },
                     { data: "goodsName" },
 
                     { data: "purchaseDate" },
                     { data: "shipmentsDate" },
                     { data: "goodsType" },
-                    { data: "unit" },
-                    { data: "costPrice" },              
+                    { data: "unit", className: "hidden" },
+                    { data: "costPrice", className: "hidden" },
 
                     { data: "inventoryQuantity" },
-                    { data: "inventorySum" },
+                    { data: "inventorySum", className: "hidden" },
 
-                    { data: "warehouseID" },
+                    { data: "warehouseID", className: "hidden" },
                     { data: "warehouseName" },
 
-                    { data: "supplierID" },
+                    { data: "supplierID", className: "hidden" },
                     { data: "supplierName" },
                     { data: "supplierAddress" },
                     {

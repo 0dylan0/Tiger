@@ -69,13 +69,13 @@
         function aaa() {
             alert("123");
         };
-        function onShowSelectInventoryDataGoodsClick() {
+        function onShowSelectInventoryDataGoodsClick(ID) {
             $.klModal.showModal("采购进货信息详情", false, true);
             $.ajax({
                 url: "@Url.Action("PurchaseDataDetails", "PurchaseData")",
                 method: "POST",
-                data: addAntiForgeryToken({
-                    HotelCode: $("#HotelCode").val()
+                data: addAntiForgeryToken({                
+                    id: ID
                 }),
                 beforeSend: $.klModal.displayModalLoadingInfo,
                 success: function (data) {
@@ -138,7 +138,7 @@
                         targets: [14],
                         orderable: false,
                         render: function (data, type, full) {
-                            return '<a  class="btn btn-xs btn-default" onclick="onShowSelectInventoryDataGoodsClick()"><span class="fa fa-search"></span> 详情</a>';
+                            return '<a  class="btn btn-xs btn-default" onclick="onShowSelectInventoryDataGoodsClick('+ encodeURIComponent(full["id"]) +')"><span class="fa fa-search"></span> 详情</a>';
                         }
                     },
                     {

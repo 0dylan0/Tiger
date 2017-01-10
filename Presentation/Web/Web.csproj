@@ -2781,6 +2781,7 @@
     <Content Include="Views\GoodsUnit\Edit.cshtml" />
     <Content Include="Views\SalesShipmentsData\Edit.cshtml" />
     <Content Include="Views\PurchaseData\PurchaseDataPartial.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

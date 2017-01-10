@@ -134,10 +134,16 @@ namespace Services.Common
         }
         public IPagedList<GoodsData> GetList(string textQuery, int pageIndex = 0, int pageSize = 2147483647, string sortExpression = "")
         {
-            string sql = @"select * from GoodsData";
+            string sql = @"select * from GoodsData ";
 
             var Parameter = new DynamicParameters();
-            //Parameter.Add("textQuery", textQuery);
+            if (!string.IsNullOrEmpty(textQuery))
+            {
+                sql += "where GoodsName like @textQuery ";
+                textQuery = textQuery.Contains("%") ? textQuery : $"%{textQuery}%";
+                Parameter.Add("textQuery", textQuery);
+            }
+
             return new SqlPagedList<GoodsData>(sql, Parameter, pageIndex, pageSize, sortExpression);
         }
 

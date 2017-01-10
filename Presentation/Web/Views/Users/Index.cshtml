@@ -60,7 +60,7 @@
                     url: "@Url.Action("Index")",
                     type: "post",
                     data: function (d) {
-                        d.textquery = $("#Name").val(),
+                        d.Name = $("#Name").val(),
                         addAntiForgeryToken(d);
                     },
                 },
