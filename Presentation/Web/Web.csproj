@@ -2714,6 +2714,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="Validators\PurchaseDataValidator.cs" />
     <Compile Include="Validators\UserValidator.cs" />
+    <Compile Include="Validators\WarehouseValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config">
