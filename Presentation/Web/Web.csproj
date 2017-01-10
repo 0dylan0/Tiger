@@ -2712,8 +2712,12 @@
     <Compile Include="Models\WarehouseModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Validators\ClientTypeValidator.cs" />
     <Compile Include="Validators\GoodsSpecificationValidator.cs" />
+    <Compile Include="Validators\GoodsTypeValidator.cs" />
+    <Compile Include="Validators\GoodsUnitValidator.cs" />
     <Compile Include="Validators\PurchaseDataValidator.cs" />
+    <Compile Include="Validators\SupplierTypeValidator.cs" />
     <Compile Include="Validators\UserValidator.cs" />
     <Compile Include="Validators\WarehouseValidator.cs" />
   </ItemGroup>
