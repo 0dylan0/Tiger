@@ -136,6 +136,13 @@ namespace Web.Controllers
 
                 return RedirectToAction("Index");
             }
+
+            model.GoodsList = GetGoodsList();
+            model.SupplierList = GetSupplierList();
+            model.WarehouseList = GetWarehouseList();
+            model.SpecificationList = GetSpecificationList();
+            model.GoodsTypeList = GetGoodsTypeList();
+
             return View(model);
         }
 
@@ -196,6 +203,12 @@ namespace Web.Controllers
                 return RedirectToAction("Index");
 
             }
+            model.GoodsList = GetGoodsList();
+            model.SupplierList = GetSupplierList();
+            model.WarehouseList = GetWarehouseList();
+            model.SpecificationList = GetSpecificationList();
+            model.GoodsTypeList = GetGoodsTypeList();
+
             return View(model);
         }
 

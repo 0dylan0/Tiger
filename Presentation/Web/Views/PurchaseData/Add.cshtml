@@ -48,7 +48,7 @@
 
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.Unit, new { @class = "control-label" })@RequiredTag()
+                        @Html.LabelFor(m => m.Unit, new { @class = "control-label" })
                         @Html.TextBoxFor(m => m.Unit, new { @class = "form-control " })
                         @Html.ValidationMessageFor(m => m.Unit)
                     </div>
@@ -144,8 +144,6 @@
                         @Html.ValidationMessageFor(m => m.Brand)
                     </div>
                 </div>
-
-
             </div>
 
             <div class="row">

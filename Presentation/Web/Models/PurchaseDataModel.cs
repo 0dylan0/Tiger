@@ -1,12 +1,15 @@
-﻿using System;
+﻿using FluentValidation.Attributes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Web.Validators;
 
 namespace Web.Models
 {
+    [Validator(typeof(PurchaseDataValidator))]
     public class PurchaseDataModel
     {
         public int ID { get; set; }
