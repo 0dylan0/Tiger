@@ -2,7 +2,7 @@
 
 
 @{
-    ViewBag.Title = "List";
+    ViewBag.Title = "用户列表";
 }
 
 <div class="box box-solid">
@@ -15,7 +15,7 @@
                 <div class="col-md-3 col-sm-4 col-xs-12 ">
                     <div class="form-group">
                         @Html.LabelFor(m => m.Name)
-                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control full-width", placeholder = "可按中文名查询" })
+                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control full-width", placeholder = "可按用户名查询" })
                     </div>
                 </div>
 
@@ -38,9 +38,9 @@
         <table class="table table-condensed table-striped table-hover dataTable">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Password</th>
+                    <th>编号</th>
+                    <th>用户名</th>
+                    <th>密码（加密后）</th>
                     <th>编辑</th>
 
                 </tr>
