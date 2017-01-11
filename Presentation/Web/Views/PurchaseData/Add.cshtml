@@ -200,7 +200,7 @@
 
         function Sum()
         {
-            $("#Sum").getKendoNumericTextBox().value((parseInt($("#Quantity").val()) * parseInt($("#UnitPrice").val())) + parseInt($("#Freight").val()));
+            $("#Sum").getKendoNumericTextBox().value((parseInt($("#Quantity").val()) * parseFloat($("#UnitPrice").val())) + parseFloat($("#Freight").val()));
         }
         $("#GoodsID").change(function () {
             $("#GoodsName").val($("#GoodsID").getKendoDropDownList().text());
