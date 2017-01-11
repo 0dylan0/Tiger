@@ -2713,6 +2713,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Validators\ClientTypeValidator.cs" />
+    <Compile Include="Validators\GoodsDataValidator.cs" />
     <Compile Include="Validators\GoodsSpecificationValidator.cs" />
     <Compile Include="Validators\GoodsTypeValidator.cs" />
     <Compile Include="Validators\GoodsUnitValidator.cs" />

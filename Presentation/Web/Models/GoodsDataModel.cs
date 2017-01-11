@@ -1,11 +1,15 @@
-﻿using System;
+﻿using FluentValidation.Attributes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
+using Web.Validators;
 
 namespace Web.Models
 {
+    [Validator(typeof(GoodsDataValidator))]
     public class GoodsDataModel
     {
         public int ID { get; set; }
@@ -30,17 +34,19 @@ namespace Web.Models
         //商品类别
         public string GoodType { get; set; }
 
+        public IEnumerable<SelectListItem> GoodTypeList { get; set; }
+
         [DisplayName("预计进价")]
         //预计进价
         public decimal DefaultPurchasePrice { get; set; }
 
-        [DisplayName("实际售价")]
+        [DisplayName("实际进价")]
         //实际售价
         public decimal ActualPurchasePrice { get; set; }
 
         [DisplayName("库存")]
         //库存
-        public string Inventory { get; set; }
+        public int Inventory { get; set; }
 
         [DisplayName("售价1")]
         //售价1
@@ -62,9 +68,11 @@ namespace Web.Models
         //仓库
         public string Warehouse { get; set; }
 
+        public IEnumerable<SelectListItem> WarehouseList { get; set; }
+
         [DisplayName("成本")]
         //成本
-        public string Cost { get; set; }
+        public decimal Cost { get; set; }
 
         [DisplayName("图片")]
         //图片
@@ -72,6 +80,6 @@ namespace Web.Models
 
         [DisplayName("单品利润")]
         //单品利润
-        public string SingleProfit { get; set; }
+        public decimal SingleProfit { get; set; }
     }
 }

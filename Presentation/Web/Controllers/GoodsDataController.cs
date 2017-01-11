@@ -22,13 +22,20 @@ namespace Web.Controllers
         private readonly IWorkContext _webWorkContext;
         private readonly GoodsDataService _goodsDataService;
         private readonly LocalizationService _localizationService;
+        private readonly CommonController _commonController;
+        private readonly WarehouseService _warehouseService;
+
         public GoodsDataController(IWorkContext webWorkContext,
             GoodsDataService goodsDataService,
-            LocalizationService localizationService)
+            LocalizationService localizationService,
+            CommonController commonController,
+            WarehouseService warehouseService)
         {
             _webWorkContext = webWorkContext;
             _goodsDataService = goodsDataService;
             _localizationService = localizationService;
+            _commonController = commonController;
+            _warehouseService = warehouseService;
         }
 
         // GET: GoodsData
@@ -60,6 +67,8 @@ namespace Web.Controllers
         public ActionResult Add()
         {
             GoodsDataModel model = new GoodsDataModel();
+            model.WarehouseList = GetWarehouseList();
+            model.GoodTypeList = _commonController.GetGoodsTypeList();
             return View(model);
         }
         [HttpPost]
@@ -73,6 +82,8 @@ namespace Web.Controllers
                 _goodsDataService.Insert(Goods);
                 return RedirectToAction("Index");
             }
+            model.WarehouseList = GetWarehouseList();
+            model.GoodTypeList = _commonController.GetGoodsTypeList();
             return View(model);
         }
 
@@ -80,6 +91,8 @@ namespace Web.Controllers
         {
             var user = _goodsDataService.GetUserById(id);
             var res = user.MapTo<GoodsData, GoodsDataModel>();
+            res.WarehouseList = GetWarehouseList();
+            res.GoodTypeList = _commonController.GetGoodsTypeList();
             return View(res);
 
         }
@@ -94,7 +107,18 @@ namespace Web.Controllers
                 return RedirectToAction("Index");
 
             }
+            model.WarehouseList = GetWarehouseList();
+            model.GoodTypeList = _commonController.GetGoodsTypeList();
             return View(model);
+        }
+
+        public List<SelectListItem> GetWarehouseList()
+        {
+            return _warehouseService.GetWarehouseList().Select(o => new SelectListItem
+            {
+                Text = o.Name,
+                Value = o.Name,
+            }).ToList();
         }
 
     }

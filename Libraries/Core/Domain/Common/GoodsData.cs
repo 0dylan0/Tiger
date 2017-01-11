@@ -33,7 +33,7 @@ namespace Core.Domain.Common
         public decimal ActualPurchasePrice { get; set; }
 
         //库存
-        public string Inventory { get; set; }
+        public int Inventory { get; set; }
 
         //售价1
         public decimal Price1 { get; set; }
@@ -50,12 +50,12 @@ namespace Core.Domain.Common
         public string Warehouse { get; set; }
 
         //成本
-        public string Cost { get; set; }
+        public decimal Cost { get; set; }
 
         //图片
         public string Image { get; set; }
 
         //单品利润
-        public string SingleProfit { get; set; }
+        public decimal SingleProfit { get; set; }
     }
 }
