@@ -95,5 +95,14 @@ namespace Web.Controllers
             return View(model);
         }
 
+
+        public ActionResult Delete(int id)
+        {
+            var res = _goodsTypeService.GetById(id);
+            _goodsTypeService.Delete(id);
+            SuccessNotification($"{"删除成功" + res.Name}");
+            return RedirectToAction("Index");
+        }
+
     }
 }

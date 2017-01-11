@@ -160,5 +160,13 @@ namespace Services.Common
             }
             return new SqlPagedList<InventoryData>(sql, Parameter, pageIndex, pageSize, sortExpression);
         }
+
+        public void Delete(int id)
+        {
+            var sql = $@"delete from InventoryData where id=@id";
+
+            _context.Execute(sql, new { id = id });
+        }
+
     }
 }

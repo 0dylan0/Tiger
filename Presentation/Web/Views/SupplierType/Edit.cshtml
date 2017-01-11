@@ -33,6 +33,7 @@
 
         <div class="box-footer">
             <button id="submitChange" type="submit" class="btn btn-primary"><i class="fa fa-save"></i> 保存</button>
+            <button type="button" id="btnDelete" class="btn btn-danger"><i class="fa fa-remove"></i> 删除</button>
             <a href="@Url.Action("Index")" class="btn btn-default"><i class="fa fa-undo"></i> 返回</a>
         </div>
     </div>
@@ -51,6 +52,12 @@
 
     <script type="text/javascript">
 
+        $("#btnDelete").click(function (e) {
+
+            alertify.klConfirm("是否确认删除", function () {
+                location.href = '@Html.Raw(Url.Action("Delete", new { id = Model.ID }))';
+            });
+        });
 
         $(function () {
 

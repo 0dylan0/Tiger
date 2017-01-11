@@ -174,6 +174,12 @@ namespace Services.Common
             return new SqlPagedList<PurchaseData>(sql, Parameter, pageIndex, pageSize, sortExpression);
         }
 
+        public void Delete(int id)
+        {
+            var sql = $@"delete from PurchaseData where id=@id";
+
+            _context.Execute(sql, new { id = id });
+        }
 
     }
 }
