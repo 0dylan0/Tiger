@@ -41,7 +41,7 @@ namespace Services.Common
                     Total,
                     Remarks,
                     Warehouse_ID,
-                    Warehouse_Name，
+                    Warehouse_Name,
                     InventoryData_ID,
                     Active,
                     Freight,

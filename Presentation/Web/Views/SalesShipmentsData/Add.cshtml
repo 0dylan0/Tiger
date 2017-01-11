@@ -6,6 +6,7 @@
 @using (Html.BeginForm("Add", "SalesShipmentsData", FormMethod.Post, new { id = "Add", data_val = true }))
 {
     @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.InventoryDataID)
     <div class="box box-solid">
         <div class="box-body">
             <div class="row">
@@ -189,28 +190,26 @@
                 $("#GoodsID").val(data.goodsID);
                 $("#GoodsType").val(data.goodsType);
                 $("#OldQuantity").val(data.inventoryQuantity);
-                $("#Cost").val(data.costPrice);
                 $("#Brand").val(data.brand);
-                $("#Sum").val(data.inventorySum);
                 $("#Specification").val(data.specification);
-               
+                $("#Cost").getKendoNumericTextBox().value(data.costPrice);
                 $("#Unit").val(data.unit);
                 $("#WarehouseID").getKendoDropDownList().value(data.warehouseID);
                 $("#WarehouseName").val(data.warehouseName);
+                $("#InventoryDataID").val(data.id);
             }
             else {
                 $("#GoodsName").val("");
                 $("#GoodsID").val("");
                 $("#GoodsType").val("");
                 $("#OldQuantity").val("");
-                $("#Cost").val("");
                 $("#Brand").val("");
-                $("#Sum")("");
                 $("#Specification").val("");
-                
+                $("#Cost").getKendoNumericTextBox().value("");
                 $("#Unit").val("");
                 $("#WarehouseID").getKendoDropDownList().value("");
                 $("#WarehouseName").val("");
+                $("#InventoryDataID").val("");
             }
         }
 
@@ -269,8 +268,41 @@
                     }
                 });
             }
+
+
+            
            
         });
+
+        $("#Quantity").change(function () {
+            Sum();
+            Profit();
+        })
+        $("#UnitPrice").change(function () {
+            Sum();
+            Profit();
+        })
+        $("#Freight").change(function () {
+            Sum();
+            Profit();
+        });
+
+        $("#Cost").change(function () {
+            Profit();
+        });
+
+        function Sum() {
+            $("#Sum").getKendoNumericTextBox().value($("#Quantity").getKendoNumericTextBox().value() * $("#UnitPrice").getKendoNumericTextBox().value() + $("#Freight").getKendoNumericTextBox().value());
+        }
+
+        function Profit()
+        {
+            $("#Profit").getKendoNumericTextBox().value($("#Sum").getKendoNumericTextBox().value() - $("#Cost").getKendoNumericTextBox().value() - $("#Freight").getKendoNumericTextBox().value());
+        }
+
+        $("#ClientDataID").on("change", function () {
+            $("#ClientDataName").val($("#ClientDataID").getKendoDropDownList().text());
+        })
     </script>
 }
 

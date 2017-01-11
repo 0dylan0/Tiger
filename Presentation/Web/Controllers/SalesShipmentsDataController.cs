@@ -147,6 +147,14 @@ namespace Web.Controllers
             return View(model);
         }
 
+        public ActionResult Detail(int id)
+        {
+            var selesShipment = _salesShipmentsDataService.GetById(id);
+            var model = selesShipment.MapTo<SalesShipmentsData, SalesShipmentsDataModel>();
+
+            return Json(new JsonResponse<string>(RenderPartialViewToString("SalesShipmentsDataPartial", model)));
+        }
+
         public List<SelectListItem> GetClientDataList()
         {
             return _clientDataService.GetClientDataList().Select(o => new SelectListItem

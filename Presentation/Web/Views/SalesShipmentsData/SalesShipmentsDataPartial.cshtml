@@ -1,0 +1,174 @@
+﻿@model Web.Models.SalesShipmentsDataModel
+
+<fieldset>
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+                <div class="display-lable">
+                    @Html.LabelFor(m => m.GoodsID, new { @class = "control-label" })
+                </div>
+                <div class="display-lable">
+                    @Html.DisplayFor(model => model.GoodsID)
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+
+                @Html.LabelFor(m => m.GoodsName, new { @class = "control-label" })
+
+                <div class="display-lable">
+                    @Html.DisplayFor(model => model.GoodsName)
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.Date, new { @class = "control-label" })
+                <div class="display-lable">
+                    @Html.DisplayFor(model => model.Date)
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.Unit, new { @class = "control-label" })
+                <div class="display-lable">
+                    @Html.DisplayFor(model => model.Unit)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.Specification, new { @class = "control-label" })
+                <div class="display-lable">
+                    @Html.DisplayFor(model => model.Specification)
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.GoodsType, new { @class = "control-label" })
+                <div class="display-lable">
+                    @Html.DisplayFor(model => model.GoodsType)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.Brand, new { @class = "control-label" })
+                <div class="display-lable">
+                    @Html.DisplayFor(model => model.Brand)
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.Quantity, new { @class = "control-label" })
+                <div class="display-lable">
+                    @Html.DisplayFor(model => model.Quantity)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.UnitPrice, new { @class = "control-label" })
+                <div class="display-lable">
+                    @Html.DisplayFor(model => model.UnitPrice)
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.Sum, new { @class = "control-label" })
+                <div class="display-lable">
+                    @Html.DisplayFor(model => model.Sum)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.Total, new { @class = "control-label" })
+                <div class="display-lable">
+                    @Html.DisplayFor(model => model.Total)
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.WarehouseName, new { @class = "control-label" })
+                <div class="display-lable">
+                    @Html.DisplayFor(model => model.WarehouseName)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.SupplierID, new { @class = "control-label" })
+                <div class="display-lable">
+                    @Html.DisplayFor(model => model.SupplierID)
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.SupplierName, new { @class = "control-label" })
+                <div class="display-lable">
+                    @Html.DisplayFor(model => model.SupplierName)
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.SupplierAddress, new { @class = "control-label" })
+                <div class="display-lable">
+                    @Html.DisplayFor(model => model.SupplierAddress)
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.Remarks, new { @class = "control-label" })
+                <div class="display-lable">
+                    @Html.DisplayFor(model => model.Remarks)
+                </div>
+            </div>
+        </div>
+    </div>
+</fieldset>
+
