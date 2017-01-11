@@ -20,13 +20,17 @@ namespace Web.Controllers
         private readonly IWorkContext _webWorkContext;
         private readonly ClientDataService _clientDataService;
         private readonly LocalizationService _localizationService;
+        private readonly CommonController _commonController;
+
         public ClientDataController(IWorkContext webWorkContext,
             ClientDataService clientDataService,
-            LocalizationService localizationService)
+            LocalizationService localizationService,
+            CommonController commonController)
         {
             _webWorkContext = webWorkContext;
             _clientDataService = clientDataService;
             _localizationService = localizationService;
+            _commonController = commonController;
         }
 
 
@@ -59,6 +63,7 @@ namespace Web.Controllers
         {
             ClientDataModel model = new ClientDataModel();
             model.ReceiptDate = DateTime.Now;
+            model.ClientTypeList = _commonController.GetClientTypeList();
             return View(model);
         }
         [HttpPost]

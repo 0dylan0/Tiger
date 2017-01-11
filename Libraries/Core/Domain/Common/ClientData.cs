@@ -32,7 +32,7 @@ namespace Core.Domain.Common
         public string Telephone { get; set; }
 
         //欠款
-        public string Arrears { get; set; }
+        public decimal Arrears { get; set; }
 
         //收款日期
         public DateTime ReceiptDate { get; set; }
@@ -50,7 +50,7 @@ namespace Core.Domain.Common
         public string TaxIdentificationNumber { get; set; }
 
         //排序号
-        public string Seq { get; set; }
+        public int Seq { get; set; }
 
         //备注1
         public string Remarks1 { get; set; }

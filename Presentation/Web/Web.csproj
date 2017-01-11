@@ -2712,6 +2712,7 @@
     <Compile Include="Models\WarehouseModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Validators\ClientDataValidator.cs" />
     <Compile Include="Validators\ClientTypeValidator.cs" />
     <Compile Include="Validators\GoodsDataValidator.cs" />
     <Compile Include="Validators\GoodsSpecificationValidator.cs" />

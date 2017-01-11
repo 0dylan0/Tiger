@@ -104,5 +104,14 @@ namespace Web.Controllers
             }).ToList();
         }
 
+        public List<SelectListItem> GetClientTypeList()
+        {
+            return _clientTypeService.GetClientTypeList().Select(o => new SelectListItem
+            {
+                Text = o.Name,
+                Value = o.Name,
+            }).ToList();
+        }
+
     }
 }

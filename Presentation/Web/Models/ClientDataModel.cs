@@ -1,11 +1,15 @@
-﻿using System;
+﻿using FluentValidation.Attributes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
+using Web.Validators;
 
 namespace Web.Models
 {
+    [Validator(typeof(ClientDataValidator))]
     public class ClientDataModel
     {
 
@@ -19,6 +23,7 @@ namespace Web.Models
 
         [DisplayName("客户类型")]
         public string ClientType { get; set; }
+        public IEnumerable<SelectListItem> ClientTypeList { get; set; }
 
         [DisplayName("地址")]
         public string Address { get; set; }
@@ -33,7 +38,7 @@ namespace Web.Models
         public string Telephone { get; set; }
 
         [DisplayName("欠款")]
-        public string Arrears { get; set; }
+        public decimal Arrears { get; set; }
 
         [DisplayName("收款日期")]
         public DateTime ReceiptDate { get; set; }
@@ -51,7 +56,7 @@ namespace Web.Models
         public string TaxIdentificationNumber { get; set; }
 
         [DisplayName("排序号")]
-        public string Seq { get; set; }
+        public int Seq { get; set; }
 
         [DisplayName("备注1")]
         public string Remarks1 { get; set; }
