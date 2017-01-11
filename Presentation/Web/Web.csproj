@@ -2719,6 +2719,7 @@
     <Compile Include="Validators\GoodsTypeValidator.cs" />
     <Compile Include="Validators\GoodsUnitValidator.cs" />
     <Compile Include="Validators\PurchaseDataValidator.cs" />
+    <Compile Include="Validators\SupplierDataValidator.cs" />
     <Compile Include="Validators\SupplierTypeValidator.cs" />
     <Compile Include="Validators\UserValidator.cs" />
     <Compile Include="Validators\WarehouseValidator.cs" />

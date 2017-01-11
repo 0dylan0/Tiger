@@ -1,11 +1,15 @@
-﻿using System;
+﻿using FluentValidation.Attributes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
+using Web.Validators;
 
 namespace Web.Models
 {
+    [Validator(typeof(SupplierDataValidator))]
     public class SupplierDataModel
     {
         public int ID { get; set; }
@@ -22,6 +26,8 @@ namespace Web.Models
         [DisplayName("供应商类别")]
         public string SupplierType { get; set; }
 
+        public IEnumerable<SelectListItem> SupplierTypeList { get; set; }
+
         [DisplayName("区域")]
         public string Area { get; set; }
 
@@ -35,7 +41,7 @@ namespace Web.Models
         public string Telephone { get; set; }
 
         [DisplayName("欠款")]
-        public string Arrears { get; set; }
+        public decimal Arrears { get; set; }
 
         [DisplayName("还款日期")]
         public DateTime RepaymentDate { get; set; }
@@ -53,7 +59,7 @@ namespace Web.Models
         public string TaxIdentificationNumber { get; set; }
 
         [DisplayName("排序号")]
-        public string Seq { get; set; }
+        public int Seq { get; set; }
 
         [DisplayName("备注1")]
         public string Remarks1 { get; set; }

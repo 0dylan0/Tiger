@@ -24,6 +24,7 @@ namespace Web.Controllers
         private readonly ClientTypeService _clientTypeService;
         private readonly SalesShipmentsDataService _salesShipmentsDataService;
         private readonly GoodsTypeService _goodsTypeService;
+        private readonly SupplierTypeService _supplierTypeService;
 
 
         public CommonController(IWorkContext webWorkContext,
@@ -36,7 +37,8 @@ namespace Web.Controllers
             GoodsSpecificationService goodsSpecificationService,
             ClientTypeService clientTypeService,
             SalesShipmentsDataService salesShipmentsDataService,
-            GoodsTypeService goodsTypeService)
+            GoodsTypeService goodsTypeService,
+            SupplierTypeService supplierTypeService)
         {
             _webWorkContext = webWorkContext;
             _purchaseDataService = purchaseDataService;
@@ -49,6 +51,7 @@ namespace Web.Controllers
             _clientTypeService = clientTypeService;
             _salesShipmentsDataService = salesShipmentsDataService;
             _goodsTypeService = goodsTypeService;
+            _supplierTypeService = supplierTypeService;
         }
 
         // GET: Common
@@ -107,6 +110,15 @@ namespace Web.Controllers
         public List<SelectListItem> GetClientTypeList()
         {
             return _clientTypeService.GetClientTypeList().Select(o => new SelectListItem
+            {
+                Text = o.Name,
+                Value = o.Name,
+            }).ToList();
+        }
+
+        public List<SelectListItem> GetSupplierTypeList()
+        {
+            return _supplierTypeService.GetSupplierTypeList().Select(o => new SelectListItem
             {
                 Text = o.Name,
                 Value = o.Name,

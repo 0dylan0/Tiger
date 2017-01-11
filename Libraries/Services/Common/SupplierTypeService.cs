@@ -68,7 +68,7 @@ namespace Services.Common
             return new SqlPagedList<SupplierType>(sql, Parameter, pageIndex, pageSize, sortExpression);
         }
 
-        public List<GetList> GetWarehouseList()
+        public List<GetList> GetSupplierTypeList()
         {
             string sql = @"select id as code, name from SupplierType";
 

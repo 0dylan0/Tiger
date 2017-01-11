@@ -20,13 +20,17 @@ namespace Web.Controllers
         private readonly IWorkContext _webWorkContext;
         private readonly SupplierDataService _supplierDataService;
         private readonly LocalizationService _localizationService;
+        private readonly CommonController _commonController;
+
         public SupplierDataController(IWorkContext webWorkContext,
             SupplierDataService supplierDataService,
-            LocalizationService localizationService)
+            LocalizationService localizationService,
+            CommonController commonController)
         {
             _webWorkContext = webWorkContext;
             _supplierDataService = supplierDataService;
             _localizationService = localizationService;
+            _commonController = commonController;
         }
 
 
@@ -59,6 +63,7 @@ namespace Web.Controllers
         {
             SupplierDataModel model = new SupplierDataModel();
             model.RepaymentDate = DateTime.Now;
+            model.SupplierTypeList = _commonController.GetSupplierTypeList();
             return View(model);
         }
         [HttpPost]
@@ -70,6 +75,8 @@ namespace Web.Controllers
                 _supplierDataService.Insert(Goods);
                 return RedirectToAction("Index");
             }
+
+            model.SupplierTypeList = _commonController.GetSupplierTypeList();
             return View(model);
         }
 
@@ -77,6 +84,7 @@ namespace Web.Controllers
         {
             var user = _supplierDataService.GetById(id);
             var res = user.MapTo<SupplierData, SupplierDataModel>();
+            res.SupplierTypeList = _commonController.GetSupplierTypeList();
             return View(res);
 
         }
@@ -91,6 +99,7 @@ namespace Web.Controllers
                 return RedirectToAction("Index");
 
             }
+            model.SupplierTypeList = _commonController.GetSupplierList();
             return View(model);
         }
     }

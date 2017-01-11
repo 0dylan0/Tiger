@@ -1,6 +1,6 @@
 ﻿@model Web.Models.SupplierDataModel
 @{
-    ViewBag.Title = "Add";
+    ViewBag.Title = "添加供应商信息";
 }
 
 @using (Html.BeginForm("Add", "SupplierData", FormMethod.Post, new { id = "Add", data_val = true }))
@@ -20,9 +20,9 @@
 
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.CompanyName, new { @class = "control-label aaa" })@RequiredTag()
+                        @Html.LabelFor(m => m.CompanyName, new { @class = "control-label " })
                         @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control " })
-                        @Html.ValidationMessageFor(m => m.CompanyName)
+
                     </div>
                 </div>
             </div>
@@ -30,7 +30,7 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.Contacts, new { @class = "control-label aaa" })@RequiredTag()
+                        @Html.LabelFor(m => m.Contacts, new { @class = "control-label " })
                         @Html.TextBoxFor(m => m.Contacts, new { @class = "form-control " })
                         @Html.ValidationMessageFor(m => m.Contacts)
                     </div>
@@ -38,8 +38,9 @@
 
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.SupplierType, new { @class = "control-label aaa" })@RequiredTag()
-                        @Html.TextBoxFor(m => m.SupplierType, new { @class = "form-control " })
+                        @Html.LabelFor(m => m.SupplierType, new { @class = "control-label " })@RequiredTag()
+                        @Html.DropDownListFor(m => m.SupplierType, Model.SupplierTypeList, T("未选择").Text.ToString(), new { @class = "form-control full-width " })
+                        @*@Html.TextBoxFor(m => m.SupplierType, new { @class = "form-control " })*@
                         @Html.ValidationMessageFor(m => m.SupplierType)
                     </div>
                 </div>
@@ -48,17 +49,17 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.Area, new { @class = "control-label aaa" })@RequiredTag()
+                        @Html.LabelFor(m => m.Area, new { @class = "control-label " })
                         @Html.TextBoxFor(m => m.Area, new { @class = "form-control " })
-                        @Html.ValidationMessageFor(m => m.Area)
+
                     </div>
                 </div>
 
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.Address, new { @class = "control-label aaa" })@RequiredTag()
+                        @Html.LabelFor(m => m.Address, new { @class = "control-label " })
                         @Html.TextBoxFor(m => m.Address, new { @class = "form-control " })
-                        @Html.ValidationMessageFor(m => m.Address)
+
                     </div>
                 </div>
             </div>
@@ -66,15 +67,15 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.Phone, new { @class = "control-label aaa" })@RequiredTag()
-                        @Html.TextBoxFor(m => m.Phone, new { @class = "form-control " })
+                        @Html.LabelFor(m => m.Phone, new { @class = "control-label " })
+                        @Html.TextBoxFor(m => m.Phone, new { @class = "form-control full-width" })
                         @Html.ValidationMessageFor(m => m.Phone)
                     </div>
                 </div>
 
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.Telephone, new { @class = "control-label aaa" })@RequiredTag()
+                        @Html.LabelFor(m => m.Telephone, new { @class = "control-label " })
                         @Html.TextBoxFor(m => m.Telephone, new { @class = "form-control " })
                         @Html.ValidationMessageFor(m => m.Telephone)
                     </div>
@@ -84,15 +85,15 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.Arrears, new { @class = "control-label aaa" })@RequiredTag()
-                        @Html.TextBoxFor(m => m.Arrears, new { @class = "form-control " })
+                        @Html.LabelFor(m => m.Arrears, new { @class = "control-label " })@RequiredTag()
+                        @Html.TextBoxFor(m => m.Arrears, new { @class = "kl-input-num  full-width " })
                         @Html.ValidationMessageFor(m => m.Arrears)
                     </div>
                 </div>
 
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.RepaymentDate, new { @class = "control-label aaa" })@RequiredTag()
+                        @Html.LabelFor(m => m.RepaymentDate, new { @class = "control-label" })@RequiredTag()
                         @Html.KLDateTextBoxFor(m => m.RepaymentDate, new { @class = "form-control kl-date-picker full-width" })
                         @*@Html.TextBoxFor(m => m.RepaymentDate, new { @class = "form-control " })*@
                         @Html.ValidationMessageFor(m => m.RepaymentDate)
@@ -103,17 +104,17 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.Banks, new { @class = "control-label aaa" })@RequiredTag()
+                        @Html.LabelFor(m => m.Banks, new { @class = "control-label " })
                         @Html.TextBoxFor(m => m.Banks, new { @class = "form-control " })
-                        @Html.ValidationMessageFor(m => m.Banks)
+
                     </div>
                 </div>
 
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.AccountName, new { @class = "control-label aaa" })@RequiredTag()
+                        @Html.LabelFor(m => m.AccountName, new { @class = "control-label " })
                         @Html.TextBoxFor(m => m.AccountName, new { @class = "form-control " })
-                        @Html.ValidationMessageFor(m => m.AccountName)
+
                     </div>
                 </div>
             </div>
@@ -121,17 +122,17 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.BankAccount, new { @class = "control-label aaa" })@RequiredTag()
+                        @Html.LabelFor(m => m.BankAccount, new { @class = "control-label " })
                         @Html.TextBoxFor(m => m.BankAccount, new { @class = "form-control " })
-                        @Html.ValidationMessageFor(m => m.BankAccount)
+
                     </div>
                 </div>
 
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.TaxIdentificationNumber, new { @class = "control-label aaa" })@RequiredTag()
+                        @Html.LabelFor(m => m.TaxIdentificationNumber, new { @class = "control-label " })
                         @Html.TextBoxFor(m => m.TaxIdentificationNumber, new { @class = "form-control " })
-                        @Html.ValidationMessageFor(m => m.TaxIdentificationNumber)
+
                     </div>
                 </div>
 
@@ -139,8 +140,8 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.Seq, new { @class = "control-label aaa" })@RequiredTag()
-                        @Html.TextBoxFor(m => m.Seq, new { @class = "form-control " })
+                        @Html.LabelFor(m => m.Seq, new { @class = "control-label " })@RequiredTag()
+                        @Html.TextBoxFor(m => m.Seq, new { @class = "kl-input-num  full-width" })
                         @Html.ValidationMessageFor(m => m.Seq)
                     </div>
                 </div>
@@ -148,39 +149,45 @@
             </div>
 
             <div class="row">
-                <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="col-xs-12 col-sm-12 col-md-8">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.Remarks1, new { @class = "control-label aaa" })@RequiredTag()
-                        @Html.TextBoxFor(m => m.Remarks1, new { @class = "form-control " })
-                        @Html.ValidationMessageFor(m => m.Remarks1)
-                    </div>
-                </div>
+                        @Html.LabelFor(m => m.Remarks1, new { @class = "control-label " })
+                        @Html.TextAreaFor(m => m.Remarks1, new { @class = "form-control " })
 
-                <div class="col-xs-12 col-sm-6 col-md-4">
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Remarks2, new { @class = "control-label aaa" })@RequiredTag()
-                        @Html.TextBoxFor(m => m.Remarks2, new { @class = "form-control " })
-                        @Html.ValidationMessageFor(m => m.Remarks2)
                     </div>
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="col-xs-12 col-sm-12 col-md-8">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.Remarks3, new { @class = "control-label aaa" })@RequiredTag()
-                        @Html.TextBoxFor(m => m.Remarks3, new { @class = "form-control " })
-                        @Html.ValidationMessageFor(m => m.Remarks3)
+                        @Html.LabelFor(m => m.Remarks2, new { @class = "control-label " })
+                        @Html.TextAreaFor(m => m.Remarks2, new { @class = "form-control " })
+
                     </div>
                 </div>
 
-                <div class="col-xs-12 col-sm-6 col-md-4">
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-8">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.Remarks4, new { @class = "control-label aaa" })@RequiredTag()
-                        @Html.TextBoxFor(m => m.Remarks4, new { @class = "form-control " })
-                        @Html.ValidationMessageFor(m => m.Remarks4)
+                        @Html.LabelFor(m => m.Remarks3, new { @class = "control-label " })
+                        @Html.TextAreaFor(m => m.Remarks3, new { @class = "form-control " })
+
                     </div>
                 </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-8">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Remarks4, new { @class = "control-label " })
+                        @Html.TextAreaFor(m => m.Remarks4, new { @class = "form-control " })
+
+                    </div>
+                </div>
+
             </div>
 
         </div>
@@ -202,9 +209,24 @@
     @Html.Partial("_KendoDropdownListPartial")
     @Html.Partial("_KendoDatePickerPartial")
     @Html.Partial("_ModalSelectorPartial")
+    @Html.Partial("_KendoNumericTextBoxPartial")
 
     <script type="text/javascript">
 
+
+
+        $("#Seq").kendoNumericTextBox({
+            decimals: 0,
+            format: "0",
+            min: 0,
+            max: 10
+        });
+
+        $("#Arrears").kendoNumericTextBox({
+            format: "c",
+            decimals: 2,
+            min: 0
+        });
 
         $(function () {
 

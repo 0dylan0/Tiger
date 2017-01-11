@@ -36,7 +36,7 @@ namespace Core.Domain.Common
 
 
         //欠款
-        public string Arrears { get; set; }
+        public decimal Arrears { get; set; }
 
         //还款日期
         public DateTime RepaymentDate { get; set; }
@@ -54,7 +54,7 @@ namespace Core.Domain.Common
         public string TaxIdentificationNumber { get; set; }
 
         //排序号
-        public string Seq { get; set; }
+        public int Seq { get; set; }
 
         //备注1
         public string Remarks1 { get; set; }
