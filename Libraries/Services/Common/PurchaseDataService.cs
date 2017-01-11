@@ -152,6 +152,14 @@ namespace Services.Common
                 id = id
             });
         }
+        public PurchaseData GetByInventoryDataID(int id)
+        {
+            var sql = @"select * from PurchaseData  where InventoryData_ID = @id";
+            return _context.QuerySingle<PurchaseData>(sql, new
+            {
+                id = id
+            });
+        }
         public IPagedList<PurchaseData> GetList(string textQuery, int pageIndex = 0, int pageSize = 2147483647, string sortExpression = "")
         {
             string sql = @"select * from PurchaseData where Active='1' ";

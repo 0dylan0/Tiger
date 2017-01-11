@@ -1,0 +1,245 @@
+﻿@model Web.Models.InventoryDataModel
+@{
+    Layout = null;
+}
+<fieldset>
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+                <div class="display-lable">
+                    @Html.LabelFor(m => m.ID, new { @class = "control-label" })
+                </div>
+                <div class="display-lable">
+                    @Html.DisplayFor(model => model.ID)
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+
+                @Html.LabelFor(m => m.WarehouseID, new { @class = "control-label" })
+
+                <div class="display-lable">
+                    @Html.DisplayFor(model => model.WarehouseID)
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.WarehouseName, new { @class = "control-label" })
+                <div class="display-lable">
+                    @Html.DisplayFor(model => model.WarehouseName)
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.GoodsID, new { @class = "control-label" })
+                <div class="display-lable">
+                    @Html.DisplayFor(model => model.GoodsID)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.GoodsName, new { @class = "control-label" })
+                <div class="display-lable">
+                    @Html.DisplayFor(model => model.GoodsName)
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.PurchaseDate, new { @class = "control-label" })
+                <div class="display-lable">
+                    @Html.DisplayFor(model => model.PurchaseDate)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.ShipmentsDate, new { @class = "control-label" })
+                <div class="display-lable">
+                    @Html.DisplayFor(model => model.ShipmentsDate)
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.Unit, new { @class = "control-label" })
+                <div class="display-lable">
+                    @Html.DisplayFor(model => model.Unit)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.Specification, new { @class = "control-label" })
+                <div class="display-lable">
+                    @Html.DisplayFor(model => model.Specification)
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.GoodsType, new { @class = "control-label" })
+                <div class="display-lable">
+                    @Html.DisplayFor(model => model.GoodsType)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.Brand, new { @class = "control-label" })
+                <div class="display-lable">
+                    @Html.DisplayFor(model => model.Brand)
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.InventoryQuantity, new { @class = "control-label" })
+                <div class="display-lable">
+                    @Html.DisplayFor(model => model.InventoryQuantity)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.CostPrice, new { @class = "control-label" })
+                <div class="display-lable">
+                    @Html.DisplayFor(model => model.CostPrice)
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.InventorySum, new { @class = "control-label" })
+                <div class="display-lable">
+                    @Html.DisplayFor(model => model.InventorySum)
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.LastInventoryDate, new { @class = "control-label" })
+                <div class="display-lable">
+                    @Html.DisplayFor(model => model.LastInventoryDate)
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.FinalSaleDate, new { @class = "control-label" })
+                <div class="display-lable">
+                    @Html.DisplayFor(model => model.FinalSaleDate)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.SupplierID, new { @class = "control-label" })
+                <div class="display-lable">
+                    @Html.DisplayFor(model => model.SupplierID)
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.SupplierName, new { @class = "control-label" })
+                <div class="display-lable">
+                    @Html.DisplayFor(model => model.SupplierName)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.SupplierAddress, new { @class = "control-label" })
+                <div class="display-lable">
+                    @Html.DisplayFor(model => model.SupplierAddress)
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.ShipmentsQuantity, new { @class = "control-label" })
+                <div class="display-lable">
+                    @Html.DisplayFor(model => model.ShipmentsQuantity)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.RemainingQuantity, new { @class = "control-label" })
+                <div class="display-lable">
+                    @Html.DisplayFor(model => model.RemainingQuantity)
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <button type="button" class="btn btn-default" id="dylan"><span class="fa fa-pencil"></span> 修改</button>
+
+</fieldset>
+<script>
+
+        $("#dylan").click(function (e) {
+            debugger;
+
+                location.href = '@Html.Raw(Url.Action("Edit", "PurchaseData", new { id = Model.ID, IfInventoryData= false }))';
+
+        });
+</script>
+
+

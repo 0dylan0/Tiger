@@ -48,13 +48,13 @@
                     <th class="hidden">单位</th>
                     <th class="hidden">成本价</th>
 
-                    <th>存库数量</th>                
+                    <th>存库数量</th>
                     <th class="hidden">存库金额</th>
 
                     <th class="hidden">仓库编号</th>
                     <th>仓库名称</th>
 
-                    
+
                     <th class="hidden">供应商编号</th>
                     <th>供应商名称</th>
                     <th>供应商地址</th>
@@ -70,6 +70,22 @@
     @Html.Partial("_KendoDropdownListPartial")
     @Html.Partial("_ModalSelectorPartial")
     <script type="text/javascript">
+
+        function onShowSelectInventoryDataGoodsClick(ID) {
+            $.klModal.showModal("库存商品信息详情", false, true);
+            $.ajax({
+                url: "@Url.Action("InventoryDataDetails", "InventoryData")",
+                method: "POST",
+                data: addAntiForgeryToken({
+                    id: ID
+                }),
+                beforeSend: $.klModal.displayModalLoadingInfo,
+                success: function (data) {
+                    $.klModal.addDataToModalBody(data);
+                    $.klModal.hideModalLoadingInfoAndDisplayBody();
+                }
+            });
+        }
 
         $(function () {
             var grid = $(".dataTable").DataTable({
@@ -129,7 +145,7 @@
                         targets: [15],
                         orderable: false,
                         render: function (data, type, full) {
-                            return '<a href="/ClientData/Edit?id=' + encodeURIComponent(full["id"]) + '" class="btn btn-xs btn-default "><span class="fa fa-pencil"></span> 详情</a>';
+                            return '<a  class="btn btn-xs btn-default" onclick="onShowSelectInventoryDataGoodsClick(' + encodeURIComponent(full["id"]) + ')"><span class="fa fa-search"></span> 详情</a>';
                         }
                     },
                     {

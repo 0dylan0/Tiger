@@ -146,10 +146,19 @@ namespace Web.Controllers
             return View(model);
         }
 
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int id, bool IfInventoryData=true)
         {
+            var purchase = new PurchaseData();
+            if (IfInventoryData)
+            {
+                 purchase = _purchaseDataService.GetById(id);
+            }
+            else
+            {
+                purchase = _purchaseDataService.GetByInventoryDataID(id);
+            }
             
-            var purchase = _purchaseDataService.GetById(id);
+
             if (_salesShipmentsDataService.GetByInventoryDataID(purchase.InventoryDataID)==null)
             {
                 var model = purchase.MapTo<PurchaseData, PurchaseDataModel>();
