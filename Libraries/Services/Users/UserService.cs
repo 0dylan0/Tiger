@@ -93,7 +93,12 @@ namespace Services.Users
             return _context.QuerySingleOrDefault<Core.Domain.Common.Users>(sql, new { Name = Name });
         }
 
+        public void Delete(int id)
+        {
+            var sql = $@"delete from Users where id=@id";
 
+            _context.Execute(sql, new { id = id });
+        }
 
 
     }

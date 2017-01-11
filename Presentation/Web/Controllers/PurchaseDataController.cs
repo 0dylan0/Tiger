@@ -221,6 +221,23 @@ namespace Web.Controllers
             return View(model);
         }
 
+        public ActionResult Delete(int id)
+        {
+            var res = _purchaseDataService.GetById(id);
+
+            if (_salesShipmentsDataService.GetByInventoryDataID(res.InventoryDataID) == null)
+            {
+                _inventoryDataService.Delete(id);
+                _purchaseDataService.Delete(id);
+                SuccessNotification($"{"删除成功" + res.GoodsName}");
+                return RedirectToAction("Index");
+            }
+            ErrorNotification("已经存在销售出货记录" + res.GoodsName + "不允许修改");
+            return RedirectToAction("Index");
+
+
+        }
+
         public ActionResult PurchaseDataDetails(int id)
         {
             var purchase = _purchaseDataService.GetById(id);

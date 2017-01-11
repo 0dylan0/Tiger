@@ -74,5 +74,12 @@ namespace Services.Common
 
             return _context.Query<GoodsSpecification>(sql).ToList();
         }
+
+        public void Delete(int id)
+        {
+            var sql = $@"delete from GoodsSpecification where id=@id";
+
+            _context.Execute(sql, new { id = id });
+        }
     }
 }
