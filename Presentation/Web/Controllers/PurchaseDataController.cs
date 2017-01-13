@@ -1,14 +1,12 @@
 ﻿using Core;
 using Core.Domain;
 using Core.Domain.Common;
-using Core.Enum;
 using Core.Page;
 using Services.Common;
 using Services.Localization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Web.Extensions;
 using Web.Framework.Controllers;
