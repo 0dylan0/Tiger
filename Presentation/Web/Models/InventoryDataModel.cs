@@ -8,6 +8,7 @@ namespace Web.Models
 {
     public class InventoryDataModel
     {
+        [DisplayName("库存编号")]
         public int ID { get; set; }
 
         [DisplayName("仓库编号")]

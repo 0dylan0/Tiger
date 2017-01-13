@@ -1,0 +1,61 @@
+﻿@model Web.Models.InventoryDataModel
+@{
+    Layout = null;
+}
+<fieldset>
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+                <label class="control-label"> 库存编号</label>
+                <div class="display-lable">
+                    @Html.DisplayFor(model => model.ID)
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.SupplierName, new { @class = "control-label" })
+                <div class="display-lable">
+                    @Html.DisplayFor(model => model.SupplierName)
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+                <label class = "control-label"> 原库存</label>
+                <div class="display-lable">
+                    @Html.DisplayFor(model => model.WarehouseName)
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.GoodsName, new { @class = "control-label" })
+                <div class="display-lable">
+                    @Html.DisplayFor(model => model.GoodsName)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button type="button" class="btn btn-default" id="dylan"><span class="fa fa-pencil"></span> 修改</button>
+
+</fieldset>
+<script>
+
+        $("#dylan").click(function (e) {
+            debugger;
+
+                location.href = '@Html.Raw(Url.Action("Edit", "PurchaseData", new { id = Model.ID, IfInventoryData= false }))';
+
+        });
+</script>
+
+

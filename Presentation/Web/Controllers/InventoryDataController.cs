@@ -61,6 +61,14 @@ namespace Web.Controllers
 
             return Json(new JsonResponse<string>(RenderPartialViewToString("InventoryDataPartial", model)));
         }
+       
+        public ActionResult TransferCargo(int id)
+        {
+            var purchase = _inventoryDataService.GetById(id);
+            var model = purchase.MapTo<InventoryData, InventoryDataModel>();
+
+            return Json(new JsonResponse<string>(RenderPartialViewToString("TransferCargoPartial", model)));
+        }
 
     }
 }

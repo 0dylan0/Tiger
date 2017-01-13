@@ -61,6 +61,7 @@
 
                     <th>详情</th>
                     <th>出货</th>
+                    <th>调货</th>
                 </tr>
             </thead>
         </table>
@@ -86,6 +87,23 @@
                 }
             });
         }
+
+        function onShowTransferCargoClick(ID) {
+            $.klModal.showModal("调动货物", false, true);
+            $.ajax({
+                url: "@Url.Action("TransferCargo", "InventoryData")",
+                method: "POST",
+                data: addAntiForgeryToken({
+                    id: ID
+                }),
+                beforeSend: $.klModal.displayModalLoadingInfo,
+                success: function (data) {
+                    $.klModal.addDataToModalBody(data);
+                    $.klModal.hideModalLoadingInfoAndDisplayBody();
+                }
+            });
+        }
+
 
         $(function () {
             var grid = $(".dataTable").DataTable({
@@ -125,6 +143,10 @@
                     {
                         orderable: false,
 
+                    },
+                    {
+                        orderable: false,
+
                     }],
                 columnDefs: [
                     {
@@ -153,6 +175,13 @@
                         orderable: false,
                         render: function (data, type, full) {
                             return '<a href="/SalesShipmentsData/Add' + '" class="btn btn-xs btn-default "><span class="fa fa-pencil"></span> 出货</a>';
+                        }
+                    },
+                    {
+                        targets: [17],
+                        orderable: false,
+                        render: function (data, type, full) {
+                            return '<a  class="btn btn-xs btn-default" onclick="onShowTransferCargoClick(' + encodeURIComponent(full["id"]) + ')"><span class="fa fa-search"></span> 调货</a>';
                         }
                     }
                 ],
