@@ -1,5 +1,6 @@
 ﻿using Core;
 using Core.Domain;
+using Core.Domain.Common;
 using Core.Page;
 using Services.Common;
 using Services.Localization;
@@ -21,13 +22,23 @@ namespace Web.Controllers
         private readonly IWorkContext _webWorkContext;
         private readonly InventoryDataService _inventoryDataService;
         private readonly LocalizationService _localizationService;
+        private readonly CommonController _commonController;
+        private readonly WarehouseService _warehouseService;
+        private readonly PurchaseDataService _purchaseDataService;
+
         public InventoryDataController(IWorkContext webWorkContext,
             InventoryDataService inventoryDataService,
-            LocalizationService localizationService)
+            LocalizationService localizationService,
+            CommonController commonController,
+            WarehouseService warehouseService,
+            PurchaseDataService purchaseDataService)
         {
             _webWorkContext = webWorkContext;
             _inventoryDataService = inventoryDataService;
             _localizationService = localizationService;
+            _commonController = commonController;
+            _warehouseService = warehouseService;
+            _purchaseDataService = purchaseDataService;
         }
 
         [HttpGet]
@@ -56,18 +67,77 @@ namespace Web.Controllers
 
         public ActionResult InventoryDataDetails(int id)
         {
-            var purchase = _inventoryDataService.GetById(id);
-            var model = purchase.MapTo<InventoryData, InventoryDataModel>();
+            var inventoryData = _inventoryDataService.GetById(id);
+            var model = inventoryData.MapTo<InventoryData, InventoryDataModel>();
 
             return Json(new JsonResponse<string>(RenderPartialViewToString("InventoryDataPartial", model)));
         }
-       
+
         public ActionResult TransferCargo(int id)
         {
-            var purchase = _inventoryDataService.GetById(id);
-            var model = purchase.MapTo<InventoryData, InventoryDataModel>();
 
+            var inventoryData = _inventoryDataService.GetById(id);
+            var model = inventoryData.MapTo<InventoryData, InventoryDataModel>();
+            model.WarehouseList = _commonController.GetWarehouseList();
             return Json(new JsonResponse<string>(RenderPartialViewToString("TransferCargoPartial", model)));
+
+        }
+
+        public ActionResult ClickTransferCargo(int id, int newNum, int newWarehouseID)
+        {
+            //添加验证判断库存是否够调用
+            if (false)//暂时不允许使用此功能
+            {
+                //更改之前的库存信息
+                var inventoryData = _inventoryDataService.GetById(id);
+                inventoryData.InventoryQuantity = inventoryData.InventoryQuantity - newNum;
+                inventoryData.InventorySum = inventoryData.CostPrice * inventoryData.InventoryQuantity;
+                inventoryData.ShipmentsQuantity = inventoryData.ShipmentsQuantity - newNum;
+                inventoryData.RemainingQuantity = inventoryData.RemainingQuantity - newNum;
+                _inventoryDataService.Update(inventoryData);
+
+
+                //添加新的库存信息
+                var newWarehouse = _warehouseService.GetById(newWarehouseID);
+                InventoryData newInventoryData = new InventoryData()
+                {
+                    WarehouseID = newWarehouseID,
+                    WarehouseName = newWarehouse.Name,
+                    GoodsID = inventoryData.GoodsID,
+                    GoodsName = inventoryData.GoodsName,
+                    PurchaseDate = inventoryData.PurchaseDate,
+                    ShipmentsDate = inventoryData.ShipmentsDate,
+
+                    Unit = inventoryData.Unit,
+                    Specification = inventoryData.Specification,
+                    GoodsType = inventoryData.GoodsType,
+                    Brand = inventoryData.Brand,
+
+                    InventoryQuantity = newNum,
+                    CostPrice = inventoryData.CostPrice,
+                    InventorySum = inventoryData.CostPrice * newNum,
+                    LastInventoryDate = inventoryData.LastInventoryDate,
+
+                    FinalSaleDate = inventoryData.FinalSaleDate,
+                    SupplierID = inventoryData.SupplierID,
+                    SupplierName = inventoryData.SupplierName,
+                    SupplierAddress = inventoryData.SupplierAddress,
+
+                    Active = inventoryData.Active,
+                    ShipmentsQuantity = inventoryData.ShipmentsQuantity - newNum,
+                    RemainingQuantity = inventoryData.RemainingQuantity - newNum
+
+                };
+                _inventoryDataService.Insert(newInventoryData);
+
+                //添加到调货信息一条记录
+
+
+                SuccessNotification("调用成功");
+                return RedirectToAction("Index");
+            }
+            ErrorNotification("调用数量大于库存剩余，请重新选择");
+            return RedirectToAction("Index");
         }
 
     }

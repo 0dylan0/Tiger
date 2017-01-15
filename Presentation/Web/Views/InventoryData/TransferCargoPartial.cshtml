@@ -28,7 +28,7 @@
     <div class="row">
         <div class="col-xs-12 col-sm-6 col-md-6">
             <div class="form-group">
-                <label class = "control-label"> 原库存</label>
+                <label class="control-label"> 原库存</label>
                 <div class="display-lable">
                     @Html.DisplayFor(model => model.WarehouseName)
                 </div>
@@ -43,19 +43,50 @@
                 </div>
             </div>
         </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+                <label class="control-label"> 目标库存</label>
+                <div class="display-lable">
+                    @Html.DropDownListFor(m => m.WarehouseID, Model.WarehouseList, T("未选择").Text.ToString(), new { @class = "form-control full-width " })
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+                <label class="control-label"> 调动数量</label>
+                <div class="display-lable">
+                    <input id="NewInventoryQuantity" class="kl-input-num  full-width" />
+                </div>
+            </div>
+        </div>
+
     </div>
 
-    <button type="button" class="btn btn-default" id="dylan"><span class="fa fa-pencil"></span> 修改</button>
+    <button type="button" class="btn btn-default" id="dylan"><span class="fa fa-pencil"></span> 调货</button>
 
 </fieldset>
+
+
 <script>
 
-        $("#dylan").click(function (e) {
-            debugger;
+    $("#NewInventoryQuantity").kendoNumericTextBox({
+        decimals: 0,
+        format: "0",
+        min: 0,
+        max: 50000
+    });
 
-                location.href = '@Html.Raw(Url.Action("Edit", "PurchaseData", new { id = Model.ID, IfInventoryData= false }))';
+    $("#WarehouseID").kendoDropDownList({
+        filter: "startswith"
+    });
 
+    $("#dylan").click(function (e) {
+        alertify.klConfirm("是否确认调货", function () {
+            location.href = '/InventoryData/ClickTransferCargo?' + "id=" +@Model.ID +"&newNum=" + $("#NewInventoryQuantity").val() + "&newWarehouseID=" + $("#WarehouseID").getKendoDropDownList().value();
         });
+    });
 </script>
 
 

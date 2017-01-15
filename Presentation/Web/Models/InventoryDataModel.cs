@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace Web.Models
 {
@@ -16,6 +17,8 @@ namespace Web.Models
 
         [DisplayName("仓库名称")]
         public string WarehouseName { get; set; }
+
+        public IEnumerable<SelectListItem> WarehouseList { get; set; }
 
         [DisplayName("商品编号")]
         public int GoodsID { get; set; }
