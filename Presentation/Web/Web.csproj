@@ -2816,6 +2816,10 @@
       <Project>{62AB9729-E904-42FD-A2E1-046949B69013}</Project>
       <Name>Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\Data\Data.csproj">
+      <Project>{A95C6B72-EA8C-40F0-971D-B02632B364FB}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Libraries\Services\Services.csproj">
       <Project>{93E94ED5-3FE1-4918-B03E-3D12D157F801}</Project>
       <Name>Services</Name>

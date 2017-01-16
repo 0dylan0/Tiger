@@ -2,6 +2,7 @@
 using Core.Domain;
 using Core.Domain.Common;
 using Core.Page;
+using Data;
 using Services.Common;
 using Services.Localization;
 using System;
@@ -26,6 +27,7 @@ namespace Web.Controllers
         private readonly WarehouseService _warehouseService;
         private readonly PurchaseDataService _purchaseDataService;
         private readonly TransferCargoDataService _transferCargoDataService;
+        private readonly DbHelper _dbHelper;
 
         public InventoryDataController(IWorkContext webWorkContext,
             InventoryDataService inventoryDataService,
@@ -33,7 +35,8 @@ namespace Web.Controllers
             CommonController commonController,
             WarehouseService warehouseService,
             PurchaseDataService purchaseDataService,
-            TransferCargoDataService transferCargoDataService)
+            TransferCargoDataService transferCargoDataService,
+            DbHelper dbHelper)
         {
             _webWorkContext = webWorkContext;
             _inventoryDataService = inventoryDataService;
@@ -42,6 +45,7 @@ namespace Web.Controllers
             _warehouseService = warehouseService;
             _purchaseDataService = purchaseDataService;
             _transferCargoDataService = transferCargoDataService;
+            _dbHelper = dbHelper;
         }
 
         [HttpGet]
@@ -88,71 +92,19 @@ namespace Web.Controllers
 
         public ActionResult ClickTransferCargo(int id, int newNum, int newWarehouseID)
         {
+
             //添加验证判断库存是否够调用
             var inventoryData = _inventoryDataService.GetById(id);
             if (inventoryData.InventoryQuantity>= newNum)
-            {
-                int OldQuantity = inventoryData.InventoryQuantity;
-                //更改之前的库存信息               
-                inventoryData.InventoryQuantity = inventoryData.InventoryQuantity - newNum;
-                inventoryData.InventorySum = inventoryData.CostPrice * inventoryData.InventoryQuantity;
-                inventoryData.ShipmentsQuantity = inventoryData.ShipmentsQuantity - newNum;
-                inventoryData.RemainingQuantity = inventoryData.RemainingQuantity - newNum;
-                _inventoryDataService.Update(inventoryData);
-
-
-                //添加新的库存信息
-                var newWarehouse = _warehouseService.GetById(newWarehouseID);
-                InventoryData newInventoryData = new InventoryData()
+            {                
+                if(_inventoryDataService.ClickTransferCargo(id, newNum, newWarehouseID))
                 {
-                    WarehouseID = newWarehouseID,
-                    WarehouseName = newWarehouse.Name,
-                    GoodsID = inventoryData.GoodsID,
-                    GoodsName = inventoryData.GoodsName,
-                    PurchaseDate = inventoryData.PurchaseDate,
-                    ShipmentsDate = inventoryData.ShipmentsDate,
-
-                    Unit = inventoryData.Unit,
-                    Specification = inventoryData.Specification,
-                    GoodsType = inventoryData.GoodsType,
-                    Brand = inventoryData.Brand,
-
-                    InventoryQuantity = newNum,
-                    CostPrice = inventoryData.CostPrice,
-                    InventorySum = inventoryData.CostPrice * newNum,
-                    LastInventoryDate = inventoryData.LastInventoryDate,
-
-                    FinalSaleDate = inventoryData.FinalSaleDate,
-                    SupplierID = inventoryData.SupplierID,
-                    SupplierName = inventoryData.SupplierName,
-                    SupplierAddress = inventoryData.SupplierAddress,
-
-                    Active = inventoryData.Active,
-                    ShipmentsQuantity = inventoryData.ShipmentsQuantity - newNum,
-                    RemainingQuantity = inventoryData.RemainingQuantity - newNum
-
-                };
-                _inventoryDataService.Insert(newInventoryData);
-
-                //添加到调货信息一条记录
-                TransferCargoData transferCargoData = new TransferCargoData()
-                {
-                    GoodsID= inventoryData.GoodsID,
-                    GoodsName= inventoryData.GoodsName,
-                    SupplierID= inventoryData.SupplierID,
-                    SupplierName= inventoryData.SupplierName,
-                    OldWarehouseID= inventoryData.WarehouseID,
-                    OldWarehouseName=inventoryData.WarehouseName,
-                    OldQuantity= OldQuantity,
-                    NewWarehouseID= newWarehouseID,
-                    NewWarehouseName= newWarehouse.Name,
-                    NewQuantity= newNum,
-                    Date= DateTime.Now
-                };
-                _transferCargoDataService.Insert(transferCargoData);
-
-                SuccessNotification("调用成功");
+                    SuccessNotification("调用成功");
+                    return RedirectToAction("Index");
+                }
+                ErrorNotification("调用失败");
                 return RedirectToAction("Index");
+
             }
             ErrorNotification("调用数量大于库存剩余，请重新选择");
             return RedirectToAction("Index");
