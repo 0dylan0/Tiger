@@ -113,12 +113,14 @@ namespace Services.Common
                     Total=@Total,
                     Remarks=@Remarks,
                     ClientData_ID=@ClientDataID,
-                    ClientData_Name=@ClientDataName)
+                    ClientData_Name=@ClientDataName
                     where ID=@ID";
             _context.Execute(sql, new
             {
+                ID = SalesShipmentsData.ID,
                 GoodsID = SalesShipmentsData.GoodsID,
                 GoodsName = SalesShipmentsData.GoodsName,
+                Date = SalesShipmentsData.Date,
                 Unit = SalesShipmentsData.Unit,
                 Specification = SalesShipmentsData.Specification,
                 GoodsType = SalesShipmentsData.GoodsType,

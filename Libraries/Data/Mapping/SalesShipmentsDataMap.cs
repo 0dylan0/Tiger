@@ -34,6 +34,11 @@ namespace Data.Mapping
             Map(t => t.Remarks).ToColumn("Remarks");
             Map(t => t.WarehouseID).ToColumn("Warehouse_ID");
             Map(t => t.WarehouseName).ToColumn("Warehouse_Name");
+
+            Map(t => t.InventoryDataID).ToColumn("InventoryData_ID");
+            Map(t => t.Active).ToColumn("Active");
+            Map(t => t.ClientDataID).ToColumn("ClientData_ID");
+            Map(t => t.ClientDataName).ToColumn("ClientData_Name");
         }
     }
 }

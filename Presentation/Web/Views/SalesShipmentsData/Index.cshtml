@@ -64,21 +64,20 @@
     @Html.Partial("_KendoDropdownListPartial")
     @Html.Partial("_ModalSelectorPartial")
     <script type="text/javascript">
-        function onShowDetailClick(ID)
-        {
+        function onShowDetailClick(ID) {
             $.klModal.showModal("销售出货信息详情", false, true);
             $.ajax({
                 url: "@Url.Action("Detail", "SalesShipmentsData")",
                 method: "POST",
-            data: addAntiForgeryToken({                
-                id: ID
-            }),
-            beforeSend: $.klModal.displayModalLoadingInfo,
-            success: function (data) {
-                $.klModal.addDataToModalBody(data);
-                $.klModal.hideModalLoadingInfoAndDisplayBody();
-            }
-        });
+                data: addAntiForgeryToken({
+                    id: ID
+                }),
+                beforeSend: $.klModal.displayModalLoadingInfo,
+                success: function (data) {
+                    $.klModal.addDataToModalBody(data);
+                    $.klModal.hideModalLoadingInfoAndDisplayBody();
+                }
+            });
         }
 
         $(function () {
