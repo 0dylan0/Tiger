@@ -34,6 +34,7 @@ namespace Web.Infrastructure
             builder.RegisterType<ClientTypeService>().InstancePerLifetimeScope();
             builder.RegisterType<SupplierTypeService>().InstancePerLifetimeScope();
             builder.RegisterType<GoodsUnitService>().InstancePerLifetimeScope();
+            builder.RegisterType<TransferCargoDataService>().InstancePerLifetimeScope();
             
         }
 

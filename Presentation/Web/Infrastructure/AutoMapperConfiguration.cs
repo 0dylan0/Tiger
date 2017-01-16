@@ -45,6 +45,9 @@ namespace Web.Infrastructure
                 cfg.CreateMap<SupplierType, SupplierTypeModel>();
                 cfg.CreateMap<GoodsUnitModel, GoodsUnit>();
                 cfg.CreateMap<GoodsUnit, GoodsUnitModel>();
+                cfg.CreateMap<TransferCargoDataModel, TransferCargoData>();
+                cfg.CreateMap<TransferCargoData, TransferCargoDataModel>();
+                
             });
 
             _mapper = _mapperConfiguration.CreateMapper();

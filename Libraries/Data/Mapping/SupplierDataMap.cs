@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Data.Mapping
 {
-    class SupplierDataMap : DommelEntityMap<SupplierData>
+    public class SupplierDataMap : DommelEntityMap<SupplierData>
     {
         public SupplierDataMap()
         {

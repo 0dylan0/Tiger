@@ -25,13 +25,15 @@ namespace Web.Controllers
         private readonly CommonController _commonController;
         private readonly WarehouseService _warehouseService;
         private readonly PurchaseDataService _purchaseDataService;
+        private readonly TransferCargoDataService _transferCargoDataService;
 
         public InventoryDataController(IWorkContext webWorkContext,
             InventoryDataService inventoryDataService,
             LocalizationService localizationService,
             CommonController commonController,
             WarehouseService warehouseService,
-            PurchaseDataService purchaseDataService)
+            PurchaseDataService purchaseDataService,
+            TransferCargoDataService transferCargoDataService)
         {
             _webWorkContext = webWorkContext;
             _inventoryDataService = inventoryDataService;
@@ -39,6 +41,7 @@ namespace Web.Controllers
             _commonController = commonController;
             _warehouseService = warehouseService;
             _purchaseDataService = purchaseDataService;
+            _transferCargoDataService = transferCargoDataService;
         }
 
         [HttpGet]
@@ -86,10 +89,11 @@ namespace Web.Controllers
         public ActionResult ClickTransferCargo(int id, int newNum, int newWarehouseID)
         {
             //添加验证判断库存是否够调用
-            if (false)//暂时不允许使用此功能
+            var inventoryData = _inventoryDataService.GetById(id);
+            if (inventoryData.InventoryQuantity>= newNum)
             {
-                //更改之前的库存信息
-                var inventoryData = _inventoryDataService.GetById(id);
+                int OldQuantity = inventoryData.InventoryQuantity;
+                //更改之前的库存信息               
                 inventoryData.InventoryQuantity = inventoryData.InventoryQuantity - newNum;
                 inventoryData.InventorySum = inventoryData.CostPrice * inventoryData.InventoryQuantity;
                 inventoryData.ShipmentsQuantity = inventoryData.ShipmentsQuantity - newNum;
@@ -131,7 +135,21 @@ namespace Web.Controllers
                 _inventoryDataService.Insert(newInventoryData);
 
                 //添加到调货信息一条记录
-
+                TransferCargoData transferCargoData = new TransferCargoData()
+                {
+                    GoodsID= inventoryData.GoodsID,
+                    GoodsName= inventoryData.GoodsName,
+                    SupplierID= inventoryData.SupplierID,
+                    SupplierName= inventoryData.SupplierName,
+                    OldWarehouseID= inventoryData.WarehouseID,
+                    OldWarehouseName=inventoryData.WarehouseName,
+                    OldQuantity= OldQuantity,
+                    NewWarehouseID= newWarehouseID,
+                    NewWarehouseName= newWarehouse.Name,
+                    NewQuantity= newNum,
+                    Date= DateTime.Now
+                };
+                _transferCargoDataService.Insert(transferCargoData);
 
                 SuccessNotification("调用成功");
                 return RedirectToAction("Index");

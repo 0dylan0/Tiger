@@ -127,6 +127,7 @@
     <Compile Include="Domain\Common\SalesShipmentsData.cs" />
     <Compile Include="Domain\Common\SupplierData.cs" />
     <Compile Include="Domain\Common\SupplierType.cs" />
+    <Compile Include="Domain\Common\TransferCargoData.cs" />
     <Compile Include="Domain\Common\Users.cs" />
     <Compile Include="Domain\Common\UserHotelRange.cs" />
     <Compile Include="Domain\Common\UserHotelView.cs" />

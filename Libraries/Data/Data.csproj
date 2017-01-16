@@ -78,6 +78,7 @@
     <Compile Include="Mapping\PurchaseDataMap.cs" />
     <Compile Include="Mapping\SalesShipmentsDataMap.cs" />
     <Compile Include="Mapping\SupplierDataMap.cs" />
+    <Compile Include="Mapping\TransferCargoDataMap.cs" />
     <Compile Include="Mapping\UserMap.cs" />
     <Compile Include="Mapping\WarehouseMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
