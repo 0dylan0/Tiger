@@ -127,9 +127,12 @@ namespace Web.Controllers
         {
             var salesShipments = _salesShipmentsDataService.GetById(id);
             var model = salesShipments.MapTo<SalesShipmentsData, SalesShipmentsDataModel>();
-           
+
+            model.OldQuantity = model.Quantity;
             model.ClientDataList = GetClientDataList();
             model.WarehouseList = GetWarehouseList();
+            model.SpecificationList = GetSpecificationList();
+            model.GoodsTypeList = GetGoodsTypeList();
             return View(model);
 
         }
@@ -140,10 +143,38 @@ namespace Web.Controllers
             {
                 SalesShipmentsData salesShipments = model.MapTo<SalesShipmentsDataModel, SalesShipmentsData>();
                 _salesShipmentsDataService.Update(salesShipments);
+
+
+                var inventoryDataID = _inventoryDataService.GetById(model.InventoryDataID);
+                InventoryData inventoryData = new InventoryData()
+                {
+                    WarehouseID = model.WarehouseID,
+                    WarehouseName = model.WarehouseName,
+                    GoodsID = model.GoodsID,
+                    GoodsName = model.GoodsName,
+                    Unit = model.Unit,
+                    Specification = model.Specification,
+                    GoodsType = model.GoodsType,
+                    Brand = model.Brand,
+                    InventoryQuantity = inventoryDataID.InventoryQuantity + (model.Quantity - model.OldQuantity),
+                    CostPrice = ((model.Quantity != 0) ? (model.Sum / Convert.ToDecimal(model.Quantity)) : 0),
+                    InventorySum = model.Sum,
+
+                    PurchaseDate = DateTime.Now,
+                    ShipmentsDate = DateTime.Now,
+                    LastInventoryDate = DateTime.Now,
+                    FinalSaleDate = DateTime.Now
+                };
+                _inventoryDataService.Update(inventoryData);
                 SuccessNotification($"{_localizationService.GetResource("UpdateSuccess") + model.GoodsName}");
                 return RedirectToAction("Index");
 
             }
+
+            model.ClientDataList = GetClientDataList();
+            model.WarehouseList = GetWarehouseList();
+            model.SpecificationList = GetSpecificationList();
+            model.GoodsTypeList = GetGoodsTypeList();
             return View(model);
         }
 
