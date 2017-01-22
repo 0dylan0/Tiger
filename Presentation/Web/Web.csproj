@@ -2098,7 +2098,9 @@
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="tiger.ico" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Scripts\jquery.form.min.js.map" />
     <Content Include="Scripts\kendo\2016.2.714\messages\kendo.messages.zh-TW.min.js.map" />
     <Content Include="Scripts\kendo\2016.2.714\messages\kendo.messages.zh-HK.min.js.map" />
@@ -2723,6 +2725,7 @@
     <Compile Include="Validators\GoodsTypeValidator.cs" />
     <Compile Include="Validators\GoodsUnitValidator.cs" />
     <Compile Include="Validators\PurchaseDataValidator.cs" />
+    <Compile Include="Validators\SalesShipmentsDataValidator.cs" />
     <Compile Include="Validators\SupplierDataValidator.cs" />
     <Compile Include="Validators\SupplierTypeValidator.cs" />
     <Compile Include="Validators\UserValidator.cs" />

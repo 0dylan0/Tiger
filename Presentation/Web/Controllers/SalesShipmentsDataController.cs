@@ -28,6 +28,7 @@ namespace Web.Controllers
         private readonly GoodsSpecificationService _goodsSpecificationService;
         private readonly ClientTypeService _clientTypeService;
         private readonly ClientDataService _clientDataService;
+        private readonly GoodsTypeService _goodsTypeService;
 
         public SalesShipmentsDataController(IWorkContext webWorkContext,
             SalesShipmentsDataService salesShipmentsDataService,
@@ -37,7 +38,8 @@ namespace Web.Controllers
             InventoryDataService inventoryDataService,
             GoodsSpecificationService goodsSpecificationService,
             ClientTypeService clientTypeService,
-            ClientDataService clientDataService)
+            ClientDataService clientDataService,
+            GoodsTypeService goodsTypeService)
         {
             _webWorkContext = webWorkContext;
             _salesShipmentsDataService = salesShipmentsDataService;
@@ -48,6 +50,7 @@ namespace Web.Controllers
             _goodsSpecificationService = goodsSpecificationService;
             _clientTypeService = clientTypeService;
             _clientDataService = clientDataService;
+            _goodsTypeService = goodsTypeService;
         }
 
         // GET: SalesShipmentsData
@@ -61,7 +64,7 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult Index(PageInfo pageInfo, SalesShipmentsDataListModel model)
         {
-            IPagedList<SalesShipmentsData> SalesShipmentsDataList = _salesShipmentsDataService.GetList(model.Name, pageInfo.PageIndex, pageInfo.PageSize, pageInfo.sortExpression);
+            IPagedList<SalesShipmentsData> SalesShipmentsDataList = _salesShipmentsDataService.GetList(model.Name, model.ShowInactive,pageInfo.PageIndex, pageInfo.PageSize, pageInfo.sortExpression);
             model.SalesShipmentsData = SalesShipmentsDataList.MapTo<IList<SalesShipmentsData>, IList<SalesShipmentsDataModel>>();
 
             var results = new DataTable<SalesShipmentsDataModel>()
@@ -95,6 +98,7 @@ namespace Web.Controllers
                 _salesShipmentsDataService.Insert(SalesShipments);
                 InventoryData inventoryData = new InventoryData()
                 {
+                    ID = model.InventoryDataID,
                     WarehouseID = model.WarehouseID,
                     WarehouseName = model.WarehouseName,
                     GoodsID = model.GoodsID,
@@ -113,6 +117,7 @@ namespace Web.Controllers
                     FinalSaleDate = DateTime.Now
                 };
                 _inventoryDataService.Update(inventoryData);
+                SuccessNotification("添加成功");
                 return RedirectToAction("Index");
             }
 
@@ -166,7 +171,7 @@ namespace Web.Controllers
                     FinalSaleDate = DateTime.Now
                 };
                 _inventoryDataService.Update(inventoryData);
-                SuccessNotification($"{_localizationService.GetResource("UpdateSuccess") + model.GoodsName}");
+                SuccessNotification("修改成功");
                 return RedirectToAction("Index");
 
             }
@@ -178,12 +183,21 @@ namespace Web.Controllers
             return View(model);
         }
 
-        public ActionResult Detail(int id)
+        public ActionResult Refund(int id,int inventoryDataID,int quantity)
         {
             var selesShipment = _salesShipmentsDataService.GetById(id);
-            var model = selesShipment.MapTo<SalesShipmentsData, SalesShipmentsDataModel>();
+            _salesShipmentsDataService.Refund(id);
 
-            return Json(new JsonResponse<string>(RenderPartialViewToString("SalesShipmentsDataPartial", model)));
+            var inventoryID = _inventoryDataService.GetById(inventoryDataID);
+            InventoryData inventoryData = new InventoryData()
+            {
+                ID = inventoryID.ID,
+                InventoryQuantity = inventoryID.InventoryQuantity + quantity,
+            };
+            _inventoryDataService.Refund(inventoryData);
+
+            SuccessNotification("退货成功");
+            return RedirectToAction("Index");
         }
 
         public List<SelectListItem> GetClientDataList()
@@ -215,7 +229,7 @@ namespace Web.Controllers
 
         public List<SelectListItem> GetGoodsTypeList()
         {
-            return _clientTypeService.GetClientTypeList().Select(o => new SelectListItem
+            return _goodsTypeService.GetGoodsTypeList().Select(o => new SelectListItem
             {
                 Text = o.Name,
                 Value = o.Name,

@@ -88,7 +88,7 @@ namespace Services.Common
                 WarehouseID = SalesShipmentsData.WarehouseID,
                 WarehouseName = SalesShipmentsData.WarehouseName,
                 InventoryDataID = SalesShipmentsData.InventoryDataID,
-                Active = SalesShipmentsData.Active,
+                Active = "1",
                 Freight = SalesShipmentsData.Freight,
                 ClientDataID = SalesShipmentsData.ClientDataID,
                 ClientDataName = SalesShipmentsData.ClientDataName
@@ -138,6 +138,18 @@ namespace Services.Common
 
         }
 
+        public void Refund(int id)
+        {
+            var sql = $@"update SalesShipmentsData set
+                    Active = '0'
+                    where ID=@ID";
+            _context.Execute(sql, new
+            {
+                ID = id
+            });
+
+        }
+
         public SalesShipmentsData GetById(int id)
         {
             var sql = @"select * from SalesShipmentsData  where id = @id";
@@ -156,11 +168,11 @@ namespace Services.Common
             });
         }
 
-        public IPagedList<SalesShipmentsData> GetList(string textQuery, int pageIndex = 0, int pageSize = 2147483647, string sortExpression = "")
+        public IPagedList<SalesShipmentsData> GetList(string textQuery, bool showInactive,int pageIndex = 0, int pageSize = 2147483647, string sortExpression = "")
         {
-            string sql = @"select * from SalesShipmentsData";
+            string sql = @"select * from SalesShipmentsData where active = @ShowInactive";
             var Parameter = new DynamicParameters();
-            //Parameter.Add("textQuery", textQuery);
+            Parameter.Add("ShowInactive", showInactive ? "0" : "1");
             return new SqlPagedList<SalesShipmentsData>(sql, Parameter, pageIndex, pageSize, sortExpression);
         }
 

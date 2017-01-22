@@ -1,12 +1,15 @@
-﻿using System;
+﻿using FluentValidation.Attributes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Web.Validators;
 
 namespace Web.Models
 {
+    [Validator(typeof(SalesShipmentsDataValidator))]
     public class SalesShipmentsDataModel
     {
         public int ID { get; set; }
@@ -17,7 +20,7 @@ namespace Web.Models
         [DisplayName("商品名称")]
         public string GoodsName { get; set; }
 
-        [DisplayName("日期")]
+        [DisplayName("送货日期")]
         public DateTime Date { get; set; }
 
         [DisplayName("单位")]

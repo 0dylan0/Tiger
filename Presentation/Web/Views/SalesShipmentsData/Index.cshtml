@@ -18,6 +18,14 @@
                     </div>
                 </div>
 
+                <div class="col-md-2 col-sm-4 col-xs-12">
+                    <div class="form-group checkbox">
+                        @HiddenLabel()
+                        @Html.CheckBoxFor(m => m.ShowInactive)
+                        @Html.LabelFor(m => m.ShowInactive)
+                    </div>
+                </div>
+
                 <div class="col-md-1 col-sm-2 col-xs-12">
                     <div class="form-group">
                         @HiddenLabel()
@@ -46,9 +54,6 @@
                     <th>数量</th>
                     <th>实际单价</th>
                     <th>总金额</th>
-
-                    <th>成本</th>
-                    <th>利润</th>
 
                     <th>总量</th>
                     <th>客户</th>
@@ -87,6 +92,7 @@
                     url: "@Url.Action("Index")",
                     type: "post",
                     data: function (d) {
+                        d.ShowInactive = $("#ShowInactive").prop("checked"),
                         d.textquery = $("#Name").val(),
                         addAntiForgeryToken(d);
                     },
@@ -100,9 +106,6 @@
                     { data: "goodsType" },
                     { data: "quantity" },
                     { data: "unitPrice" },
-
-                    { data: "sum" },
-                    { data: "cost" },
 
                     { data: "profit" },
                     { data: "total" },
@@ -124,14 +127,14 @@
 
                     },
                     {
-                        targets: [12],
+                        targets: [10],
                         orderable: false,
                         render: function (data, type, full) {
                             return '<a class="btn btn-xs btn-default" onclick="onShowDetailClick(' + encodeURIComponent(full["id"]) + ')"><span class="fa fa-search"></span> 详情</a>';
                         }
                     },
                     {
-                        targets: [13],
+                        targets: [11],
                         orderable: false,
                         render: function (data, type, full) {
                             return '<a href="/SalesShipmentsData/Edit?id=' + encodeURIComponent(full["id"]) + '" class="btn btn-xs btn-default "><span class="fa fa-pencil"></span> 修改</a>';

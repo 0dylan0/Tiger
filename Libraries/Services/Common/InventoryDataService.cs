@@ -144,9 +144,21 @@ namespace Services.Common
                 ShipmentsDate = InventoryData.ShipmentsDate,
                 WarehouseID = InventoryData.WarehouseID,
                 WarehouseName = InventoryData.WarehouseName,
-                Active = InventoryData.Active,
+                Active = '1',
                 ShipmentsQuantity = InventoryData.ShipmentsQuantity,
                 RemainingQuantity = InventoryData.RemainingQuantity,
+                ID= InventoryData.ID
+            });
+        }
+
+        public void Refund(InventoryData InventoryData)
+        {
+            var sql = $@"update InventoryData set
+                    InventoryQuantity=@InventoryQuantity
+                    WHERE ID=@ID";
+            _context.Execute(sql, new
+            {
+                InventoryQuantity = InventoryData.InventoryQuantity,
                 ID= InventoryData.ID
             });
         }
