@@ -79,15 +79,43 @@ namespace Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult Add()
+        public ActionResult Add(int id=0)
         {
-            SalesShipmentsDataModel model = new SalesShipmentsDataModel();
-            model.Date= DateTime.Now;
-            model.ClientDataList = GetClientDataList();
-            model.WarehouseList = GetWarehouseList();
-            model.SpecificationList = GetSpecificationList();
-            model.GoodsTypeList = GetGoodsTypeList();
-            return View(model);
+            if(id==0)
+            {
+                SalesShipmentsDataModel model = new SalesShipmentsDataModel();
+                model.Date = DateTime.Now;
+                model.ClientDataList = GetClientDataList();
+                model.WarehouseList = GetWarehouseList();
+                model.SpecificationList = GetSpecificationList();
+                model.GoodsTypeList = GetGoodsTypeList();
+                return View(model);
+            }
+            else
+            {
+                InventoryData inventoryData = _inventoryDataService.GetById(id);
+                SalesShipmentsDataModel model = new SalesShipmentsDataModel()
+                {
+                    WarehouseID = inventoryData.WarehouseID,
+                    WarehouseName = inventoryData.WarehouseName,
+                    GoodsID = inventoryData.GoodsID,
+                    GoodsName = inventoryData.GoodsName,
+                    Unit = inventoryData.Unit,
+                    Specification = inventoryData.Specification,
+                    GoodsType = inventoryData.GoodsType,
+                    Brand = inventoryData.Brand,
+                    Cost=inventoryData.CostPrice,
+                    InventoryDataID=inventoryData.ID,
+                    OldQuantity = inventoryData.InventoryQuantity
+                };
+                model.Date = DateTime.Now;
+                model.ClientDataList = GetClientDataList();
+                model.WarehouseList = GetWarehouseList();
+                model.SpecificationList = GetSpecificationList();
+                model.GoodsTypeList = GetGoodsTypeList();
+                return View(model);
+            }
+            
         }
         [HttpPost]
         public ActionResult Add(SalesShipmentsDataModel model)
