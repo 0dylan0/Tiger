@@ -75,13 +75,15 @@ namespace Web.Controllers
                 _clientDataService.Insert(Goods);
                 return RedirectToAction("Index");
             }
+            model.ClientTypeList = _commonController.GetClientTypeList();
             return View(model);
         }
 
         public ActionResult Edit(int id)
         {
             var user = _clientDataService.GetUserById(id);
-            var res = user.MapTo<ClientData, ClientDataModel>();            
+            var res = user.MapTo<ClientData, ClientDataModel>();
+            res.ClientTypeList = _commonController.GetClientTypeList();
             return View(res);
 
         }
@@ -96,6 +98,7 @@ namespace Web.Controllers
                 return RedirectToAction("Index");
 
             }
+            model.ClientTypeList = _commonController.GetClientTypeList();
             return View(model);
         }
 

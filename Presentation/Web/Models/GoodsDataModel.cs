@@ -42,7 +42,7 @@ namespace Web.Models
 
         [DisplayName("实际进价")]
         //实际售价
-        public decimal ActualPurchasePrice { get; set; }
+        public decimal? ActualPurchasePrice { get; set; } = 0;
 
         [DisplayName("库存")]
         //库存
@@ -72,7 +72,7 @@ namespace Web.Models
 
         [DisplayName("成本")]
         //成本
-        public decimal Cost { get; set; }
+        public decimal? Cost { get; set; } = 0;
 
         [DisplayName("图片")]
         //图片
@@ -80,6 +80,6 @@ namespace Web.Models
 
         [DisplayName("单品利润")]
         //单品利润
-        public decimal SingleProfit { get; set; }
+        public decimal? SingleProfit { get; set; } = 0;
     }
 }

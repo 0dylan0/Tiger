@@ -30,7 +30,7 @@ namespace Core.Domain.Common
         public string OldWarehouseName { get; set; }
 
         //旧的仓库量
-        public int OldQuantity { get; set; }
+        public int? OldQuantity { get; set; }
 
         //新的仓库ID
         public int NewWarehouseID { get; set; }

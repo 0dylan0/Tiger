@@ -8,6 +8,7 @@ namespace Web.Models
 {
     public class SalesShipmentsDataListModel
     {
+        [DisplayName("商品名")]
         public string Name { get; set; }
 
         [DisplayName("显示退货信息")]

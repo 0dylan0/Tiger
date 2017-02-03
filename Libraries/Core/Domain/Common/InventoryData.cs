@@ -41,13 +41,13 @@ namespace Core.Domain
         public string Brand { get; set; }
 
         //库存数量
-        public int InventoryQuantity { get; set; }
+        public int? InventoryQuantity { get; set; }
 
         //成本
-        public decimal CostPrice { get; set; }
+        public decimal? CostPrice { get; set; }
 
         //库存金额
-        public decimal InventorySum { get; set; }
+        public decimal? InventorySum { get; set; }
 
         //上次盘点日期
         public DateTime LastInventoryDate { get; set; }
@@ -71,7 +71,7 @@ namespace Core.Domain
         public int ShipmentsQuantity { get; set; }
 
         //剩余数量
-        public int RemainingQuantity { get; set; }
+        public int? RemainingQuantity { get; set; }
 
 
     }

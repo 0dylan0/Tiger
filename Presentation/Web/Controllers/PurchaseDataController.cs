@@ -200,7 +200,8 @@ namespace Web.Controllers
                     FinalSaleDate = DateTime.Now,
                     Active = "1",
                     ShipmentsQuantity = 0,
-                    RemainingQuantity = model.Quantity
+                    RemainingQuantity = model.Quantity,
+                    ID=model.InventoryDataID
                 };
                 //修改货物库存表返回ID
                 _inventoryDataService.Update(inventoryData);

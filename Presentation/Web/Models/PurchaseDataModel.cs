@@ -42,13 +42,13 @@ namespace Web.Models
         public string Brand { get; set; }
 
         [DisplayName("数量")]
-        public int Quantity { get; set; }
+        public int? Quantity { get; set; } = 0;
 
         [DisplayName("成本价")]
-        public decimal UnitPrice { get; set; }
+        public decimal? UnitPrice { get; set; } = 0;
 
         [DisplayName("总金额")]
-        public decimal Sum { get; set; }
+        public decimal? Sum { get; set; } = 0;
 
         [DisplayName("总量")]
         public string Total { get; set; }
@@ -83,6 +83,6 @@ namespace Web.Models
         public string Active { get; set; }
 
         [DisplayName("运费")]
-        public decimal Freight { get; set; }
+        public decimal? Freight { get; set; } = 0;
     }
 }

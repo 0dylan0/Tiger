@@ -198,7 +198,7 @@ namespace Services.Common
             {
                 var inventoryData=_context.QuerySingleOrDefault<InventoryData>("select * from InventoryData  where id = @id", new { id = id }, t);
                 //var inventoryData = GetById(id);
-                int OldQuantity = inventoryData.InventoryQuantity;
+                int? OldQuantity = inventoryData.InventoryQuantity;
                 //更改之前的库存信息               
                 inventoryData.InventoryQuantity = inventoryData.InventoryQuantity - newNum;
                 inventoryData.InventorySum = inventoryData.CostPrice * inventoryData.InventoryQuantity;

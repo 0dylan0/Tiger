@@ -41,7 +41,7 @@ namespace Web.Models
         public string Telephone { get; set; }
 
         [DisplayName("欠款")]
-        public decimal Arrears { get; set; }
+        public decimal? Arrears { get; set; } = 0;
 
         [DisplayName("还款日期")]
         public DateTime RepaymentDate { get; set; }
@@ -59,7 +59,7 @@ namespace Web.Models
         public string TaxIdentificationNumber { get; set; }
 
         [DisplayName("排序号")]
-        public int Seq { get; set; }
+        public int? Seq { get; set; } = 0;
 
         [DisplayName("备注1")]
         public string Remarks1 { get; set; }

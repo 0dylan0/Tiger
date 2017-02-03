@@ -45,7 +45,6 @@
                     <th>区域</th>
                     <th>手机</th>
                     <th>还款日期</th>
-                    <th>详情</th>
                     <th>编辑</th>
                 </tr>
             </thead>
@@ -92,13 +91,6 @@
                     },
                     {
                         targets: [8],
-                        orderable: false,
-                        render: function (data, type, full) {
-                            return '<a href="/SupplierData/Edit?id=' + encodeURIComponent(full["id"]) + '" class="btn btn-xs btn-default "><span class="fa fa-pencil"></span> 详情</a>';
-                        }
-                    },
-                    {
-                        targets: [9],
                         orderable: false,
                         render: function (data, type, full) {
                             return '<a href="/SupplierData/Edit?id=' + encodeURIComponent(full["id"]) + '" class="btn btn-xs btn-default "><span class="fa fa-pencil"></span> 修改</a>';

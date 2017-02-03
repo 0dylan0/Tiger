@@ -40,13 +40,13 @@ namespace Web.Models
         [DisplayName("数量")]
         public int Quantity { get; set; }
 
-        public int OldQuantity { get; set; }
+        public int? OldQuantity { get; set; }
 
         [DisplayName("实际单价")]
         public decimal UnitPrice { get; set; }
 
         [DisplayName("成本")]
-        public decimal Cost { get; set; }
+        public decimal? Cost { get; set; }
 
         [DisplayName("总利润")]
         public decimal Profit { get; set; }
