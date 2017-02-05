@@ -260,8 +260,7 @@
 
             $("#Profit").kendoNumericTextBox({
                 format: "c",
-                decimals: 2,
-                min: 0
+                decimals: 2
             });
             
             $("#Quantity").change(function () {
@@ -287,7 +286,7 @@
 
             function Profit()
             {
-                $("#Profit").getKendoNumericTextBox().value(parseFloat($("#Sum").val()) - parseFloat($("#Cost").val()) - parseFloat($("#Freight").val()));
+                $("#Profit").getKendoNumericTextBox().value(parseFloat($("#Sum").val()) - parseFloat($("#Cost").val()) * parseInt($("#Quantity").val()) - parseFloat($("#Freight").val()));
             }
 
             $("#ClientDataID").on("change", function () {

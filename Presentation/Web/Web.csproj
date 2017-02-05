@@ -2662,6 +2662,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\ArrearsController.cs" />
     <Compile Include="Controllers\ClientDataController.cs" />
     <Compile Include="Controllers\ClientTypeController.cs" />
     <Compile Include="Controllers\CommonController.cs" />
@@ -2813,6 +2814,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Arrears\" />
     <Folder Include="Views\Common\" />
     <Folder Include="Views\Purchase\" />
   </ItemGroup>

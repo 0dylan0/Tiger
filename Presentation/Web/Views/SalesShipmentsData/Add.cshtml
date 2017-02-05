@@ -39,14 +39,14 @@
                         @Html.DropDownListFor(m => m.Specification, Model.SpecificationList, T("未选择").Text.ToString(), new { @class = "form-control full-width " })
                         @Html.ValidationMessageFor(m => m.Specification)
                     </div>
-                </div> 
+                </div>
             </div>
 
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <div class="form-group">
                         @Html.LabelFor(m => m.Brand, new { @class = "control-label" })
-                        @Html.TextBoxFor(m => m.Brand, new { @class = "form-control ",@readonly= "readonly" })
+                        @Html.TextBoxFor(m => m.Brand, new { @class = "form-control ", @readonly = "readonly" })
                         @Html.ValidationMessageFor(m => m.Brand)
                     </div>
                 </div>
@@ -130,7 +130,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <div class="form-group">
@@ -142,12 +142,12 @@
             </div>
             <div class="row">
                 @*<div class="col-xs-12 col-sm-6 col-md-4">
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Total, new { @class = "control-label" })@RequiredTag()
-                    @Html.TextBoxFor(m => m.Total, new { @class = "kl-input-num  full-width" })
-                    @Html.ValidationMessageFor(m => m.Total)
-                </div>
-            </div>*@
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Total, new { @class = "control-label" })@RequiredTag()
+                            @Html.TextBoxFor(m => m.Total, new { @class = "kl-input-num  full-width" })
+                            @Html.ValidationMessageFor(m => m.Total)
+                        </div>
+                    </div>*@
 
                 <div class="col-xs-12 col-sm-10 col-md-8">
                     <div class="form-group">
@@ -240,8 +240,7 @@
 
             $("#Profit").kendoNumericTextBox({
                 format: "c",
-                decimals: 2,
-                min: 0
+                decimals: 2
             });
 
 
@@ -264,7 +263,7 @@
             }
 
 
-            
+
             $("#GoodsType").getKendoDropDownList().readonly();
             $("#Specification").getKendoDropDownList().readonly();
             $("#WarehouseID").getKendoDropDownList().readonly();
@@ -294,9 +293,8 @@
             $("#Sum").getKendoNumericTextBox().value((parseInt($("#Quantity").val()) * parseFloat($("#UnitPrice").val())) + parseFloat($("#Freight").val()));
         }
 
-        function Profit()
-        {
-            $("#Profit").getKendoNumericTextBox().value(parseFloat($("#Sum").val()) - parseFloat($("#Cost").val()) - parseFloat($("#Freight").val()));
+        function Profit() {
+            $("#Profit").getKendoNumericTextBox().value(parseFloat($("#Sum").val()) - parseFloat($("#Cost").val()) * parseInt($("#Quantity").val()) - parseFloat($("#Freight").val()));
         }
 
         $("#ClientDataID").on("change", function () {

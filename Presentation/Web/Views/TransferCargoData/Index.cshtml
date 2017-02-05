@@ -80,14 +80,11 @@
                     return false;
                 });
                 var grid = $(".dataTable").DataTable({
-                    order: [1, "desc"],
+                    order: [0, "desc"],
                     ajax: {
                         url: "@Url.Action("Index")",
                         type: "post",
                         data: function (d) {
-                            d.Name = $("#Name").val(),
-                            addAntiForgeryToken(d);
-                        },
                     },
                     columns: [
                         { data: "id" },
