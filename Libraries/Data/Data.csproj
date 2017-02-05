@@ -71,6 +71,8 @@
     <Compile Include="DbHelper.cs" />
     <Compile Include="Infrastructure\DbStartupTask.cs" />
     <Compile Include="Logging\ConsoleSqlLogger.cs" />
+    <Compile Include="Mapping\ArrearsDataMap.cs" />
+    <Compile Include="Mapping\ArrearsDetailsMap.cs" />
     <Compile Include="Mapping\ClientDataMap.cs" />
     <Compile Include="Mapping\GoodsDataMap.cs" />
     <Compile Include="Mapping\InventoryDataMap.cs" />

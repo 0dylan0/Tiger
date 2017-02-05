@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Domain.Common
 {
-    public class Arrears
+    public class ArrearsData
     {
         public int ID { get; set; }
 

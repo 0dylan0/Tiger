@@ -10,7 +10,7 @@ namespace Core.Domain.Common
     {
         public int ID { get; set; }
 
-        public int GoodesID { get; set; }
+        public int GoodsID { get; set; }
 
         public string GoodsName { get; set; }
 

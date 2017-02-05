@@ -113,7 +113,7 @@
     <Compile Include="CommonHelper.cs" />
     <Compile Include="Comparer\Equality.cs" />
     <Compile Include="ComponentModel\GenericListTypeConverter.cs" />
-    <Compile Include="Domain\Common\Arrears.cs" />
+    <Compile Include="Domain\Common\ArrearsData.cs" />
     <Compile Include="Domain\Common\ArrearsDetails.cs" />
     <Compile Include="Domain\Common\BaseDicEntity.cs" />
     <Compile Include="Domain\Common\BaseEntity.cs" />

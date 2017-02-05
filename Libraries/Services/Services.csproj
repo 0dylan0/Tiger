@@ -71,6 +71,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\ArrearsDataService.cs" />
+    <Compile Include="Common\ArrearsDetailsService.cs" />
     <Compile Include="Common\ClientDataService.cs" />
     <Compile Include="Common\ClientTypeService.cs" />
     <Compile Include="Common\GoodsDataService.cs" />
