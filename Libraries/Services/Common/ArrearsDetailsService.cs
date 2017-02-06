@@ -81,6 +81,38 @@ namespace Services.Common
             });
         }
 
+        public void UpdateArrears(int arrearsDetailsId, decimal? arrears,int arrearsID)
+        {
+           
+            var sql2 = @"select * from ArrearsData  where id = @id";
+            ArrearsData arrearsDataRes = _context.QuerySingle<ArrearsData>(sql2, new
+            {
+                id = arrearsID
+            });
+            ArrearsDetails arrearsDetailsIdRes = GetById(arrearsDetailsId);
+            decimal? newArrears = arrearsDataRes.ArrearsAmount - (arrearsDetailsIdRes.ArrearsAmount- arrears);
+
+            var sql3 = $@"update ArrearsData set
+                    ArrearsAmount=@ArrearsAmount
+                    where ID=@ID";
+            _context.Execute(sql3, new
+            {
+                ArrearsAmount = newArrears,
+                ID = arrearsID
+            });
+
+
+
+            var sql = $@"update ArrearsDetails set
+                    ArrearsAmount=@ArrearsAmount
+                    where ID=@ID";
+            _context.Execute(sql, new
+            {
+                ArrearsAmount = arrears,
+                ID = arrearsDetailsId
+            });
+        }
+
         public ArrearsDetails GetById(int id)
         {
             var sql = @"select * from ArrearsDetails  where id = @id";

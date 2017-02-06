@@ -73,17 +73,14 @@ namespace Web.Controllers
 
         }
         [HttpPost]
-        public ActionResult Edit(SalesShipmentsDataModel model)
+        public ActionResult Edit(int arrearsDetailsId, decimal arrears,int arrearsID)
         {
             if (ModelState.IsValid)
             {
-
-                //_arrearsDataService.Update();
-                SuccessNotification("修改成功");
-                return RedirectToAction("Index");
-
-            }
-            return View(model);
+                _arrearsDetailsService.UpdateArrears(arrearsDetailsId, arrears, arrearsID);
+                return Json(new JsonResponse(JsonResponseStatus.success), JsonRequestBehavior.AllowGet);
+            }       
+            return View(_arrearsDataService.GetById(arrearsID));
         }
     }
 }

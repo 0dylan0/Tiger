@@ -68,6 +68,22 @@ namespace Services.Common
 
         }
 
+        public void UpdateArrearsAmountAndSum(decimal? ArrearsAmount, decimal? Sum,int id)
+        {
+            var sql = $@"update ArrearsData set
+                    ArrearsAmount=@ArrearsAmount,
+                    Sum=@Sum
+                    where ID=@ID";
+            _context.Execute(sql, new
+            {
+                ID = id,
+                ArrearsAmount = ArrearsAmount,
+                Sum = Sum
+            });
+
+        }
+
+
         public ArrearsData GetById(int id)
         {
             var sql = @"select * from ArrearsData  where id = @id";

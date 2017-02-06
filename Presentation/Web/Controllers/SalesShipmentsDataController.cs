@@ -172,7 +172,7 @@ namespace Web.Controllers
         public void ArrearsInset(SalesShipmentsDataModel model, int salesShipmentsDataID)
         {
 
-            int resID =_arrearsDataService.GetByClientDataIDAndDate(model.ClientDataID,model.Date);
+            int resID = _arrearsDataService.GetByClientDataIDAndDate(model.ClientDataID, model.Date);
             if (resID == 0)
             {
                 ArrearsData arrearsData = new ArrearsData()
@@ -214,6 +214,12 @@ namespace Web.Controllers
                     GoodsName = model.GoodsName
                 };
                 _arrearsDetailsService.Insert(arrearsDetails);
+
+                //为主表添加欠款
+                ArrearsData arrearsData = _arrearsDataService.GetById(resID);
+                decimal? ArrearsAmount = arrearsData.ArrearsAmount + model.ArrearsAmount;
+                decimal? Sum = arrearsData.Sum + model.ArrearsAmount;
+                _arrearsDataService.UpdateArrearsAmountAndSum(ArrearsAmount, Sum, resID);
             }
 
 
