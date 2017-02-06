@@ -21,6 +21,9 @@ namespace Web.Validators
                 .NotEmpty().WithMessage("商品名称不能为空");
             RuleFor(m => m.Date)
                 .NotEmpty().WithMessage("送货日期不能为空");
+            RuleFor(m => m.ArrearsAmount)
+                .NotEmpty().WithMessage("欠款额不能为空，无欠款为0");
+            
         }
     }
 }

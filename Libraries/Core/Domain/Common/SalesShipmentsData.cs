@@ -69,5 +69,7 @@ namespace Core.Domain.Common
         public int ClientDataID { get; set; }
 
         public string ClientDataName { get; set; }
+
+        public int? ArrearsID { get; set; }
     }
 }

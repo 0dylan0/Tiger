@@ -15,7 +15,7 @@ namespace Data.Mapping
             ToTable("GoodsData");
 
             Map(t => t.ID).ToColumn("ID").IsKey();
-            Map(t => t.GoodsID).ToColumn("Goodes_ID");
+            Map(t => t.GoodsID).ToColumn("Goods_ID");
             Map(t => t.GoodsName).ToColumn("Goods_Name");
            
             Map(t => t.ArrearsID).ToColumn("Arrears_ID");

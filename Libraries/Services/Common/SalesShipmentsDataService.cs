@@ -23,7 +23,7 @@ namespace Services.Common
             _context = context;
         }
 
-        public void Insert(SalesShipmentsData SalesShipmentsData)
+        public int Insert(SalesShipmentsData SalesShipmentsData)
         {
             var sql = $@"insert into SalesShipmentsData(
                     Goods_ID,
@@ -68,8 +68,8 @@ namespace Services.Common
                     @Active,
                     @Freight,
                     @ClientDataID,
-                    @ClientDataName)";
-            _context.Execute(sql, new
+                    @ClientDataName) select @@identity";
+            return _context.QuerySingle<int>(sql, new
             {
                 GoodsID = SalesShipmentsData.GoodsID,
                 GoodsName = SalesShipmentsData.GoodsName,
@@ -93,8 +93,19 @@ namespace Services.Common
                 ClientDataID = SalesShipmentsData.ClientDataID,
                 ClientDataName = SalesShipmentsData.ClientDataName
             });
-        } 
+        }
 
+        public void InsertArrearsID(int ArrearsID, int salesShipmentsDataID)
+        {
+            var sql = $@"update SalesShipmentsData set
+                         Arrears_ID=@ArrearsID 
+                         where ID=@ID";
+            _context.Execute(sql, new
+            {
+                ID = salesShipmentsDataID,
+                ArrearsID = ArrearsID
+            });
+        }
         public void Update(SalesShipmentsData SalesShipmentsData)
         {
             var sql = $@"update SalesShipmentsData set
@@ -168,7 +179,7 @@ namespace Services.Common
             });
         }
 
-        public IPagedList<SalesShipmentsData> GetList(string textQuery, bool showInactive,int pageIndex = 0, int pageSize = 2147483647, string sortExpression = "")
+        public IPagedList<SalesShipmentsData> GetList(string textQuery, bool showInactive, int pageIndex = 0, int pageSize = 2147483647, string sortExpression = "")
         {
             string sql = @"select * from SalesShipmentsData where active = @ShowInactive";
             var Parameter = new DynamicParameters();

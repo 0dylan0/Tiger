@@ -47,7 +47,11 @@ namespace Web.Infrastructure
                 cfg.CreateMap<GoodsUnit, GoodsUnitModel>();
                 cfg.CreateMap<TransferCargoDataModel, TransferCargoData>();
                 cfg.CreateMap<TransferCargoData, TransferCargoDataModel>();
-                
+
+                cfg.CreateMap<ArrearsDataModel, ArrearsData>();
+                cfg.CreateMap<ArrearsData, ArrearsDataModel>();
+                cfg.CreateMap<ArrearsDetailsModel, ArrearsDetails>();
+                cfg.CreateMap<ArrearsDetails, ArrearsDetailsModel>();
             });
 
             _mapper = _mapperConfiguration.CreateMapper();

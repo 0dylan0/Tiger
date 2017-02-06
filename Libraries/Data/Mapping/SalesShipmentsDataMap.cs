@@ -39,6 +39,8 @@ namespace Data.Mapping
             Map(t => t.Active).ToColumn("Active");
             Map(t => t.ClientDataID).ToColumn("ClientData_ID");
             Map(t => t.ClientDataName).ToColumn("ClientData_Name");
+            Map(t => t.ArrearsID).ToColumn("Arrears_ID");
+            
         }
     }
 }

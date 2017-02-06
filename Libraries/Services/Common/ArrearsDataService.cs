@@ -23,7 +23,7 @@ namespace Services.Common
             _context = context;
         }
 
-        public void Insert(ArrearsData ArrearsData)
+        public int Insert(ArrearsData ArrearsData)
         {
             var sql = $@"insert into ArrearsData(
                     ClientData_ID,
@@ -36,8 +36,8 @@ namespace Services.Common
                     @ClientDataName,
                     @ArrearsAmount,
                     @Date,
-                    @Sum)";
-            _context.Execute(sql, new
+                    @Sum)  select @@identity";
+            return _context.QuerySingle<int>(sql, new
             {
                 ClientDataID = ArrearsData.ClientDataID,
                 ClientDataName = ArrearsData.ClientDataName,
@@ -76,6 +76,17 @@ namespace Services.Common
                 id = id
             });
         }
+
+        public int GetByClientDataIDAndDate(int ClientDataID,DateTime Date)
+        {
+            var sql = @"select ID from ArrearsData  where ClientData_ID = @ClientDataID and Date=@Date";
+            return _context.QueryFirstOrDefault<int>(sql, new
+            {
+                ClientDataID = ClientDataID,
+                Date= Date
+            });
+        }
+
         public IPagedList<ArrearsData> GetList(string textQuery, int pageIndex = 0, int pageSize = 2147483647, string sortExpression = "")
         {
             string sql = @"select * from ArrearsData ";

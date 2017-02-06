@@ -84,5 +84,10 @@ namespace Web.Models
 
         [DisplayName("客户")]
         public string ClientDataName { get; set; }
+
+        [DisplayName("欠款额")]
+        public decimal? ArrearsAmount { get; set; } = 0;
+
+        public int? ArrearsID { get; set; }
     }
 }

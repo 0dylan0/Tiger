@@ -3,7 +3,7 @@
     ViewBag.Title = "销售出货修改";
 }
 
-@using (Html.BeginForm("Edit", "SalesShipmentsData", FormMethod.Post, new { id = "Add", data_val = true }))
+@using (Html.BeginForm("Edit", "SalesShipmentsData", FormMethod.Post, new { id = "Edit", data_val = true }))
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(m => m.ID)

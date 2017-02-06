@@ -2687,6 +2687,9 @@
     <Compile Include="Infrastructure\AutoMapperConfiguration.cs" />
     <Compile Include="Infrastructure\AutoMapperStartupTask.cs" />
     <Compile Include="Infrastructure\DependencyRegistrar.cs" />
+    <Compile Include="Models\ArrearsDataListModel.cs" />
+    <Compile Include="Models\ArrearsDataModel.cs" />
+    <Compile Include="Models\ArrearsDetailsModel.cs" />
     <Compile Include="Models\BasicModel.cs" />
     <Compile Include="Models\ClientDataListModel.cs" />
     <Compile Include="Models\ClientDataModel.cs" />
@@ -2805,6 +2808,8 @@
     <Content Include="Views\SalesShipmentsData\SalesShipmentsDataPartial.cshtml" />
     <Content Include="Views\InventoryData\TransferCargoPartial.cshtml" />
     <Content Include="Views\TransferCargoData\Index.cshtml" />
+    <Content Include="Views\Arrears\Index.cshtml" />
+    <Content Include="Views\Arrears\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2814,7 +2819,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Arrears\" />
     <Folder Include="Views\Common\" />
     <Folder Include="Views\Purchase\" />
   </ItemGroup>

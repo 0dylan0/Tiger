@@ -139,6 +139,13 @@
                         @Html.ValidationMessageFor(m => m.Date)
                     </div>
                 </div>
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ArrearsAmount, new { @class = "control-label" })
+                        @Html.TextBoxFor(m => m.ArrearsAmount, new { @class = "kl-input-num  full-width" })
+                        @Html.ValidationMessageFor(m => m.ArrearsAmount)
+                    </div>
+                </div>               
             </div>
             <div class="row">
                 @*<div class="col-xs-12 col-sm-6 col-md-4">
@@ -158,6 +165,8 @@
                 </div>
             </div>
         </div>
+
+        @Html.TextBoxFor(m => m.ArrearsID, new { @class = "kl-input-num  full-width hidden" })
 
         <div class="box-footer">
             <button id="submitChange" type="submit" class="btn btn-primary"><i class="fa fa-save"></i> 保存</button>
@@ -242,6 +251,11 @@
                 format: "c",
                 decimals: 2
             });
+            $("#ArrearsAmount").kendoNumericTextBox({
+                format: "c",
+                decimals: 2
+            });
+            
 
 
             $("#ShowSelectInventoryDataGoods").on("click", onShowSelectInventoryDataGoodsClick);

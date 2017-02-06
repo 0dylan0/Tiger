@@ -89,6 +89,15 @@ namespace Services.Common
                 id = id
             });
         }
+
+        public IEnumerable<ArrearsDetails> GetByArrearsId(int arrearsID)
+        {
+            var sql = @"select * from ArrearsDetails  where Arrears_ID = @ArrearsID";
+            return _context.Query<ArrearsDetails>(sql,
+                new { ArrearsID = arrearsID }
+                );
+        }
+
         public IPagedList<ArrearsDetails> GetList(string textQuery, int pageIndex = 0, int pageSize = 2147483647, string sortExpression = "")
         {
             string sql = @"select * from ArrearsDetails ";

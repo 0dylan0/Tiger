@@ -1,0 +1,117 @@
+﻿@model Web.Models.ArrearsDataModel
+
+@{
+    ViewBag.Title = "编辑欠款信息";
+}
+
+@using (Html.BeginForm("Edit", "ArrearsData", FormMethod.Post, new { id = "Edit", data_val = true }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.ID)
+    @Html.HiddenFor(m => m.ClientDataID)
+    <div class="box box-solid">
+        <div class="box-body">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ClientDataName, new { @class = "control-label" })
+                        @Html.TextBoxFor(m => m.ClientDataName, new { @class = "form-control ", @readonly = "readonly" })
+                        
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ArrearsAmount, new { @class = "control-label" })
+                        @Html.TextBoxFor(m => m.ArrearsAmount, new { @class = "form-control ", @readonly = "readonly" })
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Sum, new { @class = "control-label" })
+                        @Html.TextBoxFor(m => m.Sum, new { @class = "form-control ", @readonly = "readonly" })
+                        
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Date, new { @class = "control-label" })
+                        @Html.KLDateTextBoxFor(m => m.Date, new { @class = "form-control kl-date-picker full-width", @readonly = "readonly" })
+                        
+                    </div>
+                </div>
+            </div>
+
+            <table class="table dt-responsive" id="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>                        
+                        <th>货物名</th>
+                        <th >数量</th>
+                        <th >实际单价</th>
+                        <th>总欠款金额（不会改变）</th>  
+                        <th >欠款金额</th>
+                                         
+                        <th>编辑</th>
+                        <th class="hidden">销售出货表关联ID</th>
+                        <th class="hidden">货物ID</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.ArrearsDetailsModels.Count; i++)
+                    {
+                        //var isShow = Model.ArrearsDetailsModels[i].IsDelete ? "hidden" : "";
+                        <tr @*data-index=@i @isShow*@>
+                            <td>@Html.TextBox("ArrearsDetailsModels[" + i + "].ID", Model.ArrearsDetailsModels[i].ID, new { @class = "form-control", @readonly = "readonly" })</td>
+                           
+                            <td>@Html.TextBox("ArrearsDetailsModels[" + i + "].GoodsName", Model.ArrearsDetailsModels[i].GoodsName, new { @class = "form-control", @readonly = "readonly" })</td>
+                            <td>
+                                @Html.TextBox("ArrearsDetailsModels[" + i + "].PenaltyFee", Model.ArrearsDetailsModels[i].Quantity, new { @class = "form-control", @readonly = "readonly" })
+                                @*@Html.ValidationMessageFor(m => m.ArrearsDetailsModels[i].PenaltyFee)*@
+                            </td>
+                            <td>@Html.TextBox("ArrearsDetailsModels[" + i + "].UnitPrice", Model.ArrearsDetailsModels[i].UnitPrice, new { @class = "form-control", @readonly = "readonly" })</td>
+                            
+                            <td>@Html.TextBox("ArrearsDetailsModels[" + i + "].Sum", Model.ArrearsDetailsModels[i].Sum, new { @class = "form-control", @readonly = "readonly" })</td>
+                            <td>@Html.TextBox("ArrearsDetailsModels[" + i + "].ArrearsAmount", Model.ArrearsDetailsModels[i].ArrearsAmount, new { @class = "kl-input-num  full-width ArrearsAmount" })</td>
+                            <td>
+                                <button type="button" class="btn btn-primary"><span class="fa fa-pencil"></span> 编辑</button>
+                                @Html.Hidden("ArrearsDetailsModels[" + i + "].Button")
+                            </td>
+                            <td>@Html.TextBox("ArrearsDetailsModels[" + i + "].SalesShipmentsDataID", Model.ArrearsDetailsModels[i].SalesShipmentsDataID, new { @class = "form-control hidden", @readonly = "readonly" })</td>
+                            <td>@Html.TextBox("ArrearsDetailsModels[" + i + "].GoodsID", Model.ArrearsDetailsModels[i].GoodsID, new { @class = "form-control hidden", @readonly = "readonly" })</td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+
+        <div class="box-footer">
+            <button id="submitChange" type="submit" class="btn btn-primary hidden"><i class="fa fa-save"></i> 保存</button>
+            <a href="@Url.Action("Index")" class="btn btn-default"><i class="fa fa-undo"></i> 返回</a>
+        </div>
+    </div>
+}
+@helper RequiredTag()
+{
+    @Html.Partial("_RequiredTagPartial")
+}
+@section scripts{
+    @Html.Partial("_KendoDropdownListPartial")
+    @Html.Partial("_KendoDatePickerPartial")
+    @Html.Partial("_ModalSelectorPartial")
+    @Html.Partial("_KendoNumericTextBoxPartial")
+
+
+    <script type="text/javascript">
+        $(".ArrearsAmount").kendoNumericTextBox({
+            format: "c",
+            decimals: 2,
+            min: 0
+        });
+    </script>
+}

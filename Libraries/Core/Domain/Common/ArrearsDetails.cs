@@ -14,20 +14,20 @@ namespace Core.Domain.Common
 
         public string GoodsName { get; set; }
 
-        public int ArrearsID { get; set; }
+        public int? ArrearsID { get; set; }
 
         public int SalesShipmentsDataID { get; set; }
 
         //数量
-        public decimal Quantity { get; set; }
+        public int? Quantity { get; set; }
 
         //单价
-        public decimal UnitPrice { get; set; }
+        public decimal? UnitPrice { get; set; }
 
         //总金额（初始化后不要改变）
-        public decimal Sum { get; set; }
+        public decimal? Sum { get; set; }
 
         //欠款金额
-        public decimal ArrearsAmount { get; set; }
+        public decimal? ArrearsAmount { get; set; }
     }
 }

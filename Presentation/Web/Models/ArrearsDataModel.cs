@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace Core.Domain.Common
+namespace Web.Models
 {
-    public class ArrearsData
+    public class ArrearsDataModel
     {
         public int ID { get; set; }
 
@@ -14,10 +13,12 @@ namespace Core.Domain.Common
 
         public string ClientDataName { get; set; }
 
-        public decimal? ArrearsAmount { get; set; }
+        public decimal ArrearsAmount { get; set; }
 
         public DateTime Date { get; set; }
 
-        public decimal? Sum { get; set; }
+        public decimal Sum { get; set; }
+
+        public List<ArrearsDetailsModel> ArrearsDetailsModels { get; set; }
     }
 }

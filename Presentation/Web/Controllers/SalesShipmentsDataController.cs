@@ -29,6 +29,8 @@ namespace Web.Controllers
         private readonly ClientTypeService _clientTypeService;
         private readonly ClientDataService _clientDataService;
         private readonly GoodsTypeService _goodsTypeService;
+        private readonly ArrearsDataService _arrearsDataService;
+        private readonly ArrearsDetailsService _arrearsDetailsService;
 
         public SalesShipmentsDataController(IWorkContext webWorkContext,
             SalesShipmentsDataService salesShipmentsDataService,
@@ -39,7 +41,9 @@ namespace Web.Controllers
             GoodsSpecificationService goodsSpecificationService,
             ClientTypeService clientTypeService,
             ClientDataService clientDataService,
-            GoodsTypeService goodsTypeService)
+            GoodsTypeService goodsTypeService,
+            ArrearsDataService arrearsDataService,
+            ArrearsDetailsService arrearsDetailsService)
         {
             _webWorkContext = webWorkContext;
             _salesShipmentsDataService = salesShipmentsDataService;
@@ -51,6 +55,8 @@ namespace Web.Controllers
             _clientTypeService = clientTypeService;
             _clientDataService = clientDataService;
             _goodsTypeService = goodsTypeService;
+            _arrearsDataService = arrearsDataService;
+            _arrearsDetailsService = arrearsDetailsService;
         }
 
         // GET: SalesShipmentsData
@@ -64,7 +70,7 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult Index(PageInfo pageInfo, SalesShipmentsDataListModel model)
         {
-            IPagedList<SalesShipmentsData> SalesShipmentsDataList = _salesShipmentsDataService.GetList(model.Name, model.ShowInactive,pageInfo.PageIndex, pageInfo.PageSize, pageInfo.sortExpression);
+            IPagedList<SalesShipmentsData> SalesShipmentsDataList = _salesShipmentsDataService.GetList(model.Name, model.ShowInactive, pageInfo.PageIndex, pageInfo.PageSize, pageInfo.sortExpression);
             model.SalesShipmentsData = SalesShipmentsDataList.MapTo<IList<SalesShipmentsData>, IList<SalesShipmentsDataModel>>();
 
             var results = new DataTable<SalesShipmentsDataModel>()
@@ -79,9 +85,9 @@ namespace Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult Add(int id=0)
+        public ActionResult Add(int id = 0)
         {
-            if(id==0)
+            if (id == 0)
             {
                 SalesShipmentsDataModel model = new SalesShipmentsDataModel();
                 model.Date = DateTime.Now;
@@ -104,8 +110,8 @@ namespace Web.Controllers
                     Specification = inventoryData.Specification,
                     GoodsType = inventoryData.GoodsType,
                     Brand = inventoryData.Brand,
-                    Cost=inventoryData.CostPrice,
-                    InventoryDataID=inventoryData.ID,
+                    Cost = inventoryData.CostPrice,
+                    InventoryDataID = inventoryData.ID,
                     OldQuantity = inventoryData.InventoryQuantity
                 };
                 model.Date = DateTime.Now;
@@ -115,7 +121,7 @@ namespace Web.Controllers
                 model.GoodsTypeList = GetGoodsTypeList();
                 return View(model);
             }
-            
+
         }
         [HttpPost]
         public ActionResult Add(SalesShipmentsDataModel model)
@@ -123,7 +129,7 @@ namespace Web.Controllers
             if (ModelState.IsValid)
             {
                 SalesShipmentsData SalesShipments = model.MapTo<SalesShipmentsDataModel, SalesShipmentsData>();
-                _salesShipmentsDataService.Insert(SalesShipments);
+                int salesShipmentsDataID = _salesShipmentsDataService.Insert(SalesShipments);
                 InventoryData inventoryData = new InventoryData()
                 {
                     ID = model.InventoryDataID,
@@ -136,7 +142,7 @@ namespace Web.Controllers
                     GoodsType = model.GoodsType,
                     Brand = model.Brand,
                     InventoryQuantity = model.OldQuantity - model.Quantity,
-                    CostPrice = (( model.Quantity != 0) ? (model.Sum / Convert.ToDecimal(model.Quantity)) : 0),
+                    CostPrice = ((model.Quantity != 0) ? (model.Sum / Convert.ToDecimal(model.Quantity)) : 0),
                     InventorySum = model.Sum,
 
                     PurchaseDate = DateTime.Now,
@@ -145,6 +151,13 @@ namespace Web.Controllers
                     FinalSaleDate = DateTime.Now
                 };
                 _inventoryDataService.Update(inventoryData);
+
+                if (model.ArrearsAmount != 0 && model.ArrearsAmount != null)
+                {
+                    //添加欠款信息
+                    ArrearsInset(model, salesShipmentsDataID);
+                }
+
                 SuccessNotification("添加成功");
                 return RedirectToAction("Index");
             }
@@ -154,6 +167,57 @@ namespace Web.Controllers
             model.SpecificationList = GetSpecificationList();
             model.GoodsTypeList = GetGoodsTypeList();
             return View(model);
+        }
+
+        public void ArrearsInset(SalesShipmentsDataModel model, int salesShipmentsDataID)
+        {
+
+            int resID =_arrearsDataService.GetByClientDataIDAndDate(model.ClientDataID,model.Date);
+            if (resID == 0)
+            {
+                ArrearsData arrearsData = new ArrearsData()
+                {
+                    ClientDataID = model.ClientDataID,
+                    ClientDataName = model.ClientDataName,
+                    ArrearsAmount = model.ArrearsAmount,
+                    Date = model.Date,
+                    Sum = model.ArrearsAmount
+
+                };
+                int arrearsID = _arrearsDataService.Insert(arrearsData);
+                ArrearsDetails arrearsDetails = new ArrearsDetails()
+                {
+                    Quantity = model.Quantity,
+                    UnitPrice = model.UnitPrice,
+                    SalesShipmentsDataID = salesShipmentsDataID,
+                    Sum = model.ArrearsAmount,
+                    ArrearsAmount = model.ArrearsAmount,
+                    ArrearsID = arrearsID,
+                    GoodsID = model.GoodsID,
+                    GoodsName = model.GoodsName
+                };
+                _arrearsDetailsService.Insert(arrearsDetails);
+
+                _salesShipmentsDataService.InsertArrearsID(arrearsID, salesShipmentsDataID);
+            }
+            else
+            {
+                ArrearsDetails arrearsDetails = new ArrearsDetails()
+                {
+                    Quantity = model.Quantity,
+                    UnitPrice = model.UnitPrice,
+                    SalesShipmentsDataID = salesShipmentsDataID,
+                    Sum = model.ArrearsAmount,
+                    ArrearsAmount = model.ArrearsAmount,
+                    ArrearsID = resID,
+                    GoodsID = model.GoodsID,
+                    GoodsName = model.GoodsName
+                };
+                _arrearsDetailsService.Insert(arrearsDetails);
+            }
+
+
+
         }
 
         public ActionResult Edit(int id)
@@ -211,7 +275,7 @@ namespace Web.Controllers
             return View(model);
         }
 
-        public ActionResult Refund(int id,int inventoryDataID,int quantity)
+        public ActionResult Refund(int id, int inventoryDataID, int quantity)
         {
             var selesShipment = _salesShipmentsDataService.GetById(id);
             _salesShipmentsDataService.Refund(id);

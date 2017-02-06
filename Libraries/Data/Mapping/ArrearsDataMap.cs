@@ -16,7 +16,7 @@ namespace Data.Mapping
 
             Map(t => t.ID).ToColumn("ID").IsKey();
             Map(t => t.ClientDataID).ToColumn("ClientData_ID");
-            Map(t => t.ClientDataName).ToColumn("UnitClientData_Name");
+            Map(t => t.ClientDataName).ToColumn("ClientData_Name");
             Map(t => t.ArrearsAmount).ToColumn("ArrearsAmount");
             Map(t => t.Date).ToColumn("Date"); 
             Map(t => t.Sum).ToColumn("Sum");
