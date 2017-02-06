@@ -19,7 +19,7 @@
                         
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="col-xs-12 col-sm-6 col-md-4 hidden">
                     <div class="form-group">
                         @Html.LabelFor(m => m.ArrearsAmount, new { @class = "control-label" })
                         @Html.TextBoxFor(m => m.ArrearsAmount, new { @class = "form-control ", @readonly = "readonly" })
@@ -29,7 +29,7 @@
             </div>
 
             <div class="row">
-                <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="col-xs-12 col-sm-6 col-md-4 ">
                     <div class="form-group">
                         @Html.LabelFor(m => m.Sum, new { @class = "control-label" })
                         @Html.TextBoxFor(m => m.Sum, new { @class = "form-control ", @readonly = "readonly" })

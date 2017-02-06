@@ -33,8 +33,9 @@
                 <tr>
                     <th>ID</th>
                     <th>客户名称</th>
-                    <th>欠款额</th>
+                    <th>总欠款额</th>
                     <th>日期</th>
+                    <th>总欠款（不会改变）</th>
                     <th>编辑</th>
                 </tr>
             </thead>
@@ -61,7 +62,8 @@
 					{ data: "id" },
                     { data: "clientDataName" },
                     { data: "arrearsAmount" },
-                    { data: "date" }],
+                    { data: "date" },
+                    { data: "sum" }],
                 columnDefs: [
                     {
                         targets: [3],
@@ -71,7 +73,7 @@
 
                     },
                     {
-                        targets: [4],
+                        targets: [5],
                         orderable: false,
                         render: function (data, type, full) {
                             return '<a href="/Arrears/Edit?id=' + encodeURIComponent(full["id"]) + '" class="btn btn-xs btn-default "><span class="fa fa-pencil"></span> 修改</a>';

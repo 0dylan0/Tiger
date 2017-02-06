@@ -109,7 +109,7 @@ namespace Services.Common
             var Parameter = new DynamicParameters();
             if (!string.IsNullOrEmpty(textQuery))
             {
-                sql += " where Client_Name like @textQuery";
+                sql += " where ClientData_Name like @textQuery";
                 textQuery = textQuery.Contains("%") ? textQuery : $"%{textQuery}%";
                 Parameter.Add("textQuery", textQuery);
             }
