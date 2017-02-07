@@ -15,12 +15,15 @@ namespace Services.Common
     {
         private readonly DapperRepository _repository;
         private readonly IDbConnection _context;
+        private readonly ArrearsDataService _arrearsDataService;
 
         public ArrearsDetailsService(DapperRepository repository,
-            IDbConnection context)
+            IDbConnection context,
+            ArrearsDataService arrearsDataService)
         {
             _repository = repository;
             _context = context;
+            _arrearsDataService = arrearsDataService;
         }
 
         public void Insert(ArrearsDetails ArrearsDetails)
@@ -81,7 +84,7 @@ namespace Services.Common
             });
         }
 
-        public void UpdateArrears(int arrearsDetailsId, decimal? arrears,int arrearsID)
+        public void UpdateArrears(int arrearsDetailsId, decimal? arrears,int arrearsID,string remarks)
         {
            
             var sql2 = @"select * from ArrearsData  where id = @id";
@@ -91,14 +94,16 @@ namespace Services.Common
             });
             ArrearsDetails arrearsDetailsIdRes = GetById(arrearsDetailsId);
             decimal? newArrears = arrearsDataRes.ArrearsAmount - (arrearsDetailsIdRes.ArrearsAmount- arrears);
-
+            ArrearsData Arrears = _arrearsDataService.GetById(arrearsID);
             var sql3 = $@"update ArrearsData set
-                    ArrearsAmount=@ArrearsAmount
+                    ArrearsAmount=@ArrearsAmount,
+                    Remarks=@remarks
                     where ID=@ID";
             _context.Execute(sql3, new
             {
                 ArrearsAmount = newArrears,
-                ID = arrearsID
+                ID = arrearsID,
+                remarks= Arrears.Remarks+remarks
             });
 
 

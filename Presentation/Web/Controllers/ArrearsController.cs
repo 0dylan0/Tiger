@@ -73,11 +73,11 @@ namespace Web.Controllers
 
         }
         [HttpPost]
-        public ActionResult Edit(int arrearsDetailsId, decimal arrears,int arrearsID)
+        public ActionResult Edit(int arrearsDetailsId, decimal arrears,int arrearsID,string remarks)
         {
             if (ModelState.IsValid)
             {
-                _arrearsDetailsService.UpdateArrears(arrearsDetailsId, arrears, arrearsID);
+                _arrearsDetailsService.UpdateArrears(arrearsDetailsId, arrears, arrearsID, remarks);
                 return Json(new JsonResponse(JsonResponseStatus.success), JsonRequestBehavior.AllowGet);
             }       
             return View(_arrearsDataService.GetById(arrearsID));

@@ -16,14 +16,14 @@
                     <div class="form-group">
                         @Html.LabelFor(m => m.ClientDataName, new { @class = "control-label" })
                         @Html.TextBoxFor(m => m.ClientDataName, new { @class = "form-control ", @readonly = "readonly" })
-                        
+
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-4 hidden">
                     <div class="form-group">
                         @Html.LabelFor(m => m.ArrearsAmount, new { @class = "control-label" })
                         @Html.TextBoxFor(m => m.ArrearsAmount, new { @class = "form-control ", @readonly = "readonly" })
-                        
+
                     </div>
                 </div>
             </div>
@@ -33,28 +33,36 @@
                     <div class="form-group">
                         @Html.LabelFor(m => m.Sum, new { @class = "control-label" })
                         @Html.TextBoxFor(m => m.Sum, new { @class = "form-control ", @readonly = "readonly" })
-                        
+
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <div class="form-group">
                         @Html.LabelFor(m => m.Date, new { @class = "control-label" })
                         @Html.TextBoxFor(m => m.Date, new { @class = "form-control", @readonly = "readonly" })
-                        
+
                     </div>
                 </div>
             </div>
 
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-8 ">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Remarks, new { @class = "control-label" })
+                        @Html.TextAreaFor(m => m.Remarks, new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+                </div>
+            </div>
             <table class="table dt-responsive" id="table">
                 <thead>
                     <tr>
-                        <th>ID</th>                        
+                        <th>ID</th>
                         <th>货物名</th>
-                        <th >数量</th>
-                        <th >实际单价</th>
-                        <th>总欠款金额（不会改变）</th>  
-                        <th >欠款金额</th>
-                                         
+                        <th>数量</th>
+                        <th>实际单价</th>
+                        <th>总欠款金额（不会改变）</th>
+                        <th>欠款金额</th>
+
                         <th>编辑</th>
                         <th class="hidden">销售出货表关联ID</th>
                         <th class="hidden">货物ID</th>
@@ -66,19 +74,20 @@
                         //var isShow = Model.ArrearsDetailsModels[i].IsDelete ? "hidden" : "";
                         <tr @*data-index=@i @isShow*@>
                             <td>@Html.TextBox("ArrearsDetailsModels[" + i + "].ID", Model.ArrearsDetailsModels[i].ID, new { @class = "form-control", @readonly = "readonly" })</td>
-                           
+
                             <td>@Html.TextBox("ArrearsDetailsModels[" + i + "].GoodsName", Model.ArrearsDetailsModels[i].GoodsName, new { @class = "form-control", @readonly = "readonly" })</td>
                             <td>
                                 @Html.TextBox("ArrearsDetailsModels[" + i + "].PenaltyFee", Model.ArrearsDetailsModels[i].Quantity, new { @class = "form-control", @readonly = "readonly" })
                                 @*@Html.ValidationMessageFor(m => m.ArrearsDetailsModels[i].PenaltyFee)*@
                             </td>
                             <td>@Html.TextBox("ArrearsDetailsModels[" + i + "].UnitPrice", Model.ArrearsDetailsModels[i].UnitPrice, new { @class = "form-control", @readonly = "readonly" })</td>
-                            
+
                             <td>@Html.TextBox("ArrearsDetailsModels[" + i + "].Sum", Model.ArrearsDetailsModels[i].Sum, new { @class = "form-control", @readonly = "readonly" })</td>
                             <td>@Html.TextBox("ArrearsDetailsModels[" + i + "].ArrearsAmount", Model.ArrearsDetailsModels[i].ArrearsAmount, new { @class = "kl-input-num  full-width ArrearsAmount" })</td>
                             <td>
-                                <button type="button" class="btn btn-primary" onclick="EditArrears(@Model.ArrearsDetailsModels[i].ID , @i)">
-                                <span class="fa fa-pencil"></span> 编辑</button>
+                                <button type="button" class="btn btn-primary" onclick="EditArrears(@Model.ArrearsDetailsModels[i].ID , @i ,@Model.ArrearsDetailsModels[i].ArrearsAmount)">
+                                    <span class="fa fa-pencil"></span> 编辑
+                                </button>
                                 @Html.Hidden("ArrearsDetailsModels[" + i + "].Button")
                             </td>
                             <td>@Html.TextBox("ArrearsDetailsModels[" + i + "].SalesShipmentsDataID", Model.ArrearsDetailsModels[i].SalesShipmentsDataID, new { @class = "form-control hidden", @readonly = "readonly" })</td>
@@ -114,22 +123,28 @@
             decimals: 2,
             min: 0
         });
-        function EditArrears(id ,i)
-        {
-            var XZP = "#ArrearsDetailsModels_" + i + "__ArrearsAmount";          
+        function EditArrears(id, i, oldArrearsAmount) {
+            var XZP = "#ArrearsDetailsModels_" + i + "__ArrearsAmount";
+            var name = "#ArrearsDetailsModels_" + i + "__GoodsName";
+            var sum = "#ArrearsDetailsModels_" + i + "__Sum";
+            Remarks($(XZP).getKendoNumericTextBox().value(), $(name).val(), oldArrearsAmount);
             $.ajax({
-                    url: "@Url.Action("Edit", "Arrears")",
-                    method: "POST",
-                    data: addAntiForgeryToken({
-                        arrearsDetailsId: id,
-                        arrears: $(XZP).getKendoNumericTextBox().value(),
-                        arrearsID: $("#ID").val()
-                    }),                   
-                    success: function (data) {
-                       
-                        alertify.klWarningAlert("修改成功","成功");                       
-                    }
-                });
+                url: "@Url.Action("Edit", "Arrears")",
+                method: "POST",
+                data: addAntiForgeryToken({
+                    arrearsDetailsId: id,
+                    arrears: $(XZP).getKendoNumericTextBox().value(),
+                    arrearsID: $("#ID").val(),
+                    remarks: $("#Remarks").val()
+                }),
+                success: function (data) {
+                    alertify.klWarningAlert("修改成功", "成功");
+                }
+            });
+        }
+        function Remarks(Arrears, name, oldArrearsAmount) {
+            var myDate = new Date();
+            $("#Remarks").val($("#Remarks").val() + name + "+" + myDate.toLocaleDateString() + "+ 还款" + (oldArrearsAmount - Arrears) + "+余欠" + Arrears + "。。。");
         }
     </script>
 }

@@ -19,7 +19,7 @@ namespace Web.Validators
             RuleFor(m => m.ActualPurchasePrice)
                  .NotEmpty().WithMessage("实际进价不能为空，不确定可以为0");
             RuleFor(m => m.Warehouse)
-                 .NotEmpty().WithMessage("日期不能为空");
+                 .NotEmpty().WithMessage("仓库不能为空");
             RuleFor(m => m.Cost)
                  .NotEmpty().WithMessage("成本不能为空，不确定可以为0");
             RuleFor(m => m.SingleProfit)

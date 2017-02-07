@@ -20,6 +20,7 @@ namespace Data.Mapping
             Map(t => t.ArrearsAmount).ToColumn("ArrearsAmount");
             Map(t => t.Date).ToColumn("Date"); 
             Map(t => t.Sum).ToColumn("Sum");
+            Map(t => t.Remarks).ToColumn("Remarks"); 
 
         }
     }

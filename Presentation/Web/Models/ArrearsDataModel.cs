@@ -26,5 +26,8 @@ namespace Web.Models
         public decimal Sum { get; set; }
 
         public List<ArrearsDetailsModel> ArrearsDetailsModels { get; set; }
+
+        [DisplayName("操作日志")]
+        public string Remarks { get; set; }
     }
 }
