@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Core.Domain;
 using Core.Domain.Common;
+using Services.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,6 +53,9 @@ namespace Web.Infrastructure
                 cfg.CreateMap<ArrearsData, ArrearsDataModel>();
                 cfg.CreateMap<ArrearsDetailsModel, ArrearsDetails>();
                 cfg.CreateMap<ArrearsDetails, ArrearsDetailsModel>();
+
+                cfg.CreateMap<SalesShipmentsStatisticsModel, SalesShipmentsStatisticsModelShow>();
+                cfg.CreateMap<SalesShipmentsStatisticsModelShow, SalesShipmentsStatisticsModel>();
             });
 
             _mapper = _mapperConfiguration.CreateMapper();

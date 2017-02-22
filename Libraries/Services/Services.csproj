@@ -82,6 +82,8 @@
     <Compile Include="Common\InventoryDataService.cs" />
     <Compile Include="Common\PurchaseDataService.cs" />
     <Compile Include="Common\SalesShipmentsDataService.cs" />
+    <Compile Include="Common\SalesShipmentsStatisticsModelShow.cs" />
+    <Compile Include="Common\SalesShipmentsStatisticsService.cs" />
     <Compile Include="Common\SupplierDataService.cs" />
     <Compile Include="Common\SupplierTypeService.cs" />
     <Compile Include="Common\TransferCargoDataService.cs" />

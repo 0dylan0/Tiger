@@ -1,0 +1,125 @@
+﻿@model Web.Models.SalesShipmentsStatisticsListModel
+@{
+    ViewBag.Title = "销售出货信息统计";
+}
+
+<div class="box box-solid">
+    <div class="box-header">
+        @using (Html.BeginForm("Index", "SalesShipmentsStatistics", FormMethod.Post, new { Id = "SalesShipmentsStatisticsForm" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="row">
+                <div class="col-xs-6 col-sm-4 col-md-2 ">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.GoodsID, new { @class = "control-label" })
+                        @Html.DropDownListFor(m => m.GoodsID, Model.GoodsList, T("全部").Text.ToString(), new { @class = "form-control full-width " })
+                    </div>
+                </div>
+
+                <div class="col-xs-6 col-sm-4 col-md-2 ">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ClientDataID, new { @class = "control-label" })
+                        @Html.DropDownListFor(m => m.ClientDataID, Model.ClientDataList, T("全部").Text.ToString(), new { @class = "form-control full-width " })
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-4 col-md-2 ">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.FromDate, new { @class = "control-label" })
+                        @Html.KLDateTextBoxFor(m => m.FromDate, new { @class = "form-control kl-date-picker full-width" })
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-4 col-md-2 ">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ToDate, new { @class = "control-label" })
+                        @Html.KLDateTextBoxFor(m => m.ToDate, new { @class = "form-control kl-date-picker full-width" })
+                    </div>
+                </div>
+
+                <div class="col-md-1 col-sm-2 col-xs-12">
+                    <div class="form-group">
+                        @HiddenLabel()
+                        <button type="submit" class="btn btn-default" id="SubmitForm"><i class="fa fa-search"></i> 查询</button>
+                    </div>
+                </div>
+            </div>
+
+        }
+    </div>
+    <div class="box-body">
+
+        <table class="table table-condensed table-striped table-hover dataTable">
+            <thead>
+                <tr>
+                    <th>商品编号</th>
+                    <th>商品名称</th>
+                    <th>客户编号</th>
+                    <th>客户</th>
+
+                    <th>总销售额</th>
+                    <th>总利润</th>
+                    <th>总成本</th>
+                    <th>总数量</th>
+
+                    <th>时间</th>
+
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+@section scripts{
+    @Html.Partial("_KendoDropdownListPartial")
+    @Html.Partial("_KendoDatePickerPartial")
+    @Html.Partial("_ModalSelectorPartial")
+    @Html.Partial("_KendoNumericTextBoxPartial")
+    <script type="text/javascript">
+
+
+        $(function () {
+            var grid = $(".dataTable").DataTable({
+                order: [0, "ASC"],
+                ajax: {
+                    url: "@Url.Action("Index")",
+                    type: "post",
+                    data: function (d) {
+                        d.goodsID = $("#GoodsID").getKendoDropDownList().value(),
+                        d.clientDataID = $("#ClientDataID").getKendoDropDownList().value(),
+                        d.fromDate = $("#FromDate").val(),
+                        d.toDate = $("#ToDate").val()
+                        addAntiForgeryToken(d);
+                    },
+                },
+                columns: [
+                    { data: "goodsID" },
+                    { data: "goodesName" },
+                    { data: "clientDataID" },
+                    { data: "clientDataName" },
+
+                    { data: "totalSum" },
+                    { data: "totalCost" },
+                    { data: "totalProfit" },
+
+                    { data: "totalNum" },
+                    { data: "date" }],
+                columnDefs: [
+                    {
+                        targets: [8],
+                        render: function (data, type, full) {
+                            return FormatDate(data, "yyyy-MM-dd");
+                        }
+                    }
+                ],
+
+                language: {
+                    zeroRecords: "DataTables.zeroRecords"
+                },
+            });
+            $("#SubmitForm").click(function (e) {
+                grid.page("first").draw();
+                return false;
+            });
+
+        });
+    </script>
+}
+
