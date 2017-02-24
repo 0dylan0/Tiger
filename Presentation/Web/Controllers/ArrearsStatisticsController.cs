@@ -1,5 +1,4 @@
 ﻿using Core;
-using Core.Domain.Common;
 using Core.Page;
 using Services.Common;
 using Services.Localization;
@@ -16,8 +15,9 @@ using Web.Models;
 
 namespace Web.Controllers
 {
-    public class SalesShipmentsStatisticsController : BaseController
+    public class ArrearsStatisticsController : BaseController
     {
+
         private readonly IWorkContext _webWorkContext;
         private readonly SalesShipmentsDataService _salesShipmentsDataService;
         private readonly LocalizationService _localizationService;
@@ -32,8 +32,9 @@ namespace Web.Controllers
         private readonly ArrearsDetailsService _arrearsDetailsService;
         private readonly SalesShipmentsStatisticsService _salesShipmentsStatisticsService;
         private readonly GoodsDataService _goodsDataService;
+        private readonly ArrearsStatisticsService _arrearsStatisticsService;
 
-        public SalesShipmentsStatisticsController(IWorkContext webWorkContext,
+        public ArrearsStatisticsController(IWorkContext webWorkContext,
             SalesShipmentsDataService salesShipmentsDataService,
             LocalizationService localizationService,
             SupplierDataService supplierDataService,
@@ -46,7 +47,8 @@ namespace Web.Controllers
             ArrearsDataService arrearsDataService,
             ArrearsDetailsService arrearsDetailsService,
             SalesShipmentsStatisticsService salesShipmentsStatisticsService,
-            GoodsDataService goodsDataService)
+            GoodsDataService goodsDataService,
+            ArrearsStatisticsService arrearsStatisticsService)
         {
             _webWorkContext = webWorkContext;
             _salesShipmentsDataService = salesShipmentsDataService;
@@ -62,13 +64,14 @@ namespace Web.Controllers
             _arrearsDetailsService = arrearsDetailsService;
             _salesShipmentsStatisticsService = salesShipmentsStatisticsService;
             _goodsDataService = goodsDataService;
+            _arrearsStatisticsService = arrearsStatisticsService;
         }
 
-        // GET: SalesShipmentsStatistics
+        // GET: ArrearsStatistics
         [HttpGet]
         public ActionResult Index()
         {
-            SalesShipmentsStatisticsListModel model = new SalesShipmentsStatisticsListModel();
+            ArrearsStatisticsListModel model = new ArrearsStatisticsListModel();
             model.GoodsList = GetGoodsList();
             model.ClientDataList = GetClientDataList();
             model.FromDate = DateTime.Now;
@@ -77,47 +80,28 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(PageInfo pageInfo, SalesShipmentsStatisticsListModel model)
+        public ActionResult Index(PageInfo pageInfo, ArrearsStatisticsListModel model)
         {
-            IPagedList<SalesShipmentsStatisticsModelShow> salesShipmentsStatistics = _salesShipmentsStatisticsService.GetList(
+            IPagedList<ArrearsStatisticsShow> arrearsStatistics = _arrearsStatisticsService.GetList(
                 model.GoodsID,
                 model.ClientDataID,
                 model.FromDate,
-                model.ToDate, 
+                model.ToDate,
                 pageInfo.PageIndex, pageInfo.PageSize, pageInfo.sortExpression);
-            model.SalesShipmentsStatistics = salesShipmentsStatistics.MapTo<IList<SalesShipmentsStatisticsModelShow>, IList<SalesShipmentsStatisticsModel>>();
+            model.ArrearsStatistics = arrearsStatistics.MapTo<IList<ArrearsStatisticsShow>, IList<ArrearsStatisticsModel>>();
 
-            var results = new DataTable<SalesShipmentsStatisticsModel>()
+            var results = new DataTable<ArrearsStatisticsModel>()
             {
                 Draw = pageInfo.Draw + 1,
-                RecordsTotal = salesShipmentsStatistics.TotalCount,
-                RecordsFiltered = salesShipmentsStatistics.TotalCount,
-                Data = model.SalesShipmentsStatistics
+                RecordsTotal = arrearsStatistics.TotalCount,
+                RecordsFiltered = arrearsStatistics.TotalCount,
+                Data = model.ArrearsStatistics
             };
 
-            
+
             return Json(new PlainJsonResponse(results));
         }
 
-
-        //[HttpGet, ActionName("Index")]
-        //[HttpGet]
-        //public ActionResult GetIndexPartialView(SalesShipmentsStatisticsListModel model)
-        //{
-        //    ViewData["name"] = "Hajan";
-        //    return PartialView("_salesShipmentsStatisticsPartial");
-        //}
-
-        public SalesShipmentsStatisticsModel Calculation(IList<SalesShipmentsDataModel> model)
-        {
-
-            SalesShipmentsStatisticsModel SalesShipmentsStatistics = new SalesShipmentsStatisticsModel()
-            {
-
-            };
-
-            return new SalesShipmentsStatisticsModel();
-        }
 
         public List<SelectListItem> GetClientDataList()
         {

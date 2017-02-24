@@ -56,6 +56,9 @@ namespace Web.Infrastructure
 
                 cfg.CreateMap<SalesShipmentsStatisticsModel, SalesShipmentsStatisticsModelShow>();
                 cfg.CreateMap<SalesShipmentsStatisticsModelShow, SalesShipmentsStatisticsModel>();
+                cfg.CreateMap<ArrearsStatisticsModel, ArrearsStatisticsShow>();
+                cfg.CreateMap<ArrearsStatisticsShow, ArrearsStatisticsModel>();
+                
             });
 
             _mapper = _mapperConfiguration.CreateMapper();

@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace Web.Models
 {
-    public class SalesShipmentsStatisticsListModel
+    public class ArrearsStatisticsListModel
     {
         [DisplayName("商品")]
         public int GoodsID { get; set; }
@@ -25,8 +25,6 @@ namespace Web.Models
 
         public IEnumerable<SelectListItem> ClientDataList { get; set; }
 
-        public IList<SalesShipmentsStatisticsModel> SalesShipmentsStatistics { get; set; }
-
-        public SalesShipmentsStatisticsPartialModel SalesShipmentsStatisticsPartial { get; set; }
+        public IList<ArrearsStatisticsModel> ArrearsStatistics { get; set; }
     }
 }

@@ -142,17 +142,48 @@
         <aside class="main-sidebar">
             <section class="sidebar">
                 <ul class="sidebar-menu">
+                    
+
+
+                    <li class="treeview">
+                        <a href="~/PurchaseData/Index">
+                            <i class="fa fa-train"></i><span> 采购进货</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="~/SalesShipmentsData/Index">
+                            <i class="fa fa-truck"></i><span> 销售出货</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="~/InventoryData/Index">
+                            <i class="fa fa-archive"></i><span> 商品库存</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="~/TransferCargoData/Index">
+                            <i class="fa fa-book"></i><span> 调货信息</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="~/Arrears/Index">
+                            <i class="fa fa-balance-scale"></i><span> 欠款信息</span>
+                        </a>
+                    </li>
+
                     <li class="treeview">
                         <a href="#">
-                            <i class="fa fa-user"></i><span> 用户管理</span>
+                            <i class="fa fa-industry"></i><span> 统计信息</span>
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            @NavMenuItem(T("用户"), Url.Action("Index", "Users"))
+                            @NavMenuItem(T("销售出货信息统计"), Url.Action("Index", "SalesShipmentsStatistics"))
+                            @NavMenuItem(T("欠款信息统计"), Url.Action("Index", "ArrearsStatistics"))
                         </ul>
                     </li>
+
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-leaf"></i><span> 信息维护</span>
@@ -182,36 +213,21 @@
                             @NavMenuItem(T("商品类别信息维护"), Url.Action("Index", "GoodsType"))
                             @NavMenuItem(T("供应商类别信息维护"), Url.Action("Index", "SupplierType"))
                             @NavMenuItem(T("货物单位信息维护"), Url.Action("Index", "GoodsUnit"))
-                            
+
                         </ul>
                     </li>
-
-
                     <li class="treeview">
-                        <a href="~/PurchaseData/Index">
-                            <i class="fa fa-train"></i><span> 采购进货</span>
+                        <a href="#">
+                            <i class="fa fa-user"></i><span> 用户管理</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
                         </a>
+                        <ul class="treeview-menu">
+                            @NavMenuItem(T("用户"), Url.Action("Index", "Users"))
+                        </ul>
                     </li>
-                    <li class="treeview">
-                        <a href="~/SalesShipmentsData/Index">
-                            <i class="fa fa-truck"></i><span> 销售出货</span>
-                        </a>
-                    </li>
-                    <li class="treeview">
-                        <a href="~/InventoryData/Index">
-                            <i class="fa fa-archive"></i><span> 商品库存</span>
-                        </a>
-                    </li>
-                    <li class="treeview">
-                        <a href="~/TransferCargoData/Index">
-                            <i class="fa fa-book"></i><span> 调货信息</span>
-                        </a>
-                    </li>
-                    <li class="treeview">
-                        <a href="~/Arrears/Index">
-                            <i class="fa fa-book"></i><span> 欠款信息</span>
-                        </a>
-                    </li>
+                    
 
                     @*<li class="treeview">@NavMenuItem(T("采购进货"), Url.Action("Index", "PurchaseData"))</li>*@
                     @*<li class="treeview">@NavMenuItem(T("销售出货"), Url.Action("Index", "SalesShipmentsData"))</li>

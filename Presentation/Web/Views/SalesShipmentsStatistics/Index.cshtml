@@ -45,6 +45,33 @@
 
         }
     </div>
+    <div class="box box-solid">
+        <div class="box-header">
+            <div class="row">
+                <div class="col-xs-6 col-sm-4 col-md-2 ">
+                    <div class="form-group">
+                        <label id="totalSumName" class="control-label"> 总金额</label><input id="totalSumValue" readonly="readonly" class="form-control full-width " />
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-4 col-md-2 ">
+                    <div class="form-group">
+                        <label id="totalCostName" class="control-label"> 总成本</label><input id="totalCostValue" readonly="readonly" class="form-control full-width " />
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-4 col-md-2 ">
+                    <div class="form-group">
+                        <label id="totalProfitName" class="control-label"> 总利润</label><input id="totalProfitValue" readonly="readonly" class="form-control full-width " />
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-4 col-md-2 ">
+                    <div class="form-group">
+                        <label id="totalNumName" class="control-label"> 总数量</label><input id="totalNumValue" readonly="readonly" class="form-control full-width " />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*@Html.Partial("_salesShipmentsStatisticsPartial")*@
     <div class="box-body">
 
         <table class="table table-condensed table-striped table-hover dataTable">
@@ -56,8 +83,9 @@
                     <th>客户</th>
 
                     <th>总销售额</th>
-                    <th>总利润</th>
                     <th>总成本</th>
+                    <th>总利润</th>
+
                     <th>总数量</th>
 
                     <th>时间</th>
@@ -67,6 +95,7 @@
         </table>
     </div>
 </div>
+
 @section scripts{
     @Html.Partial("_KendoDropdownListPartial")
     @Html.Partial("_KendoDatePickerPartial")
@@ -88,6 +117,15 @@
                         d.toDate = $("#ToDate").val()
                         addAntiForgeryToken(d);
                     },
+                },
+                createdRow: function (row, data, index) {
+                    if (data.goodsID == 0 && data.goodesName == "总计") {
+                        $(row).attr("class", "hidden");
+                        $("#totalSumValue").val(data.totalSum);
+                        $("#totalCostValue").val(data.totalCost);
+                        $("#totalProfitValue").val(data.totalProfit);
+                        $("#totalNumValue").val(data.totalNum);
+                    }
                 },
                 columns: [
                     { data: "goodsID" },
@@ -118,6 +156,22 @@
                 grid.page("first").draw();
                 return false;
             });
+
+            @*function SalesShipmentsStatisticsPartial() {
+                $.ajax({
+                    data: {
+                        goodsID: $("#GoodsID").getKendoDropDownList().value(),
+                        clientDataID: $("#ClientDataID").getKendoDropDownList().value(),
+                        fromDate: $("#FromDate").val(),
+                        toDate: $("#ToDate").val()
+                    },
+                    url: "@Url.Action("GetIndexPartialView", "Profile")",
+                    type: "get",
+                    success: function (data) {
+                        $("#bbb").text(@ViewData["name"])
+                    }
+                });
+            }*@
 
         });
     </script>

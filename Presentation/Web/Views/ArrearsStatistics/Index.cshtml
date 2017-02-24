@@ -1,0 +1,158 @@
+﻿@model Web.Models.ArrearsStatisticsListModel
+    @{
+        ViewBag.Title = "欠款信息统计";
+    }
+
+    <div class="box box-solid">
+        <div class="box-header">
+            @using (Html.BeginForm("Index", "ArrearsStatistics", FormMethod.Post, new { Id = "ArrearsStatisticsForm" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="row">
+                    <div class="col-xs-6 col-sm-4 col-md-2 ">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.GoodsID, new { @class = "control-label" })
+                            @Html.DropDownListFor(m => m.GoodsID, Model.GoodsList, T("全部").Text.ToString(), new { @class = "form-control full-width " })
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6 col-sm-4 col-md-2 ">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.ClientDataID, new { @class = "control-label" })
+                            @Html.DropDownListFor(m => m.ClientDataID, Model.ClientDataList, T("全部").Text.ToString(), new { @class = "form-control full-width " })
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-4 col-md-2 ">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.FromDate, new { @class = "control-label" })
+                            @Html.KLDateTextBoxFor(m => m.FromDate, new { @class = "form-control kl-date-picker full-width" })
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-4 col-md-2 ">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.ToDate, new { @class = "control-label" })
+                            @Html.KLDateTextBoxFor(m => m.ToDate, new { @class = "form-control kl-date-picker full-width" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-1 col-sm-2 col-xs-12">
+                        <div class="form-group">
+                            @HiddenLabel()
+                            <button type="submit" class="btn btn-default" id="SubmitForm"><i class="fa fa-search"></i> 查询</button>
+                        </div>
+                    </div>
+                </div>
+
+            }
+        </div>
+        <div class="box box-solid">
+            <div class="box-header">
+                <div class="row">
+                    <div class="col-xs-6 col-sm-4 col-md-2 ">
+                        <div class="form-group">
+                            <label id="quantityName" class="control-label"> 总数量</label><input id="quantityValue" readonly="readonly" class="form-control full-width " />
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-4 col-md-2 ">
+                        <div class="form-group">
+                            <label id="sumName" class="control-label"> 总欠款额（初始）</label><input id="sumValue" readonly="readonly" class="form-control full-width " />
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-4 col-md-2 ">
+                        <div class="form-group">
+                            <label id="arrearsAmountName" class="control-label"> 现总欠款额</label><input id="arrearsAmountValue" readonly="readonly" class="form-control full-width " />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        @*@Html.Partial("_salesShipmentsStatisticsPartial")*@
+        <div class="box-body">
+
+            <table class="table table-condensed table-striped table-hover dataTable">
+                <thead>
+                    <tr>
+                        <th>客户ID</th>
+                        <th>客户名</th>
+                        <th class="hidden">总欠款余额</th>
+                        <th class="hidden">初始总欠款额</th>
+
+                        <th>商品名</th>
+                        <th>总数量</th>
+                        <th>单价</th>
+
+                        <th>欠款额</th>
+                        <th>欠款余额</th>
+                        <th>时间</th>
+
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+
+    @section scripts{
+        @Html.Partial("_KendoDropdownListPartial")
+        @Html.Partial("_KendoDatePickerPartial")
+        @Html.Partial("_ModalSelectorPartial")
+        @Html.Partial("_KendoNumericTextBoxPartial")
+        <script type="text/javascript">
+
+
+            $(function () {
+                var grid = $(".dataTable").DataTable({
+                    order: [0, "ASC"],
+                    ajax: {
+                        url: "@Url.Action("Index")",
+                        type: "post",
+                        data: function (d) {
+                            d.goodsID = $("#GoodsID").getKendoDropDownList().value(),
+                            d.clientDataID = $("#ClientDataID").getKendoDropDownList().value(),
+                            d.fromDate = $("#FromDate").val(),
+                            d.toDate = $("#ToDate").val()
+                            addAntiForgeryToken(d);
+                        },
+                    },
+                    createdRow: function (row, data, index) {
+                        if (data.clientDataID == 0 && data.clientDataName == "总计") {
+                            $(row).attr("class", "hidden");
+                            $("#quantityValue").val(data.quantity);
+                            $("#sumValue").val(data.sum);
+                            $("#arrearsAmountValue").val(data.arrearsAmount);
+                        }
+                    },
+                    columns: [
+                        { data: "clientDataID" },
+                        { data: "clientDataName" },
+                        { data: "arrearsDataAmount", className: "hidden" },
+                        { data: "arrearsDataSum", className: "hidden" },
+
+                        { data: "goodsName" },
+                        { data: "quantity" },
+                        { data: "unitPrice" },
+
+                        { data: "sum" },
+                        { data: "arrearsAmount" },
+                        { data: "date" }],
+                    columnDefs: [
+                        {
+                            targets: [9],
+                            render: function (data, type, full) {
+                                return FormatDate(data, "yyyy-MM-dd");
+                            }
+                        }
+                    ],
+
+                    language: {
+                        zeroRecords: "DataTables.zeroRecords"
+                    },
+                });
+                $("#SubmitForm").click(function (e) {
+                    grid.page("first").draw();
+                    return false;
+                });
+            });
+        </script>
+    }
+

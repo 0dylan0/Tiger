@@ -2663,6 +2663,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\ArrearsController.cs" />
+    <Compile Include="Controllers\ArrearsStatisticsController.cs" />
     <Compile Include="Controllers\ClientDataController.cs" />
     <Compile Include="Controllers\ClientTypeController.cs" />
     <Compile Include="Controllers\CommonController.cs" />
@@ -2691,6 +2692,8 @@
     <Compile Include="Models\ArrearsDataListModel.cs" />
     <Compile Include="Models\ArrearsDataModel.cs" />
     <Compile Include="Models\ArrearsDetailsModel.cs" />
+    <Compile Include="Models\ArrearsStatisticsListModel.cs" />
+    <Compile Include="Models\ArrearsStatisticsModel.cs" />
     <Compile Include="Models\BasicModel.cs" />
     <Compile Include="Models\ClientDataListModel.cs" />
     <Compile Include="Models\ClientDataModel.cs" />
@@ -2713,6 +2716,7 @@
     <Compile Include="Models\SalesShipmentsDataModel.cs" />
     <Compile Include="Models\SalesShipmentsStatisticsListModel.cs" />
     <Compile Include="Models\SalesShipmentsStatisticsModel.cs" />
+    <Compile Include="Models\SalesShipmentsStatisticsPartialModel.cs" />
     <Compile Include="Models\SearchInventoryDataModel.cs" />
     <Compile Include="Models\SupplierDataListModel.cs" />
     <Compile Include="Models\SupplierDataModel.cs" />
@@ -2814,6 +2818,8 @@
     <Content Include="Views\Arrears\Index.cshtml" />
     <Content Include="Views\Arrears\Edit.cshtml" />
     <Content Include="Views\SalesShipmentsStatistics\Index.cshtml" />
+    <Content Include="Views\SalesShipmentsStatistics\_salesShipmentsStatisticsPartial.cshtml" />
+    <Content Include="Views\ArrearsStatistics\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
