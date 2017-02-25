@@ -48,6 +48,7 @@
                     <th>ID</th>
                     <th>商品编号</th>
                     <th>商品名称</th>
+                    <th class="hidden">商品详情</th>
                     <th>出货日期</th>
 
                     <th>类别</th>
@@ -83,6 +84,21 @@
                     $.klModal.hideModalLoadingInfoAndDisplayBody();
                 }
             });
+        };
+        function onShowSelectGoodsClick(ID) {
+            $.klModal.showModal("采购进货信息详情", false, true);
+            $.ajax({
+                url: "@Url.Action("PurchaseDataDetails", "PurchaseData")",
+                method: "POST",
+                data: addAntiForgeryToken({
+                    id: ID
+                }),
+                beforeSend: $.klModal.displayModalLoadingInfo,
+                success: function (data) {
+                    $.klModal.addDataToModalBody(data);
+                    $.klModal.hideModalLoadingInfoAndDisplayBody();
+                }
+            });
         }
 
         $(function () {
@@ -101,6 +117,10 @@
 					{ data: "id" },
                     { data: "goodsID" },
                     { data: "goodsName" },
+                    {
+                        orderable: false,
+
+                    },
                     { data: "date" },
 
                     { data: "goodsType" },
@@ -118,6 +138,12 @@
                     {
                         targets: [3],
                         render: function (data, type, full) {
+                            return '<a class="btn btn-xs btn-default hidden" onclick="onShowSelectGoodsClick(' + encodeURIComponent(full["goodsID"]) + ')"><span class="fa fa-search"></span> 商品详情</a>';
+                        }
+                    },
+                    {
+                        targets: [4],
+                        render: function (data, type, full) {
                             return FormatDate(data, "yyyy-MM-dd");
                         }
 
@@ -130,7 +156,7 @@
                     //    }
                     //},
                     {
-                        targets: [10],
+                        targets: [11],
                         orderable: false,
                         render: function (data, type, full) {
                             return '<a href="/SalesShipmentsData/Edit?id=' + encodeURIComponent(full["id"]) + '" class="btn btn-xs btn-default "><span class="fa fa-pencil"></span> 修改</a>';

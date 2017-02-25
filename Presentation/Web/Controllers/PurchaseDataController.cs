@@ -121,9 +121,9 @@ namespace Web.Controllers
                     ShipmentsDate = DateTime.Now,
                     LastInventoryDate = DateTime.Now,
                     FinalSaleDate = DateTime.Now,
-                    Active="1",
-                    ShipmentsQuantity=0,
-                    RemainingQuantity= model.Quantity
+                    Active = "1",
+                    ShipmentsQuantity = 0,
+                    RemainingQuantity = model.Quantity
                 };
                 //添加货物库存表返回ID
                 int inventoryDataID = _inventoryDataService.Insert(inventoryData);
@@ -144,31 +144,31 @@ namespace Web.Controllers
             return View(model);
         }
 
-        public ActionResult Edit(int id, bool IfInventoryData=true)
+        public ActionResult Edit(int id, bool IfInventoryData = true)
         {
             var purchase = new PurchaseData();
             if (IfInventoryData)
             {
-                 purchase = _purchaseDataService.GetById(id);
+                purchase = _purchaseDataService.GetById(id);
             }
             else
             {
                 purchase = _purchaseDataService.GetByInventoryDataID(id);
             }
-            
 
-            if (_salesShipmentsDataService.GetByInventoryDataID(purchase.InventoryDataID)==null)
-            {
-                var model = purchase.MapTo<PurchaseData, PurchaseDataModel>();
-                model.GoodsList = GetGoodsList();
-                model.SupplierList = GetSupplierList();
-                model.WarehouseList = GetWarehouseList();
-                model.SpecificationList = GetSpecificationList();
-                model.GoodsTypeList = GetGoodsTypeList();
-                return View(model);
-            }
-            ErrorNotification("已经存在销售出货记录"+purchase.GoodsName+"不允许修改");
-            return RedirectToAction("Index");
+            //20170225 去掉 判断销售出货已经存在但是不允许修改的判断
+            //if (_salesShipmentsDataService.GetByInventoryDataID(purchase.InventoryDataID)==null)
+            //{
+            var model = purchase.MapTo<PurchaseData, PurchaseDataModel>();
+            model.GoodsList = GetGoodsList();
+            model.SupplierList = GetSupplierList();
+            model.WarehouseList = GetWarehouseList();
+            model.SpecificationList = GetSpecificationList();
+            model.GoodsTypeList = GetGoodsTypeList();
+            return View(model);
+            //}
+            //ErrorNotification("已经存在销售出货记录"+purchase.GoodsName+"不允许修改");
+            //return RedirectToAction("Index");
 
         }
         [HttpPost]
@@ -201,13 +201,13 @@ namespace Web.Controllers
                     Active = "1",
                     ShipmentsQuantity = 0,
                     RemainingQuantity = model.Quantity,
-                    ID=model.InventoryDataID
+                    ID = model.InventoryDataID
                 };
                 //修改货物库存表返回ID
                 _inventoryDataService.Update(inventoryData);
                 purchase.Active = "1";
                 _purchaseDataService.Update(purchase);
-                SuccessNotification("修改成功"+model.GoodsName);
+                SuccessNotification("修改成功" + model.GoodsName);
                 return RedirectToAction("Index");
 
             }

@@ -130,6 +130,7 @@ namespace Web.Controllers
             {
                 SalesShipmentsData SalesShipments = model.MapTo<SalesShipmentsDataModel, SalesShipmentsData>();
                 int salesShipmentsDataID = _salesShipmentsDataService.Insert(SalesShipments);
+                var inventoryDataRes = _inventoryDataService.GetById(model.InventoryDataID);
                 InventoryData inventoryData = new InventoryData()
                 {
                     ID = model.InventoryDataID,
@@ -142,8 +143,8 @@ namespace Web.Controllers
                     GoodsType = model.GoodsType,
                     Brand = model.Brand,
                     InventoryQuantity = model.OldQuantity - model.Quantity,
-                    CostPrice = ((model.Quantity != 0) ? (model.Sum / Convert.ToDecimal(model.Quantity)) : 0),
-                    InventorySum = model.Sum,
+                    CostPrice = inventoryDataRes.CostPrice,
+                    InventorySum = inventoryDataRes.InventorySum - model.Sum,
 
                     PurchaseDate = DateTime.Now,
                     ShipmentsDate = DateTime.Now,

@@ -40,6 +40,7 @@
                     <th>编号</th>
                     <th class="hidden">商品编号</th>
                     <th>商品名称</th>
+                    <th>商品详情</th>
 
                     <th>进货日期</th>@*采购进货日期*@
                     <th>出货日期</th>@*销售出货日期*@
@@ -90,6 +91,22 @@
             });
         }
 
+        function onShowSelectGoodsClick(ID) {
+            $.klModal.showModal("采购进货信息详情", false, true);
+            $.ajax({
+                url: "@Url.Action("PurchaseDataDetails", "PurchaseData")",
+                method: "POST",
+                data: addAntiForgeryToken({
+                    id: ID
+                }),
+                beforeSend: $.klModal.displayModalLoadingInfo,
+                success: function (data) {
+                    $.klModal.addDataToModalBody(data);
+                    $.klModal.hideModalLoadingInfoAndDisplayBody();
+                }
+            });
+        }
+
         function onShowTransferCargoClick(ID) {
             $.klModal.showModal("调动货物", false, true);
             $.ajax({
@@ -122,6 +139,10 @@
 					{ data: "id" },
                     { data: "goodsID", className: "hidden" },
                     { data: "goodsName" },
+                    {
+                        orderable: false,
+
+                    },
 
                     { data: "purchaseDate" },
                     { data: "shipmentsDate" },
@@ -154,9 +175,8 @@
                     {
                         targets: [3],
                         render: function (data, type, full) {
-                            return FormatDate(data, "yyyy-MM-dd");
+                            return '<a class="btn btn-xs btn-default" onclick="onShowSelectGoodsClick(' + encodeURIComponent(full["id"]) + ')"><span class="fa fa-search"></span> 商品详情</a>';
                         }
-
                     },
                     {
                         targets: [4],
@@ -166,21 +186,28 @@
 
                     },
                     {
-                        targets: [15],
+                        targets: [5],
+                        render: function (data, type, full) {
+                            return FormatDate(data, "yyyy-MM-dd");
+                        }
+
+                    },
+                    {
+                        targets: [16],
                         orderable: false,
                         render: function (data, type, full) {
                             return '<a  class="btn btn-xs btn-default" onclick="onShowSelectInventoryDataGoodsClick(' + encodeURIComponent(full["id"]) + ')"><span class="fa fa-search"></span> 详情</a>';
                         }
                     },
                     {
-                        targets: [16],
+                        targets: [17],
                         orderable: false,
                         render: function (data, type, full) {
                             return '<a href="/SalesShipmentsData/Add?id=' + encodeURIComponent(full["id"]) + '" class="btn btn-xs btn-default "><span class="fa fa-pencil"></span> 出货</a>';
                         }
                     },
                     {
-                        targets: [17],
+                        targets: [18],
                         orderable: false,
                         render: function (data, type, full) {
                             return '<a  class="btn btn-xs btn-default" onclick="onShowTransferCargoClick(' + encodeURIComponent(full["id"]) + ')"><span class="fa fa-book"></span> 调货</a>';
