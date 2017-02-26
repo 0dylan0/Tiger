@@ -253,7 +253,7 @@ namespace Services.Common
 
                 //添加新的库存信息
                 //var newWarehouse = _warehouseService.GetById(newWarehouseID);
-                var newWarehouse = _context.QuerySingleOrDefault<Warehouse>("select * from Warehouse  where id = @id", new { id = id }, t);
+                var newWarehouse = _context.QuerySingleOrDefault<Warehouse>("select * from Warehouse  where id = @id", new { id = newWarehouseID }, t);
 
 
                 InventoryData newInventoryData = new InventoryData()

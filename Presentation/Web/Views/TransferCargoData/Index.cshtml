@@ -1,122 +1,125 @@
 ﻿@model Web.Models.TransferCargoDataListModel
 
 
-    @{
-        ViewBag.Title = "调货信息列表";
-    }
+@{
+    ViewBag.Title = "调货信息列表";
+}
 
-    <div class="box box-solid">
-        <div class="box-header">
-            @using (Html.BeginForm("Index", "TransferCargoData", FormMethod.Post, new { Id = "TransferCargoDataForm" }))
+<div class="box box-solid">
+    <div class="box-header">
+        @using (Html.BeginForm("Index", "TransferCargoData", FormMethod.Post, new { Id = "TransferCargoDataForm" }))
             {
-                @Html.AntiForgeryToken()
-                <div class="row">
-                    <div class="col-md-3 col-sm-4 col-xs-12 ">
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.Name)
-                            @Html.TextBoxFor(m => m.Name, new { @class = "form-control full-width", placeholder = "可按商品名查询" })
-                        </div>
-                    </div>
-
-                    <div class="col-md-1 col-sm-2 col-xs-12">
-                        <div class="form-group">
-                            @HiddenLabel()
-                            <button type="submit" class="btn btn-default" id="SubmitRivalDatumForm"><i class="fa fa-search"></i> 查询</button>
-                        </div>
+            @Html.AntiForgeryToken()
+            <div class="row">
+                <div class="col-md-3 col-sm-4 col-xs-12 ">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Name)
+                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control full-width", placeholder = "可按商品名查询" })
                     </div>
                 </div>
 
-            }
-        </div>
-        <div class="box-body">
-            <table class="table table-condensed table-striped table-hover dataTable">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th class="hidden">商品编号</th>
-                        <th>商品名称</th>
-                        <th class="hidden">供应商编号</th>
-                        <th>供应商名称</th>
-                        <th class="hidden">旧的仓库ID</th>
-                        <th>旧的仓库名</th>
-                        <th>旧的仓库量</th>
-                        <th class="hidden">新的仓库ID</th>
-                        <th>新的仓库名</th>
-                        <th>新的仓库量</th>
-                        <th>仓库调货日期</th>
+                <div class="col-md-1 col-sm-2 col-xs-12">
+                    <div class="form-group">
+                        @HiddenLabel()
+                        <button type="submit" class="btn btn-default" id="SubmitRivalDatumForm"><i class="fa fa-search"></i> 查询</button>
+                    </div>
+                </div>
+            </div>
 
-                    </tr>
-                </thead>
-            </table>
-        </div>
+        }
     </div>
-    @section scripts{
-        @Html.Partial("_KendoDropdownListPartial")
-        @Html.Partial("_ModalSelectorPartial")
-        <script type="text/javascript">
-            function aaa() {
-                alert("123");
-            };
-            function onShowSelectInventoryDataGoodsClick(ID) {
-                $.klModal.showModal("采购进货信息详情", false, true);
-                $.ajax({
-                    url: "@Url.Action("PurchaseDataDetails", "PurchaseData")",
-                    method: "POST",
-                    data: addAntiForgeryToken({
-                        id: ID
-                    }),
-                    beforeSend: $.klModal.displayModalLoadingInfo,
-                    success: function (data) {
-                        $.klModal.addDataToModalBody(data);
-                        $.klModal.hideModalLoadingInfoAndDisplayBody();
-                    }
-                });
-            }
+    <div class="box-body">
+        <table class="table table-condensed table-striped table-hover dataTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th class="hidden">商品编号</th>
+                    <th>商品名称</th>
+                    <th class="hidden">供应商编号</th>
+                    <th>供应商名称</th>
+                    <th class="hidden">旧的仓库ID</th>
+                    <th>旧的仓库名</th>
+                    <th>旧的仓库量</th>
+                    <th class="hidden">新的仓库ID</th>
+                    <th>新的仓库名</th>
+                    <th>新的仓库量</th>
+                    <th>仓库调货日期</th>
 
-            $(function () {
-
-                $("#SubmitRivalDatumForm").click(function (e) {
-                    grid.page("first").draw();
-                    return false;
-                });
-                var grid = $(".dataTable").DataTable({
-                    order: [0, "desc"],
-                    ajax: {
-                        url: "@Url.Action("Index")",
-                        type: "post",
-                        data: function (d) {
-                    },
-                    columns: [
-                        { data: "id" },
-                        { data: "goodsID", className: "hidden" },
-                        { data: "goodsName" },
-                        { data: "supplierID", className: "hidden" },
-                        { data: "supplierName" },
-
-                        { data: "oldWarehouseID", className: "hidden" },
-                        { data: "oldWarehouseName" },
-                        { data: "oldQuantity" },
-
-                        { data: "newWarehouseID", className: "hidden" },
-                        { data: "newWarehouseName" },
-                        { data: "newQuantity" },
-
-                        { data: "date" }],
-                    columnDefs: [
-                        {
-                            targets: [11],
-                            render: function (data, type, full) {
-                                return FormatDate(data, "yyyy-MM-dd");
-                            }
-                        },
-                    ],
-
-                    language: {
-                        zeroRecords: "DataTables.zeroRecords"
-                    },
-                });
-
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+@section scripts{
+    @Html.Partial("_KendoDropdownListPartial")
+    @Html.Partial("_ModalSelectorPartial")
+    <script type="text/javascript">
+        function aaa() {
+            alert("123");
+        };
+        function onShowSelectInventoryDataGoodsClick(ID) {
+            $.klModal.showModal("采购进货信息详情", false, true);
+            $.ajax({
+                url: "@Url.Action("PurchaseDataDetails", "PurchaseData")",
+                method: "POST",
+                data: addAntiForgeryToken({
+                    id: ID
+                }),
+                beforeSend: $.klModal.displayModalLoadingInfo,
+                success: function (data) {
+                    $.klModal.addDataToModalBody(data);
+                    $.klModal.hideModalLoadingInfoAndDisplayBody();
+                }
             });
-        </script>
-    }
+        }
+
+        $(function () {
+
+            $("#SubmitRivalDatumForm").click(function (e) {
+                grid.page("first").draw();
+                return false;
+            });
+            var grid = $(".dataTable").DataTable({
+                order: [0, "desc"],
+                ajax: {
+                    url: "@Url.Action("Index")",
+                    type: "post",
+                    data: function (d) {
+                        d.Name = $("#Name").val(),
+                        addAntiForgeryToken(d);
+                    },
+                },
+                columns: [
+                    { data: "id" },
+                    { data: "goodsID", className: "hidden" },
+                    { data: "goodsName" },
+                    { data: "supplierID", className: "hidden" },
+                    { data: "supplierName" },
+
+                    { data: "oldWarehouseID", className: "hidden" },
+                    { data: "oldWarehouseName" },
+                    { data: "oldQuantity" },
+
+                    { data: "newWarehouseID", className: "hidden" },
+                    { data: "newWarehouseName" },
+                    { data: "newQuantity" },
+
+                    { data: "date" }],
+                columnDefs: [
+                    {
+                        targets: [11],
+                        render: function (data, type, full) {
+                            return FormatDate(data, "yyyy-MM-dd");
+                        }
+                    },
+                ],
+
+                language: {
+                    zeroRecords: "DataTables.zeroRecords"
+                },
+            });
+
+        });
+    </script>
+}
 
