@@ -73,12 +73,9 @@ namespace Web.Controllers
                         Core.Domain.Common.Users user = _userService.GetByCode(loginModel.UserName);
                         _authenticationService.SignIn(user, loginModel.RememberMe);
 
-                        if (loginModel.IsFromOtherSystem)
+                        if (!String.IsNullOrEmpty(loginModel.ReturnUrl) && Url.IsLocalUrl(loginModel.ReturnUrl))
                         {
-                            if (!String.IsNullOrEmpty(loginModel.ReturnUrl) && Url.IsLocalUrl(loginModel.ReturnUrl))
-                            {
-                                return Redirect("~/Home/Index?returnUrl=" + HttpUtility.UrlEncode(loginModel.ReturnUrl));
-                            }
+                            return Redirect(loginModel.ReturnUrl);
                         }
                         return Redirect("~/Home/Index");
                     case UserLoginResult.UserNotExist:

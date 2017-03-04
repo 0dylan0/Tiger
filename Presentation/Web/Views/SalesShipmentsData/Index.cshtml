@@ -117,10 +117,7 @@
 					{ data: "id" },
                     { data: "goodsID" },
                     { data: "goodsName" },
-                    {
-                        orderable: false,
 
-                    },
                     { data: "date" },
 
                     { data: "goodsType" },
@@ -135,14 +132,14 @@
 
                     }],
                 columnDefs: [
+                    //{
+                    //    targets: [3],
+                    //    render: function (data, type, full) {
+                    //        return '<a class="btn btn-xs btn-default hidden" onclick="onShowSelectGoodsClick(' + encodeURIComponent(full["goodsID"]) + ')"><span class="fa fa-search"></span> 商品详情</a>';
+                    //    }
+                    //},
                     {
                         targets: [3],
-                        render: function (data, type, full) {
-                            return '<a class="btn btn-xs btn-default hidden" onclick="onShowSelectGoodsClick(' + encodeURIComponent(full["goodsID"]) + ')"><span class="fa fa-search"></span> 商品详情</a>';
-                        }
-                    },
-                    {
-                        targets: [4],
                         render: function (data, type, full) {
                             return FormatDate(data, "yyyy-MM-dd");
                         }
@@ -156,7 +153,7 @@
                     //    }
                     //},
                     {
-                        targets: [11],
+                        targets: [10],
                         orderable: false,
                         render: function (data, type, full) {
                             return '<a href="/SalesShipmentsData/Edit?id=' + encodeURIComponent(full["id"]) + '" class="btn btn-xs btn-default "><span class="fa fa-pencil"></span> 修改</a>';
