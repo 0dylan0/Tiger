@@ -154,6 +154,10 @@ namespace Web.Controllers
             else
             {
                 purchase = _purchaseDataService.GetByInventoryDataID(id);
+                if(purchase==null)
+                {
+                    purchase = _purchaseDataService.GetTransferCargoDataOldIdByInventoryDataID(id);
+                }
             }
 
             //20170225 去掉 判断销售出货已经存在但是不允许修改的判断
@@ -249,6 +253,20 @@ namespace Web.Controllers
 
             return Json(new JsonResponse<string>(RenderPartialViewToString("PurchaseDataPartial", model)));
         }
+
+        public ActionResult PurchaseDataDetailsByInventoryDataId(int id)
+        {
+            var purchase = _purchaseDataService.GetByInventoryDataId(id);
+            var model = purchase.MapTo<PurchaseData, PurchaseDataModel>();
+            model.GoodsList = GetGoodsList();
+            model.SupplierList = GetSupplierList();
+            model.WarehouseList = GetWarehouseList();
+            model.SpecificationList = GetSpecificationList();
+            model.GoodsTypeList = GetGoodsTypeList();
+
+            return Json(new JsonResponse<string>(RenderPartialViewToString("PurchaseDataPartial", model)));
+        }
+
 
         public List<SelectListItem> GetGoodsList()
         {

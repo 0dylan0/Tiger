@@ -41,7 +41,7 @@ namespace Web.Models
         [DisplayName("品牌")]
         public string Brand { get; set; }
 
-        [DisplayName("数量")]
+        [DisplayName("进货数量")]
         public int? Quantity { get; set; } = 0;
 
         [DisplayName("成本价")]

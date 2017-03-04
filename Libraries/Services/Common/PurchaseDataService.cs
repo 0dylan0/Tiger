@@ -152,14 +152,44 @@ namespace Services.Common
                 id = id
             });
         }
+
+        public PurchaseData GetByInventoryDataId(int id)
+        {
+            var sql = @"select * from PurchaseData  where InventoryData_ID = @id";
+            var purchaseData = _context.QueryFirstOrDefault<PurchaseData>(sql, new { id = id });
+            if (purchaseData!=null)
+            {
+                return purchaseData;
+            }
+            else
+            {
+                var sql2 = @"select OldInventoryData_ID from TransferCargoData  where InventoryData_ID = @id";
+                var OldInventoryDataID = _context.QuerySingle<int>(sql2, new { id = id });
+                return _context.QuerySingle<PurchaseData>(sql, new { id = OldInventoryDataID });
+            }
+             
+        }
+
         public PurchaseData GetByInventoryDataID(int id)
         {
             var sql = @"select * from PurchaseData  where InventoryData_ID = @id";
-            return _context.QuerySingle<PurchaseData>(sql, new
+            return _context.QueryFirstOrDefault<PurchaseData>(sql, new
             {
                 id = id
             });
         }
+
+        public PurchaseData GetTransferCargoDataOldIdByInventoryDataID(int id)
+        {
+            var sql = @"select OldInventoryData_ID from TransferCargoData  where InventoryData_ID = @id";
+            var OldInventoryDataID = _context.QuerySingle<int>(sql, new { id = id });
+            var sql1 = @"select * from PurchaseData  where InventoryData_ID = @id";
+            return _context.QueryFirstOrDefault<PurchaseData>(sql1, new
+            {
+                id = OldInventoryDataID
+            });
+        }
+
         public IPagedList<PurchaseData> GetList(string textQuery, int pageIndex = 0, int pageSize = 2147483647, string sortExpression = "")
         {
             string sql = @"select * from PurchaseData where Active='1' ";

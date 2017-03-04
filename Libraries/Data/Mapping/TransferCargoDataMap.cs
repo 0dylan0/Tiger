@@ -30,6 +30,8 @@ namespace Data.Mapping
             Map(t => t.NewQuantity).ToColumn("NewQuantity");
 
             Map(t => t.Date).ToColumn("Date");
+            Map(t => t.InventoryDataID).ToColumn("InventoryData_ID");
+            Map(t => t.OldInventoryDataID).ToColumn("OldInventoryData_ID");
         }
     }
 }

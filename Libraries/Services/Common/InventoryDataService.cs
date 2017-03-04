@@ -147,7 +147,7 @@ namespace Services.Common
                 Active = '1',
                 ShipmentsQuantity = InventoryData.ShipmentsQuantity,
                 RemainingQuantity = InventoryData.RemainingQuantity,
-                ID= InventoryData.ID
+                ID = InventoryData.ID
             });
         }
 
@@ -159,7 +159,7 @@ namespace Services.Common
             _context.Execute(sql, new
             {
                 InventoryQuantity = InventoryData.InventoryQuantity,
-                ID= InventoryData.ID
+                ID = InventoryData.ID
             });
         }
 
@@ -196,7 +196,7 @@ namespace Services.Common
             return _dbHelper.ExecuteTransaction(
             t =>
             {
-                var inventoryData=_context.QuerySingleOrDefault<InventoryData>("select * from InventoryData  where id = @id", new { id = id }, t);
+                var inventoryData = _context.QuerySingleOrDefault<InventoryData>("select * from InventoryData  where id = @id", new { id = id }, t);
                 //var inventoryData = GetById(id);
                 int? OldQuantity = inventoryData.InventoryQuantity;
                 //更改之前的库存信息               
@@ -329,8 +329,8 @@ namespace Services.Common
                     @WarehouseName,
                     @Active,
                     @ShipmentsQuantity,           
-                    @RemainingQuantity) ";
-                 _context.Execute(sql1, new
+                    @RemainingQuantity) select @@identity";
+                int newInventoryDataId = _context.QuerySingle<int>(sql1, new
                 {
                     GoodsID = newInventoryData.GoodsID,
                     GoodsName = newInventoryData.GoodsName,
@@ -353,7 +353,7 @@ namespace Services.Common
                     Active = newInventoryData.Active,
                     ShipmentsQuantity = newInventoryData.ShipmentsQuantity,
                     RemainingQuantity = newInventoryData.RemainingQuantity
-                },t);
+                }, t);
 
                 //添加到调货信息一条记录
                 TransferCargoData transferCargoData = new TransferCargoData()
@@ -368,7 +368,9 @@ namespace Services.Common
                     NewWarehouseID = newWarehouseID,
                     NewWarehouseName = newWarehouse.Name,
                     NewQuantity = newNum,
-                    Date = DateTime.Now
+                    Date = DateTime.Now,
+                    InventoryDataID = newInventoryDataId,
+                    OldInventoryDataID = inventoryData.ID
                 };
                 //_transferCargoDataService.Insert(transferCargoData);
                 var sql2 = $@"insert into TransferCargoData(
@@ -384,7 +386,9 @@ namespace Services.Common
                     NewWarehouse_ID,
                     NewWarehouse_Name,
                     NewQuantity,
-                    Date)
+                    Date,
+                    InventoryData_ID,
+                    OldInventoryData_ID)
 			        VALUES (
                     @GoodsID,
                     @GoodsName,                  
@@ -398,7 +402,9 @@ namespace Services.Common
                     @NewWarehouseID,
                     @NewWarehouseName,
                     @NewQuantity,
-                    @Date)";
+                    @Date,
+                    @InventoryDataID,
+                    @OldInventoryDataID)";
                 _context.Execute(sql2, new
                 {
                     GoodsID = transferCargoData.GoodsID,
@@ -414,8 +420,10 @@ namespace Services.Common
                     NewWarehouseName = transferCargoData.NewWarehouseName,
                     NewQuantity = transferCargoData.NewQuantity,
 
-                    Date = transferCargoData.Date
-                },t);
+                    Date = transferCargoData.Date,
+                    InventoryDataID = transferCargoData.InventoryDataID,
+                    OldInventoryDataID = transferCargoData.OldInventoryDataID
+                }, t);
 
             });
         }

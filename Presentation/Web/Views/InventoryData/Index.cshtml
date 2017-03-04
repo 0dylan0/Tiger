@@ -94,7 +94,7 @@
         function onShowSelectGoodsClick(ID) {
             $.klModal.showModal("采购进货信息详情", false, true);
             $.ajax({
-                url: "@Url.Action("PurchaseDataDetails", "PurchaseData")",
+                url: "@Url.Action("PurchaseDataDetailsByInventoryDataId", "PurchaseData")",
                 method: "POST",
                 data: addAntiForgeryToken({
                     id: ID

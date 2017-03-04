@@ -42,5 +42,9 @@ namespace Web.Models
 
         //调货日期
         public DateTime Date { get; set; }
+
+        public int InventoryDataID { get; set; }
+
+        public int OldInventoryDataID { get; set; }
     }
 }
