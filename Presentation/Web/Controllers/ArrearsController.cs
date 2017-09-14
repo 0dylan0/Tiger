@@ -41,6 +41,7 @@ namespace Web.Controllers
         public ActionResult Index()
         {
             ArrearsDataListModel model = new ArrearsDataListModel();
+            var name = _webWorkContext.CurrentUser.Name;
             return View(model);
         }
 

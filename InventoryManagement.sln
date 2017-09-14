@@ -17,6 +17,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "Presentation\Web\Web
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.Framework", "Presentation\Web.Framework\Web.Framework.csproj", "{5BC9FEEE-A8D9-4BBC-A59C-F59F59419485}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BackgroundServices", "BackgroundServices", "{522C6721-BEB7-4571-95BA-FB79F86D9376}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsService", "WindowsService\WindowsService.csproj", "{606680EF-2CB1-4F60-9EFA-D5CAA6F1FD4F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +47,10 @@ Global
 		{5BC9FEEE-A8D9-4BBC-A59C-F59F59419485}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5BC9FEEE-A8D9-4BBC-A59C-F59F59419485}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5BC9FEEE-A8D9-4BBC-A59C-F59F59419485}.Release|Any CPU.Build.0 = Release|Any CPU
+		{606680EF-2CB1-4F60-9EFA-D5CAA6F1FD4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{606680EF-2CB1-4F60-9EFA-D5CAA6F1FD4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{606680EF-2CB1-4F60-9EFA-D5CAA6F1FD4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{606680EF-2CB1-4F60-9EFA-D5CAA6F1FD4F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -53,5 +61,6 @@ Global
 		{93E94ED5-3FE1-4918-B03E-3D12D157F801} = {C60863C8-5F54-42B0-A808-ECD2F7A890E3}
 		{975ABB5A-CBCC-4469-87CC-8A383672BF10} = {34496EAC-011A-470B-B954-214AA541B607}
 		{5BC9FEEE-A8D9-4BBC-A59C-F59F59419485} = {34496EAC-011A-470B-B954-214AA541B607}
+		{606680EF-2CB1-4F60-9EFA-D5CAA6F1FD4F} = {522C6721-BEB7-4571-95BA-FB79F86D9376}
 	EndGlobalSection
 EndGlobal
