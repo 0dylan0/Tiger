@@ -25,9 +25,9 @@ namespace WindowsService
 
                 conf.RunAsLocalSystem();
                 conf.OnException(e => _logger.Error(e));
-                conf.SetDescription("KunlunLPS 后台服务");
-                conf.SetDisplayName("KunlunLPSService");
-                conf.SetServiceName("KunlunLPSService");
+                conf.SetDescription("InventoryManagement 后台服务");
+                conf.SetDisplayName("InventoryManagementService");
+                conf.SetServiceName("InventoryManagementService");
             });
         }
     }

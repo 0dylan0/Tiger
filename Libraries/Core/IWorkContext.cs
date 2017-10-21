@@ -17,6 +17,10 @@ namespace Core
 
         //Language CurrentLanguage { get; set; }
 
+        Guid CurrentRequestId { get; }
+
+        string CurrentUserCode { get; }
+
         bool IsAlreadyLogin();
     }
 }

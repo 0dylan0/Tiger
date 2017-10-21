@@ -145,6 +145,7 @@
     <Compile Include="Common\UserHotelRangeService.cs" />
     <Compile Include="Common\WarehouseService.cs" />
     <Compile Include="Configuration\SettingService.cs" />
+    <Compile Include="Jobs\TestJob.cs" />
     <Compile Include="Localization\LanguageService.cs" />
     <Compile Include="Localization\LocalizationExtensions.cs" />
     <Compile Include="Localization\LocalizationService.cs" />
@@ -155,12 +156,15 @@
     <Compile Include="Security\HotelAuthenticationService.cs" />
     <Compile Include="Security\HotelService.cs" />
     <Compile Include="Security\IAuthenticationService.cs" />
+    <Compile Include="Security\IEncryptionService.cs" />
     <Compile Include="Security\LicenseService.cs" />
     <Compile Include="Security\PermissionService.cs" />
     <Compile Include="SelectItem.cs" />
     <Compile Include="Tasks\IScheduleTaskService.cs" />
     <Compile Include="Tasks\ScheduleTaskService.cs" />
     <Compile Include="Tasks\TaskManager.cs" />
+    <Compile Include="Test\ITestService.cs" />
+    <Compile Include="Test\TestService.cs" />
     <Compile Include="Users\UserLoginResult.cs" />
     <Compile Include="Users\UserRegistrationService.cs" />
     <Compile Include="Users\UserService.cs" />

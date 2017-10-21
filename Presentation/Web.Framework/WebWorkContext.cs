@@ -2,6 +2,8 @@
 using Core.Domain;
 using Core.Domain.Common;
 using Core.Domain.Localization;
+using Core.Enum;
+using Core.Infrastructure;
 using Services.Localization;
 using Services.Security;
 using System;
@@ -31,6 +33,10 @@ namespace Web.Framework
         private readonly HttpContextBase _httpContext;
 
         private Core.Domain.Common.Users _cachedUser;
+
+        private Guid _cachedRequestId;
+
+        private string _cachedUserCode;
 
         private Hotel _cachedHotel;
 
@@ -172,5 +178,47 @@ namespace Web.Framework
             }
         }
 
+        public Guid CurrentRequestId => _cachedRequestId != default(Guid) ? _cachedRequestId : (_cachedRequestId = Guid.NewGuid());
+
+        public string CurrentUserCode
+        {
+            get
+            {
+                if (String.IsNullOrEmpty(_cachedUserCode))
+                {
+                    var currentEntryPoint = (EntryPoint)EngineContext.Current.Resolve(typeof(EntryPoint));
+                    return _cachedUserCode = GetEntryPointUserCode(currentEntryPoint);
+                }
+
+                return _cachedUserCode;
+            }
+        }
+
+        #region Private
+
+        private string GetEntryPointUserCode(EntryPoint currentEntryPoint)
+        {
+            switch (currentEntryPoint)
+            {
+                case EntryPoint.Website:
+                    return CurrentUser?.Code;
+
+                //case EntryPoint.WebApi:
+                //    var authenticationService = EngineContext.Current.Resolve<IAuthenticationService>();
+                //    var client = authenticationService.GetClient();
+                //    return $"[API] {client.ClientId}";
+
+                case EntryPoint.PosApi:
+                    return "LPS Pos Api";
+
+                case EntryPoint.WindowsService:
+                    return "LPS Windows Service";
+
+                default:
+                    return "Unknown LPS entry point";
+            }
+        }
+
+        #endregion
     }
 }

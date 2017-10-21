@@ -9,7 +9,7 @@ using System;
 
 namespace Services.Tasks
 {
-    public class ScheduleTaskService //: IScheduleTaskService
+    public class ScheduleTaskService : IScheduleTaskService
     {
         private readonly IRepository<ScheduleTask> _taskRepository;
         private readonly IScheduler _scheduler;

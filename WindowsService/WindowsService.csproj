@@ -79,6 +79,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Infrastructure\DependencyRegistrar.cs" />
+    <Compile Include="Infrastructure\InitializeStartupTask.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WindowsService.cs" />
@@ -95,9 +97,17 @@
       <Project>{62AB9729-E904-42FD-A2E1-046949B69013}</Project>
       <Name>Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Libraries\Data\Data.csproj">
+      <Project>{a95c6b72-ea8c-40f0-971d-b02632b364fb}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Libraries\Services\Services.csproj">
       <Project>{93E94ED5-3FE1-4918-B03E-3D12D157F801}</Project>
       <Name>Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Presentation\Web.Framework\Web.Framework.csproj">
+      <Project>{5bc9feee-a8d9-4bbc-a59c-f59f59419485}</Project>
+      <Name>Web.Framework</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

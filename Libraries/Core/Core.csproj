@@ -159,6 +159,7 @@
     <Compile Include="Domain\Common\ArrearsDetails.cs" />
     <Compile Include="Domain\Common\BaseDicEntity.cs" />
     <Compile Include="Domain\Common\BaseEntity.cs" />
+    <Compile Include="Domain\Common\BaseVersionedEntity.cs" />
     <Compile Include="Domain\Common\Basic.cs" />
     <Compile Include="Domain\Common\ClientData.cs" />
     <Compile Include="Domain\Common\ClientType.cs" />
@@ -184,9 +185,18 @@
     <Compile Include="Domain\Tasks\ScheduleTask.cs" />
     <Compile Include="Domain\Users.cs" />
     <Compile Include="Enum\ChoiceType.cs" />
+    <Compile Include="Enum\EntryPoint.cs" />
     <Compile Include="Enum\NumberDisplayFormat.cs" />
+    <Compile Include="Exceptions\CouponException.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\UriExtensions.cs" />
+    <Compile Include="Fakes\Extensions.cs" />
+    <Compile Include="Fakes\FakeHttpContext.cs" />
+    <Compile Include="Fakes\FakeHttpRequest.cs" />
+    <Compile Include="Fakes\FakeHttpResponse.cs" />
+    <Compile Include="Fakes\FakeHttpSessionState.cs" />
+    <Compile Include="Fakes\FakeIdentity.cs" />
+    <Compile Include="Fakes\FakePrincipal.cs" />
     <Compile Include="Infrastructure\AppDomainTypeFinder.cs" />
     <Compile Include="Infrastructure\DependencyManagement\ContainerManager.cs" />
     <Compile Include="Infrastructure\DependencyManagement\IDependencyRegistrar.cs" />
