@@ -180,6 +180,9 @@ namespace Web.Framework
 
         public Guid CurrentRequestId => _cachedRequestId != default(Guid) ? _cachedRequestId : (_cachedRequestId = Guid.NewGuid());
 
+        /// <summary>
+        /// 当前用户 Code。对于  站点来说，会获取到当前登陆的用户 Code（若未登陆则为 null）；Web API 会返回 “ Web Api”；而 POS API 会返回 “LPS Pos Api”。
+        /// </summary>
         public string CurrentUserCode
         {
             get
@@ -203,19 +206,19 @@ namespace Web.Framework
                 case EntryPoint.Website:
                     return CurrentUser?.Code;
 
-                //case EntryPoint.WebApi:
-                //    var authenticationService = EngineContext.Current.Resolve<IAuthenticationService>();
-                //    var client = authenticationService.GetClient();
-                //    return $"[API] {client.ClientId}";
+                case EntryPoint.WebApi:
+                    var authenticationService = EngineContext.Current.Resolve<IAuthenticationService>();
+                    var client = authenticationService.GetClient();
+                    return $"[API] {client.ClientId}";
 
                 case EntryPoint.PosApi:
-                    return "LPS Pos Api";
+                    return "Pos Api";
 
                 case EntryPoint.WindowsService:
-                    return "LPS Windows Service";
+                    return "Windows Service";
 
                 default:
-                    return "Unknown LPS entry point";
+                    return "Unknown entry point";
             }
         }
 

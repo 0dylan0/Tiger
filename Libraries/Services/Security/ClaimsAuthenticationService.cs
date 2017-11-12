@@ -5,6 +5,7 @@ using System.Security.Claims;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Infrastructure;
 using Microsoft.Owin.Security;
+using Core.Security;
 
 namespace Services.Security
 {
@@ -93,6 +94,22 @@ namespace Services.Security
             }
             var user = _userService.GetByCode(code);
             return user;
+        }
+
+        /// <summary>
+        /// 获取当前调用 API 的客户端信息
+        /// </summary>
+        /// <returns>当前调用 API 的客户端，可能为 null</returns>
+        public IdentityServerClient GetClient()
+        {
+            var user = _authenticationManager?.User;
+
+            if (user == null)
+            {
+                return null;
+            }
+
+            return new IdentityServerClient(user);
         }
 
         #endregion

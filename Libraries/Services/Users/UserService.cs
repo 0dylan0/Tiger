@@ -71,6 +71,15 @@ namespace Services.Users
                 id = id
             });
         }
+
+        public IEnumerable<Core.Domain.Common.Users> GetAll()
+        {
+            var sql = @"select * from Users";
+            return _context.Query<Core.Domain.Common.Users>(sql,
+                new { }
+                );
+        }
+
         public IPagedList<Core.Domain.Common.Users> GetList(string textQuery, int pageIndex = 0, int pageSize = 2147483647, string sortExpression = "")
         {
             string sql = @"select * from Users ";

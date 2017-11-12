@@ -215,6 +215,7 @@
     <Compile Include="Page\PagedList.cs" />
     <Compile Include="Page\SqlPagedList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\IdentityServerClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -1,4 +1,5 @@
 ﻿using Core.Domain;
+using Core.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,7 @@ namespace Services.Security
         void SignOut();
 
         Core.Domain.Common.Users GetAuthenticatedUser();
+
+        IdentityServerClient GetClient();
     }
 }

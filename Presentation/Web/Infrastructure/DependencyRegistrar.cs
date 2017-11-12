@@ -1,11 +1,13 @@
 ﻿using Autofac;
 using Core.Infrastructure;
 using Core.Infrastructure.DependencyManagement;
+using Data;
 using Services.Common;
 using Services.Security;
 using Services.Users;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 
@@ -39,6 +41,7 @@ namespace Web.Infrastructure
             builder.RegisterType<ArrearsDetailsService>().InstancePerLifetimeScope();
             builder.RegisterType<SalesShipmentsStatisticsService>().InstancePerLifetimeScope(); 
             builder.RegisterType<ArrearsStatisticsService>().InstancePerLifetimeScope();
+
         }
 
 

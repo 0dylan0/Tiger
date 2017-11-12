@@ -92,6 +92,10 @@
       <HintPath>..\..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Swashbuckle.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cd1bb07a5ac7c7bc, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Swashbuckle.Core.5.5.3\lib\net40\Swashbuckle.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
@@ -143,11 +147,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\CookieNameConfiguration.cs" />
+    <Compile Include="Configuration\IdentityServerConfiguration.cs" />
     <Compile Include="Configuration\LoginAddressConfiguration.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Exceptions\Filters\UnhandledExceptionFilter.cs" />
+    <Compile Include="Exceptions\GlobalErrorLogger.cs" />
+    <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Extensions\HtmlHelperExtensions.cs" />
+    <Compile Include="Extensions\ListExtensions.cs" />
+    <Compile Include="Extensions\ModelStateExtensions.cs" />
     <Compile Include="Infrastructure\AutoMapperStartupTask.cs" />
     <Compile Include="Infrastructure\DependencyRegistrar.cs" />
     <Compile Include="Json\JsonHelper.cs" />
@@ -160,6 +169,8 @@
     <Compile Include="Mvc\Attributes\AllowCrossDomainLoginAttribute.cs" />
     <Compile Include="Mvc\Filters\IFilterProvider.cs" />
     <Compile Include="Mvc\Filters\IMFilterProvider.cs" />
+    <Compile Include="Mvc\Filters\PageSumFilterProvider.cs" />
+    <Compile Include="Mvc\Filters\PageVisitsStatistics.cs" />
     <Compile Include="Mvc\ModelBinder\NullModelOnGetRequestBinder.cs" />
     <Compile Include="Mvc\ModelBinder\PageInfoModelBinder.cs" />
     <Compile Include="Page\DataTable.cs" />
@@ -174,13 +185,26 @@
     <Compile Include="UI\NotifyType.cs" />
     <Compile Include="ValidatorFactory.cs" />
     <Compile Include="ViewEngines\Razor\WebViewPage.cs" />
+    <Compile Include="WebAPI\Controllers\BaseApiController.cs" />
+    <Compile Include="WebAPI\Handler\AddRequestIdHandler.cs" />
+    <Compile Include="WebAPI\Handler\LoggingHandler.cs" />
+    <Compile Include="WebAPI\Models\ErrorCodes.cs" />
+    <Compile Include="WebAPI\Models\ErrorResponse.cs" />
+    <Compile Include="WebAPI\Models\ValidationErrorItem.cs" />
+    <Compile Include="WebAPI\Models\ValidationErrorResponse.cs" />
+    <Compile Include="WebAPI\Page\PagingLinkBuilder.cs" />
+    <Compile Include="WebAPI\Page\PagingResult.cs" />
+    <Compile Include="WebAPI\Result\NoContentResult.cs" />
+    <Compile Include="WebAPI\Swashbuckle\Filters\FluentValidationRules.cs" />
     <Compile Include="WebWorkContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="WebAPI\Filters\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Libraries\Core\Core.csproj">
       <Project>{62AB9729-E904-42FD-A2E1-046949B69013}</Project>
